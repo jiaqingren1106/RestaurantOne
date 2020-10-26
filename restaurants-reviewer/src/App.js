@@ -1,15 +1,9 @@
 import './App.css';
 import React from 'react';
+import './index.css'
+import StartUp from "./fontPages/StartUp";
 
-function App() {
-  return (
-    <div className="App">
+const App = () => <StartUp/>
 
-        <h1>
-          Restaurants Reviewer
-        </h1>
-    </div>
-  );
-}
 
 export default App;
