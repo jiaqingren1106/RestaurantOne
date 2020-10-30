@@ -1,0 +1,13 @@
+.restaurantPic{
+    variant:"top";
+    width: 75px;
+    height: 350px;
+    object-fit: contain;
+    border-radius: 20%;
+
+}
+
+#restaurant1{
+    margin: 10px;
+    border-radius: 5%;
+}

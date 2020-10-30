@@ -1,0 +1,22 @@
+.FirstPage {
+    font-family: 'Arvo', serif;
+    position: relative;
+    color: #ffc800;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.FirstPage {
+    content: "";
+    opacity: 0.8;
+    background: url("../images/front_background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    /* filter: blur(3px); */
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}

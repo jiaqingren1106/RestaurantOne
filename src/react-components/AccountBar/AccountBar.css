@@ -1,0 +1,7 @@
+.accountBar{
+    width: 70px;
+    border: 2px solid black;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
