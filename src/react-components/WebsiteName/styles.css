@@ -1,0 +1,10 @@
+.WebsiteName{
+    font-family:"Syne Mono", monospace;
+    font-size: 25px;
+    text-align: center;
+    top: 0;
+    line-height: 150%;
+    color: black;
+    letter-spacing: 1px;
+    padding: 5px 15px 20px;
+}
