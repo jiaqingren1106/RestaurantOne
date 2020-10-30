@@ -5,9 +5,6 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 class Restaurant extends React.Component {
   render() {
     return (
