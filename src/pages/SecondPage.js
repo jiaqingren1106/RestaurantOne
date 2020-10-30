@@ -6,17 +6,18 @@ import AccountBar from '../react-components/AccountBar/AccountBar';
 import Advertisment from '../react-components/Advertisment/Advertisment';
 import SearchBar from '../react-components/SearchBar/SearchBar';
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
-
-import AW from "/Users/renjiaqing/Downloads/team41/src/images/AW.png";
-import BurgerKing from "/Users/renjiaqing/Downloads/team41/src/images/burgerking.jpg";
-import Mcdonald from "/Users/renjiaqing/Downloads/team41/src/images/Mcdonald.png";
-import PizzaHut from "/Users/renjiaqing/Downloads/team41/src/images/pizzahut.jpg";
-import Popeye from "/Users/renjiaqing/Downloads/team41/src/images/popeye.jpg";
-import StarBucks from "/Users/renjiaqing/Downloads/team41/src/images/starbucks.jpg";
-import TimHortons from "/Users/renjiaqing/Downloads/team41/src/images/timhortons.jpg";
-import TacoBell from "/Users/renjiaqing/Downloads/team41/src/images/tacobell.jpg";
-import Subway from "/Users/renjiaqing/Downloads/team41/src/images/subway.jpg";
 import CouponGroup from '../react-components/CouponGroup/CouponGroup';
+
+
+import AW from "../images/AW.png";
+import BurgerKing from "../images/burgerking.jpg";
+import Mcdonald from "../images/Mcdonald.png";
+import PizzaHut from "../images/pizzahut.jpg";
+import Popeye from "../images/popeye.jpg";
+import StarBucks from "../images/starbucks.jpg";
+import TimHortons from "../images/timhortons.jpg";
+import TacoBell from "../images/tacobell.jpg";
+import Subway from "../images/subway.jpg";
 
 
 

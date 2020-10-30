@@ -6,7 +6,7 @@ import SecondPage from './pages/SecondPage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SecondPage />
+    <FirstPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
