@@ -2,7 +2,7 @@
     font-family: 'Arvo', serif;
     position: relative;
     color: #ffc800;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 

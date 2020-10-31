@@ -1,7 +1,7 @@
 import React from 'react';
 import './StartUp.css'
 
-const StartUp = () => {
+const StartUp = ({setRoute}) => {
     return (<section className= "frontPage">
         <div className="log_sign_container">
             <div className="icon">
@@ -9,9 +9,9 @@ const StartUp = () => {
             </div>
 
             <div className="log_sign">
-            <a href="">Login</a>
+            <a className="point_cursor" onClick={ () => setRoute("SignIn")}>Login</a>
             /
-            <a href=""> Sign Up</a>
+            <a className="point_cursor" onClick={ () => setRoute("Register")}> Sign Up</a>
         </div>
         </div>
         <div className="body_container">
