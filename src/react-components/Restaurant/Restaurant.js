@@ -5,15 +5,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 class Restaurant extends React.Component {
   render() {
     return (
       <Card id="restaurant1" className="restaurantCard">
         <Card.Img className="restaurantPic" variant="top" src={this.props.image} />
-        <Card.Body>
+        <Card.Body className="restaurantBody">
           <Card.Title>{this.props.name}</Card.Title>
           <Card.Text>
             {this.props.description}

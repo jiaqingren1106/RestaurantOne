@@ -2,6 +2,7 @@ import './App.css';
 import React, {useState} from 'react';
 import './index.css'
 import StartUp from "./fontPages/StartUp";
+
 import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./fontPages/Register";
@@ -23,6 +24,11 @@ const getTargetPage = (route, setRoute) => {
 const App = () => {
 
    const [route, setRoute] =  useState('StartUp');
+
+// import Deals from "./react-components/Deals/Deals";
+
+
+// const App = () => <Deals/>
 
    return (
        <div>

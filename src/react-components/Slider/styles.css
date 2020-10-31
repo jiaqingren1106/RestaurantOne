@@ -1,0 +1,14 @@
+.Slider{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.McDonaldPhoto{
+    flex: 1;
+    height: 80px;
+    width: 80px;
+    resizeMode: 'cover'
+}

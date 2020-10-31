@@ -16,8 +16,7 @@ import StarBucks from "../images/starbucks.jpg";
 import TimHortons from "../images/timhortons.jpg";
 import TacoBell from "../images/tacobell.jpg";
 import Subway from "../images/subway.jpg";
-
-
+import { NavBar } from '../react-components/NavBar/NavBar';
 
 class FirstPage extends React.Component {
     state = {
@@ -69,10 +68,8 @@ class FirstPage extends React.Component {
 
         return (
         <section className='FirstPage'>
-            <Header />
-            <AccountBar/>
+            <NavBar />
             <Advertisment />
-            <SearchBar />
             {RestaurantList}
            
         </section>
