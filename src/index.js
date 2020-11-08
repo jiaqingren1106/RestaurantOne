@@ -6,6 +6,7 @@ import SecondPage from './pages/SecondPage';
 import SignIn from "./fontPages/SignIn";
 import AdminPage from "./Admin/AdminPage"
 import PostsTable from "./Admin/admin-components/PostsTable"
+import UserTable from "./Admin/admin-components/UserTable"
 
 ReactDOM.render(
 

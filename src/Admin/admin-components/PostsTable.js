@@ -1,4 +1,5 @@
 import React from 'react';
+import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './PostsTable.css';
@@ -37,6 +38,16 @@ class PostsTable extends React.Component {
       }
    }
 
+   deletePosts(id){
+      let updatingPosts = this.state.posts;
+      for (let i = 0; i < this.state.posts.length; i++){
+          if(updatingPosts[i]["id"] === id){
+              updatingPosts.splice(i, 1);
+          }
+      }
+      this.setState({users: updatingPosts})
+ }
+
     renderTableData() {
       return this.state.posts.map((post) => {
          const { id, rest_id, title, content , isBan} = post //destructuring
@@ -51,7 +62,7 @@ class PostsTable extends React.Component {
                   {this.isBanButtonRender(isBan, id)}
                </td>
                <td>
-                  <Button variant="danger" block>Delete</Button>
+                  <Button variant="danger" block onClick={()=>this.deletePosts(id)}>Delete</Button>
                </td>
             </tr>
          )
@@ -63,6 +74,16 @@ class PostsTable extends React.Component {
       return header.map((key, index) => {
          return <th key={index}>{key.toUpperCase()}</th>
       })
+   }
+
+   emptyNotification(){
+      if(this.state.posts.length === 0){
+         return(
+            <Alert variant={'secondary'}>
+               There are no posts in Restaurant Reviewer
+            </Alert>
+         )
+      }
    }
   
    render() {
@@ -77,6 +98,7 @@ class PostsTable extends React.Component {
                   {this.renderTableData()}
                </tbody>
             </Table>
+            {this.emptyNotification()}
          </div>
       )
    }
