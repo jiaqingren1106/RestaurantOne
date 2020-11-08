@@ -1,30 +1,33 @@
 import React from 'react';
 import "./styles.css"
-import { ButtonGroup } from '@material-ui/core';
-import Button from "@material-ui/core/Button";
 
-class Navigation extends React.Component{
-
-    handleClick = () =>{
-        console.log("clicked")
-    }
-
-    render(){
+class Navigation extends React.Component {
+    render() {
         return(
-            <div>
-                <ButtonGroup vertical>
-                    <Button>Button</Button>
-                    <Button>Button</Button>
+            <div className={"navigation"}>
 
-                    <Button>Button</Button>
-                    <Button>Button</Button>
+                <button className={'navigationButton'}>
+                    Back
+                </button>
 
+                <button className={"navigationButton"}>
+                    Blog
+                </button>
 
-                </ButtonGroup>
+                <button className={"navigationButton"}>
+                    Menu
+                </button>
+
+                <button className={"navigationButton"}>
+                    Coupon
+                </button>
+
 
             </div>
         )
     }
 }
+
+
 
 export default Navigation

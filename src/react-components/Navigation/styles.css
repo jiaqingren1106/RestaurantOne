@@ -1,0 +1,16 @@
+.navigation{
+    float: right;
+}
+
+
+.navigationButton{
+    margin-top: 50px;
+    margin-right: 300px;
+    font-size: 30px;
+    font-family: Arial, "Andale Mono";
+    line-height: 150%;
+    color: darkslategrey;
+    border: None;
+    background: None;
+    float: right;
+}
