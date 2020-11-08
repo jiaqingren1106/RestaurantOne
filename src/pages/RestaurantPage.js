@@ -1,15 +1,14 @@
 import React from 'react';
-import "./styles.css"
-import WebsiteName from "./react-components/WebsiteName";
-import Slider from "./react-components/Slider";
-import RestaurantInfo from "./react-components/RestaurantInfo";
-import Mcdonald1 from './images/Mcdonald-1.png'
-import Mcdonald2 from './images/Mcdonald-2.png'
-import Mcdonald3 from './images/Mcdonald-3.png'
-import Mcdonald4 from './images/Mcdonald-4.png'
-import Mcdonald5 from './images/Mcdonald-5.png'
-import rightArrow from './images/rightarrow.png'
-import leftArrow from './images/leftarrow.png'
+import WebsiteName from "../react-components/WebsiteName";
+import Slider from "../react-components/Slider";
+import RestaurantInfo from "../react-components/RestaurantInfo";
+import Mcdonald1 from '../images/Mcdonald-1.png'
+import Mcdonald2 from '../images/Mcdonald-2.png'
+import Mcdonald3 from '../images/Mcdonald-3.png'
+import Mcdonald4 from '../images/Mcdonald-4.png'
+import Mcdonald5 from '../images/Mcdonald-5.png'
+import rightArrow from '../images/rightarrow.png'
+import leftArrow from '../images/leftarrow.png'
 
 
 class restaurantPage extends React.Component{
@@ -25,11 +24,13 @@ class restaurantPage extends React.Component{
 
     render() {
         return (
-            <div>
-                <WebsiteName />
-                <Slider pic={this.state.restaurant_info[0]}/>
-                <RestaurantInfo info={this.state.restaurant_info[1]} />
-            </div>
+            <section>
+                <div>
+                    <WebsiteName />
+                    <Slider pic={this.state.restaurant_info[0]}/>
+                    <RestaurantInfo info={this.state.restaurant_info[1]} />
+                </div>
+            </section>
         );
     }
 }
