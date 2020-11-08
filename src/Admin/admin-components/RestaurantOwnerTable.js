@@ -86,8 +86,8 @@ class RestaurantOwnerTable extends React.Component {
   
    render() {
       return (
-         <div id="post_table">
-            <h1 id='title'>Restaurant Owner Table</h1>
+         <div class="table">
+            <h1 class='title'>Restaurant Owner Table</h1>
             <Table striped bordered hover id='restaurantOwner' size='sm'>
                <thead>
                   <tr>{this.renderTableHeader()}</tr>

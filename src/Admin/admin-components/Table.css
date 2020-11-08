@@ -1,6 +1,21 @@
-div {
-  width: 90%;
-  margin: auto;
+.table {
+  padding-top: 30px;
+  /* padding-bottom: 30px; */
+  padding-left: 10px;
+  padding-right: 100px;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: 200px;
+  text-decoration: underline;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 200px;
+  margin-bottom: 15px;
 }
 
 tr,
