@@ -66,12 +66,10 @@ class PostsRow extends React.Component {
    }
   
    render() {
-
-
       return (
-         <div>
+         <div id="post_table">
             <h1 id='title'>Posts Table</h1>
-            <Table striped bordered hover id='posts'>
+            <Table striped bordered hover id='posts' size='sm'>
                <thead>
                   <tr>{this.renderTableHeader()}</tr>
                </thead>
