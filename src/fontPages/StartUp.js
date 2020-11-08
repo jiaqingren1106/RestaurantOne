@@ -5,7 +5,7 @@ import {setRoute} from "../redux/actions";
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.routeState.route
     }
 }
 

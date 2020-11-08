@@ -5,7 +5,7 @@ import "./SignIn.css"
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.routeState.route
     }
 }
 

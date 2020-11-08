@@ -7,7 +7,7 @@ import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./fontPages/Register";
 import SignIn from "./fontPages/SignIn";
-import {routeState} from "./redux/reducer";
+import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
 
 const getTargetPage = (route) => {
@@ -29,13 +29,14 @@ const getTargetPage = (route) => {
 }
 const mapStateToProps = (state) => {
     return {route:
-        state.routeState.route}
+        state.routeState.route,
+    user: state.userState.username}
+
 }
 const mapDispatchToProps = (dispatch) => ({})
 
-const App = ({route}) => {
+const App = ({route, user}) => {
 // import Deals from "./react-components/Deals/Deals";
-
 
 // const App = () => <Deals/>
 
