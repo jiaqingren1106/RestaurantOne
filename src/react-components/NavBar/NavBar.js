@@ -27,16 +27,16 @@ const Styles = styled.div`
 export const NavBar = () => (
   <Styles>
     <Navbar expand="lg" fixed="top">
-      <Navbar.Brand href="/">RestaurantOne</Navbar.Brand>
+      <Navbar.Brand >RestaurantOne</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Form className="form-center">
         <FormControl type="text" placeholder="Search" className="" />
       </Form>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/">Hello, Customer</Nav.Link></Nav.Item> 
-          <Nav.Item><Nav.Link href="/about">Profile</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link href="/about">Log Out</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link>Hello, Customer</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link >Profile</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link>Log Out</Nav.Link></Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

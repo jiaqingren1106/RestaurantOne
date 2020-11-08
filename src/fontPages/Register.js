@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {setRoute, register} from "../redux/actions";
+import { connect } from 'react-redux'
 import "./SignIn.css"
 
 const mapStateToProps = (state) => {
@@ -16,12 +17,13 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Register = (props)=> {
-    const entered_user = {
+    const {setRoute, setUser} = props
+    const [entered_user, setEntered_user] = useState({
         username: "",
         usernamec: "",
         password:"",
         passwordc:"",
-    }
+    })
     const [warning, setWarning] = useState("")
     const [userType, setUserType] = useState("regular")
     const setType = (e) => {
@@ -39,39 +41,52 @@ const Register = (props)=> {
         else {
             return (<div className="uploadBox">
                 <label htmlFor="img">Select certificate image:</label>
-                <input type="file" className="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib black"
-                       id="avatar" name="avatar"
+                <input type="file"
+                       id="fileUpload" name="avatar"
                        accept="image/png, image/jpeg"/>
+                <button id="fileButton" onClick={ function(){
+                    document.getElementById("fileUpload").click()} }
+                        className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib black">choose file</button>
             </div>)
         }
     }
     const onSubmit = () => {
-        for(const key_ in entered_user){
-            if (entered_user.key_ === ""){
+        for(const field_ in entered_user){
+            if (entered_user[field_] === ""){
                 setWarning("have unfilled field")
+                setEntered_user(entered_user)
                 return
             }
         }
         if (entered_user.username !== entered_user.usernamec) {
             setWarning("username does not match")
+            setEntered_user(entered_user)
             return;
         }
         if (entered_user.password !== entered_user.passwordc) {
             setWarning("password does not match")
+            setEntered_user(entered_user)
             return;
         }
-        props.setUser({})
+        register({
+            username: entered_user.username,
+            userType: userType,
+            password: entered_user.password
+        })
+
+        setRoute("FirstPage")
+
 
     }
     return (
         <div className="signInContainer">
 
             <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw8 center article-container
-                shadow-5 signInContent signInBox " >
+                shadow-5" >
 
                 <main className="pa4 black-80">
-                    <form className="measure center">
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                    <div className="measure center">
+                        <fieldset  className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 mh0 ">Register</legend>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f4" >Username</label>
@@ -83,14 +98,14 @@ const Register = (props)=> {
                                        }}/>
                             </div>
                             <div className="mv3">
-                                <label className="db fw6 lh-copy f4 " htmlFor="password">Password</label>
+                                <label className="db fw6 lh-copy f4 " >Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" name="password" id="password" onChange={(e) => {
+                                       type="password" onChange={(e) => {
                                            entered_user.password = e.target.value
                                 }}/>
                                 <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" name="password" id="password" onChange={(e) => {
+                                       type="password"onChange={(e) => {
                                            entered_user.passwordc = e.target.value
                                 }}/>
                             </div>
@@ -101,19 +116,17 @@ const Register = (props)=> {
                             <div className="flex items-center mb2">
                                 <input className="mr2" type="checkbox"
                                        onChange={(event => {setType(event)})}/>
-                                    <label htmlFor="airbud" className="lh-copy">sign up as restaurant</label>
+                                    <label  className="lh-copy">sign up as restaurant</label>
                             </div>
                             {displayDocument()}
                         </fieldset>
                         <div>
-                            <input className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
-                                   onClick={() => setRoute("FirstPage")} type="submit"
-                                   value="Create"/>
+                            <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
+                                   onClick={() => onSubmit()}> Create </button>
                         </div>
-                    </form>
+                    </div>
                 </main>
             </article>
-
         </div>)
 };
-export default Register
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
