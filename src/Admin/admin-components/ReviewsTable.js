@@ -86,8 +86,8 @@ class ReviewsTable extends React.Component {
   
    render() {
       return (
-         <div id="post_table">
-            <h1 id='title'>Reviews Table</h1>
+         <div class="table">
+            <h1 class='title'>Reviews Table</h1>
             <Table striped bordered hover id='reviews' size='sm'>
                <thead>
                   <tr>{this.renderTableHeader()}</tr>

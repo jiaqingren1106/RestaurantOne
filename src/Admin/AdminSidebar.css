@@ -1,4 +1,29 @@
-.navBar {
+/* .navBar {
     position: relative;
     width: 50px;
+} */
+
+.navBar {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 100vh !important;
+  z-index: 100;
+  padding: 48px 0 0;
+  box-shadow: inset 5px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.side-navigation-panel-select-option {
+  color: white;
+}
+
+.side-navigation-panel-select-option:hover {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  color: black;
+  text-decoration: underline;
+  box-shadow: 5px 10px 15px yellow;
 }

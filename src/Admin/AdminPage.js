@@ -4,7 +4,7 @@ import PostsTable from './admin-components/PostsTable';
 import ResaurantOwnerTable from './admin-components/RestaurantOwnerTable';
 import ReviewsTable from './admin-components/ReviewsTable';
 import UserTable from './admin-components/UserTable';
-
+import DashboardTable from "./admin-components/DashboardTable"
 
 import AdminSidebar from './AdminSidebar';
 import Container from 'react-bootstrap/Container'
@@ -29,7 +29,7 @@ class AdminPage extends React.Component {
         let page
         switch (this.state.page) {
             case 0:
-                page = <PostsTable />
+                page = <DashboardTable />
                 break
             case 1:
                 page = <UserTable />
@@ -49,12 +49,12 @@ class AdminPage extends React.Component {
         }
 
         return (
-            <Container className='Adminpage'>
+            <Container className='Adminpage' fluid>
                 <Row>
-                    <Col xs={3}>
+                    <Col xs={2} id="sidebar-wrapper">
                         <AdminSidebar onPageSelected = {this.useMeWhenOnClick}/>
                     </Col>
-                    <Col xa={9}>
+                    <Col xs={10} id="page-content-wrapper">
                         {page}
                     </Col>
                 </Row>

@@ -94,8 +94,8 @@ class UserTable extends React.Component {
   
    render() {
       return (
-         <div id="user_table">
-            <h1 id='title'>User Table</h1>
+         <div class="table">
+            <h1 class='title'>User Table</h1>
             <Table striped bordered hover id='users' size='sm'>
                <thead>
                   <tr>{this.renderTableHeader()}</tr>
