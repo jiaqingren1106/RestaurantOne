@@ -9,7 +9,7 @@ class AdminSidebar extends React.Component {
         return (
             <Navigation id = "navBar" className = 'nav'
                 onSelect={({itemId}) => {
-                    this.props.onClick(itemId)
+                    this.props.onPageSelected(itemId)
                 }}
                 items={[
                     {
