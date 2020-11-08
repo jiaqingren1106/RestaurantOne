@@ -11,7 +11,7 @@
 .FirstPage {
     content: "";
     opacity: 0.8;
-    /* background: url("../images/front_background.jpg") no-repeat center center fixed; */
+    background: url("../images/front_background.jpg") no-repeat center center fixed;
     background-size: cover;
     /* filter: blur(3px); */
     position: absolute;

@@ -1,15 +1,9 @@
 import React from 'react';
 import './FirstPage.css';
 
-import Header from '../react-components/Header/Header';
-import AccountBar from '../react-components/AccountBar/AccountBar';
 import Advertisment from '../react-components/Advertisment/Advertisment';
-import SearchBar from '../react-components/SearchBar/SearchBar';
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
-import SideBar from '../react-components/SideBar/SideBar'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
 
 import AW from "../images/AW.png";
 import BurgerKing from "../images/burgerking.jpg";
@@ -20,7 +14,7 @@ import StarBucks from "../images/starbucks.jpg";
 import TimHortons from "../images/timhortons.jpg";
 import TacoBell from "../images/tacobell.jpg";
 import Subway from "../images/subway.jpg";
-import { NavBar } from '../react-components/NavBar/NavBar';
+import NavBar from '../react-components/NavBar/NavBar';
 
 class FirstPage extends React.Component {
     state = {
@@ -101,8 +95,7 @@ class FirstPage extends React.Component {
 
 
         return (
-
-            <section>
+            <section className='FirstPage'>
                 <NavBar />
                 <Advertisment />
                 {RestaurantList}
