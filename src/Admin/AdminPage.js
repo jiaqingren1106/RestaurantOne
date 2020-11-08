@@ -6,7 +6,7 @@ import AccountBar from '../react-components/AccountBar/AccountBar';
 import Advertisment from '../react-components/Advertisment/Advertisment';
 import SearchBar from '../react-components/SearchBar/SearchBar';
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
-import SideBar from '../react-components/SideBar/SideBar';
+// import SideBar from '../react-components/SideBar/SideBar';
 
 
 import AW from "../images/AW.png";

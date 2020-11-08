@@ -19,6 +19,8 @@ const getTargetPage = (route, setRoute) => {
             return (<FirstPage setRoute = {setRoute}/>)
         case "SecondPage":
             return (<SecondPage setRoute = {setRoute}/>)
+        default:
+            return (<StartUp setRoute = {setRoute}/>);
     }
 }
 const App = () => {
