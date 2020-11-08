@@ -1,0 +1,9 @@
+#user_table {
+  width: 75%;
+  margin: auto;
+}
+
+tr,
+td {
+  text-align: center;
+}

@@ -20,6 +20,7 @@ const getTargetPage = (route, setRoute) => {
             return (<FirstPage/>)
         case "SecondPage":
             return (<SecondPage/>)
+
     }
 }
 const mapStateToProps = (state) => {
