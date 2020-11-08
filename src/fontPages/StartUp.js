@@ -1,5 +1,15 @@
 import React from 'react';
 import './StartUp.css'
+import {connect} from "react-redux";
+import {setRoute} from "../redux/actions";
+
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route)=> dispatch(setRoute(new_route))
+    }
+}
 
 const StartUp = ({setRoute}) => {
     return (<section className= "frontPage">
@@ -24,4 +34,4 @@ const StartUp = ({setRoute}) => {
     </section>) }
 
 
-export default StartUp
+export default connect(mapStateToProps, mapDispatchToProps)(StartUp)

@@ -2,29 +2,33 @@ import './App.css';
 import React, {useState} from 'react';
 import './index.css'
 import StartUp from "./fontPages/StartUp";
-
+import { connect } from 'react-redux'
 import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./fontPages/Register";
 import SignIn from "./fontPages/SignIn";
+
 const getTargetPage = (route, setRoute) => {
     switch (route) {
         case "StartUp":
-            return (<StartUp setRoute = {setRoute}/>);
+            return (<StartUp/>);
         case "SignIn":
-            return (<SignIn setRoute = {setRoute}/>);
+            return (<SignIn/>);
         case "Register":
-            return (<Register setRoute = {setRoute}/>)
+            return (<Register/>)
         case "FirstPage":
-            return (<FirstPage setRoute = {setRoute}/>)
+            return (<FirstPage/>)
         case "SecondPage":
-            return (<SecondPage setRoute = {setRoute}/>)
+            return (<SecondPage/>)
     }
 }
-const App = () => {
+const mapStateToProps = (state) => {
+    return {route:
+        state.route}
+}
+const mapDispatchToProps = (dispatch) => ({})
 
-   const [route, setRoute] =  useState('StartUp');
-
+const App = ({route}) => {
 // import Deals from "./react-components/Deals/Deals";
 
 
@@ -32,10 +36,10 @@ const App = () => {
 
    return (
        <div>
-           {getTargetPage(route, setRoute)}
+           {getTargetPage(route)}
        </div>
 
    )
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
