@@ -7,8 +7,9 @@ import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./fontPages/Register";
 import SignIn from "./fontPages/SignIn";
+import {routeState} from "./redux/reducer";
 
-const getTargetPage = (route, setRoute) => {
+const getTargetPage = (route) => {
     switch (route) {
         case "StartUp":
             return (<StartUp/>);
@@ -25,7 +26,7 @@ const getTargetPage = (route, setRoute) => {
 }
 const mapStateToProps = (state) => {
     return {route:
-        state.route}
+        state.routeState.route}
 }
 const mapDispatchToProps = (dispatch) => ({})
 
