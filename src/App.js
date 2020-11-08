@@ -8,6 +8,7 @@ import SecondPage from "./pages/SecondPage";
 import Register from "./fontPages/Register";
 import SignIn from "./fontPages/SignIn";
 import {routeState} from "./redux/reducer";
+import RestaurantPage from "./pages/RestaurantPage";
 
 const getTargetPage = (route) => {
     switch (route) {
@@ -21,6 +22,8 @@ const getTargetPage = (route) => {
             return (<FirstPage/>)
         case "SecondPage":
             return (<SecondPage/>)
+        case "RestaurantPage":
+            return (<RestaurantPage/>)
 
     }
 }

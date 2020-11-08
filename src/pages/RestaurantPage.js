@@ -11,7 +11,7 @@ import rightArrow from '../images/rightarrow.png'
 import leftArrow from '../images/leftarrow.png'
 
 
-class restaurantPage extends React.Component{
+class RestaurantPage extends React.Component{
 
     state = {
         restaurant_info: [{images:[Mcdonald1, Mcdonald2, Mcdonald3, Mcdonald4, Mcdonald5], leftArrow: leftArrow,
@@ -35,4 +35,4 @@ class restaurantPage extends React.Component{
     }
 }
 
-export default restaurantPage
+export default RestaurantPage
