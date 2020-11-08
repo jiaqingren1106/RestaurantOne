@@ -24,7 +24,8 @@ const getTargetPage = (route) => {
             return (<SecondPage/>)
         case "RestaurantPage":
             return (<RestaurantPage/>)
-
+        default:
+            return (<StartUp/>);
     }
 }
 const mapStateToProps = (state) => {
