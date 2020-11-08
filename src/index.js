@@ -22,19 +22,12 @@ import ReviewsTable from "./Admin/admin-components/ReviewsTable"
 ReactDOM.render(
 
   <React.StrictMode>
-<<<<<<< HEAD
-    <PostsTable />
-    <UserTable />
-    <RestaurantOwnerTable />
-    <ReviewsTable />
-=======
 
       <Provider store = {store}>
           <App/>
       </Provider>
 
     {/* <PostsTable/> */}
->>>>>>> e95738a37173c181b0f17c72953443ebf0c68b80
   </React.StrictMode>,
     document.getElementById('root')
 );
