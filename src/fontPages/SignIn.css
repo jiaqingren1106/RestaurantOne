@@ -20,3 +20,10 @@
     display: flex;
     justify-content: flex-start;
 }
+#fileUpload{
+    display: none; /* do not display the actual file upload button */
+}
+
+#fileButton {
+    border-color: black;
+}
