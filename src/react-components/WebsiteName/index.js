@@ -5,7 +5,7 @@ class WebsiteName extends React.Component{
     render() {
         return(
             <div className = "WebsiteName">
-                <h1> RestaurantONE!
+                <h1 className={"restaurantName"}> RestaurantONE!
                 </h1>
             </div>
         )

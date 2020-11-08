@@ -6,7 +6,10 @@ import AccountBar from '../react-components/AccountBar/AccountBar';
 import Advertisment from '../react-components/Advertisment/Advertisment';
 import SearchBar from '../react-components/SearchBar/SearchBar';
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
-// import SideBar from '../react-components/SideBar/SideBar';
+import SideBar from '../react-components/SideBar/SideBar'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import AW from "../images/AW.png";
 import BurgerKing from "../images/burgerking.jpg";
@@ -21,20 +24,28 @@ import { NavBar } from '../react-components/NavBar/NavBar';
 
 class FirstPage extends React.Component {
     state = {
-        restaurants : [
-            {name: "BergurKing", rating: "5", key: "1", image: BurgerKing, description: "aba aba"},
-            {name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: "aba aba"},
-            {name: "AW", rating: "5", key: "3", image: AW, description: "aba aba"},
+        page: 0,
+        restaurants: [
+            { name: "BergurKing", rating: "5", key: "1", image: BurgerKing, description: "aba aba" },
+            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: "aba aba" },
+            { name: "AW", rating: "5", key: "3", image: AW, description: "aba aba" },
 
-            {name: "Subway", rating: "5", key: "4", image: Subway, description: "aba aba"},
-            {name: "Popeye", rating: "5", key: "5", image: Popeye, description: "aba aba"},
-            {name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: "aba aba"},
+            { name: "Subway", rating: "5", key: "4", image: Subway, description: "aba aba" },
+            { name: "Popeye", rating: "5", key: "5", image: Popeye, description: "aba aba" },
+            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: "aba aba" },
 
-            {name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: "aba aba"},
-            {name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: "aba aba"},
-            {name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: "aba aba"}
+            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: "aba aba" },
+            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: "aba aba" },
+            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: "aba aba" }
         ]
     }
+
+    useMeWhenOnClick = (pageNumber) => {
+        this.setState({ 
+            page: pageNumber
+        })
+    }
+
 
     render() {
         const row = 3;
@@ -48,7 +59,7 @@ class FirstPage extends React.Component {
             cardGroupLen = restaurantLen / row + 1;
         }
 
-        
+
         let cardgroups = [];
         var i;
         for (i = 0; i < cardGroupLen; i++) {
@@ -58,23 +69,58 @@ class FirstPage extends React.Component {
         var RestaurantList;
         RestaurantList = (
             <div>
-              {cardgroups.map((index) => {
-                return <RestaurantGroups
-                restaurants={(this.state.restaurants).slice(row*index,index*row+row)}/>
-              })}
+                {cardgroups.map((index) => {
+                    return <RestaurantGroups
+                        restaurants={(this.state.restaurants).slice(row * index, index * row + row)} />
+                })}
             </div>
-          );
-        
-        
+        );
+
+
+        let page
+        switch (this.state.page) {
+            case 0:
+                page = RestaurantList
+                break
+            case 1:
+                page = RestaurantList
+                break
+            case 2:
+                page = RestaurantList
+                break
+            case 3:
+                page = RestaurantList
+                break
+            case 4:
+                page =RestaurantList
+                break
+            default:
+                page = RestaurantList
+                break
+        }
+
 
         return (
-        <section className='FirstPage'>
-            <NavBar />
-            {/* <SideBar/> */}
-            <Advertisment />
-            {RestaurantList}
-           
-        </section>
+
+            <section>
+                <NavBar />
+                <Advertisment />
+                {RestaurantList}
+            </section>
+
+            // <div className='FirstPage'>
+            //     <Row>
+            //         <Col class="col-4" xs={4}>
+            //             <SideBar onPageSelected = {this.useMeWhenOnClick}/>
+            //         </Col>
+            //         <Col class="col" >
+            //             <NavBar />
+            //             <Advertisment />
+            //             {RestaurantList}
+            //         </Col>
+            //     </Row>
+
+            // </div>
         );
     }
 }

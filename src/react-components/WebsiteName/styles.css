@@ -1,10 +1,28 @@
-.WebsiteName{
+
+.restaurantName{
     font-family:"Syne Mono", monospace;
-    font-size: 25px;
-    text-align: center;
+    font-size: 50px;
+    text-align: left;
     top: 0;
     line-height: 150%;
     color: black;
     letter-spacing: 1px;
-    padding: 5px 15px 20px;
+    margin-left: 50px;
+    /*padding: 5px 15px 20px;*/
+}
+
+.review{
+    float: right;
+    margin-top: 50px;
+    margin-right: 50px;
+    font-size: 30px;
+    font-family: Arial, "Andale Mono";
+    line-height: 150%;
+    color: darkslategrey;
+    border: None;
+    background: None;
+}
+
+.RestaurantInfo{
+    float: left;
 }

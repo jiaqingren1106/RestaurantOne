@@ -1,6 +1,12 @@
 import React from 'react';
 import './SignIn.css'
 
+const mapStateToProps = (state) => {
+    return {route:
+        state.route}
+}
+const mapDispatchToProps = (dispatch) => ({})
+
 const SignIn = ({setRoute}) => {
     return (
         <div className="signInContainer">
