@@ -2,7 +2,6 @@ import React from 'react';
 import './Restaurant.css';
 import {connect} from 'react-redux'
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {register, setRoute} from "../../redux/actions";
 

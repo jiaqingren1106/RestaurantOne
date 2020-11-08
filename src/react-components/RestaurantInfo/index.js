@@ -55,11 +55,11 @@ class RestaurantInfo extends React.Component{
                         return (
                             <div className={'reviewBlock'}>
                                 <p className={'userName'}>
-                                    {this.props.info['users'][index]}
+                                    {"User: " + this.props.info['users'][index]}
                                 </p>
 
                                 <p className={'reviewConcent'}>
-                                    {this.props.info['reviews'][index]}
+                                    {"Comments:  " + this.props.info['reviews'][index]}
                                 </p>
 
                                 <img src={user1} alt={""} className={"reviewpic"} />
