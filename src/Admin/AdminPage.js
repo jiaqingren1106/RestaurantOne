@@ -2,13 +2,25 @@ import React from 'react';
 import './AdminPage.css';
 import PostsTable from './admin-components/PostsTable';
 import AdminSidebar from './AdminSidebar';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 
 class AdminPage extends React.Component {
     state = {page: 0}
 
+    
+    useMeWhenOnClick = (pageNumber) => {
+        this.setState({ 
+            page: pageNumber
+        })
+    }
+
 
     render() {
+       
+      
         let page
         switch (this.state.page) {
             case 0:
@@ -32,10 +44,17 @@ class AdminPage extends React.Component {
         }
 
         return (
-            <div className='Adminpage'>
-                <AdminSidebar/>
-                {page}
-            </div>
+            <Container className='Adminpage'>
+                <Row>
+                    <Col xs={3}>
+                        <AdminSidebar onClick = {this.useMeWhenOnClick}/>
+                    </Col>
+                    <Col xa={9}>
+                        {page}
+                    </Col>
+                </Row>
+                
+            </Container>
         );
     }
 }
