@@ -11,7 +11,7 @@ class Restaurant extends React.Component {
       <Card id="restaurant1" className="restaurantCard">
         <Card.Img className="restaurantPic" variant="top" src={this.props.image} />
         <Card.Body className="restaurantBody">
-          <Card.Title>{this.props.name}</Card.Title>
+          <Card.Title className="restaurantTitle">{this.props.name}</Card.Title>
           <Card.Text>
             {this.props.description}
           </Card.Text>

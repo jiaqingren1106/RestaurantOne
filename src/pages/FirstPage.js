@@ -6,6 +6,7 @@ import AccountBar from '../react-components/AccountBar/AccountBar';
 import Advertisment from '../react-components/Advertisment/Advertisment';
 import SearchBar from '../react-components/SearchBar/SearchBar';
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
+import SideBar from '../react-components/SideBar/SideBar';
 
 import AW from "../images/AW.png";
 import BurgerKing from "../images/burgerking.jpg";
@@ -36,7 +37,7 @@ class FirstPage extends React.Component {
     }
 
     render() {
-        const row = 4;
+        const row = 3;
 
         const restaurantLen = this.state.restaurants.length;
         const leftover = restaurantLen % row;
@@ -69,6 +70,7 @@ class FirstPage extends React.Component {
         return (
         <section className='FirstPage'>
             <NavBar />
+            {/* <SideBar/> */}
             <Advertisment />
             {RestaurantList}
            
