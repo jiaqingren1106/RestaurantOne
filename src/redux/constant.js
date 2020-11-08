@@ -1,0 +1,2 @@
+export const CHANGE_ROUTE = 'CHANGE_ROUTE'
+export const CHANGE_LOGIN = 'CHANGE_LOGIN'
