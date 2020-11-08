@@ -1,38 +1,39 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import ToggleButton from 'react-bootstrap/ToggleButton'
 import './PostsTable.css';
 
 class PostsRow extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
+         update_id : -1,
          header : ["id", "restaurant_id", "title", "content", "Ban/Unban", "Delete"],
          posts : [
-             {id: "1", rest_id: "1", title:"Discount 10%", content: "Get your Discounts!", isBan: true},
-             {id: "2", rest_id: "2", title:"Discount 20%", content: "Get your Discounts!", isBan: false},
-             {id: "3", rest_id: "3", title:"Discount 30%", content: "Get your Discounts!", isBan: true},
-             {id: "4", rest_id: "4", title:"Discount 40%", content: "Get your Discounts!", isBan: false},
+             {id: 1, rest_id: 1, title:"Discount 10%", content: "Get your Discounts!", isBan: true},
+             {id: 2, rest_id: 2, title:"Discount 20%", content: "Get your Discounts!", isBan: false},
+             {id: 3, rest_id: 3, title:"Discount 30%", content: "Get your Discounts!", isBan: true},
+             {id: 4, rest_id: 4, title:"Discount 40%", content: "Get your Discounts!", isBan: false},
          ]
      }
    }
 
-   toggleBan(id){
-      const updatePosts = this.state.posts
-      for(let i = 0;  i < updatePosts.length; i++){
-         if(updatePosts[i]["id"] === id){
-            updatePosts[i]["isBan"] = !updatePosts[i]["isBan"]
+   toggleButton(id){
+      let updatingPosts = this.state.posts;
+      for (let i = 0; i < this.state.posts.length; i++){
+         if(updatingPosts[i]["id"] === id){
+            updatingPosts[i]["isBan"] = !updatingPosts[i]["isBan"]
+            // alert("isBan of " + id +"becomes "+ updatingPosts[i]["isBan"])
          }
       }
-      this.setState({posts: updatePosts})
+      this.setState({posts: updatingPosts})
    }
 
    isBanButtonRender(isBan, id){
       if(isBan){
-         return <Button variant="secondary" block onClick={(id) => this.toggleBan(id)}>Unban</Button>
+         return <Button variant="secondary" block onClick={() => this.toggleButton(id)}>Unban</Button>
       } else{
-         return <Button variant="dark" block onClick={(id) => this.toggleBan(id)}>Ban</Button>
+         return <Button variant="dark" block onClick={() => this.toggleButton(id)}>Ban</Button>
       }
    }
 
@@ -65,6 +66,8 @@ class PostsRow extends React.Component {
    }
   
    render() {
+
+
       return (
          <div>
             <h1 id='title'>Posts Table</h1>
