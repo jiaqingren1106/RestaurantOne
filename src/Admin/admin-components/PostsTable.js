@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './PostsTable.css';
 
-class PostsRow extends React.Component {
+class PostsTable extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
@@ -82,4 +82,4 @@ class PostsRow extends React.Component {
    }
 }
 
-export default PostsRow;
+export default PostsTable;
