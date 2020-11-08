@@ -7,25 +7,30 @@ import './AdminSidebar.css'
 class AdminSidebar extends React.Component {
     render() {
         return (
-            <Navigation className = 'nav'
+            <Navigation id = "navBar" className = 'nav'
+                onSelect={({itemId}) => {
+                    this.props.onPageSelected(itemId)
+                }}
                 items={[
                     {
                         title: 'Dashboard',
-                        // you can use your own custom Icon component as well
-                        // icon is optional
-                        // elemBefore: () => <Icon name="inbox" />,
+                        itemId: 0
                     },
                     {
                         title: 'User',
+                        itemId: 1
                     },
                     {
                         title: 'Restaurant Owner',
+                        itemId: 2
                     },
                     {
                         title: 'Posts',
+                        itemId: 3
                     },
                     {
                         title: 'Reviews',
+                        itemId: 4
                     },
                 ]}
             />

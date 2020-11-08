@@ -2,7 +2,7 @@ import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import './UserTable.css';
+import './Table.css';
 
 class UserTable extends React.Component {
    constructor(props) {

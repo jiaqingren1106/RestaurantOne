@@ -12,3 +12,27 @@
     width: 80px;
     resizeMode: 'cover'
 }
+
+.arrowPrev{
+    height: 50px;
+    width: 50px;
+    margin-top: 100px;
+}
+
+.arrowNext{
+    height: 50px;
+    width: 50px;
+    margin-top: 100px;
+}
+
+.displayPic{
+    height: 300px;
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.picSlider{
+    display: flex;
+    justify-content: center;
+}

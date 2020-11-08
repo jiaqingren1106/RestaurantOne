@@ -2,13 +2,12 @@ import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import './PostsTable.css';
+import './Table.css';
 
 class PostsTable extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         update_id : -1,
          header : ["id", "restaurant_id", "title", "content", "Ban/Unban", "Delete"],
          posts : [
              {id: 1, rest_id: 1, title:"Discount 10%", content: "Get your Discounts!", isBan: true},

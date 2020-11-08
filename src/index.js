@@ -9,8 +9,10 @@ import {Provider} from "react-redux";
 
 
 const logger = createLogger()
+
 const rootReducer = combineReducers({routeState, userState})
 const store = createStore(rootReducer, applyMiddleware(logger))
+
 
 
 ReactDOM.render(
