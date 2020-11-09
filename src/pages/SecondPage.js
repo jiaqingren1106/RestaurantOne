@@ -36,7 +36,7 @@ class SecondPage extends React.Component {
     }
 
     render() {
-        const row = 5;
+        const row = 3;
         const restaurantLen = this.state.restaurants.length;
         const leftover = restaurantLen % row;
         var cardGroupLen;
