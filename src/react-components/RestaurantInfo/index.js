@@ -5,6 +5,7 @@ import user1 from '../../images/user-review-1.jpg'
 import user2 from '../../images/user-review-2.jpg'
 import user3 from '../../images/user-review-3.jpg'
 import MapContainer from '../MapContainer/MapContainer'
+import userPic from '../../images/userPhoto.jpg'
 
 class RestaurantInfo extends React.Component{
 
@@ -27,7 +28,6 @@ class RestaurantInfo extends React.Component{
 
     handleSubmit(event) {
         this.reviews.push(this.state.value)
-        console.log(this.reviews)
         this.users.push('Anonymous')
         this.reviewpic.push('none')
         this.setState({value: this.state.value});
@@ -97,9 +97,13 @@ class RestaurantInfo extends React.Component{
                     {list.map((index) => {
                         return (
                             <div className={'reviewBlock'}>
-                                <p className={'userName'} >
-                                    {"User: " + this.users[index]}
-                                </p>
+
+                                <div className={'userInfo'}>
+                                    <img src={userPic} alt={''} className={'userPic'} />
+                                    <p className={'userName1'} >
+                                        {this.users[index]}
+                                    </p>
+                                </div>
 
                                 <p className={'reviewConcent'}>
                                     {"Comments:  " + this.reviews[index]}
@@ -116,9 +120,13 @@ class RestaurantInfo extends React.Component{
                                 Select your rate:
                                 <select value={this.state.value} onChange={this.handleChange}>
                                     <option value="1">1</option>
+
                                     <option value="2">2</option>
+
                                     <option value="3">3</option>
+
                                     <option value="4">4</option>
+
                                     <option value="5">5</option>
                                 </select>
                             </label>

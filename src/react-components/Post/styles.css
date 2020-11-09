@@ -6,7 +6,7 @@
 }
 
 .title{
-    margin-left: 300px;;
+    margin-left: 25vw;
     position: relative;
     float: left;
     margin-bottom: 20px;
@@ -16,11 +16,11 @@
     height: 500px;
     width: 800px;
     display: inline-block;
-    margin-left: 300px;
+    margin-left: 25vw;
 }
 
 .date{
-    margin-left: 300px;
+    margin-left: 25vw;
     position: relative;
     font-size: 20px;
     margin-top: 20px;
@@ -28,8 +28,8 @@
 }
 
 .content{
-    width: 800px;
-    margin-left: 300px;
+    width: 50vw;
+    margin-left: 25vw;
 }
 
 .post{
@@ -41,17 +41,28 @@
 .commentsTitle{
     font-size: 30px;
     margin-top: 30px;
-    margin-left: 300px;
+    margin-left: 25vw;
 }
 
 .userName{
     font-size: 30px;
-    margin-left: 300px;
+}
+
+.userInfo1{
+    display: flex;
+    margin-left: 30vw;
 }
 
 .reviewContent{
-    width: 800px;
-    margin-left: 400px;
+    width: 45vw;
+    margin-left: 30vw;
     font-family: Arial, "Al Bayan";
     font-size: 15px;
+}
+
+.userPicture1{
+    width: 4vw;
+    height: 4vw;
+    padding: 0;
+    margin: 0;
 }
