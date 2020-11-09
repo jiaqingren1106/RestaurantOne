@@ -122,3 +122,22 @@
     background-color: transparent;
 
 }
+
+.RestaurantTop{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.RestaurantLeft{
+    flex-grow: 1;
+}
+
+
+.googleMap{
+    flex-grow: 2;
+    maxWidth: 400px;
+    height: 400px;
+    overflowX: hidden;
+    overflowY: hidden;
+}

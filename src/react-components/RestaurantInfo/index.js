@@ -4,8 +4,7 @@ import checkPic from "../../images/checkPic.png"
 import user1 from '../../images/user-review-1.jpg'
 import user2 from '../../images/user-review-2.jpg'
 import user3 from '../../images/user-review-3.jpg'
-import Select from 'react-select';
-
+import MapContainer from '../MapContainer/MapContainer'
 
 class RestaurantInfo extends React.Component{
 
@@ -56,31 +55,40 @@ class RestaurantInfo extends React.Component{
         return (
             <div className={"respage"}>
                 <div className={"RestaurantInfo"}>
-                    <h1 className={"RestaurantName"}>
-                        {this.props.info.title}
-                    </h1>
-                    <p className={"RestaurantDescription"}>
-                        {this.props.info.description}
-                    </p>
-                    <p className={"Rating"}>
-                        {this.props.info.rating}
-                    </p>
-                    <p className={"OpenTime"}>
-                        {this.props.info.opentime}
-                    </p>
-                    <p className={"Location"}>
-                        {this.props.info.location}
-                    </p>
 
-                    <p className={"CovidUpdate"}>
-                        Covid Update
-                    </p>
+                    <div className={"RestaurantTop"}>
+                        <div className={"RestaurantLeft"}>
+                            <h1 className={"RestaurantName"}>
+                                {this.props.info.title}
+                            </h1>
+                            <p className={"RestaurantDescription"}>
+                                {this.props.info.description}
+                            </p>
+                            <p className={"Rating"}>
+                                {this.props.info.rating}
+                            </p>
+                            <p className={"OpenTime"}>
+                                {this.props.info.opentime}
+                            </p>
+                            <p className={"Location"}>
+                                {this.props.info.location}
+                            </p>
 
-                    <img className={"checkPic"} src={checkPic} alt={"None"}/>
+                            <p className={"CovidUpdate"}>
+                                Covid Update
+                            </p>
 
-                    <p className={"condition"}>
-                        {this.props.info.safe}
-                    </p>
+                            <img className={"checkPic"} src={checkPic} alt={"None"}/>
+
+                            <p className={"condition"}>
+                                {this.props.info.safe}
+                            </p>
+                        </div>
+                        <div  className={"googleMap"}>
+                            <MapContainer/>
+                        </div>
+                    </div>
+
 
                     <p className={"r"}>
                         Review
