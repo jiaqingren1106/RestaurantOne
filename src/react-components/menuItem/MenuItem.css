@@ -1,0 +1,18 @@
+#MenuItemPic{
+    width: 100%;
+    object-fit: contain;
+
+}
+
+#MenuItem1{
+    margin: 10px;
+}
+
+
+#MenuItemTitle{
+    height: 30px;
+}
+
+#cardBody{
+    padding:0;
+}

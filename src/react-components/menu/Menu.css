@@ -1,0 +1,34 @@
+.Menu {
+    font-family: 'Arvo', serif;
+    position: relative;
+    color: #ffc800;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-left: 3%;
+    padding-right: 3%;
+
+}
+
+.Menu {
+    content: "";
+    opacity: 0.8;
+    background: url("../../images/front_background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    /* filter: blur(3px); */
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+#back{
+    margin-left: 1%;
+    margin-top: 0%;
+    width: 100px;
+    color: black;
+    font-size: x-large;
+}
+

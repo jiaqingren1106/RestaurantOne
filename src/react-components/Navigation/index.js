@@ -33,7 +33,7 @@ class Navigation extends React.Component {
                     Blog
                 </button>
 
-                <button className={"navigationButton"}>
+                <button className={"navigationButton"} onClick={() => setRoute("MenuPage")}>
                     Menu
                 </button>
 

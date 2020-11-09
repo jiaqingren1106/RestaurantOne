@@ -12,6 +12,7 @@ import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
+import Menu from './react-components/menu/Menu';
 
 const getTargetPage = (route) => {
     switch (route) {
@@ -33,6 +34,8 @@ const getTargetPage = (route) => {
             return (<Post />)
         case "AdminPage":
             return (<AdminPage/>)
+        case "MenuPage":
+            return (<Menu/>)
         default:
             return (<StartUp/>);
     }
