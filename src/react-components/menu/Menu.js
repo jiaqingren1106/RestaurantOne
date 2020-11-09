@@ -76,7 +76,7 @@ class Menu extends React.Component {
 
         var MenuItemList;
         MenuItemList = (
-            <div>
+            <div className={'menu'}>
                 {cardgroups.map((index) => {
                     return <MenuGroup
                         key={0}
