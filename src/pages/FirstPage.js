@@ -65,6 +65,7 @@ class FirstPage extends React.Component {
             <div>
                 {cardgroups.map((index) => {
                     return <RestaurantGroups
+                        key={0}
                         restaurants={(this.state.restaurants).slice(row * index, index * row + row)} />
                 })}
             </div>

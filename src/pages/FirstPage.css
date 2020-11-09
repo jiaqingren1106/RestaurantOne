@@ -5,6 +5,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding-top: 100px;
+    padding-left: 3%;
+    padding-right: 3%;
 
 }
 
@@ -14,14 +17,14 @@
     background: url("../images/front_background.jpg") no-repeat center center fixed;
     background-size: cover;
     /* filter: blur(3px); */
-    position: absolute;
+    position: relative;
     top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
 }
 
-.col-4{
+/* .col-4{
     margin-top: 100px;
 }
 
@@ -32,4 +35,4 @@
 
 .row{
     width: 100%;
-}
+} */
