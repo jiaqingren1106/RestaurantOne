@@ -22,17 +22,17 @@ class FirstPage extends React.Component {
     state = {
         onSearch: false,
         restaurants: [
-            { name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING},
-            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
-            { name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
+            {name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING},
+            {name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
+            {name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
 
-            { name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
-            { name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
-            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
+            {name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
+            {name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
+            {name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
 
-            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
-            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
-            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
+            {name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
+            {name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
+            {name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
         ],
         searched: []
     }
@@ -57,9 +57,14 @@ class FirstPage extends React.Component {
 
     }
 
+    useMeWhenClickedDashBoard = () => {
+        this.setState({ onSearch: false })
+    }
+
 
     render() {
         const column = 3;
+
         let restaurants
         if (this.state.onSearch){
             restaurants = this.state.searched
@@ -99,7 +104,7 @@ class FirstPage extends React.Component {
 
         return (
             <section className='FirstPage'>
-                <NavBar onSearch={this.useMeWhenYouDoSearch} />
+                <NavBar onSearch={this.useMeWhenYouDoSearch} setSearched={this.useMeWhenClickedDashBoard}/>
                 {RestaurantList}
             </section>
         );
