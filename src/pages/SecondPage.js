@@ -1,5 +1,5 @@
 import React from 'react';
-import './FirstPage.css';
+import './SecondPage.css';
 
 import Advertisment from '../react-components/Advertisment/Advertisment';
 import CouponGroup from '../react-components/CouponGroup/CouponGroup';
@@ -64,7 +64,7 @@ class SecondPage extends React.Component {
           );
 
         return (
-        <section className='FirstPage'>
+        <section className='SecondPage'>
             <NavBar />
             <Advertisment />
             {CouponList}

@@ -24,9 +24,7 @@ class AdminPage extends React.Component {
 
 
     render() {
-       
-      
-        let page
+       let page
         switch (this.state.page) {
             case 0:
                 page = <DashboardTable />
@@ -49,12 +47,12 @@ class AdminPage extends React.Component {
         }
 
         return (
-            <Container className='Adminpage' fluid>
-                <Row>
-                    <Col xs={2} id="sidebar-wrapper">
+            <Container id='adminPage' fluid>
+                <Row id='adminRow'>
+                    <Col xs={3} id="sidebar-wrapper">
                         <AdminSidebar onPageSelected = {this.useMeWhenOnClick}/>
                     </Col>
-                    <Col xs={10} id="page-content-wrapper">
+                    <Col xs={9} id="page-content-wrapper">
                         {page}
                     </Col>
                 </Row>

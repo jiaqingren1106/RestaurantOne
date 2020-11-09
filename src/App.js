@@ -7,6 +7,7 @@ import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./fontPages/Register";
 import SignIn from "./fontPages/SignIn";
+import AdminPage from "./Admin/AdminPage";
 import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
@@ -30,15 +31,18 @@ const getTargetPage = (route) => {
             return (<BlogPage />)
         case "Post":
             return (<Post />)
-
+        case "AdminPage":
+            return (<AdminPage/>)
         default:
             return (<StartUp/>);
     }
 }
 const mapStateToProps = (state) => {
+
     return {route:
         state.routeState.route,
-    user: state.userState.username}
+    user: state.userState}
+
 
 }
 const mapDispatchToProps = (dispatch) => ({})
