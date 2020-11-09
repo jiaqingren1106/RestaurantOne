@@ -3,57 +3,69 @@ import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
 
 const mapStyles = {
     position: 'relative',
-    width: '40%',
-    height: '40%'
+    width: '100%',
+    height: '100%'
 };
 
 export class MapContainer extends Component {
 
     state = {
-        showingInfoWindow: false,  // Hides or shows the InfoWindow
-        activeMarker: {},          // Shows the active marker upon click
-        selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
+    lat: 43.6686687,
+    lng: -79.3976189,
+        apiKey: 'AIzaSyALh3Jxz38yeMi-GmZ8ID5xMvhDnmaC244'
     };
 
-    onMarkerClick = (props, marker, e) =>{
-        console.log({"props":props, "maker": marker})
-        this.setState({
-            selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
-        });
-    }
 
-
-    onClose = props => {
-        if (this.state.showingInfoWindow) {
-            this.setState({
-                showingInfoWindow: false,
-                activeMarker: null
-            });
-        }
-    };
     render() {
         return (
-            <Map
-                google={this.props.google}
-                zoom={16}
-                style={mapStyles}
-                initialCenter={
-                    {
-                        lat: 43.6686687,
-                        lng: -79.3976189
-                    }
-                }
-            >
-                <Marker position={{ lat: 43.6686687, lng:-79.3976189}}/>
+            <div style={{position: "relative", width: "100%", height: "100%"}}>
+                <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.lat},${this.state.lng}&zoom=14&size=500x400&sensor=false&markers=color:red%7C${this.state.lat},${this.state.lng}&key=${this.state.apiKey}`} alt=''/>
+            </div>
 
-
-            </Map>
         );
     }
-}
+// }
 
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyALh3Jxz38yeMi-GmZ8ID5xMvhDnmaC244'
-})(MapContainer);
+// export default GoogleApiWrapper({
+//
+// })(MapContainer);
+//
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             mapIsReady: false,
+//         };
+//     }
+//
+//     componentDidMount() {
+//         const ApiKey = 'AIzaSyALh3Jxz38yeMi-GmZ8ID5xMvhDnmaC244';
+//         const script = document.createElement('script');
+//         script.src = `https://maps.googleapis.com/maps/api/js?key=${ApiKey}`;
+//         script.async = true;
+//         script.defer = true;
+//         script.addEventListener('load', () => {
+//             this.setState({ mapIsReady: true });
+//         });
+//
+//         document.body.appendChild(script);
+//     }
+//
+//     componentDidUpdate() {
+//         if (this.state.mapIsReady) {
+//             // Display the map
+//             this.map = new window.google.maps.Map(document.getElementById('map'), {
+//                 center: {lat: -34.397, lng: 150.644},
+//                 zoom: 12,
+//                 mapTypeId: 'roadmap',
+//             });
+//             // You also can add markers on the map below
+//         }
+//     }
+//
+//     render() {
+//         return (
+//             <div id="map" />
+//         );
+//     }
+}
+export default MapContainer;
