@@ -32,16 +32,26 @@ class Profile extends React.Component {
         const password = this.props.user.password
         this.state = {
             isEdit: false,
+
+            isPost: false,
             isHistory: false,
+
             isFollowing: false,
             isFollower: false,
+            
             updateUsername: username,
             updatePassword: password,
             history: [
                 { postid: 0, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 1, date: "2010-9-10", comment: "really good, 10/10 would come agai" },
-                { postid: 2, date: "2010-9-10", comment: "really good, 10/10 would come agai" },
-                { postid: 4, date: "2010-9-10", comment: "really good, 10/10 would come agai" }
+                { postid: 1, date: "2010-9-10", comment: "really good, 10/10 would come again" },
+                { postid: 2, date: "2010-9-10", comment: "really good, 10/10 would come again" },
+                { postid: 4, date: "2010-9-10", comment: "really good, 10/10 would come again" }
+            ],
+            post: [
+                { postid: 0, date: "2010-9-10", content: "introduce new burger" },
+                { postid: 1, date: "2010-9-10", content: "introduce new fries" },
+                { postid: 2, date: "2010-9-10", content: "introduce new coke" },
+                { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
             ],
             following: [
                 { name: "BergurKing", rating: "5", key: "1" },
@@ -76,6 +86,14 @@ class Profile extends React.Component {
             this.setState({ isHistory: false });
         } else {
             this.setState({ isHistory: true });
+        }
+
+    }
+    showPostInput() {
+        if (this.state.isPost) {
+            this.setState({ isPost: false });
+        } else {
+            this.setState({ isPost: true });
         }
 
     }
@@ -128,12 +146,18 @@ class Profile extends React.Component {
         const user = this.props.user;
         const showPassword = ("*").repeat(user.password.length);
 
-        let follow
+        let follow;
+        let comment_history;
         if (this.props.user.username === "owner") {
             follow = <Button variant="warning" block onClick={() => this.showFollowerInput()}>Show Follower</Button>
+            comment_history = <Button variant="warning" block onClick={() => this.showPostInput()}>Show Post</Button>
         } else {
             follow = <Button variant="warning" block onClick={() => this.showFollowingInput()}>Show Following</Button>
+            comment_history = <Button variant="warning" block onClick={() => this.showHistoryInput()}>Show History</Button>
         }
+
+        
+
 
         
 
@@ -144,10 +168,8 @@ class Profile extends React.Component {
                 <h4 className="subtitle">User Type: {user.userType}</h4>
                 <h4 className="subtitle">Password: {showPassword}</h4>
                 <Button block onClick={() => this.showEditInput()}>Edit</Button>
-                <Button variant="warning" block onClick={() => this.showHistoryInput()}>Show History</Button>
-
+                {comment_history}
                 {follow}
-
             </div>
         );
 
@@ -205,16 +227,38 @@ class Profile extends React.Component {
             </div>
         );
 
+        let postList = (
+            <div>
+                {this.state.history.map((post) => {
+                    return (
+                        <div className={'postBlock'}>
+                            <p id="history">
+                                {"Date: " + post.date}
+                            </p>
+                            <p id="history">
+                                {"Post ID: " + post.postid}
+                            </p>
+
+                            <p id="history">
+                                {"Content:  " + post.content}
+                            </p>
+
+
+                        </div>);
+                })}
+            </div>
+        );
+
         let followingList = (
             <div>
                 {this.state.following.map((following) => {
                     return (
                         <div className={'reviewBlock'}>
                             <p id="followings">
-                                {"Date: " + following.name}
+                                {"Name: " + following.name}
                             </p>
                             <p id="followings">
-                                {"Post ID: " + following.rating}
+                                {"Rating: " + following.rating}
                             </p>
                         </div>);
                 })}
@@ -253,6 +297,13 @@ class Profile extends React.Component {
             historyRender = nothing;
         }
 
+        let postRender = nothing;
+        if (this.state.isPost) {
+            postRender = postList;
+        } else {
+            postRender = nothing;
+        }
+
         let followingRender = nothing;
         if (this.state.isFollowing) {
             followingRender = followingList;
@@ -272,6 +323,13 @@ class Profile extends React.Component {
             isFollow = followerRender
         }else {
             isFollow = followingRender
+        }
+
+        let isPostComment
+        if (this.props.user.username === "owner"){
+            isPostComment = postRender
+        }else {
+            isPostComment = historyRender
         }
 
 
@@ -316,8 +374,8 @@ class Profile extends React.Component {
                             {rendering}
                         </Col>
                         <Col>
-                            <Button variant="warning" block onClick={() => this.showHistoryInput()}>Show History</Button>
-                            {historyRender}
+                            {comment_history}
+                            {isPostComment}
                         </Col>
                         <Col>
                             {follow}
