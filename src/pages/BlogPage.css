@@ -1,21 +1,24 @@
 .back {
     background-color: antiquewhite;
-    position: relative;
+    padding-left: 10vw;
 }
 
-.title {
-    position: relative;
-    top: 0px;
-    margin-right: 0px;
+.title1 {
     background-color: transparent;
     border: none;
     font-size: 30px;
+    margin-left: 10vw;
+
+}
+
+.titlediv{
+    display: inline-block;
 }
 
 .blogblock{
-    position: relative;
-    margin-left: 250px;
-    margin-right: 250px;
+    margin-left: 10vw;
+    margin-right: 10vw;
     display: inline-block;
     margin-top: 20px;
 }
+
