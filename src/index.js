@@ -23,7 +23,7 @@ ReactDOM.render(
   <React.StrictMode>
 
       <Provider store = {store}>
-          <RestaurantPage />
+          <App />
       </Provider>
 
     {/* <PostsTable/> */}

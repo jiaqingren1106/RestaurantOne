@@ -13,6 +13,7 @@ import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
+import Profile from "./pages/Profile";
 
 const getTargetPage = (route) => {
     switch (route) {
@@ -36,6 +37,8 @@ const getTargetPage = (route) => {
             return (<AdminPage/>)
         case "MenuPage":
             return (<Menu/>)
+        case "ProfilePage":
+            return (<Profile/>)
         default:
             return (<StartUp/>);
     }

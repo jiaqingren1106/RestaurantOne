@@ -41,14 +41,24 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class NavBar extends React.Component {
-  
+
+    handleLogOut = () => {
+        this.props.setUser( {
+            username: "",
+            userType:"",
+            password: ""
+        })
+        this.props.setRoute("StartUp")
+    }
   render() {
     const user = this.props.user
 
     let navRender = (
       <Nav className="ml-auto">
         <Nav.Item>
-          <Nav.Link >Hello, Friend!</Nav.Link>
+          <Nav.Link style = {
+              {cursor: "context-menu",
+              }}>Hello, Friend!</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link className="point_cursor" onClick={ () => this.props.setRoute("SignIn")}>Login</Nav.Link>
@@ -61,9 +71,11 @@ class NavBar extends React.Component {
     if (user.userType !== ""){
       navRender = (
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link >Hello, {user.username}</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link >Profile</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link >Log Out</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link style = {
+                {cursor: "context-menu",
+                }}>Hello, {user.username}</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={() => this.props.setRoute("ProfilePage")}>Profile</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={() => this.handleLogOut() }>Log Out</Nav.Link></Nav.Item>
         </Nav>
       )
     }
@@ -71,10 +83,10 @@ class NavBar extends React.Component {
     return (
       <Styles>
         <Navbar expand="lg" fixed="top">
-          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("StartUp")}>RestaurantOne</Navbar.Brand>
-          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("SecondPage")}>Deals</Navbar.Brand>
-          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("FirstPage")}>Dashboard</Navbar.Brand>
-
+            <div>
+                <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("SecondPage")}>Deals</Navbar.Brand>
+                <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("FirstPage")}>Dashboard</Navbar.Brand>
+            </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Form className="form-center">
             <FormControl type="text" placeholder="Search" className="" />
