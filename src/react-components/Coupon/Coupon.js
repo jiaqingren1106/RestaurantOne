@@ -4,16 +4,21 @@ import './Coupon.css';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+import '../Restaurant/Restaurant.css'
 
 
 class Coupon extends React.Component {
   render() {
     return (
       <Card id="coupon1" className="couponCard">
-        <Card.Img className="couponPic" variant="top" src={this.props.image} />
+          <div className="imageButton" style={{height: "200px"}}>
+              <Card.Img className="restaurantPic" variant="top" src={this.props.image} />
+          </div>
+
         <Card.Footer className="couponFooter">
-          <small className="text-muted">Rating: {this.props.rating}</small>
+          <small className="text-muted">
+              Code: mdsahfjksggfk
+          </small>
         </Card.Footer>
       </Card>
     );

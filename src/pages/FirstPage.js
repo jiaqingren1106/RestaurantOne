@@ -1,7 +1,9 @@
 import React from 'react';
 import './FirstPage.css';
-
-import Advertisment from '../react-components/Advertisment/Advertisment';
+import {BURGERKING, MCDONALDS,
+    AWDES, SUBWAY, POPEYES,PIZZAHUT, TIMHORTONS,
+STARBUCKS,
+TACOBELL} from "../data/discription_constants";
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
 
 
@@ -18,39 +20,66 @@ import NavBar from '../react-components/NavBar/NavBar';
 
 class FirstPage extends React.Component {
     state = {
-        page: 0,
+        onSearch: false,
         restaurants: [
-            { name: "BergurKing", rating: "5", key: "1", image: BurgerKing, description: "aba aba" },
-            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: "aba aba" },
-            { name: "AW", rating: "5", key: "3", image: AW, description: "aba aba" },
+            {name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING},
+            {name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
+            {name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
 
-            { name: "Subway", rating: "5", key: "4", image: Subway, description: "aba aba" },
-            { name: "Popeye", rating: "5", key: "5", image: Popeye, description: "aba aba" },
-            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: "aba aba" },
+            {name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
+            {name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
+            {name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
 
-            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: "aba aba" },
-            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: "aba aba" },
-            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: "aba aba" }
-        ]
+            {name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
+            {name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
+            {name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
+        ],
+        searched: []
     }
 
-    useMeWhenOnClick = (pageNumber) => {
-        this.setState({ 
-            page: pageNumber
-        })
+    useMeWhenYouDoSearch = (props) => {
+        let new_restaurant = []
+        if (props.trim() === "") {
+            this.setState({ onSearch: false })
+        } else {
+            let i = 0
+            for (i; i < this.state.restaurants.length; i++) {
+                if (this.state.restaurants[i].name.toUpperCase().includes(props.toUpperCase())) {
+                    new_restaurant.push(this.state.restaurants[i])
+                }
+            }
+            this.setState({ onSearch: true })
+            this.setState({ searched: new_restaurant })
+        }
+        // if (new_restaurant.length === 0){
+        //     this.setState({ onSearch: false })
+        // }
+
+    }
+
+    useMeWhenClickedDashBoard = () => {
+        this.setState({ onSearch: false })
     }
 
 
     render() {
-        const row = 3;
+        const column = 3;
 
-        const restaurantLen = this.state.restaurants.length;
-        const leftover = restaurantLen % row;
+        let restaurants
+        if (this.state.onSearch){
+            restaurants = this.state.searched
+        } else {
+            restaurants = this.state.restaurants
+        }
+
+
+        const restaurantLen = restaurants.length;
+        const leftover = restaurantLen % column;
         var cardGroupLen;
         if (leftover === 0) {
-            cardGroupLen = restaurantLen / row;
+            cardGroupLen = restaurantLen / column;
         } else {
-            cardGroupLen = restaurantLen / row + 1;
+            cardGroupLen = restaurantLen / column + 1;
         }
 
 
@@ -62,59 +91,22 @@ class FirstPage extends React.Component {
 
         var RestaurantList;
         RestaurantList = (
-            <div>
+            <div id = "Restaurants">
                 {cardgroups.map((index) => {
                     return <RestaurantGroups
                         key={0}
-                        restaurants={(this.state.restaurants).slice(row * index, index * row + row)} />
+                        restaurants={(restaurants).slice(column * index, index * column + column)} />
                 })}
             </div>
         );
 
 
-        let page
-        switch (this.state.page) {
-            case 0:
-                page = RestaurantList
-                break
-            case 1:
-                page = RestaurantList
-                break
-            case 2:
-                page = RestaurantList
-                break
-            case 3:
-                page = RestaurantList
-                break
-            case 4:
-                page =RestaurantList
-                break
-            default:
-                page = RestaurantList
-                break
-        }
-
 
         return (
             <section className='FirstPage'>
-                <NavBar />
-                <Advertisment />
+                <NavBar onSearch={this.useMeWhenYouDoSearch} setSearched={this.useMeWhenClickedDashBoard}/>
                 {RestaurantList}
             </section>
-
-            // <div className='FirstPage'>
-            //     <Row>
-            //         <Col class="col-4" xs={4}>
-            //             <SideBar onPageSelected = {this.useMeWhenOnClick}/>
-            //         </Col>
-            //         <Col class="col" >
-            //             <NavBar />
-            //             <Advertisment />
-            //             {RestaurantList}
-            //         </Col>
-            //     </Row>
-
-            // </div>
         );
     }
 }

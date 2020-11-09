@@ -101,10 +101,11 @@ class BlogPage extends React.Component{
                 <BrowserRouter>
                     <div className={"back"}>
 
-                        <button className={"title"} onClick={() => setRoute("RestaurantPage")}>
-                            Back!
-                        </button>
-
+                        <div className={'titlediv'}>
+                            <button className={"title1"} onClick={() => setRoute("RestaurantPage")}>
+                                Back!
+                            </button>
+                        </div>
                         <div className={"blogpage"}>
                             <div className='blogblock'>
                                 {CouponList}

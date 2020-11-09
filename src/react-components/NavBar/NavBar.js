@@ -3,6 +3,8 @@ import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 import { register, setRoute } from "../../redux/actions";
+import './NavBar.css'
+
 
 const Styles = styled.div`
   .navbar { 
@@ -40,15 +42,45 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
+
 class NavBar extends React.Component {
-  
+  state = {
+    inputValue: ""
+  }
+
+  searchActive = (event) => {
+    event.preventDefault();
+    this.props.onSearch(this.state.inputValue);    
+  }
+
+  onCoupon = () => {
+    this.props.setSearched();
+    this.props.setRoute("SecondPage")
+  }
+
+  onDashBoard = () => {
+    this.props.setSearched();
+    this.props.setRoute("FirstPage")
+    
+  }
+
+    handleLogOut = () => {
+        this.props.setUser( {
+            username: "",
+            userType:"",
+            password: ""
+        })
+        this.props.setRoute("StartUp")
+    }
   render() {
     const user = this.props.user
 
     let navRender = (
       <Nav className="ml-auto">
         <Nav.Item>
-          <Nav.Link >Hello, Friend!</Nav.Link>
+          <Nav.Link style = {
+              {cursor: "context-menu",
+              }}>Hello, Friend!</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link className="point_cursor" onClick={ () => this.props.setRoute("SignIn")}>Login</Nav.Link>
@@ -61,9 +93,11 @@ class NavBar extends React.Component {
     if (user.userType !== ""){
       navRender = (
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link >Hello, {user.username}</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link >Profile</Nav.Link></Nav.Item>
-          <Nav.Item><Nav.Link >Log Out</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link style = {
+                {cursor: "context-menu",
+                }}>Hello, {user.username}</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={() => this.props.setRoute("ProfilePage")}>Profile</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={() => this.handleLogOut() }>Log Out</Nav.Link></Nav.Item>
         </Nav>
       )
     }
@@ -71,13 +105,13 @@ class NavBar extends React.Component {
     return (
       <Styles>
         <Navbar expand="lg" fixed="top">
-          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("StartUp")}>RestaurantOne</Navbar.Brand>
-          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("SecondPage")}>Deals</Navbar.Brand>
-          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("FirstPage")}>Dashboard</Navbar.Brand>
-
+            <div>
+                <Navbar.Brand  className='point_cursor' onClick={this.onCoupon}>Deals</Navbar.Brand>
+                <Navbar.Brand  className='point_cursor' onClick={this.onDashBoard}>Dashboard</Navbar.Brand>
+            </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Form className="form-center">
-            <FormControl type="text" placeholder="Search" className="" />
+          <Form className="form-center" onSubmit={this.searchActive}>
+            <FormControl type="text" placeholder="Search" id="searchIput" value={this.state.inputValue} onChange={e => this.setState({inputValue: e.target.value})} />
           </Form>
           <Navbar.Collapse id="basic-navbar-nav">
             {navRender}
