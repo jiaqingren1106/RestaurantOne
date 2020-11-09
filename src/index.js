@@ -10,7 +10,7 @@ import BlogPage from "./pages/BlogPage";
 import RestaurantPage from "./pages/RestaurantPage";
 import Post from "./react-components/Post";
 import FirstPage from "./pages/FirstPage";
-import StartUp from "./fontPages/StartUp";
+import StartUp from "./frontPages/StartUp";
 const logger = createLogger()
 
 const rootReducer = combineReducers({routeState, userState})

@@ -1,12 +1,12 @@
 import './App.css';
 import React, {useState} from 'react';
 import './index.css'
-import StartUp from "./fontPages/StartUp";
+import StartUp from "./frontPages/StartUp";
 import { connect } from 'react-redux'
 import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
-import Register from "./fontPages/Register";
-import SignIn from "./fontPages/SignIn";
+import Register from "./frontPages/Register";
+import SignIn from "./frontPages/SignIn";
 import AdminPage from "./Admin/AdminPage";
 import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
