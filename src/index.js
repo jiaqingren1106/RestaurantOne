@@ -11,6 +11,7 @@ import RestaurantPage from "./pages/RestaurantPage";
 import Post from "./react-components/Post";
 import FirstPage from "./pages/FirstPage";
 import MyEditor from "./react-components/MyEditor";
+import Menu from "./react-components/menu/Menu";
 const logger = createLogger()
 
 

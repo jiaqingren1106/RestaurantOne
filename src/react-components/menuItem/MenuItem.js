@@ -16,15 +16,13 @@ class MenuItem extends React.Component {
         return (
             <Card id="MenuItem1" className="MenuItemCard">
                 <Card.Img id="MenuItemPic" variant="top" src={this.props.image} />
+
                 <Card.Body id="cardBody">
                     <Card.Title id="MenuItemTitle">{this.props.name}</Card.Title>
-                    <Card.Text>
+                    <Card.Text className={'MenuPrice'}>
                         {this.props.price}
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer>
-                    <small className="text-muted">Rating: {this.props.rating}</small>
-                </Card.Footer>
             </Card>
         );
     }

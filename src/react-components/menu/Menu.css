@@ -5,7 +5,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 30px;
+    padding-top: 100px;
     padding-left: 3%;
     padding-right: 3%;
 
@@ -18,6 +18,7 @@
     background-size: cover;
     /* filter: blur(3px); */
     position: relative;
+    min-height: 100vh;
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -28,7 +29,12 @@
     margin-left: 1%;
     margin-top: 0%;
     width: 100px;
-    color: black;
+    color: orange;
     font-size: x-large;
 }
 
+#Menu {
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
