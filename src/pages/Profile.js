@@ -362,29 +362,7 @@ class Profile extends React.Component {
             // </Container>
 
             <Container id='Profile'>
-<<<<<<< HEAD
-                <Row>
-                    <Col xs={12}>
-                        <NavBar />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={2}></Col>
-                    <Col xs={8}>
-                        {profile}
-                    </Col>
-                    <Col xs={2}></Col>
-                </Row>
-                <Row>
-                    <Col xs={2}></Col>
-                    <Col xs={8}>
-                        {rendering}
-                    </Col>
-                    <Col xs={2}></Col>
-                </Row>
-=======
                 <NavBar />
-
                 <div id="profile">
                     <h4 className="subtitle">Username: {user.username}</h4>
                     <h4 className="subtitle">User Type: {user.userType}</h4>
@@ -405,7 +383,6 @@ class Profile extends React.Component {
                     </Row>
 
                 </div>
->>>>>>> ccf44f074b8e3b92a368bd66f112a5e20a33f564
             </Container>
         );
     }
