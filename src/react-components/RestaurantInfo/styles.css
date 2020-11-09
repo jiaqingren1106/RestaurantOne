@@ -58,7 +58,7 @@
     line-height: 150%;
     color: black;
     margin-top: 20px;
-    padding-left: 1vw;
+    padding-left: 10vw;
 }
 
 .userName1{
@@ -79,14 +79,14 @@
 }
 
 .reviewBlock{
-    padding-left: 1vw;
-    border-bottom: black solid 1px;
+    padding-left: 10vw;
+    padding-bottom: 3vw;
+    /*border-bottom: black solid 1px ;*/
 }
 
 .reviewpic{
     height: 300px;
     width: 300px;
-    margin-left: 25vw;
 }
 
 .textEditor{
@@ -122,6 +122,7 @@
 }
 
 .RestaurantTop{
+    padding-left: 10vw;
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -135,10 +136,11 @@
 
 .googleMap{
     flex-grow: 2;
-    maxWidth: 400px;
-    height: 400px;
+    maxWidth: 280px;
+    height: 280px;
     overflowX: hidden;
     overflowY: hidden;
+    padding-left: 10vw;
 }
 
 .userInfo{
@@ -146,6 +148,7 @@
 }
 
 .userPic{
+    border-radius: 50%;
     width: 4vw;
     height: 4vw;
     padding: 0;

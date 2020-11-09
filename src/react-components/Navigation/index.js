@@ -39,7 +39,7 @@ class Navigation extends React.Component {
         const setRoute = this.props.setRoute
 
         return(
-            <div className={"navigation"}>
+            <div className={"navigation1"}>
 
                 <button className={'navigationButton'} onClick={() => setRoute("FirstPage")}>
                     Back

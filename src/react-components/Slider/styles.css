@@ -16,7 +16,7 @@
 .arrowPrev{
     height: 50px;
     width: 50px;
-    margin-top: 50px;
+    margin-top: 10vh;
     background-color: antiquewhite;
 
 }
@@ -24,14 +24,14 @@
 .arrowNext{
     height: 50px;
     width: 50px;
-    margin-top: 50px;
-    background-color: antiquewhite;
+    margin-top: 10vh;
+    background-color: transparent;
 
 }
 
 .displayPic{
-    height: 25vh;
-    width: 20vw;
+    height: 15vw;
+    width: 15vw;
     margin-left: 1vw;
     margin-right: 1vw;
 }
@@ -40,5 +40,6 @@
     display: flex;
     width: 80%;
     background-color: antiquewhite;
+    padding-left: 10vw;
     /*margin-left: 10vw;*/
 }

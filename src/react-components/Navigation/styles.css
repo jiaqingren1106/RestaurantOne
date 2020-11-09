@@ -1,5 +1,6 @@
-.navigation{
-    float: right;
+.navigation1{
+    padding-left: 25vw;
+    display: inline-block;
 }
 
 
@@ -8,7 +9,6 @@
     margin-right: 150px;
     font-size: 30px;
     font-family: Arial, "Andale Mono";
-    line-height: 150%;
     color: darkslategrey;
     border: None;
     background: None;
