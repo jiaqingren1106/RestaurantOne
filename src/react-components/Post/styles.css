@@ -1,0 +1,57 @@
+.restaurantName{
+    position: absolute;
+    left:0px;
+    background-color: transparent;
+    border: none;
+}
+
+.title{
+    margin-left: 300px;;
+    position: relative;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.blogpic{
+    height: 500px;
+    width: 800px;
+    position: relative;
+    margin-left: 300px;
+}
+
+.date{
+    margin-left: 300px;
+    position: relative;
+    font-size: 20px;
+    margin-top: 20px;
+    color: #888888;
+}
+
+.content{
+    width: 800px;
+    margin-left: 300px;
+}
+
+.post{
+    background-color: antiquewhite;
+    margin: 0;
+    padding: 0;
+}
+
+.commentsTitle{
+    font-size: 30px;
+    margin-top: 30px;
+    margin-left: 300px;
+}
+
+.userName{
+    font-size: 30px;
+    margin-left: 300px;
+}
+
+.reviewConcent{
+    width: 800px;
+    margin-left: 400px;
+    font-family: Arial, "Al Bayan";
+    font-size: 15px;
+}

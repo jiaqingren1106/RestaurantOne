@@ -1,0 +1,21 @@
+.back {
+    background-color: antiquewhite;
+    position: relative;
+}
+
+.title {
+    position: relative;
+    top: 0px;
+    margin-right: 0px;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+}
+
+.blogblock{
+    position: relative;
+    margin-left: 250px;
+    margin-right: 250px;
+    display: inline-block;
+    margin-top: 20px;
+}

@@ -1,0 +1,22 @@
+.CardImage{
+    width: inherit;
+    height: 400px;
+}
+
+.Title{
+    font-size: 40px;
+}pin
+
+ .Description{
+     width: inherit;
+
+ }
+
+.Card{
+    width: 800px;
+    margin-bottom: 20px;
+    border-bottom: black solid 1px;
+    background-color: antiquewhite;
+    border-left: None;
+    border-right: None;
+}
