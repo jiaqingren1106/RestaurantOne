@@ -1,18 +1,19 @@
 import './App.css';
 import React, {useState} from 'react';
 import './index.css'
-import StartUp from "./fontPages/StartUp";
+import StartUp from "./frontPages/StartUp";
 import { connect } from 'react-redux'
 import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
-import Register from "./fontPages/Register";
-import SignIn from "./fontPages/SignIn";
+import Register from "./frontPages/Register";
+import SignIn from "./frontPages/SignIn";
 import AdminPage from "./Admin/AdminPage";
 import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
+import Profile from "./pages/Profile";
 
 const getTargetPage = (route) => {
     switch (route) {
@@ -36,6 +37,8 @@ const getTargetPage = (route) => {
             return (<AdminPage/>)
         case "MenuPage":
             return (<Menu/>)
+        case "ProfilePage":
+            return (<Profile/>)
         default:
             return (<StartUp/>);
     }
