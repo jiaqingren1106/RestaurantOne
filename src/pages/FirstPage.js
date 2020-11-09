@@ -1,7 +1,6 @@
 import React from 'react';
 import './FirstPage.css';
 
-import Advertisment from '../react-components/Advertisment/Advertisment';
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
 
 
@@ -18,7 +17,7 @@ import NavBar from '../react-components/NavBar/NavBar';
 
 class FirstPage extends React.Component {
     state = {
-        page: 0,
+        onSearch: false,
         restaurants: [
             { name: "BergurKing", rating: "5", key: "1", image: BurgerKing, description: "aba aba" },
             { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: "aba aba" },
@@ -31,26 +30,46 @@ class FirstPage extends React.Component {
             { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: "aba aba" },
             { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: "aba aba" },
             { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: "aba aba" }
-        ]
+        ],
+        searched: []
     }
 
-    useMeWhenOnClick = (pageNumber) => {
-        this.setState({ 
-            page: pageNumber
-        })
+    useMeWhenYouDoSearch = (props) => {
+        if (props === "") {
+            this.setState({ onSearch: false })
+        } else {
+            let new_restaurant = []
+            let i = 0
+            for (i; i < this.state.restaurants.length; i++) {
+                if (this.state.restaurants[i].name === props) {
+                    new_restaurant.push(this.state.restaurants[i])
+                }
+            }
+            this.setState({ onSearch: true })
+            this.setState({ searched: new_restaurant })
+            console.log(this.state.searched)
+        }
+
     }
 
 
     render() {
-        const row = 3;
+        const column = 3;
+        let restaurants
+        if (this.state.onSearch){
+            restaurants = this.state.searched
+        } else {
+            restaurants = this.state.restaurants
+        }
 
-        const restaurantLen = this.state.restaurants.length;
-        const leftover = restaurantLen % row;
+
+        const restaurantLen = restaurants.length;
+        const leftover = restaurantLen % column;
         var cardGroupLen;
         if (leftover === 0) {
-            cardGroupLen = restaurantLen / row;
+            cardGroupLen = restaurantLen / column;
         } else {
-            cardGroupLen = restaurantLen / row + 1;
+            cardGroupLen = restaurantLen / column + 1;
         }
 
 
@@ -66,55 +85,18 @@ class FirstPage extends React.Component {
                 {cardgroups.map((index) => {
                     return <RestaurantGroups
                         key={0}
-                        restaurants={(this.state.restaurants).slice(row * index, index * row + row)} />
+                        restaurants={(restaurants).slice(column * index, index * column + column)} />
                 })}
             </div>
         );
 
 
-        let page
-        switch (this.state.page) {
-            case 0:
-                page = RestaurantList
-                break
-            case 1:
-                page = RestaurantList
-                break
-            case 2:
-                page = RestaurantList
-                break
-            case 3:
-                page = RestaurantList
-                break
-            case 4:
-                page =RestaurantList
-                break
-            default:
-                page = RestaurantList
-                break
-        }
-
 
         return (
             <section className='FirstPage'>
-                <NavBar />
-                <Advertisment />
+                <NavBar onSearch={this.useMeWhenYouDoSearch} />
                 {RestaurantList}
             </section>
-
-            // <div className='FirstPage'>
-            //     <Row>
-            //         <Col class="col-4" xs={4}>
-            //             <SideBar onPageSelected = {this.useMeWhenOnClick}/>
-            //         </Col>
-            //         <Col class="col" >
-            //             <NavBar />
-            //             <Advertisment />
-            //             {RestaurantList}
-            //         </Col>
-            //     </Row>
-
-            // </div>
         );
     }
 }
