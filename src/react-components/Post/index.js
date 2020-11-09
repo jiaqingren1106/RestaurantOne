@@ -3,7 +3,6 @@ import burger from "../../images/burger.jpg"
 import './styles.css'
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
@@ -20,8 +19,40 @@ const mapDispatchToProps = (dispatch) => {
 
 class Post extends React.Component{
 
+    constructor(props) {
+        super(props);
+        this.reviews = ['Hebetude joyeuses' +
+        ' assister nul ton prochain les commence massacre. Tout ni elle pris il au ma vaut sent hein. Ils pleine net enleve tenter maison centre blancs. Ils voeux que aimer bas linge des verre. Instrument maintenant en miserables au defilaient he. Se torture enlever en dessein. Peur moi age sang deja fort etat fin. Ronfle car car mon ces pareil reunir humain metres peuple. Corbeille sacrifice convertir des ses militaire ans.'];
+        this.users = ['ShuaiYuan'];
+        this.state = {value: ''};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.textarea.focus();
+    }
+
+    handleSubmit(event) {
+        console.log(this.state.value)
+        this.reviews.push(this.state.value)
+        console.log(this.reviews)
+        this.users.push('Anonymous')
+        this.setState({value: this.state.value});
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
     render() {
         const setRoute = this.props.setRoute
+
+        let i;
+        let list = []
+        for(i = 0; i < this.users.length; i++){
+            list.push(i);
+        }
 
         return(
 
@@ -66,13 +97,33 @@ class Post extends React.Component{
                     Comments
                 </p>
 
-                <p className={'userName'}>
-                    Yuan
-                </p>
+                {list.map((index) => {
+                    return (
+                        <div className={'commentsBlock'}>
+                            <p className={'userName'}>
+                                {"User: " + this.users[index]}
+                            </p>
 
-                <p className={'reviewConcent'}>
-                    Hebetude joyeuses assister nul ton prochain les commence massacre. Tout ni elle pris il au ma vaut sent hein. Ils pleine net enleve tenter maison centre blancs. Ils voeux que aimer bas linge des verre. Instrument maintenant en miserables au defilaient he. Se torture enlever en dessein. Peur moi age sang deja fort etat fin. Ronfle car car mon ces pareil reunir humain metres peuple. Corbeille sacrifice convertir des ses militaire ans.
-                </p>
+                            <p className={'reviewContent'}>
+                                {"Comments:  " + this.reviews[index]}
+                            </p>
+                        </div>);
+                })}
+
+                <div>
+                    <textarea className={"textEditor"}
+                              ref={c => (this.textarea = c)}
+                              placeholder="Type your comments here!"
+                              rows={10}
+                              cols={100}
+                              defaultValue=""
+                              onChange={this.handleChange}
+                    />
+                </div>
+
+                <button onClick={this.handleSubmit} className={"submitButton"}>
+                    submit
+                </button>
 
             </div>
         )

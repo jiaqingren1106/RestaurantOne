@@ -1,0 +1,11 @@
+.main {
+    width: 80%;
+    background: gray;
+    display: inline;
+    max-width: 500px;
+}
+
+.textEditor{
+    rows:100;
+    columns: 100;
+}

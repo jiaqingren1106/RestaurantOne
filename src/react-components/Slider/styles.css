@@ -17,12 +17,16 @@
     height: 50px;
     width: 50px;
     margin-top: 100px;
+    background-color: antiquewhite;
+
 }
 
 .arrowNext{
     height: 50px;
     width: 50px;
     margin-top: 100px;
+    background-color: antiquewhite;
+
 }
 
 .displayPic{
@@ -36,4 +40,5 @@
     display: flex;
     justify-content: right;
     width: 80vw;
+    background-color: antiquewhite;
 }

@@ -3,6 +3,8 @@ import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 import { register, setRoute } from "../../redux/actions";
+import './NavBar.css'
+
 
 const Styles = styled.div`
   .navbar { 
@@ -41,6 +43,14 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class NavBar extends React.Component {
+  state = {
+    inputValue: ""
+  }
+
+  searchActive = (event) => {
+    event.preventDefault();
+    this.props.onSearch(this.state.inputValue);    
+  }
 
     handleLogOut = () => {
         this.props.setUser( {
@@ -88,8 +98,8 @@ class NavBar extends React.Component {
                 <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("FirstPage")}>Dashboard</Navbar.Brand>
             </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Form className="form-center">
-            <FormControl type="text" placeholder="Search" className="" />
+          <Form className="form-center" onSubmit={this.searchActive}>
+            <FormControl type="text" placeholder="Search" id="searchIput" value={this.state.inputValue} onChange={e => this.setState({inputValue: e.target.value})} />
           </Form>
           <Navbar.Collapse id="basic-navbar-nav">
             {navRender}
