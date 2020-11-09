@@ -42,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
+
 class NavBar extends React.Component {
   state = {
     inputValue: ""
@@ -50,6 +51,17 @@ class NavBar extends React.Component {
   searchActive = (event) => {
     event.preventDefault();
     this.props.onSearch(this.state.inputValue);    
+  }
+
+  onCoupon = () => {
+    this.props.setSearched();
+    this.props.setRoute("SecondPage")
+  }
+
+  onDashBoard = () => {
+    this.props.setSearched();
+    this.props.setRoute("FirstPage")
+    
   }
 
     handleLogOut = () => {
@@ -94,8 +106,8 @@ class NavBar extends React.Component {
       <Styles>
         <Navbar expand="lg" fixed="top">
             <div>
-                <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("SecondPage")}>Deals</Navbar.Brand>
-                <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("FirstPage")}>Dashboard</Navbar.Brand>
+                <Navbar.Brand  className='point_cursor' onClick={this.onCoupon}>Deals</Navbar.Brand>
+                <Navbar.Brand  className='point_cursor' onClick={this.onDashBoard}>Dashboard</Navbar.Brand>
             </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Form className="form-center" onSubmit={this.searchActive}>
