@@ -25,10 +25,10 @@ const StartUp = (props) => {
             </div>
 
             <div className="log_sign">
-            <a className="point_cursor" onClick={ () => props.setRoute("SignIn")}>Login</a>
-            /
-            <a className="point_cursor" onClick={ () => props.setRoute("Register")}> Sign Up</a>
-        </div>
+                <a className="point_cursor" onClick={ () => props.setRoute("SignIn")}>Login</a>
+                /
+                <a className="point_cursor" onClick={ () => props.setRoute("Register")}> Sign Up</a>
+            </div>
         </div>
         <div className="body_container">
 

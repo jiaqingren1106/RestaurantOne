@@ -32,9 +32,11 @@ const getTargetPage = (route) => {
     }
 }
 const mapStateToProps = (state) => {
+
     return {route:
         state.routeState.route,
     user: state.userState}
+
 
 }
 const mapDispatchToProps = (dispatch) => ({})

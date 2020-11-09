@@ -82,7 +82,7 @@ const Register = (props)=> {
         <div className="signInContainer">
 
             <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw8 center article-container
-                shadow-5" >
+                shadow-5 signInBox" >
 
                 <main className="pa4 black-80">
                     <div className="measure center">

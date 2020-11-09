@@ -4,6 +4,7 @@ import './CouponGroup.css';
 
 import CardGroup from 'react-bootstrap/CardGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
 
 
@@ -19,9 +20,9 @@ class CouponGroup extends React.Component {
         cardgroups.push(i);
     }
 
-    var RestaurantList;
-    RestaurantList = (
-      <CardGroup>
+    var CouponList;
+    CouponList = (
+      <CardGroup id="Coupon">
         {cardgroups.map((index) => {
           return <Coupon
           image={(this.props.restaurants)[index].image} 
@@ -35,7 +36,7 @@ class CouponGroup extends React.Component {
 
     return (
       <div className="couponGroup">
-        {RestaurantList}
+        {CouponList}
       </div>
     );
   }
