@@ -124,6 +124,9 @@ const Register = (props)=> {
                             <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
                                    onClick={() => onSubmit()}> Create </button>
                         </div>
+                        <div className="lh-copy mt3 ">
+                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a>
+                        </div>
                     </div>
                 </main>
             </article>

@@ -72,7 +72,10 @@ const SignIn = ({setRoute, setUser}) => {
                                        > Login </button>
                             </div>
                             <div className="lh-copy mt3 ">
-                                <a href="#0" onClick={() => setRoute("Register")} className="f6 link dim black db">Sign up</a>
+                                <a href="#0" onClick={() => setRoute("Register")} className="f6 link dim black db">Register</a>
+                            </div>
+                            <div className="lh-copy mt3 ">
+                                <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a>
                             </div>
                         </div>
                     </main>
