@@ -1,29 +1,29 @@
-
 .signInContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background: url("../images/signin_background.jpg") no-repeat center center fixed;
-    background-size: cover;
-    position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: url("../images/signin_background.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+  position: absolute;
 }
 
 .signInBox {
-    background: rgba(251, 246, 223, 0.5);
+  background: rgba(251, 246, 223, 0.5);
 }
 .point_cursor {
-    cursor: pointer;
-    color: #ffc800;
+  cursor: pointer;
+  color: #ffc800;
 }
 .uploadBox {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
-#fileUpload{
-    display: none; /* do not display the actual file upload button */
+#fileUpload {
+  display: none; /* do not display the actual file upload button */
 }
 
 #fileButton {
-    border-color: black;
+  border-color: black;
 }
