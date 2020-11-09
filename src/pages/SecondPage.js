@@ -1,5 +1,6 @@
 import React from 'react';
 import './SecondPage.css';
+import '../react-components/Restaurant/Restaurant.css'
 
 import Advertisment from '../react-components/Advertisment/Advertisment';
 import CouponGroup from '../react-components/CouponGroup/CouponGroup';

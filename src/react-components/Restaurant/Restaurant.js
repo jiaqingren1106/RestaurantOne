@@ -26,8 +26,8 @@ class Restaurant extends React.Component {
 
     return (
       <Card id="restaurant1" className="restaurantCard">
-        <button id="imageButton" onClick={() => setRoute("RestaurantPage")}>
-          <Card.Img id="restaurantPic" variant="top" src={this.props.image} />
+        <button className="imageButton" onClick={() => setRoute("RestaurantPage")}>
+          <Card.Img className="restaurantPic" variant="top" src={this.props.image} />
 
         </button>
         <Card.Body id="cardBody">

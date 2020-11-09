@@ -1,4 +1,4 @@
-#restaurantPic{
+.restaurantPic{
     width: 100%;
     flex-grow: 1;
 
@@ -25,7 +25,7 @@
     align-items: center;
 }
 
-#imageButton {
+.imageButton {
     width: 100%;
     height: 300px;
     align-items: stretch;
