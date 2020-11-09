@@ -10,6 +10,7 @@ import SignIn from "./fontPages/SignIn";
 import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
+import Post from "./react-components/Post";
 
 const getTargetPage = (route) => {
     switch (route) {
@@ -25,6 +26,10 @@ const getTargetPage = (route) => {
             return (<SecondPage/>)
         case "RestaurantPage":
             return (<RestaurantPage/>)
+        case "BlogPage":
+            return (<BlogPage />)
+        case "Post":
+            return (<Post />)
 
         default:
             return (<StartUp/>);

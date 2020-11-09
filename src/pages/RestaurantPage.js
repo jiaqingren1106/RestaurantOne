@@ -29,7 +29,6 @@ class RestaurantPage extends React.Component{
         return (
             <section>
                 <div className={"page"}>
-                    <WebsiteName />
                     <Slider pic={this.state.restaurant_info[0]}/>
                     <Navigation />
                     <RestaurantInfo info={this.state.restaurant_info[1]} />

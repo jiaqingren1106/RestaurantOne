@@ -10,6 +10,7 @@ import BlogPage from "./pages/BlogPage";
 import RestaurantPage from "./pages/RestaurantPage";
 import Post from "./react-components/Post";
 import FirstPage from "./pages/FirstPage";
+import StartUp from "./fontPages/StartUp";
 const logger = createLogger()
 
 const rootReducer = combineReducers({routeState, userState})
@@ -22,7 +23,7 @@ ReactDOM.render(
   <React.StrictMode>
 
       <Provider store = {store}>
-          <FirstPage />
+          <RestaurantPage />
       </Provider>
 
     {/* <PostsTable/> */}

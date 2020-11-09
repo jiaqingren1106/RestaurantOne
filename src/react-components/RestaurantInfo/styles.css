@@ -27,7 +27,7 @@
 }
 
 .RestaurantInfo{
-    margin-left: 200px;
+    margin-left: 10vw;
     text-align: left;
     float: left;
     width: 100%;
@@ -63,8 +63,7 @@
 .userName{
     font-family: Arial, monospace;
     font-size: 20px;
-    top: 0;
-    left: 0;
+    margin-left: 0vw;
     line-height: 150%;
     color: black;
 }
@@ -72,10 +71,10 @@
 .reviewConcent{
     font-family: Arial, monospace;
     font-size: 15px;
-    margin-left: 100px;
+    margin-left: 10px;
     line-height: 150%;
     color: black;
-    margin-right: 300px;
+    margin-right: 10vw;
 
 }
 
@@ -86,5 +85,5 @@
 .reviewpic{
     height: 300px;
     width: 300px;
-    margin-left: 200px;
+    margin-left: 25vw;
 }
