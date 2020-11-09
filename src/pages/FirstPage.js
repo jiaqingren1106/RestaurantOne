@@ -38,20 +38,22 @@ class FirstPage extends React.Component {
     }
 
     useMeWhenYouDoSearch = (props) => {
-        if (props === "") {
+        let new_restaurant = []
+        if (props.trim() === "") {
             this.setState({ onSearch: false })
         } else {
-            let new_restaurant = []
             let i = 0
             for (i; i < this.state.restaurants.length; i++) {
-                if (this.state.restaurants[i].name === props) {
+                if (this.state.restaurants[i].name.toUpperCase().includes(props.toUpperCase())) {
                     new_restaurant.push(this.state.restaurants[i])
                 }
             }
             this.setState({ onSearch: true })
             this.setState({ searched: new_restaurant })
-            console.log(this.state.searched)
         }
+        // if (new_restaurant.length === 0){
+        //     this.setState({ onSearch: false })
+        // }
 
     }
 

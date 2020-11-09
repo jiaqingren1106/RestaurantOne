@@ -9,6 +9,8 @@
     border-radius: 20px 20px 20px 20px;
     overflow: hidden;
     box-shadow: 2px 2px 30px 2px #130506;
+    max-width: 35%;
+
 }
 
 

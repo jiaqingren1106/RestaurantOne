@@ -58,16 +58,14 @@
     line-height: 150%;
     color: black;
     margin-top: 20px;
+    padding-left: 1vw;
 }
 
-.userName{
+.userName1{
     font-family: Arial, monospace;
-    font-size: 20px;
-    margin-left: 10px;
-    margin-right: 10vw;
+    font-size: 30px;
     line-height: 150%;
     color: black;
-    left: 0px;
 }
 
 .reviewConcent{
@@ -81,6 +79,7 @@
 }
 
 .reviewBlock{
+    padding-left: 1vw;
     border-bottom: black solid 1px;
 }
 
@@ -130,6 +129,7 @@
 
 .RestaurantLeft{
     flex-grow: 1;
+    padding-left: 1vw;
 }
 
 
@@ -139,4 +139,15 @@
     height: 400px;
     overflowX: hidden;
     overflowY: hidden;
+}
+
+.userInfo{
+    display: flex;
+}
+
+.userPic{
+    width: 4vw;
+    height: 4vw;
+    padding: 0;
+    margin: 0;
 }

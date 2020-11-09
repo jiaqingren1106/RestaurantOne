@@ -3,6 +3,7 @@ import burger from "../../images/burger.jpg"
 import './styles.css'
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
+import userPic from '../../images/userPhoto.jpg'
 
 const mapStateToProps = (state) => {
     return {
@@ -100,13 +101,17 @@ class Post extends React.Component{
                 {list.map((index) => {
                     return (
                         <div className={'commentsBlock'}>
-                            <p className={'userName'}>
-                                {"User: " + this.users[index]}
-                            </p>
+                            <div className={'userInfo1'}>
+                                <img src={userPic} alt = {''} className={"userPicture1"} />
 
+                                <p className={'userName'}>
+                                    {this.users[index]}
+                                </p>
+                            </div>
                             <p className={'reviewContent'}>
                                 {"Comments:  " + this.reviews[index]}
                             </p>
+
                         </div>);
                 })}
 
