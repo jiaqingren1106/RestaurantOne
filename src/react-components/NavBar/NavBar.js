@@ -71,9 +71,9 @@ class NavBar extends React.Component {
     return (
       <Styles>
         <Navbar expand="lg" fixed="top">
-          <Navbar.Brand onClick={() => setRoute("StartUp")}>RestaurantOne</Navbar.Brand>
-          <Navbar.Brand onClick={() => setRoute("SecondPage")}>Deals</Navbar.Brand>
-          <Navbar.Brand onClick={() => setRoute("FirstPage")}>Dashboard</Navbar.Brand>
+          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("StartUp")}>RestaurantOne</Navbar.Brand>
+          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("SecondPage")}>Deals</Navbar.Brand>
+          <Navbar.Brand  className='point_cursor' onClick={() => this.props.setRoute("FirstPage")}>Dashboard</Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Form className="form-center">
