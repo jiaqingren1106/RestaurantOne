@@ -144,14 +144,6 @@ class Profile extends React.Component {
                     </Col>
                     <Col xs={2}></Col>
                 </Row>
-                {/* <Row>
-                    <Col xs={2}></Col>
-                    <Col xs={8}>
-                        {rendering}
-                    </Col>
-                    <Col xs={2}></Col>
-                </Row> */}
-                
             </Container>
         );
     }
