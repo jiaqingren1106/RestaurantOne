@@ -40,10 +40,10 @@ class Sliders extends React.Component{
 
     render(){
         const index = this.state.currentImageIndex;
-        let firstPics = this.state.images.slice(index, index + 5)
+        let firstPics = this.state.images.slice(index, index + 4)
 
         if(firstPics.length < 5){
-            firstPics = firstPics.concat(this.state.images.slice(0, 5 - firstPics.length))
+            firstPics = firstPics.concat(this.state.images.slice(0, 4 - firstPics.length))
         }
 
         return(

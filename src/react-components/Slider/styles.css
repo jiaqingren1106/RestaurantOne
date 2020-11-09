@@ -38,7 +38,8 @@
 
 .picSlider{
     display: flex;
-    justify-content: right;
-    width: 80vw;
+    width: 80%;
     background-color: antiquewhite;
+    margin: 0px;
+    padding: 0px
 }
