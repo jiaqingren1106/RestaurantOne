@@ -4,6 +4,7 @@ import checkPic from "../../images/checkPic.png"
 import user1 from '../../images/user-review-1.jpg'
 import user2 from '../../images/user-review-2.jpg'
 import user3 from '../../images/user-review-3.jpg'
+import Select from 'react-select';
 
 
 class RestaurantInfo extends React.Component{
@@ -13,6 +14,7 @@ class RestaurantInfo extends React.Component{
         this.state = {value: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit2 = this.handleSubmit2.bind(this);
 
         this.reviews = this.props.info['reviews'];
         this.users = this.props.info['users'];
@@ -25,7 +27,6 @@ class RestaurantInfo extends React.Component{
     }
 
     handleSubmit(event) {
-        console.log(this.state.value)
         this.reviews.push(this.state.value)
         console.log(this.reviews)
         this.users.push('Anonymous')
@@ -35,6 +36,11 @@ class RestaurantInfo extends React.Component{
 
     handleChange(event) {
         this.setState({value: event.target.value});
+    }
+
+    handleSubmit2(event) {
+        alert('Your rate is ' + this.state.value);
+        event.preventDefault();
     }
 
     render() {
@@ -83,7 +89,7 @@ class RestaurantInfo extends React.Component{
                     {list.map((index) => {
                         return (
                             <div className={'reviewBlock'}>
-                                <p className={'userName'}>
+                                <p className={'userName'} >
                                     {"User: " + this.users[index]}
                                 </p>
 
@@ -94,7 +100,23 @@ class RestaurantInfo extends React.Component{
                                 <img src={user1} alt={""} className={"reviewpic"} />
                             </div>);
                     })}
-                </div>
+                    </div>
+
+                    <div className={"rate"}>
+                        <form onSubmit={this.handleSubmit2}>
+                            <label>
+                                Select your rate:
+                                <select value={this.state.value} onChange={this.handleChange}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <input type="submit" value="Submit" className={"submitButton2"} />
+                        </form>
+                    </div>
 
                     <div>
                     <textarea className={"textEditor"}

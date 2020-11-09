@@ -5,7 +5,8 @@
     bottom: 0;
     left: 0;
     margin: 0;
-    padding: 0
+    padding: 0;
+    display: inline-block;
 }
 
 
@@ -63,9 +64,11 @@
 .userName{
     font-family: Arial, monospace;
     font-size: 20px;
-    margin-left: 0vw;
+    margin-left: 10px;
+    margin-right: 10vw;
     line-height: 150%;
     color: black;
+    left: 0px;
 }
 
 .reviewConcent{
@@ -99,8 +102,23 @@
     margin-left:25vw;
 }
 
+.rate{
+    display: block;
+    margin-left:25vw;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
 .submitButton{
     display: inline-block;
     margin-left: 45%;
     font-size: 30px;
+}
+
+.submitButton2{
+    margin-left: 5vw;
+    font-size: 18px;
+    background-color: transparent;
+
 }

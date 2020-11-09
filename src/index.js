@@ -10,7 +10,6 @@ import BlogPage from "./pages/BlogPage";
 import RestaurantPage from "./pages/RestaurantPage";
 import Post from "./react-components/Post";
 import FirstPage from "./pages/FirstPage";
-import StartUp from "./fontPages/StartUp";
 import MyEditor from "./react-components/MyEditor";
 const logger = createLogger()
 
@@ -24,7 +23,7 @@ ReactDOM.render(
   <React.StrictMode>
 
       <Provider store = {store}>
-          <App />
+          <RestaurantPage />
       </Provider>
 
     {/* <PostsTable/> */}

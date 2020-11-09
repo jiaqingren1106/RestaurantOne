@@ -19,6 +19,22 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class Navigation extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {Follow:'Follow'};
+        this.changeFollow = this.changeFollow.bind(this);
+    }
+
+    changeFollow(){
+        if(this.state['Follow'] === 'Follow'){
+            this.setState({Follow: 'Unfollow'})
+        }else{
+            this.setState({Follow: 'Follow'})
+        }
+    }
+
+
     render() {
         const setRoute = this.props.setRoute
 
@@ -35,6 +51,10 @@ class Navigation extends React.Component {
 
                 <button className={"navigationButton"} onClick={() => setRoute("MenuPage")}>
                     Menu
+                </button>
+
+                <button className={"navigationButton"} onClick= {this.changeFollow}>
+                    {this.state['Follow']}
                 </button>
 
             </div>
