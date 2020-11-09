@@ -15,7 +15,7 @@
 .blogpic{
     height: 500px;
     width: 800px;
-    position: relative;
+    display: inline-block;
     margin-left: 300px;
 }
 
@@ -49,7 +49,7 @@
     margin-left: 300px;
 }
 
-.reviewConcent{
+.reviewContent{
     width: 800px;
     margin-left: 400px;
     font-family: Arial, "Al Bayan";

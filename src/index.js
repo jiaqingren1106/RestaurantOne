@@ -11,6 +11,7 @@ import RestaurantPage from "./pages/RestaurantPage";
 import Post from "./react-components/Post";
 import FirstPage from "./pages/FirstPage";
 import StartUp from "./fontPages/StartUp";
+import MyEditor from "./react-components/MyEditor";
 const logger = createLogger()
 
 const rootReducer = combineReducers({routeState, userState})
