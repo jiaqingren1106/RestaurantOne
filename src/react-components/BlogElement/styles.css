@@ -22,3 +22,9 @@
     /*border-bottom: None;*/
     border: none;
 }
+
+.readMore{
+    font-size: 20px;
+    font-family: "Syne Mono";
+    color: darkblue;
+}

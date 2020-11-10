@@ -38,10 +38,6 @@ class RestaurantInfo extends React.Component{
     }
 
 
-    componentDidMount() {
-        this.textarea.focus();
-    }
-
     handleSubmit(event) {
         this.reviews.push(this.state.value)
         if (this.props.user.username === "") {

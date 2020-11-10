@@ -12,9 +12,28 @@ import rightArrow from '../images/rightarrow.png'
 import leftArrow from '../images/leftarrow.png'
 import Navigation from "../react-components/Navigation";
 import user1 from '../images/user-review-1.jpg'
+import leftarrow from "../images/leftarrow.png";
+import {register, setRoute} from "../redux/actions";
+import {connect} from "react-redux";
 
+
+const mapStateToProps = (state) => {
+    return {
+        route: state.route,
+        user: state.userState
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route)=> dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
 
 class RestaurantPage extends React.Component{
+
 
     state = {
         restaurant_info: [{images:[Mcdonald1, Mcdonald2, Mcdonald3, Mcdonald4, Mcdonald5], leftArrow: leftArrow,
@@ -28,11 +47,15 @@ class RestaurantPage extends React.Component{
     }
 
     render() {
+        const setRoute = this.props.setRoute
+
         return (
             <section>
+                <img className={"restaurantName"} onClick={() => setRoute("FirstPage")} src={leftarrow}/>
                 <div className={"page"}>
-                    <Slider pic={this.state.restaurant_info[0]}/>
                     <Navigation />
+                    <Slider pic={this.state.restaurant_info[0]}/>
+
                     <RestaurantInfo info={this.state.restaurant_info[1]} />
                 </div>
             </section>
@@ -40,4 +63,4 @@ class RestaurantPage extends React.Component{
     }
 }
 
-export default RestaurantPage
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantPage);

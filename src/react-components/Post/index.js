@@ -32,11 +32,7 @@ class Post extends React.Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    componentDidMount() {
-        this.textarea.focus();
-    }
-
+    
     handleSubmit(event) {
         if(this.props.user.username === ""){
             alert("have to login to make comment")

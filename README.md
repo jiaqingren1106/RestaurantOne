@@ -69,6 +69,7 @@ The pages are divided as follows:
    3. **Profile Page** - The profile page shows the information of the user. - The user can change their information in this profile page by clicking the Edit button. 
    4. **Restaurant Details Page** - You get directed to this page when you click one of the cards in the Landing Page. - You can view information about this restaurant such as pictures, name of restaurant, address,
    and all the reviews of the users about that restaurant. - In this page, you can view: - Menu: This will show you the menu - Blog: This will show you the blog of the restaurant - Follow: This will allow user to follow or unfollow the restaurant - Back: To go back to dashboard
+   
 3. **Admin-facing**
    1. **Dashboard**
       - Dashboard shows new Restaurant owner registration request and the admin can approve or decline this request.

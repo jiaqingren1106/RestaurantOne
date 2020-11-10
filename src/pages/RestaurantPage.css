@@ -2,3 +2,14 @@
     width: 100%;
     background-color: antiquewhite;
 }
+
+.restaurantName{
+    /*background-color: transparent;*/
+    border: none;
+    font-size: 30px;
+    height: 5vw;
+    width: 5vw;
+    background-color: antiquewhite;
+    float: left;
+    margin-left: 2vw;
+}
