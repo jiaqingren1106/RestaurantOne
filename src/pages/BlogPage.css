@@ -4,11 +4,18 @@
 }
 
 .title1 {
-    background-color: transparent;
+    /*background-color: transparent;*/
     border: none;
     font-size: 30px;
-    margin-left: 10vw;
+    height: 5vw;
+    width: 5vw;
+    background-color: antiquewhite;
+    float: left;
+    margin-left: 2vw;
+}
 
+.title2{
+    background-color: antiquewhite;
 }
 
 .titlediv{

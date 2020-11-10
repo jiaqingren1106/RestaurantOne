@@ -4,6 +4,7 @@ import './styles.css'
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
 import userPic from '../../images/userPhoto.jpg'
+import leftarrow from '../../images/leftarrow.png'
 
 const mapStateToProps = (state) => {
     return {
@@ -60,9 +61,7 @@ class Post extends React.Component{
 
             <div className={"post"}>
 
-                <button className={"restaurantName"} onClick={() => setRoute("BlogPage")}>
-                    Back!
-                </button>
+                <img className={"restaurantName"} onClick={() => setRoute("BlogPage")} src={leftarrow}/>
 
                 <h1 className={"title"}>
                     Introduction to our new burger!

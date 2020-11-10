@@ -17,6 +17,8 @@
     margin-bottom: 20px;
     border-bottom: black solid 1px;
     background-color: antiquewhite;
-    border-left: None;
-    border-right: None;
+    /*border-left: None;*/
+    /*border-right: None;*/
+    /*border-bottom: None;*/
+    border: none;
 }

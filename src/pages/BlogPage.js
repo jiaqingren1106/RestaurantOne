@@ -5,6 +5,7 @@ import burger from '../images/burger.jpg'
 import {BrowserRouter, Link, Route} from "react-router-dom";
 import {register, setRoute} from "../redux/actions";
 import {connect} from "react-redux";
+import leftarrow from '../images/leftarrow.png'
 
 const mapStateToProps = (state) => {
     return {
@@ -99,16 +100,16 @@ class BlogPage extends React.Component{
 
         return (
                 <BrowserRouter>
-                    <div className={"back"}>
-
-                        <div className={'titlediv'}>
-                            <button className={"title1"} onClick={() => setRoute("RestaurantPage")}>
-                                Back!
-                            </button>
-                        </div>
-                        <div className={"blogpage"}>
-                            <div className='blogblock'>
-                                {CouponList}
+                    <div className={'title2'}>
+                        <img className={"title1"} onClick={() => setRoute("RestaurantPage")} src={leftarrow}>
+                        </img>
+                        <div className={"back"}>
+                            <div className={'titlediv'}>
+                            </div>
+                            <div className={"blogpage"}>
+                                <div className='blogblock'>
+                                    {CouponList}
+                                </div>
                             </div>
                         </div>
                     </div>
