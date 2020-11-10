@@ -12,6 +12,7 @@
     border-radius: 5%;
     overflow: hidden;
     box-shadow: 2px 2px 30px 2px #130506;
+    max-width:30% ;
 
 }
 
