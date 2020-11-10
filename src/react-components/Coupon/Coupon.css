@@ -18,12 +18,12 @@
 
 .couponFooter{
     height: 30px;
-    padding: 0%;
+    padding: 0;
 }
 
 .text-muted{
-    padding: 0%;
-    margin: 0%;
+    padding: 0;
+    margin: 0;
 }
 
 #coupon{
