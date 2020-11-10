@@ -45,7 +45,7 @@ class BlogElement extends React.Component{
                     </Card.Text>
 
                     <Link onClick={() => setRoute("Post")}>
-                        <Card.Text>
+                        <Card.Text className={'readMore'}>
                             read more ....
                         </Card.Text>
                     </Link>

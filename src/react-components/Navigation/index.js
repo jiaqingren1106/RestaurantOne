@@ -41,10 +41,6 @@ class Navigation extends React.Component {
         return(
             <div className={"navigation1"}>
 
-                <button className={'navigationButton'} onClick={() => setRoute("FirstPage")}>
-                    Back
-                </button>
-
                 <button className={"navigationButton"} onClick={() => setRoute("BlogPage")}>
                     Blog
                 </button>
