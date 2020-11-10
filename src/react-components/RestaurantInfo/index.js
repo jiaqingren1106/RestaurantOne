@@ -1,11 +1,27 @@
 import React from 'react';
 import "./styles.css"
 import checkPic from "../../images/checkPic.png"
+import { connect } from 'react-redux';
 import user1 from '../../images/user-review-1.jpg'
 import user2 from '../../images/user-review-2.jpg'
 import user3 from '../../images/user-review-3.jpg'
 import MapContainer from '../MapContainer/MapContainer'
 import userPic from '../../images/userPhoto.jpg'
+import {register, setRoute} from "../../redux/actions";
+
+const mapStateToProps = (state) => {
+    return {
+        route: state.routeState.route,
+        user: state.userState
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route) => dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
 
 class RestaurantInfo extends React.Component{
 
@@ -28,9 +44,15 @@ class RestaurantInfo extends React.Component{
 
     handleSubmit(event) {
         this.reviews.push(this.state.value)
-        this.users.push('Anonymous')
-        this.reviewpic.push('none')
-        this.setState({value: this.state.value});
+        if (this.props.user.username === "") {
+            alert("have to login to make comment")
+        }
+        else{
+            this.users.push(this.props.user.username)
+            this.reviewpic.push('none')
+            this.setState({value: this.state.value});
+        }
+
     }
 
     handleChange(event) {
@@ -38,7 +60,6 @@ class RestaurantInfo extends React.Component{
     }
 
     handleSubmit2(event) {
-        alert('Your rate is ' + this.state.value);
         event.preventDefault();
     }
 
@@ -97,19 +118,26 @@ class RestaurantInfo extends React.Component{
                     {list.map((index) => {
                         return (
                             <div className={'reviewBlock'}>
+                                <div className={'reviewBlock2'}>
+                                    <div className={'userInfo'}>
+                                        <img src={userPic} alt={''} className={'userPic'} />
+                                        <p className={'userName1'} >
+                                            {this.users[index]}
+                                        </p>
+                                    </div>
 
-                                <div className={'userInfo'}>
-                                    <img src={userPic} alt={''} className={'userPic'} />
-                                    <p className={'userName1'} >
-                                        {this.users[index]}
+                                    <p className={'reviewConcent'}>
+                                        {"Comments:  " + this.reviews[index]}
                                     </p>
+
+                                    <img src={user1} alt={""} className={"reviewpic"} />
                                 </div>
-
-                                <p className={'reviewConcent'}>
-                                    {"Comments:  " + this.reviews[index]}
-                                </p>
-
-                                <img src={user1} alt={""} className={"reviewpic"} />
+                                <>
+                                <hr
+                                    style={{
+                                        margin: '1em auto',
+                                    }} />
+                                </>
                             </div>);
                     })}
                     </div>
@@ -130,7 +158,6 @@ class RestaurantInfo extends React.Component{
                                     <option value="5">5</option>
                                 </select>
                             </label>
-                            <input type="submit" value="Submit" className={"submitButton2"} />
                         </form>
                     </div>
 
@@ -154,4 +181,4 @@ class RestaurantInfo extends React.Component{
     }
 }
 
-export default RestaurantInfo
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantInfo)

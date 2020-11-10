@@ -8,7 +8,9 @@ import leftarrow from '../../images/leftarrow.png'
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.route,
+        user: state.userState
+
     }
 }
 
@@ -36,11 +38,15 @@ class Post extends React.Component{
     }
 
     handleSubmit(event) {
-        console.log(this.state.value)
-        this.reviews.push(this.state.value)
-        console.log(this.reviews)
-        this.users.push('Anonymous')
-        this.setState({value: this.state.value});
+        if(this.props.user.username === ""){
+            alert("have to login to make comment")
+        }else {
+            console.log(this.state.value)
+            this.reviews.push(this.state.value)
+            console.log(this.reviews)
+            this.users.push(this.props.user.username)
+            this.setState({value: this.state.value});
+        }
     }
 
     handleChange(event) {

@@ -80,13 +80,17 @@
 
 .reviewBlock{
     padding-left: 10vw;
-    padding-bottom: 3vw;
-    /*border-bottom: black solid 1px ;*/
+    padding-bottom: 1vw;
+
 }
 
 .reviewpic{
     height: 300px;
     width: 300px;
+}
+
+.reviewBlock2{
+    /*border-bottom: black solid 1px;*/
 }
 
 .textEditor{
