@@ -5,10 +5,39 @@
 In this project, we are only developing the front-end of _Restaurant Reviewer_.
 So far, we are using React for our Website.
 
-To access our website easily, you can access the link below:
-https://restaurant-review-app309.herokuapp.com/
 
 Keep in mind that all the data used in this website are hardcoded in preparation for Phase 2.
+## Getting Started
+
+The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Installing
+install Node js in local machine.
+```
+https://nodejs.org/en/download/
+```
+Clone this repository to local machine. 
+```
+git clone https://github.com/csc309-fall-2020/team41.git
+```
+change directory on terminal to the project location and run npm i. 
+```
+cd <project_location>
+npm i
+```
+
+## Running the app
+You can run the app by following command.
+
+```
+npm run start
+```
+or you can go to the deployed version
+```
+https://restaurant-review-app309.herokuapp.com/
+```
+
+## Features
 
 In this website, we divide the page into the client-facing and admin-facing pages.
 The pages are divided as follows:
