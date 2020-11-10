@@ -68,7 +68,8 @@ The pages are divided as follows:
         - In this page, you are shown with the different restaurants that have signed up into our website.
         - If the user clicks on the restaurant page, it will direct the user into the restaurant page. 
         - The user can also use the search bar to search for the restaurants that they want to see. User can type part 
-          of the restaurant, and it will display **all** restaurants that **match the part**.
+          of the restaurant, and it will display **all** restaurants that **match the part**. If type restaurant name 
+          in *Deal* page, it will display the coupon card correspond to that restuarant.
    2. **Deals Page** 
         - We are showing all the deals, and the coupon codes that the restaurants have. 
    3. **Profile Page** 
