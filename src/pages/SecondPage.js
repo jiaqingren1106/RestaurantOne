@@ -67,7 +67,7 @@ class SecondPage extends React.Component {
 
 
     render() {
-        const column = 3;
+        const column = 5;
 
         let restaurants
         if (this.state.onSearch){
