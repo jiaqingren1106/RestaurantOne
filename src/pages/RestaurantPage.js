@@ -13,6 +13,7 @@ import leftArrow from '../images/leftarrow.png'
 import Navigation from "../react-components/Navigation";
 import user1 from '../images/user-review-1.jpg'
 import leftarrow from "../images/leftarrow.png";
+import {withRouter} from "react-router-dom";
 import {register, setRoute} from "../redux/actions";
 import {connect} from "react-redux";
 
@@ -47,7 +48,15 @@ class RestaurantPage extends React.Component{
     }
 
     render() {
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
 
         return (
             <section>
@@ -63,4 +72,4 @@ class RestaurantPage extends React.Component{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RestaurantPage));

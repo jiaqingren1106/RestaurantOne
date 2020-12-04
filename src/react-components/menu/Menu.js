@@ -5,6 +5,7 @@ import MenuGroup from '../menuGroup/MenuGroup';
 import NavBar from '../../react-components/NavBar/NavBar';
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 
 import burger1 from "../../images/Mcdonald-2.png";
@@ -55,7 +56,15 @@ class Menu extends React.Component {
 
 
     render() {
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
         const row = 5;
 
         const MenuItemLen = this.state.MenuItems.length;
@@ -98,4 +107,4 @@ class Menu extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Menu));

@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './index.css'
 import StartUp from "./frontPages/StartUp";
 import { connect } from 'react-redux'
@@ -14,34 +14,36 @@ import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
 import Profile from "./pages/Profile";
+import {Route, withRouter, Switch} from 'react-router-dom'
 
 const getTargetPage = (route) => {
-    switch (route) {
-        case "StartUp":
-            return (<StartUp/>);
-        case "SignIn":
-            return (<SignIn/>);
-        case "Register":
-            return (<Register/>)
-        case "FirstPage":
-            return (<FirstPage/>)
-        case "SecondPage":
-            return (<SecondPage/>)
-        case "RestaurantPage":
-            return (<RestaurantPage/>)
-        case "BlogPage":
-            return (<BlogPage />)
-        case "Post":
-            return (<Post />)
-        case "AdminPage":
-            return (<AdminPage/>)
-        case "MenuPage":
-            return (<Menu/>)
-        case "ProfilePage":
-            return (<Profile/>)
-        default:
-            return (<StartUp/>);
-    }
+    // switch (route) {
+    //     case "StartUp":
+    //         return (<StartUp/>);
+    //     case "SignIn":
+    //         return (<SignIn/>);
+    //     case "Register":
+    //         return (<Register/>)
+    //     case "FirstPage":
+    //         return (<FirstPage/>)
+    //     case "SecondPage":
+    //         return (<SecondPage/>)
+    //     case "RestaurantPage":
+    //         return (<RestaurantPage/>)
+    //     case "BlogPage":
+    //         return (<BlogPage />)
+    //     case "Post":
+    //         return (<Post />)
+    //     case "AdminPage":
+    //         return (<AdminPage/>)
+    //     case "MenuPage":
+    //         return (<Menu/>)
+    //     case "ProfilePage":
+    //         return (<Profile/>)
+    //     default:
+    //         return (<StartUp/>);
+    // }
+
 }
 const mapStateToProps = (state) => {
 
@@ -53,15 +55,25 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => ({})
 
-const App = ({route, user}) => {
-// import Deals from "./react-components/Deals/Deals";
-
-// const App = () => <Deals/>
+const App = ({route, user, history}) => {
 
    return (
-       <div>
-           {getTargetPage(route)}
-       </div>
+           <div>
+               <Switch>
+                   <Route exact path="/" component={StartUp}/>
+                   <Route exact path="/ProfilePage" component={Profile}/>
+                   <Route exact path="/MenuPage" component={Menu}/>
+                   <Route exact path="/AdminPage" component={AdminPage}/>
+                   <Route exact path="/Post" component={Post}/>
+                   <Route exact path="/BlogPage" component={BlogPage}/>
+                   <Route exact path="/RestaurantPage" component={RestaurantPage}/>
+                   <Route exact path="/SecondPage" component={SecondPage}/>
+                   <Route exact path="/FirstPage" component={FirstPage}/>
+                   <Route exact path="/Register" component={Register}/>
+                   <Route exact path="/SignIn" component={SignIn}/>
+               </Switch>
+           </div>
+
 
    )
 }

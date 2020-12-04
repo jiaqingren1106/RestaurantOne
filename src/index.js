@@ -6,12 +6,9 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 import {routeState, userState} from "./redux/reducer";
 import {createLogger} from "redux-logger";
 import {Provider} from "react-redux";
-import BlogPage from "./pages/BlogPage";
-import RestaurantPage from "./pages/RestaurantPage";
-import Post from "./react-components/Post";
-import FirstPage from "./pages/FirstPage";
-import MyEditor from "./react-components/MyEditor";
-import Menu from "./react-components/menu/Menu";
+
+import {BrowserRouter} from "react-router-dom";
+
 const logger = createLogger()
 
 
@@ -25,7 +22,9 @@ ReactDOM.render(
   <React.StrictMode>
 
       <Provider store = {store}>
-          <App />
+          <BrowserRouter>
+              <App />
+          </BrowserRouter>
       </Provider>
 
     {/* <PostsTable/> */}

@@ -18,6 +18,16 @@ const mapDispatchToProps = (dispatch) => {
 
 const StartUp = (props) => {
 
+    const setRoute = (newRoute) => {
+        let targetRoute = `/`
+        if (!(newRoute=== "StartUp" || newRoute === "")){
+            targetRoute = `${newRoute}`
+        }
+
+        props.history.push(targetRoute)
+        props.setRoute(newRoute)
+    }
+
     return (<section className= "frontPage">
         <div className="log_sign_container">
             <div className="icon">
@@ -25,16 +35,16 @@ const StartUp = (props) => {
             </div>
 
             <div className="log_sign">
-                <a className="point_cursor" onClick={ () => props.setRoute("SignIn")}>Login</a>
+                <a className="point_cursor" onClick={ () => setRoute("SignIn")}>Login</a>
                 /
-                <a className="point_cursor" onClick={ () => props.setRoute("Register")}> Sign Up</a>
+                <a className="point_cursor" onClick={ () => setRoute("Register")}> Sign Up</a>
             </div>
         </div>
         <div className="body_container">
 
                 <h1 className="h1_front"> Explore Great Restaurant</h1>
 
-                <button type="button" className="btn btn-outline-danger btn-xl" onClick={() =>props.setRoute("FirstPage")}>
+                <button type="button" className="btn btn-outline-danger btn-xl" onClick={() =>setRoute("FirstPage")}>
                     get started</button>
 
         </div>

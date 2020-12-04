@@ -17,7 +17,16 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const SignIn = ({setRoute, setUser}) => {
+const SignIn = (props) => {
+    const setRoute = (newRoute) => {
+        let targetRoute = `/`
+        if (!(newRoute=== "StartUp" || newRoute === "")){
+            targetRoute = `${newRoute}`
+        }
+
+        props.history.push(targetRoute)
+        props.setRoute(newRoute)
+    }
     const [entered_user, setEntered_user] = useState({
         username: "",
         password: "",
@@ -31,7 +40,7 @@ const SignIn = ({setRoute, setUser}) => {
             setEntered_user(entered_user)
             return
         }
-        setUser(targetUser[0])
+        props.setUser(targetUser[0])
         if (targetUser[0].userType === "admin") {
             setRoute("AdminPage")
         }

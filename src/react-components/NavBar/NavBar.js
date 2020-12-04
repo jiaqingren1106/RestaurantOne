@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux'
 import { register, setRoute } from "../../redux/actions";
 import './NavBar.css'
+import {withRouter} from "react-router-dom";
 
 
 const Styles = styled.div`
@@ -55,25 +56,42 @@ class NavBar extends React.Component {
 
   onCoupon = () => {
     this.props.setSearched();
-    this.props.setRoute("SecondPage")
+    this.setRoute("SecondPage")
   }
 
   onDashBoard = () => {
     this.props.setSearched();
-    this.props.setRoute("FirstPage")
+    this.setRoute("FirstPage")
     
   }
+  setRoute = (newRoute) => {
+        let targetRoute = `/`
+        if (!(newRoute=== "StartUp" || newRoute === "")){
+            targetRoute = `${newRoute}`
+        }
 
+        this.props.history.push(targetRoute)
+        this.props.setRoute(newRoute)
+    }
     handleLogOut = () => {
         this.props.setUser( {
             username: "",
             userType:"",
             password: ""
         })
-        this.props.setRoute("StartUp")
+        this.setRoute("StartUp")
     }
   render() {
     const user = this.props.user
+      const setRoute = (newRoute) => {
+          let targetRoute = `/`
+          if (!(newRoute=== "StartUp" || newRoute === "")){
+              targetRoute = `${newRoute}`
+          }
+
+          this.props.history.push(targetRoute)
+          this.setRoute(newRoute)
+      }
 
     let navRender = (
       <Nav className="ml-auto">
@@ -83,10 +101,10 @@ class NavBar extends React.Component {
               }}>Hello, Friend!</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="point_cursor" onClick={ () => this.props.setRoute("SignIn")}>Login</Nav.Link>
+          <Nav.Link className="point_cursor" onClick={ () => setRoute("SignIn")}>Login</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="point_cursor" onClick={ () => this.props.setRoute("Register")}>Sign Up</Nav.Link>
+          <Nav.Link className="point_cursor" onClick={ () => setRoute("Register")}>Sign Up</Nav.Link>
         </Nav.Item>
       </Nav>
     )
@@ -96,7 +114,7 @@ class NavBar extends React.Component {
             <Nav.Item><Nav.Link style = {
                 {cursor: "context-menu",
                 }}>Hello, {user.username}</Nav.Link></Nav.Item>
-            <Nav.Item><Nav.Link onClick={() => this.props.setRoute("ProfilePage")}>Profile</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={() => setRoute("ProfilePage")}>Profile</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link onClick={() => this.handleLogOut() }>Log Out</Nav.Link></Nav.Item>
         </Nav>
       )
@@ -124,4 +142,4 @@ class NavBar extends React.Component {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

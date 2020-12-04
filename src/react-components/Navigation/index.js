@@ -2,6 +2,7 @@ import React from 'react';
 import "./styles.css"
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 
 const mapStateToProps = (state) => {
@@ -36,7 +37,15 @@ class Navigation extends React.Component {
 
 
     render() {
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
 
         return(
             <div className={"navigation1"}>
@@ -60,4 +69,4 @@ class Navigation extends React.Component {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navigation));

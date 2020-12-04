@@ -6,12 +6,21 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { register, setRoute } from "../../redux/actions";
 
+import {withRouter} from "react-router-dom";
 
 
 
 class MenuItem extends React.Component {
     render() {
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
 
         return (
             <Card id="MenuItem1" className="MenuItemCard">

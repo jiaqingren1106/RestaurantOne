@@ -5,6 +5,8 @@ import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
 import userPic from '../../images/userPhoto.jpg'
 import leftarrow from '../../images/leftarrow.png'
+import {withRouter} from "react-router-dom";
+
 
 const mapStateToProps = (state) => {
     return {
@@ -50,7 +52,15 @@ class Post extends React.Component{
     }
 
     render() {
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
 
         let i;
         let list = []
@@ -138,4 +148,4 @@ class Post extends React.Component{
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Post));

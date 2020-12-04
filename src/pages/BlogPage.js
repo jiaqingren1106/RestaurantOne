@@ -2,7 +2,7 @@ import React from 'react';
 import "./BlogPage.css"
 import Blog from "../react-components/Blog"
 import burger from '../images/burger.jpg'
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {BrowserRouter, withRouter, Link, Route} from "react-router-dom";
 import {register, setRoute} from "../redux/actions";
 import {connect} from "react-redux";
 import leftarrow from '../images/leftarrow.png'
@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class BlogPage extends React.Component{
+
 
     state = {
         info:[
@@ -69,7 +70,15 @@ class BlogPage extends React.Component{
 
     render() {
 
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
 
         const row = 1
         const restaurantLen = this.state.info.length;
@@ -118,4 +127,4 @@ class BlogPage extends React.Component{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BlogPage));

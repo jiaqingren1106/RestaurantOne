@@ -6,6 +6,8 @@ import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
+
 
 
 const mapStateToProps = (state) => {
@@ -26,7 +28,15 @@ class BlogElement extends React.Component{
         const maxlength = 300;
         let description = this.props.descriptions.slice(1, maxlength)
         description = description.concat("......")
-        const setRoute = this.props.setRoute
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
 
         return(
             <Card className={"Card"}>
@@ -56,4 +66,4 @@ class BlogElement extends React.Component{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogElement);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BlogElement));
