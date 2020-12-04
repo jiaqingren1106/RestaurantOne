@@ -31,6 +31,7 @@ class Profile extends React.Component {
         const username = this.props.user.username
         const password = this.props.user.password
         this.state = {
+            onSearch: false,
             isEdit: false,
 
             isPost: false,
@@ -76,7 +77,9 @@ class Profile extends React.Component {
 
         }
     }
-
+    useMeWhenClickedDashBoard = () => {
+        this.setState({ onSearch: false })
+    }
 
     showEditInput() {
         this.setState({ isEdit: true });
@@ -362,7 +365,9 @@ class Profile extends React.Component {
             // </Container>
 
             <Container id='Profile'>
-                <NavBar />
+                <NavBar 
+                // onSearch={this.useMeWhenYouDoSearch} 
+                setSearched={this.useMeWhenClickedDashBoard}/>
                 <div id="profile">
                     <h4 className="subtitle">Username: {user.username}</h4>
                     <h4 className="subtitle">User Type: {user.userType}</h4>
