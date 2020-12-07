@@ -1,5 +1,5 @@
 .Slider{
-    position: relative;
+    position: flex;
     height: 100vh;
     width: 60vw;
     margin: 0 auto;
@@ -17,8 +17,7 @@
     height: 50px;
     width: 50px;
     margin-top: 10vh;
-    background-color: antiquewhite;
-
+    /* background-color: antiquewhite; */
 }
 
 .arrowNext{
@@ -39,7 +38,7 @@
 .picSlider{
     display: flex;
     width: 80%;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     padding-left: 10vw;
     /*margin-left: 10vw;*/
 }

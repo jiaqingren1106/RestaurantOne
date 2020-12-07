@@ -50,6 +50,10 @@ class Navigation extends React.Component {
         return(
             <div className={"navigation1"}>
 
+                <button className={"navigationButton"} onClick= {this.changeFollow}>
+                    {this.state['Follow']}
+                </button>
+
                 <button className={"navigationButton"} onClick={() => setRoute("BlogPage")}>
                     Blog
                 </button>
@@ -58,9 +62,6 @@ class Navigation extends React.Component {
                     Menu
                 </button>
 
-                <button className={"navigationButton"} onClick= {this.changeFollow}>
-                    {this.state['Follow']}
-                </button>
 
             </div>
         )

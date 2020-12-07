@@ -60,7 +60,7 @@ const App = ({route, user, history}) => {
    return (
            <div>
                <Switch>
-                   <Route exact path="/" component={StartUp}/>
+                   <Route exact path="/" component={Post}/>
                    <Route exact path="/ProfilePage" component={Profile}/>
                    <Route exact path="/MenuPage" component={Menu}/>
                    <Route exact path="/AdminPage" component={AdminPage}/>

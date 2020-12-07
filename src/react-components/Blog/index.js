@@ -26,7 +26,6 @@ class blog extends React.Component{
             </CardGroup>
         );
 
-        console.log(BlogList)
         return(
             // <BrowserRouter>
             <div className={"Blog"}>

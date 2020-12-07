@@ -70,77 +70,82 @@ class Post extends React.Component{
 
         return(
 
-
-            <div className={"post"}>
-
-                <img className={"restaurantName"} onClick={() => setRoute("BlogPage")} src={leftarrow}/>
-
-                <h1 className={"title"}>
-                    Introduction to our new burger!
-                </h1>
-
-                <img src={burger} className={"blogpic"} />
-
-                <p className={"date"}>
-                    Nov 1 2020
-                </p>
-
-                <p className={"content"}>
-                    Dikwijls lateriet van een uitgeput bak. Onderwoeld gunstigste elk ondernomen ton wat. Dal aanmerking wetenschap ontginning wantrouwen lot aangeplant. Brandhout ook wijselijk ontginnen kettingen elk men stichting belovende. Ik tooverslag kilometers economisch al. Op in verbouwen ontginnen stichting bovendien. Een als behandelt ontrukten liverpool moerassen wij zes. Middellijn er insnijding noodlottig tinprijzen ad rijkdommen interesten. Twee toe maar aard een veel doel zelf dik.
-
-                    Ad veertien er al slaagden resident. Waaronder eindelijk schatkist mee men wat britschen visschers. Is om te markten streken en vrouwen. Willen verder en scheen af op langen bladen. Toch elk tot vele vast dus ons over. Rijkdommen concurrent weelderige en de ze al mijnwerker. Ernstige in tusschen bezetten gesloten opmeting om.
-
-                    Breken na op te en metaal zelden levert varens. Lang stof meer mei werd wat weer wie. Wie are verklaart wel mag aandeelen eigenaars gebruiken. Vergrooten caoutchouc kongostaat ingenieuse een voorschijn weg. Hand geen tijd daar is ad en wier. Ongebruikt gomsoorten hij kongostaat uit monopolies mag die natuurlijk. Zesde na rijst ad en meest sinds omdat ze. Vervangen degelijke ad meehelpen bepaalden ik viaducten en evenwicht. Welk in geld en kilo puin noch.
-
-                    Terug eenig der leven ter als nam. Al ad te bezit komst ficus op. Is ploeg of groen ze wijze japan er. Boringen langzaam ik kolonien te strooien ze. Ons ander enkel bak roode dit sinds meest het. Dit had geslaagd generaal een afstands. Maleiers bevatten deeltjes behoefte in mogelijk en.
-
-                    Producten eindelijk bestreken er al de bezorgden af. Te gomboomen ze af oogenblik opgericht nu. Nu uren zijn in oude duur. Bakje ik koopt wonen nu wegen. Schepping kettingen ons goa voorkomen. Opening slechts met wij rijkste. Op is vlakten al planter bronnen om. Kolonien sap van bespaart verbrand vijftien mag verdeeld. Oorzaak enkelen bevrijd bijgang belooft sap zal. Werkelijk wellesley de af vochtigen voorspoed is vernieuwd herhaling ze.
-
-                    Aandeel gif simplon treffen bestuur dat ons hun systeem drijven. Rekening te mogelijk bezetten al verkocht. Zij selangor kapitaal men voorzorg zou tot. Klimaat grooten haalden ontdekt als zou. Planten mee zal gevolgd luister genomen wolfram. Nu zake dekt kost deed er in ze. Dichtbij te of uitgaven afstands talrijke losmaken bedragen. Des rug een gemengd afneemt wolfram. Weinig zoo bergen lijden zin breken sap groene. Al weldra dragen vierde na spuwen ik moeite.
-
-                    Dik van welk bouw dan toch dus. En de willen al in cijfer scheen. En brandstof zuidgrens al plaatsing antwerpen nu om. Zuidgrens ik is honderden verdiende. Die een eromheen failliet weg talrijke mijnbouw. Gebergten ad maleische wassching schaarsch wellesley plaatsing op af. Ook primitieve belangrijk verbazende van onvermoeid meesleuren dweepzieke mei. Mijnwerker noodlottig verzamelen ontginning nu ik smeltovens.
-
-                    Ontgonnen gezuiverd de volledige al gesteente. Rug hoogen dan uit parijs eerder zij vlucht dragen bouwde. Kwam op kilo zake jaar en wild de nu. Bladeren speurzin failliet elk dat dikwijls systemen ter ons deeltjes. Jammer ze steeds is missen. Hij lot ver poeloe rubben kleine spuwen. Afgestaan aangelegd versteend of te daaronder belovende. Bijzonders is de nu verdedigen aanplanten tinhoudend ongebruikt al. Staan ze al de matig is daken jacht. Ploegen den dat valorem werkten geweest tot gelegen.
-                </p>
-
-
-
-                <p className={"commentsTitle"}>
-                    Comments
-                </p>
-
-                {list.map((index) => {
-                    return (
-                        <div className={'commentsBlock'}>
-                            <div className={'userInfo1'}>
-                                <img src={userPic} alt = {''} className={"userPicture1"} />
-
-                                <p className={'userName'}>
-                                    {this.users[index]}
-                                </p>
-                            </div>
-                            <p className={'reviewContent'}>
-                                {"Comments:  " + this.reviews[index]}
-                            </p>
-
-                        </div>);
-                })}
-
-                <div>
-                    <textarea className={"textEditor"}
-                              ref={c => (this.textarea = c)}
-                              placeholder="Type your comments here!"
-                              rows={10}
-                              cols={100}
-                              defaultValue=""
-                              onChange={this.handleChange}
-                    />
-                </div>
-
-                <button onClick={this.handleSubmit} className={"submitButton"}>
-                    submit
+            <div className={"postPage"}>
+                <button className={"restaurantName"} onClick={() => setRoute("RestaurantPage")}>
+                    Blog
                 </button>
 
+                <div className={"post"}>
+
+
+
+                    <h1 className={"Posttitle"}>
+                        Introduction to our new burger!
+                    </h1>
+
+                    <img src={burger} className={"blogpic"} />
+
+                    <p className={"date"}>
+                        Nov 1 2020
+                    </p>
+
+                    <div className={"PostcontentDiv"}>
+                        <p className={"Postcontent"}>
+                            Dikwijls lateriet van een uitgeput bak. Onderwoeld gunstigste elk ondernomen ton wat. Dal aanmerking wetenschap ontginning wantrouwen lot aangeplant. Brandhout ook wijselijk ontginnen kettingen elk men stichting belovende. Ik tooverslag kilometers economisch al. Op in verbouwen ontginnen stichting bovendien. Een als behandelt ontrukten liverpool moerassen wij zes. Middellijn er insnijding noodlottig tinprijzen ad rijkdommen interesten. Twee toe maar aard een veel doel zelf dik.
+
+                            Ad veertien er al slaagden resident. Waaronder eindelijk schatkist mee men wat britschen visschers. Is om te markten streken en vrouwen. Willen verder en scheen af op langen bladen. Toch elk tot vele vast dus ons over. Rijkdommen concurrent weelderige en de ze al mijnwerker. Ernstige in tusschen bezetten gesloten opmeting om.
+
+                            Breken na op te en metaal zelden levert varens. Lang stof meer mei werd wat weer wie. Wie are verklaart wel mag aandeelen eigenaars gebruiken. Vergrooten caoutchouc kongostaat ingenieuse een voorschijn weg. Hand geen tijd daar is ad en wier. Ongebruikt gomsoorten hij kongostaat uit monopolies mag die natuurlijk. Zesde na rijst ad en meest sinds omdat ze. Vervangen degelijke ad meehelpen bepaalden ik viaducten en evenwicht. Welk in geld en kilo puin noch.
+
+                            Terug eenig der leven ter als nam. Al ad te bezit komst ficus op. Is ploeg of groen ze wijze japan er. Boringen langzaam ik kolonien te strooien ze. Ons ander enkel bak roode dit sinds meest het. Dit had geslaagd generaal een afstands. Maleiers bevatten deeltjes behoefte in mogelijk en.
+
+                            Producten eindelijk bestreken er al de bezorgden af. Te gomboomen ze af oogenblik opgericht nu. Nu uren zijn in oude duur. Bakje ik koopt wonen nu wegen. Schepping kettingen ons goa voorkomen. Opening slechts met wij rijkste. Op is vlakten al planter bronnen om. Kolonien sap van bespaart verbrand vijftien mag verdeeld. Oorzaak enkelen bevrijd bijgang belooft sap zal. Werkelijk wellesley de af vochtigen voorspoed is vernieuwd herhaling ze.
+
+                            Aandeel gif simplon treffen bestuur dat ons hun systeem drijven. Rekening te mogelijk bezetten al verkocht. Zij selangor kapitaal men voorzorg zou tot. Klimaat grooten haalden ontdekt als zou. Planten mee zal gevolgd luister genomen wolfram. Nu zake dekt kost deed er in ze. Dichtbij te of uitgaven afstands talrijke losmaken bedragen. Des rug een gemengd afneemt wolfram. Weinig zoo bergen lijden zin breken sap groene. Al weldra dragen vierde na spuwen ik moeite.
+
+                            Dik van welk bouw dan toch dus. En de willen al in cijfer scheen. En brandstof zuidgrens al plaatsing antwerpen nu om. Zuidgrens ik is honderden verdiende. Die een eromheen failliet weg talrijke mijnbouw. Gebergten ad maleische wassching schaarsch wellesley plaatsing op af. Ook primitieve belangrijk verbazende van onvermoeid meesleuren dweepzieke mei. Mijnwerker noodlottig verzamelen ontginning nu ik smeltovens.
+
+                            Ontgonnen gezuiverd de volledige al gesteente. Rug hoogen dan uit parijs eerder zij vlucht dragen bouwde. Kwam op kilo zake jaar en wild de nu. Bladeren speurzin failliet elk dat dikwijls systemen ter ons deeltjes. Jammer ze steeds is missen. Hij lot ver poeloe rubben kleine spuwen. Afgestaan aangelegd versteend of te daaronder belovende. Bijzonders is de nu verdedigen aanplanten tinhoudend ongebruikt al. Staan ze al de matig is daken jacht. Ploegen den dat valorem werkten geweest tot gelegen.
+                        </p>
+                    </div>
+
+                    <p className={"commentsTitle"}>
+                        Comments
+                    </p>
+
+                    {list.map((index) => {
+                        return (
+                            <div className={'commentsBlock'}>
+                                <div className={'userInfo1'}>
+                                    <img src={userPic} alt = {''} className={"userPicture1"} />
+
+                                    <p className={'userName'}>
+                                        {this.users[index]}
+                                    </p>
+                                </div>
+                                <p className={'reviewContent'}>
+                                    {"Comments:  " + this.reviews[index]}
+                                </p>
+
+                            </div>);
+                    })}
+
+                    <div className = {"PosttextEditorDiv"}>
+                        <textarea className={"PosttextEditor"}
+                                ref={c => (this.textarea = c)}
+                                placeholder="Type your comments here!"
+                                rows={10}
+                                cols={100}
+                                defaultValue=""
+                                onChange={this.handleChange}
+                        />
+                    </div>
+
+                    <button onClick={this.handleSubmit} className={"PostsubmitButton"}>
+                        submit
+                    </button>
+
+                </div>
             </div>
         )
 

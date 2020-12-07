@@ -141,7 +141,9 @@ class RestaurantInfo extends React.Component{
                     <div className={"rate"}>
                         <form onSubmit={this.handleSubmit2}>
                             <label>
+                                <p className = {"selectRate"}>
                                 Select your rate:
+                                </p>
                                 <select value={this.state.value} onChange={this.handleChange}>
                                     <option value="1">1</option>
 

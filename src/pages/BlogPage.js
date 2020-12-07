@@ -109,9 +109,17 @@ class BlogPage extends React.Component{
 
         return (
                 <BrowserRouter>
-                    <div className={'title2'}>
-                        <img className={"title1"} onClick={() => setRoute("RestaurantPage")} src={leftarrow}>
-                        </img>
+                    <div className={'BlogPage'}>
+                        <div className={'BlogPageUpper'}>
+                            <button className={"restaurantName"} onClick={() => setRoute("RestaurantPage")}>
+                                Restaurant
+                            </button>
+                        </div>
+
+                        <p className={'BlogPageTitle'}>
+                            Blog
+                        </p>
+
                         <div className={"back"}>
                             <div className={'titlediv'}>
                             </div>

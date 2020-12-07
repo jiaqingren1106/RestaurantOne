@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors } from 'react-select/src/theme';
 
 class MyEditor extends React.Component{
 
@@ -30,23 +31,23 @@ class MyEditor extends React.Component{
             resize: "none",
             padding: "9px",
             boxSizing: "border-box",
-            fontSize: "15px"
+            fontSize: "15px",
         };
         return (
-            <button onClick={this.handleSubmit}>
-                <div>
-                    <textarea
-                        style={style}
-                        ref={c => (this.textarea = c)}
-                        placeholder="type some text"
-                        rows={500}
-                        cols={500}
-                        defaultValue=""
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <input type="submit" value="Submit" />
-            </button>
+            <div className = {"texteditor"}>
+                <button onClick={this.handleSubmit}>
+                        <textarea
+                            style={style}
+                            ref={c => (this.textarea = c)}
+                            placeholder="type some text"
+                            rows={500}
+                            cols={500}
+                            defaultValue=""
+                            onChange={this.handleChange}
+                        />
+                    <input type="submit" value="Submit" />
+                </button>
+            </div>
         );
     }
 }

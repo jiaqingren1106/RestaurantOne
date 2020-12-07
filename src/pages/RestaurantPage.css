@@ -1,15 +1,35 @@
 .page{
     width: 100%;
-    background-color: antiquewhite;
+    color: white;
 }
 
 .restaurantName{
     /*background-color: transparent;*/
+    content: "Text";
+    font-family: Arial, Helvetica, sans-serif;
     border: none;
     font-size: 30px;
-    height: 5vw;
-    width: 5vw;
-    background-color: antiquewhite;
-    float: left;
+    color: white;
+    /* height: 5vw;
+    width: 10vw; */
+    /* background-color: antiquewhite; */
+    display: inline-block;
     margin-left: 2vw;
 }
+
+.upper{
+    /* background-color: antiquewhite; */
+    display: flex;
+}
+
+.right{
+    margin-left: 20vw;
+    float: right;
+}
+
+.restaurantPage{
+    background-image: url("../images/blackbackground.jpg");
+    background-color: black;
+    background-size: contain;
+}
+

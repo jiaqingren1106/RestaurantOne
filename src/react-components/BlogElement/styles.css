@@ -16,7 +16,9 @@
     width: 800px;
     margin-bottom: 20px;
     border-bottom: black solid 1px;
-    background-color: antiquewhite;
+    background: transparent;
+    color: white;
+    font-size: 20px;
     /*border-left: None;*/
     /*border-right: None;*/
     /*border-bottom: None;*/
@@ -26,5 +28,5 @@
 .readMore{
     font-size: 20px;
     font-family: "Syne Mono";
-    color: darkblue;
+    color: aquamarine;
 }
