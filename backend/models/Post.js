@@ -12,6 +12,11 @@ const PostSchema = new mongoose.Schema({
         required: true
     },
 
+    date:{
+        type: String,
+        required: true
+    },
+
     description:{
         type: String,
         required: true
