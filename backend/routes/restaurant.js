@@ -1,7 +1,7 @@
 const RestaurantController = require("../controllers/RestaurantController");
 
 const restaurantRoutes = (app) => {
-    app.route('/resturants')
+    app.route('/restaurant')
         .get(RestaurantController.getAllRestaurants)
         .post(RestaurantController.createRestaurant);
 
