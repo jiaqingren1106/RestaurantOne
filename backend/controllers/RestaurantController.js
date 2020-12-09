@@ -1,4 +1,4 @@
-const restaurant = require('../models/restaurant.js');
+const restaurant = require('../models/Restaurant')
 const log = console.log;
 
 const getRestaurantById = (req, res) => {

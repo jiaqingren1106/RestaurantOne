@@ -6,6 +6,9 @@ import {connect} from "react-redux";
 import userPic from '../../images/userPhoto.jpg'
 import {withRouter} from "react-router-dom";
 import {getDescription} from "../../Action/blogAction"
+import { waitFor } from '@testing-library/react';
+import { components } from 'react-select';
+
 
 const mapStateToProps = (state) => {
     return {
@@ -23,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-
 class Post extends React.Component{
 
     constructor(props) {
@@ -31,19 +33,17 @@ class Post extends React.Component{
         this.reviews = ['Hebetude joyeuses' +
         ' assister nul ton prochain les commence massacre. Tout ni elle pris il au ma vaut sent hein. Ils pleine net enleve tenter maison centre blancs. Ils voeux que aimer bas linge des verre. Instrument maintenant en miserables au defilaient he. Se torture enlever en dessein. Peur moi age sang deja fort etat fin. Ronfle car car mon ces pareil reunir humain metres peuple. Corbeille sacrifice convertir des ses militaire ans.'];
         this.users = ['ShuaiYuan'];
-        this.state = {value: '', id: "5fcefe28b06a85d4258bdd3a", description:"", title: "", date: "", image:""};
+        this.state = {value: '', id: "5fcefe28b06a85d4258bdd3a", postImage: [],description:"", title: "", date: "", image:[], reviews:[]};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        getDescription(this);
+        getDescription(this)
     }
     
     handleSubmit(event) {
         if(this.props.user.username === ""){
             alert("have to login to make comment")
         }else {
-            console.log(this.state.value)
             this.reviews.push(this.state.value)
-            console.log(this.reviews)
             this.users.push(this.props.user.username)
             this.setState({value: this.state.value});
         }
@@ -52,9 +52,9 @@ class Post extends React.Component{
         this.setState({value: event.target.value});
     }
 
-
     render() {
-        
+
+        console.log(this.state["reviews"])
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -70,6 +70,36 @@ class Post extends React.Component{
         for(i = 0; i < this.users.length; i++){
             list.push(i);
         }
+        let comp;
+        const reviewLength = (this.state['reviews'].length == 0)
+
+
+        if(reviewLength == true){
+            comp = <div> </div>
+        }else{
+            let review_list = []
+            for(let i = 0; i < this.state['reviews'].length; i ++){
+                review_list.push(i)
+            }
+
+            comp = review_list.map((index) => {
+                return (
+                    <div className={'commentsBlock'}>
+                        <div className={'userInfo1'}>
+                            <img src={this.state['reviews'][index][1]} alt = {''} className={"userPicture1"} />
+
+                            <p className={'userName'}>
+                                {this.state['reviews'][index][0]}
+                            </p>
+                        </div>
+                        <p className={'reviewContent'}>
+                            {"Comments:  " + this.state['reviews'][index][2]}
+                        </p>
+
+                    </div>);
+            })
+        }
+
 
         return(
 
@@ -84,7 +114,14 @@ class Post extends React.Component{
                         {this.state.title}
                     </h1>
 
-                    <img src={burger} className={"blogpic"} />
+                    
+                    {this.state['image'].map((image) => {
+                        return (
+                            <div className>
+                                <img src={image} alt = {''} className={"blogpic"} />
+                            </div>);
+                    })}
+
 
                     <p className={"date"}>
                         {this.state.date}
@@ -100,22 +137,23 @@ class Post extends React.Component{
                         Comments
                     </p>
 
-                    {list.map((index) => {
+                    {comp}
+                    {/* {this.state['reviews'].map((index) => {
                         return (
                             <div className={'commentsBlock'}>
                                 <div className={'userInfo1'}>
-                                    <img src={userPic} alt = {''} className={"userPicture1"} />
+                                    <img src={this.state['reviews'][index]} alt = {''} className={"userPicture1"} />
 
                                     <p className={'userName'}>
-                                        {this.users[index]}
+                                        {this.state['reviews'][index]}
                                     </p>
                                 </div>
                                 <p className={'reviewContent'}>
-                                    {"Comments:  " + this.reviews[index]}
+                                    {"Comments:  " + this.state['reviews'][index]}
                                 </p>
 
                             </div>);
-                    })}
+                    })} */}
 
                     <div className = {"PosttextEditorDiv"}>
                         <textarea className={"PosttextEditor"}

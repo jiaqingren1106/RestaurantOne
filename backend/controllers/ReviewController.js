@@ -1,4 +1,4 @@
-const review = require('../models/review.js');
+const review = require('../models/Review');
 const log = console.log;
 
 const getReviewById = (req, res) => {

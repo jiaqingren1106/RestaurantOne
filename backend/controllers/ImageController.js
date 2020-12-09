@@ -1,5 +1,5 @@
 // import the mongoose model
-const { Image } = require("../models/Image");
+const Image = require("../models/Image");
 const log = console.log;
 
 // multipart middleware: allows you to access uploaded file from req.file
