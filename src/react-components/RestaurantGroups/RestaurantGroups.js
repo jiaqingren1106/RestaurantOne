@@ -24,10 +24,11 @@ class RestaurantGroups extends React.Component {
       <CardGroup>
         {cardgroups.map((index) => {
           return <Restaurant
-          image={(this.props.restaurants)[index].image} 
+          image={(this.props.restaurants)[index].image_url} 
           description={(this.props.restaurants)[index].description} 
           name={(this.props.restaurants)[index].name} 
-          rating={(this.props.restaurants)[index].rating}/>
+          rating={(this.props.restaurants)[index].rating}
+          id={(this.props.restaurants)[index]._id}/>
         })}
       </CardGroup>
     );

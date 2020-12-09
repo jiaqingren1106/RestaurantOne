@@ -21,6 +21,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class BlogPage extends React.Component{
+    constructor(props){
+        super(props);
+        console.log(props.location.state)
+    }
 
 
     state = {

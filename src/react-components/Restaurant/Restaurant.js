@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {register, setRoute} from "../../redux/actions";
-import {withRouter} from "react-router-dom";
+import {withRouter, Link} from "react-router-dom";
 
 
 const mapStateToProps = (state) => {
@@ -23,22 +23,26 @@ const mapDispatchToProps = (dispatch) => {
 
 class Restaurant extends React.Component {
   render() {
-      const setRoute = (newRoute) => {
+      const setRoute = (newRoute, id) => {
           let targetRoute = `/`
           if (!(newRoute=== "StartUp" || newRoute === "")){
               targetRoute = `${newRoute}`
           }
-
-          this.props.history.push(targetRoute)
           this.props.setRoute(newRoute)
+          this.props.history.push(targetRoute, id)
       }
 
       return (
       <Card id="restaurant1" className="restaurantCard">
-        <button className="imageButton" onClick={() => setRoute("RestaurantPage")}>
-          <Card.Img className="restaurantPic" variant="top" src={this.props.image_url} />
+        <Link 
+        to={{ 
+          pathname: "/RestaurantPage", 
+          state: this.props.id 
+         }}
+        className="imageButton" onClick={() => setRoute("RestaurantPage", this.props.id)}>
+          <Card.Img className="restaurantPic" variant="top" src={this.props.image} />
 
-        </button>
+        </Link>
         <Card.Body id="cardBody">
           <Card.Title id="restaurantTitle">{this.props.name}</Card.Title>
           <div id="restaurantDescri">
@@ -54,6 +58,3 @@ class Restaurant extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Restaurant));
-
-
-
