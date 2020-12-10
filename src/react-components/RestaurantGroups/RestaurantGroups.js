@@ -8,7 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
+
 class RestaurantGroups extends React.Component {
+
 
   render() {
     const restaurantcount = this.props.restaurants.length;
@@ -24,7 +26,7 @@ class RestaurantGroups extends React.Component {
       <CardGroup>
         {cardgroups.map((index) => {
           return <Restaurant
-          image={(this.props.restaurants)[index].image_url} 
+          image={(this.props.restaurants)[index].image[0]} 
           description={(this.props.restaurants)[index].description} 
           name={(this.props.restaurants)[index].name} 
           rating={(this.props.restaurants)[index].rating}

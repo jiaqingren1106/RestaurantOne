@@ -7,7 +7,7 @@ import {getMultipleDescription} from './postAction'
 const API_HOST = ENV.api_host
 
 export const getRestaurants = (Comp) => {
-    const url = `${API_HOST}/restaurant`
+    const url = `${API_HOST}/restaurants`
 
     const request = new Request(url,
         {

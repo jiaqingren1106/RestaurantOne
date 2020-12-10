@@ -5,7 +5,7 @@ import MenuGroup from '../menuGroup/MenuGroup';
 import NavBar from '../../react-components/NavBar/NavBar';
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import {withRouter, Link} from "react-router-dom";
 
 
 import burger1 from "../../images/Mcdonald-2.png";
@@ -32,20 +32,23 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Menu extends React.Component {
-    state = {
-        MenuItems: [
-            { name: "Bergur", rating: "5", key: "1", image: burger1, price: "10.0$" },
-            { name: "BigMac", rating: "4", key: "2", image: burger2, price: "10.0$" },
-            { name: "Chicken Nugget", rating: "5", key: "3", image: burger3, price: "10.0$" },
-
-            { name: "Fries", rating: "5", key: "4", image: burger4, price: "10.0$" },
-            { name: "Chicken Sandvich", rating: "5", key: "5", image: burger5, price: "10.0$" },
-            { name: "Pizza", rating: "5", key: "6", image: burger6, price: "10.0$" },
-
-            { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
-            { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
-            { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
-        ]
+    constructor(props){
+        super(props);
+        this.state = {
+            MenuItems: [
+                { name: "Bergur", rating: "5", key: "1", image: burger1, price: "10.0$" },
+                { name: "BigMac", rating: "4", key: "2", image: burger2, price: "10.0$" },
+                { name: "Chicken Nugget", rating: "5", key: "3", image: burger3, price: "10.0$" },
+    
+                { name: "Fries", rating: "5", key: "4", image: burger4, price: "10.0$" },
+                { name: "Chicken Sandvich", rating: "5", key: "5", image: burger5, price: "10.0$" },
+                { name: "Pizza", rating: "5", key: "6", image: burger6, price: "10.0$" },
+    
+                { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
+                { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
+                { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
+            ]
+        }
     }
 
     useMeWhenOnClick = (pageNumber) => {
@@ -56,15 +59,17 @@ class Menu extends React.Component {
 
 
     render() {
-        const setRoute = (newRoute) => {
+        const setRoute = (newRoute, id) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
                 targetRoute = `${newRoute}`
             }
-
-            this.props.history.push(targetRoute)
             this.props.setRoute(newRoute)
+            this.props.history.push(targetRoute, id)
         }
+
+
+
         const row = 5;
 
         const MenuItemLen = this.state.MenuItems.length;
@@ -94,13 +99,20 @@ class Menu extends React.Component {
             </div>
         );
 
-
+       
 
         return (
             <section className='Menu'>
-                <button id="back" onClick={() => setRoute("RestaurantPage")}>
+                <Link 
+                id="back" 
+                onClick={() => setRoute("RestaurantPage", this.props.location.state)}
+                to={{ 
+                    pathname: "/RestaurantPage", 
+                    state: this.props.location.state
+                   }}
+                >
                     back
-                </button>
+                </Link>
                 {MenuItemList}
             </section>
         );

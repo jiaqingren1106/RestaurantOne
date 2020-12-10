@@ -27,6 +27,7 @@ class BlogPage extends React.Component{
         super(props);
 
         this.state = {
+            id: props.location.state,
             post_id: [],
             title:[],
             date:[],
@@ -36,20 +37,13 @@ class BlogPage extends React.Component{
         }
 
         getRestaurantsPost(this, props.location.state)
+        console.log(props)
+
     }
 
 
     render() {
 
-        const setRoute = (newRoute) => {
-            let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
-                targetRoute = `${newRoute}`
-            }
-
-            this.props.history.push(targetRoute)
-            this.props.setRoute(newRoute)
-        }
 
         const row = 1
         const restaurantLen = this.state.title.length;
@@ -91,13 +85,32 @@ class BlogPage extends React.Component{
             )
         }
 
+      
+     
+
+        const setRoute = (newRoute, id) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+            this.props.setRoute(newRoute)
+            this.props.history.push(targetRoute, id)
+        }
+
         return (
                 <BrowserRouter >
                     <div className={'BlogPage'}>
                         <div className={'BlogPageUpper'}>
-                            <button className={"restaurantName"} onClick={() => setRoute("RestaurantPage")}>
+                            <Link 
+                            className={"restaurantName"} 
+                            onClick={() => setRoute("RestaurantPage", this.state.id )}
+                            to={{ 
+                                pathname: "/RestaurantPage", 
+                                state: this.state.id 
+                               }}
+                            >
                                 Restaurant
-                            </button>
+                            </Link>
                         </div>
 
                         <p className={'BlogPageTitle'}>

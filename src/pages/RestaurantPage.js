@@ -44,13 +44,12 @@ class RestaurantPage extends React.Component {
                 leftArrow: leftArrow,
                 rightArrow: rightArrow,
                 usersid: "5fcfbd01794cb32eb4a928ec",
-                id: "5fd0f37099f8ac36aeebb045",
+                id: props.location.state,
                 reviews:[],
                 posts: []
         }
         
-        getRestaurantsByID(this, this.state['id'])
-
+        console.log(props)
         if (props.location.state) {
             getRestaurantsByID(this, props.location.state)
         }

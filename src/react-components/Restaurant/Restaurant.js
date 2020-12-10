@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {register, setRoute} from "../../redux/actions";
 import {withRouter, Link} from "react-router-dom";
+import {getImageInNav} from "../../Action/imageAction";
+
 
 
 const mapStateToProps = (state) => {
@@ -22,6 +24,13 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class Restaurant extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {image: ""}
+
+    getImageInNav(this, props.image)
+
+  }
   render() {
       const setRoute = (newRoute, id) => {
           let targetRoute = `/`
@@ -39,8 +48,9 @@ class Restaurant extends React.Component {
           pathname: "/RestaurantPage", 
           state: this.props.id 
          }}
-        className="imageButton" onClick={() => setRoute("RestaurantPage", this.props.id)}>
-          <Card.Img className="restaurantPic" variant="top" src={this.props.image} />
+        className="imageButton" 
+        onClick={() => setRoute("RestaurantPage", this.props.id)}>
+          <Card.Img className="restaurantPic" variant="top" src={this.state.image} />
 
         </Link>
         <Card.Body id="cardBody">
