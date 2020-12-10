@@ -52,5 +52,6 @@
     width: 10vw;
 }
 
-.BlogDescription{
+#root{
+    background-image: url("../images/blackbackground.jpg");
 }

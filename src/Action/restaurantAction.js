@@ -1,6 +1,9 @@
 
 import { components } from 'react-select';
 import ENV from '../config.js'
+import {getReview} from './reviewAction'
+import {getImage} from './imageAction'
+import {getMultipleDescription} from './postAction'
 const API_HOST = ENV.api_host
 
 export const getRestaurants = (Comp) => {
@@ -29,7 +32,8 @@ export const getRestaurants = (Comp) => {
 
 
 export const getRestaurantsByID = (Comp, id) => {
-    const url = `${API_HOST}/resturants/${id}`
+    const url = `${API_HOST}/restaurants/${id}`
+    console.log(url)
 
     const request = new Request(url,
         {
@@ -45,29 +49,71 @@ export const getRestaurantsByID = (Comp, id) => {
             }
         })
         .then(json => {
-            Comp.setState({id: json._id})
-            Comp.setState({description: json.description})
-            Comp.setState({rating: json.rating})
-            Comp.setState({title: json.name})
-            Comp.setState({location: json.address})
+            Comp.setState({name: json.name, address:json.address, 
+                description: json.description, rating: json.rating, opentime: json.opentime,
+                safe: json.safe, posts:json.posts}, function(){
+                    for(let i = 0; i < json['reviews'].length; i ++){
+                        getReview(Comp, json['reviews'][i])
+                    }
+                    for(let i = 0; i < json['image'].length; i++){
+                        getImage(Comp, json['image'][i])
+                    }
+                })    
+
         })
         .catch(error => {
             console.log(error);
         });
 };
 
-// {
-//     restaurant_info: [{
-//         images: [Mcdonald1, Mcdonald2, Mcdonald3, Mcdonald4, Mcdonald5],
-//         leftArrow: leftArrow,
-//         rightArrow: rightArrow
-//     },
+export const getRestaurantsPost = (Comp, id) => {
+    const url = `${API_HOST}/restaurants/${id}`
 
-//     {
-//         title: 'Mcdonald', description: '$ Burgers Fast Food American', rating: '4.5(500+)',
-//         opentime: '8:00AM - 10:00PM', location: '196 Bloor St W, Toronto, ON M5s 1t8, Canada',
-//         safe: 'Safe environment!', reviews: ["En vergoeding uitstekend denzelfden ik. Dik daar acre zijn voor ver veel. Ter allen den telde kan heeft. Verklaart om voldoende degelijke er overvloed al afstanden weerstand. Vijf tot meer woud zoo dik bron. Ze snelleren nu bezorgden krachtige af na wonderwel. Afscheidt nu aangelegd vernieuwd ad overvloed. Forten andere streek te in er europa nu. ", "Dikwijls lateriet van een uitgeput bak. Onderwoeld gunstigste elk ondernomen ton wat. Dal aanmerking wetenschap ontginning wantrouwen lot aangeplant. Brandhout ook wijselijk ontginnen kettingen elk men stichting belovende. Ik tooverslag kilometers economisch al. Op in verbouwen ontginnen stichting bovendien. Een als behandelt ontrukten liverpool moerassen wij zes. Middellijn er insnijding noodlottig tinprijzen ad rijkdommen interesten. Twee toe maar aard een veel doel zelf dik. ",
-//             "Breken na op te en metaal zelden levert varens. Lang stof meer mei werd wat weer wie. Wie are verklaart wel mag aandeelen eigenaars gebruiken. Vergrooten caoutchouc kongostaat ingenieuse een voorschijn weg. Hand geen tijd daar is ad en wier. Ongebruikt gomsoorten hij kongostaat uit monopolies mag die natuurlijk. Zesde na rijst ad en meest sinds omdat ze. Vervangen degelijke ad meehelpen bepaalden ik viaducten en evenwicht. Welk in geld en kilo puin noch. "], users: ["Yuan", "Yuan2", "Yuan3"],
-//         reviewpic: [user1, user1, user1]
-//     }],
-// }
+    console.log(url)
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            for(let i = 0; i < json.posts.length; i++){
+                getMultipleDescription(Comp, json.posts[i])
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+export const addRestaurantPost = (Comp, restaurantid, reviewid) => {
+    const url = `${API_HOST}/restaurants/${restaurantid}/${reviewid}`
+
+    const request = new Request(url,
+        {
+            method:"post"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            console.log(json)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};

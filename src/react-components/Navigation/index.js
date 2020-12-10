@@ -25,8 +25,6 @@ class Navigation extends React.Component {
         super(props);
         this.state = {Follow:'Follow', id: props.id};
         this.changeFollow = this.changeFollow.bind(this);
-        // console.log("id in navigation is "+this.id)
-        console.log(props)
     }
 
     changeFollow(){

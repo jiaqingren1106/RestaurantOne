@@ -8,6 +8,8 @@ import user3 from '../../images/user-review-3.jpg'
 import MapContainer from '../MapContainer/MapContainer'
 import userPic from '../../images/userPhoto.jpg'
 import {register, setRoute} from "../../redux/actions";
+import {addReview} from "../../Action/reviewAction"
+
 
 const mapStateToProps = (state) => {
     return {
@@ -33,20 +35,19 @@ class RestaurantInfo extends React.Component{
         this.handleSubmit2 = this.handleSubmit2.bind(this);
 
         this.reviews = this.props.info['reviews'];
-        this.users = this.props.info['users'];
         this.reviewpic = this.props.info['reviewpic'];
     }
 
 
     handleSubmit(event) {
-        this.reviews.push(this.state.value)
-        if (this.props.user.username === "") {
+        if (this.props.usersid === "") {
             alert("have to login to make comment")
         }
         else{
-            this.users.push(this.props.user.username)
-            this.reviewpic.push('none')
-            this.setState({value: this.state.value});
+            // this.users.push(this.props.user.username)
+            // this.setState({value: this.state.value});
+            console.log(this.state.value)
+            addReview(this, this.state.value, this.props.info.userId, this.props.info.restaurantId)
         }
 
     }
@@ -60,6 +61,74 @@ class RestaurantInfo extends React.Component{
     }
 
     render() {
+
+        let comp;
+        const reviewLength = (this.reviews.length == 0)
+
+
+        if(reviewLength == true){
+            comp = <div> </div>
+        }else{
+            let review_list = []
+            for(let i = 0; i < this.reviews.length; i ++){
+                review_list.push(i)
+            }
+
+            comp = review_list.map((index) => {
+                return (
+                    <div className={'reviewBlock'}>
+                        <div className={'reviewBlock2'}>
+
+                            <div className={'userInfo'}>
+                                <img src={this.reviews[index][1]} alt = {''} className={"userPic"} />
+
+                                <p className={'userName1'}>
+                                    {this.reviews[index][0]}
+                                </p>
+                            </div>
+                        </div>
+                        <p className={'reviewConcent'}>
+                            {"Comments:  " + this.reviews[index][2]}
+                        </p>
+
+                       <hr
+                        style={{
+                            margin: '1em auto',
+                        }} />
+
+                    </div>);
+            })
+        }
+
+
+        // {list.map((index) => {
+        //     return (
+        //         <div className={'reviewBlock'}>
+        //             <div className={'reviewBlock2'}>
+        //                 <div className={'userInfo'}>
+        //                     <img src={userPic} alt={''} className={'userPic'} />
+        //                     <p className={'userName1'} >
+        //                         {this.users[index]}
+        //                     </p>
+        //                 </div>
+
+        //                 <p className={'reviewConcent'}>
+        //                     {"Comments:  " + this.reviews[index]}
+        //                 </p>
+
+        //                 <img src={user1} alt={""} className={"reviewpic"} />
+        //             </div>
+        //             <>
+        //             <hr
+        //                 style={{
+        //                     margin: '1em auto',
+        //                 }} />
+        //             </>
+        //         </div>);
+        // })}
+
+
+
 
         const length = this.reviews.length
 
@@ -111,31 +180,7 @@ class RestaurantInfo extends React.Component{
                         Review
                     </p>
 
-                    {list.map((index) => {
-                        return (
-                            <div className={'reviewBlock'}>
-                                <div className={'reviewBlock2'}>
-                                    <div className={'userInfo'}>
-                                        <img src={userPic} alt={''} className={'userPic'} />
-                                        <p className={'userName1'} >
-                                            {this.users[index]}
-                                        </p>
-                                    </div>
-
-                                    <p className={'reviewConcent'}>
-                                        {"Comments:  " + this.reviews[index]}
-                                    </p>
-
-                                    <img src={user1} alt={""} className={"reviewpic"} />
-                                </div>
-                                <>
-                                <hr
-                                    style={{
-                                        margin: '1em auto',
-                                    }} />
-                                </>
-                            </div>);
-                    })}
+                    {comp}
                     </div>
 
                     <div className={"rate"}>
