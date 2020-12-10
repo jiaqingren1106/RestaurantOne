@@ -68,6 +68,7 @@ const App = ({route, user, history}) => {
                <Switch>
                    <Route exact path="/" component={Post}/>
                    <Route exact path="/ProfilePage" component={ProfileUser}/>
+                   <Route exact path="/ProfilePageOwner" component={ProfileOwner}/>
                    <Route exact path="/MenuPage" component={Menu}/>
                    <Route exact path="/AdminPage" component={AdminPage}/>
                    <Route exact path="/Post" component={Post}/>
