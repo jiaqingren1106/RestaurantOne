@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./frontPages/Register";
+import RegisterOwner from "./frontPages/RegisterOwner";
 import SignIn from "./frontPages/SignIn";
 import AdminPage from "./Admin/AdminPage";
 import {routeState, userState} from "./redux/reducer";
@@ -13,8 +14,13 @@ import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
+
 import Profile from "./pages/Profile";
+import ProfileOwner from "./pages/ProfileOwner";
+
+
 import {Route, withRouter, Switch} from 'react-router-dom'
+import ProfileUser from './pages/ProfileUser';
 
 const getTargetPage = (route) => {
     // switch (route) {
@@ -61,7 +67,7 @@ const App = ({route, user, history}) => {
            <div>
                <Switch>
                    <Route exact path="/" component={Post}/>
-                   <Route exact path="/ProfilePage" component={Profile}/>
+                   <Route exact path="/ProfilePage" component={ProfileUser}/>
                    <Route exact path="/MenuPage" component={Menu}/>
                    <Route exact path="/AdminPage" component={AdminPage}/>
                    <Route exact path="/Post" component={Post}/>
@@ -69,7 +75,7 @@ const App = ({route, user, history}) => {
                    <Route exact path="/RestaurantPage" component={RestaurantPage}/>
                    <Route exact path="/SecondPage" component={SecondPage}/>
                    <Route exact path="/FirstPage" component={FirstPage}/>
-                   <Route exact path="/Register" component={Register}/>
+                   <Route exact path="/Register" component={RegisterOwner}/>
                    <Route exact path="/SignIn" component={SignIn}/>
                </Switch>
            </div>

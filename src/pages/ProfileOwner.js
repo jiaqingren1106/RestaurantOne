@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class Profile extends React.Component {
+class ProfileOwner extends React.Component {
 
     constructor(props) {
         super(props)
@@ -42,31 +42,14 @@ class Profile extends React.Component {
             
             updateUsername: username,
             updatePassword: password,
-            history: [
-                { postid: 0, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 1, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 2, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 4, date: "2010-9-10", comment: "really good, 10/10 would come again" }
-            ],
+
             post: [
                 { postid: 0, date: "2010-9-10", content: "introduce new burger" },
                 { postid: 1, date: "2010-9-10", content: "introduce new fries" },
                 { postid: 2, date: "2010-9-10", content: "introduce new coke" },
                 { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
             ],
-            following: [
-                { name: "BergurKing", rating: "5", key: "1" },
-                { name: "McDonalds", rating: "4", key: "2" },
-                { name: "AW", rating: "5", key: "3" },
 
-                { name: "Subway", rating: "5", key: "4" },
-                { name: "Popeye", rating: "5", key: "5" },
-                { name: "PizzaHut", rating: "5", key: "6" },
-
-                { name: "TimHortons", rating: "5", key: "7" },
-                { name: "StarBucks", rating: "5", key: "8" },
-                { name: "TacoBell", rating: "5", key: "9" }
-            ],
             follower: [
                 { name: "alan", key: "1" },
                 { name: "yuan", key: "2" },
@@ -81,16 +64,8 @@ class Profile extends React.Component {
         this.setState({ onSearch: false })
     }
 
-    showEditInput() {
-        this.setState({ isEdit: true });
-    }
-    showHistoryInput() {
-        if (this.state.isHistory) {
-            this.setState({ isHistory: false });
-        } else {
-            this.setState({ isHistory: true });
-        }
-    }
+  
+  
     showPostInput() {
         if (this.state.isPost) {
             this.setState({ isPost: false });
@@ -109,13 +84,6 @@ class Profile extends React.Component {
         }
     }
     
-    showFollowingInput() {
-        if (this.state.isFollowing) {
-            this.setState({ isFollowing: false });
-        } else {
-            this.setState({ isFollowing: true });
-        }
-    }
 
     onSubmit() {
         const user = this.props.user;
@@ -145,36 +113,15 @@ class Profile extends React.Component {
         return;
     }
 
+    showEditInput() {
+        this.setState({ isEdit: true });
+    }
+
     render() {
         const user = this.props.user;
         const showPassword = ("*").repeat(user.password.length);
 
-        let follow;
-        let comment_history;
-        if (this.props.user.username === "owner") {
-            follow = <Button variant="warning" block onClick={() => this.showFollowerInput()}>Show Follower</Button>
-            comment_history = <Button variant="warning" block onClick={() => this.showPostInput()}>Show Post</Button>
-        } else {
-            follow = <Button variant="warning" block onClick={() => this.showFollowingInput()}>Show Following</Button>
-            comment_history = <Button variant="warning" block onClick={() => this.showHistoryInput()}>Show History</Button>
-        }
-
-        
-
-
-        
-
-        const profile = (
-           
-            <div id="profile">
-                <h4 className="subtitle">Username: {user.username}</h4>
-                <h4 className="subtitle">User Type: {user.userType}</h4>
-                <h4 className="subtitle">Password: {showPassword}</h4>
-                <Button block onClick={() => this.showEditInput()}>Edit</Button>
-                {comment_history}
-                {follow}
-            </div>
-        );
+    
 
         const form = (
             <Form>
@@ -208,31 +155,10 @@ class Profile extends React.Component {
             </Form>
         );
 
-        let historyList = (
-            <div>
-                {this.state.history.map((review) => {
-                    return (
-                        <div className={'reviewBlock'}>
-                            <p id="history">
-                                {"Date: " + review.date}
-                            </p>
-                            <p id="history">
-                                {"Post ID: " + review.postid}
-                            </p>
-
-                            <p id="history">
-                                {"Comments:  " + review.comment}
-                            </p>
-
-
-                        </div>);
-                })}
-            </div>
-        );
-
+      
         let postList = (
             <div>
-                {this.state.history.map((post) => {
+                {this.state.post.map((post) => {
                     return (
                         <div className={'postBlock'}>
                             <p id="history">
@@ -252,22 +178,7 @@ class Profile extends React.Component {
             </div>
         );
 
-        let followingList = (
-            <div>
-                {this.state.following.map((following) => {
-                    return (
-                        <div className={'reviewBlock'}>
-                            <p id="followings">
-                                {"Name: " + following.name}
-                            </p>
-                            <p id="followings">
-                                {"Rating: " + following.rating}
-                            </p>
-                        </div>);
-                })}
-            </div>
-        );
-
+    
         let followerList = (
             <div>
                 {this.state.follower.map((follower) => {
@@ -282,8 +193,6 @@ class Profile extends React.Component {
         );
 
 
-
-
         const nothing = (<br />);
 
         let rendering = nothing;
@@ -293,77 +202,8 @@ class Profile extends React.Component {
             rendering = nothing;
         }
 
-        let historyRender = nothing;
-        if (this.state.isHistory) {
-            historyRender = historyList;
-        } else {
-            historyRender = nothing;
-        }
-
-        let postRender = nothing;
-        if (this.state.isPost) {
-            postRender = postList;
-        } else {
-            postRender = nothing;
-        }
-
-        let followingRender = nothing;
-        if (this.state.isFollowing) {
-            followingRender = followingList;
-        } else {
-            followingRender = nothing;
-        }
-
-        let followerRender = nothing;
-        if (this.state.isFollower) {
-            followerRender = followerList;
-        } else {
-            followerRender = nothing;
-        }
-
-        let isFollow
-        if (this.props.user.username === "owner"){
-            isFollow = followerRender
-        }else {
-            isFollow = followingRender
-        }
-
-        let isPostComment
-        if (this.props.user.username === "owner"){
-            isPostComment = postRender
-        }else {
-            isPostComment = historyRender
-        }
-
-
 
         return (
-            // <Container id='Profile'>
-            //     <Row>
-            //         <Col xs={12}>
-            //             <NavBar />
-            //         </Col>
-            //     </Row>
-            //     <Row>
-            //         <Col xs={2}></Col>
-            //         <Col xs={8}>
-            //             {profile}
-            //         </Col>
-            //         <Col xs={2}></Col>
-            //     </Row>
-            //     <Row>
-            //         <Col >{rendering}</Col>
-            //         <Col >
-
-            //             {historyRender}
-
-            //         </Col>
-            //         <Col> {followingRender}</Col>
-            //     </Row>
-
-
-            // </Container>
-
             <Container id='Profile'>
                 <NavBar 
                 // onSearch={this.useMeWhenYouDoSearch} 
@@ -378,12 +218,12 @@ class Profile extends React.Component {
                             {rendering}
                         </Col>
                         <Col>
-                            {comment_history}
-                            {isPostComment}
+                            <Button variant="warning" block onClick={() => this.showPostInput()}>Show Post</Button>
+                            {postList}
                         </Col>
                         <Col>
-                            {follow}
-                            {isFollow}
+                            <Button variant="warning" block onClick={() => this.showFollowerInput()}>Show Follower</Button>
+                            {followerList}
                         </Col>
                     </Row>
 
@@ -393,4 +233,4 @@ class Profile extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileOwner);
