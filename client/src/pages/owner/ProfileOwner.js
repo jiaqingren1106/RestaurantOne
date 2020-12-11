@@ -9,6 +9,7 @@ import './ProfileOwner.css';
 
 import { createUser } from '../../Action/userAction'
 import "../../frontPages/SignIn.css"
+import {getRestAttributeByID} from "../../Action/restaurantAction"
 
 
 
@@ -47,11 +48,15 @@ class ProfileOwner extends React.Component {
             restaurantName: "",
             restaurantDes: ""
         }
+
+        getRestAttributeByID(this, user.restaurant_id);
+        
     }
 
 
     componentDidMount() {
         //call the backend to
+        
     }
 
 
@@ -73,25 +78,35 @@ class ProfileOwner extends React.Component {
                     <label className="db fw6 lh-copy f4 " >Restaurant Name</label>
                     <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
 
-                           onChange={(e) => {}}/>
+                           onChange={(e) => {this.setState({restaurantName:e.target.value})}}
+                           value = {this.state.restaurantName}
+                           />
                 </div>
                 <div className="mt3">
                     <label className="db fw6 lh-copy f4 " >Restaurant Description</label>
                     <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-100 h5"
 
-                           onChange={(e) => {}}/>
+                           onChange={(e) => {this.setState({restaurantDes:e.target.value})}}
+                           value = {this.state.restaurantDes}
+                           />
                 </div>
                 <div className="mt3 flex flex-row justify-between">
                     <label className="db fw6 lh-copy f4 " >Open Time:</label>
                     <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-60 "
 
-                              onChange={(e) => {}}/>
+                            onChange={(e) => {this.setState({openTime:e.target.value})}}
+                            value = {this.state.openTime}
+                            />
                 </div>
             </div>)
+        }
 
+        const uploadChange = () => {
 
         }
-        console.log(this.props.user)
+
+
+        // console.log(this.props.user)
         return (
             <div id="main">
                 <SideNav className="navBarProfile"

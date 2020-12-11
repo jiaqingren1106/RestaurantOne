@@ -33,7 +33,6 @@ export const getRestaurants = (Comp) => {
 
 export const getRestaurantsByID = (Comp, id) => {
     const url = `${API_HOST}/restaurants/${id}`
-    console.log(url)
 
     const request = new Request(url,
         {
@@ -65,6 +64,40 @@ export const getRestaurantsByID = (Comp, id) => {
             console.log(error);
         });
 };
+
+
+export const getRestAttributeByID = (Comp, id) => {
+    const url = `${API_HOST}/restaurants/${id}`
+
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+        //    Comp.setState({ openTime: json.opentime})
+        //    Comp.setState({ restaurantName: json.name})
+        //    Comp.setState({ restaurantDes: json.description})
+
+           Comp.setState({ openTime: json.opentime, restaurantName: json.name, restaurantDes: json.description})
+
+
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
 
 export const getRestaurantsPost = (Comp, id) => {
     const url = `${API_HOST}/restaurants/${id}`
