@@ -27,20 +27,20 @@ const Register = (props)=> {
         props.history.push(targetRoute)
         props.setRoute(newRoute)
     }
-    const entered_user = {
+    const [entered_user, setEntered_user] = useState({
         username: "",
         usernamec: "",
         password:"",
         passwordc:"",
-    }
+    })
     const [certificate, setCertificate] = useState(null)
-    const entered_restaurant = {
+    const [entered_restaurant, setEntered_restaurant] = useState({
         restName: "",
         restDescription: "",
         restAddress: "",
         restPostcode: "",
         restOpentime: ""
-    }
+    })
     const [warning, setWarning] = useState("")
     const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
@@ -102,6 +102,7 @@ const Register = (props)=> {
         }
         if (result === false) {
             setSubmitMsg("")
+            setEntered_restaurant(entered_restaurant)
             setWarning("has unfilled field in restaurant")
         }
         return result
@@ -111,17 +112,23 @@ const Register = (props)=> {
             if (entered_user[field_] === ""){
                 setWarning("have unfilled field")
                 setSubmitMsg("")
+                setEntered_restaurant(entered_restaurant)
+                setEntered_user(entered_user)
                 return
             }
         }
         if (entered_user.username !== entered_user.usernamec) {
             setWarning("username does not match")
             setSubmitMsg("")
+            setEntered_restaurant(entered_restaurant)
+            setEntered_user(entered_user)
             return;
         }
         if (entered_user.password !== entered_user.passwordc) {
             setWarning("password does not match")
             setSubmitMsg("")
+            setEntered_restaurant(entered_restaurant)
+            setEntered_user(entered_user)
             return;
         }
         let result = true;
