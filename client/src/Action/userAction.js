@@ -56,6 +56,34 @@ export const getUserInLogin = (setResult, result) => {
 
 
 
+export const getFollowerToArray = (Comp, result, id) => {
+    const url = `${API_HOST}/users/${id}`
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+        
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get description");
+            }
+        })
+        .then(json => {
+            console.log(json.name)
+            result.push({name: json.name, email: json.email})
+            Comp.setState({follower: result})
+            
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+
 export const getUserForReview = (Comp, user_id) => {
     const url = `${API_HOST}/users/${user_id}`
     const request = new Request(url,

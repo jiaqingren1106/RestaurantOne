@@ -26,9 +26,9 @@ class CouponGroup extends React.Component {
         {cardgroups.map((index) => {
           return <Coupon
           image={(this.props.restaurants)[index].image} 
-          description={(this.props.restaurants)[index].description} 
-          name={(this.props.restaurants)[index].name} 
-          rating={(this.props.restaurants)[index].rating}/>
+          code={(this.props.restaurants)[index].code} 
+          expire={(this.props.restaurants)[index].expire} 
+          />
         })}
       </CardGroup>
     );

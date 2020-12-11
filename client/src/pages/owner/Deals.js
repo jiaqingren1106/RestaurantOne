@@ -47,17 +47,17 @@ class Deals extends React.Component {
     state = {
         onSearch: false,
         restaurants: [
-            { name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING },
-            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
-            { name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
+            { name: "BurgerKing", image: BurgerKing, code:"2341535245642453", expire:"2020"},
+            { name: "McDonalds", image: Mcdonald, code:"dfdfsggfgb", expire:"2020"},
+            { name: "AW", image: AW, code:"dfasfsdsd", expire:"qy53  rGER"},
 
-            { name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
-            { name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
-            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
+            { name: "Subway",image: Subway, code:"KTYRHTEGRW", expire:"2020"},
+            { name: "Popeyes", image: Popeye, code:"42IOFH33F", expire:"2020"},
+            { name: "PizzaHut", image: PizzaHut, code:"REGGQWR", expire:"2020"},
 
-            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
-            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
-            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
+            { name: "TimHortons",  image: TimHortons, code:"34TQGTQ43", expire:"2020"},
+            { name: "StarBucks",  image: StarBucks, code:"EQRGERQER", expire:"2020"},
+            { name: "TacoBell", image: TacoBell, code:"QERGERGQ", expire:"2020"}
         ],
         createPostAppear: false,
         newPostingMsg: "",
@@ -134,6 +134,20 @@ class Deals extends React.Component {
             this.setState({picMsg: ""})
            
         }
+
+
+        const createCoupon = () => {
+            let menu = {
+                price: this.state.price,
+                name: this.state.name,
+                postPic: this.state.postPic
+            }
+
+            //upload to data base
+            this.setState({postPic:null, price:"", name:""})
+
+        }
+
 
         return (
             <section className='SecondPage'>
