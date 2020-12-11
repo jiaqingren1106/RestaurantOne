@@ -2,10 +2,7 @@ import React, {useState} from "react";
 import {setRoute, register} from "../redux/actions";
 import { connect } from 'react-redux'
 import {createUser} from '../Action/userAction'
-import {createImage} from '../Action/imageAction'
 import "./SignIn.css"
-import { getElementError } from "@testing-library/react";
-import {createRestaurant} from "../Action/restaurantAction"
 
 let state = {}
 
@@ -23,6 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Register = (props)=> {
+
 
 
     const setRoute = (newRoute) => {
@@ -55,8 +53,6 @@ const Register = (props)=> {
     const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
-    const [imageId, setimageId] = useState("")
-
     const setType = (e) => {
         if (e.target.checked === true) {
             setUserType("restaurant")
@@ -66,7 +62,7 @@ const Register = (props)=> {
         }
     }
     const fileSelectedHandler = (e) => {
-        const file = e.target
+        const file = e.target.files[0]
         setCertificate(file)
         setuploadMsg("upload img successfully")
 
@@ -78,20 +74,12 @@ const Register = (props)=> {
                 <div>
                     <div className="uploadBox">
                         <label htmlFor="img">Select certificate image:</label>
-
-                        <form className="image-form" id = "form1" onChange={(e) => {
-                            e.preventDefault();
-                            setCertificate(document.getElementById("form1"))
-                            // createImage(certificate, setimageId)
-                            }}>
-                            <div class="image-form__field" id = "imageI">
-                                <label>Image:</label>
-                                <input name="image" type="file" />
-                            </div>
-                        </form>
-                        {/* <button id="fileButton" onClick={ function(){
+                        <input type="file"
+                               id="fileUpload" name="avatar"
+                               accept="image/png, image/jpeg" onChange={fileSelectedHandler}/>
+                        <button id="fileButton" onClick={ function(){
                             document.getElementById("fileUpload").click()} }
-                                className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib black">choose file</button> */}
+                                className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib black">choose file</button>
                         <p className="i dark-blue" id="uploadMsg">
                             {uploadMsg}
                         </p>
@@ -114,6 +102,7 @@ const Register = (props)=> {
         let result = true
         for (const field_ in entered_restaurant) {
             if (entered_restaurant[field_] === "") {
+                console.log(field_)
                 result = false
             }
         }
@@ -128,6 +117,7 @@ const Register = (props)=> {
         return result
     }
     const onSubmit = () => {
+        console.log(entered_user)
         for(const field_ in entered_user){
             if (entered_user[field_] === ""){
                 setWarning("have unfilled field")
@@ -163,15 +153,9 @@ const Register = (props)=> {
         }
         if (result)  {
             setWarning("")
-            console.log(entered_restaurant)
             setSubmitMsg("uploading data...")
-            if(userType == "regular"){
-                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
-            }else{
-                createImage(certificate, setimageId);
-                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-            }
-
+            createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
+            console.log("sss")
         }
 
 
@@ -195,7 +179,6 @@ const Register = (props)=> {
                                        e.target.value
                                        }}/>
                             </div>
-
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f4 " >Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
@@ -224,6 +207,11 @@ const Register = (props)=> {
                             </div>
 
 
+
+
+
+
+
                             <div className="flex items-center mb2">
                                 <input className="mr2" type="checkbox"
                                        onChange={(event => {setType(event)})}/>
@@ -238,8 +226,7 @@ const Register = (props)=> {
                             </p>
                         </fieldset>
                         <div>
-                            <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"    
-
+                            <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
                                    onClick={() => onSubmit()}> Create </button>
                         </div>
                         {/* <div className="lh-copy mt3 ">
