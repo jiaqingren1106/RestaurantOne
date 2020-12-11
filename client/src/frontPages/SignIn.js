@@ -41,10 +41,15 @@ const SignIn = (props) => {
         getUserInLogin(setResult, result)
 
         console.log(result)
+        let targetUser
+        if (result !== []){
+            targetUser = (result).filter((user => user.name === entered_user.username
+                && user.password === entered_user.password))
+        }
+        else {
 
-        let targetUser = (result).filter((user => user.name === entered_user.username
-            && user.password === entered_user.password))
-        console.log(targetUser)
+        }
+
 
         if (targetUser.length === 0) {
             setWarning("no such user or password is incorrect")
