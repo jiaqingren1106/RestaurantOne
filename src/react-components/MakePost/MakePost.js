@@ -10,13 +10,16 @@ const MakePost = (props) => {
         const file = e.target.files[0]
         setPostPic(file)
         setPicMsg("upload img successfully")
-
+        setWarning("")
     }
     const handleCreatePost = () => {
         setPicMsg("")
         setWarning("")
         if (postTitle !== "" && postContent !== "" && postPic !== null) {
-            // handle the post Creation
+            props.setPostApp(false)
+            props.setPostSending("sending new post...")
+            // call the backend sending
+
         }
         else {
             setWarning("has unfilled field!")

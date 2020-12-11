@@ -41,10 +41,17 @@ class PostList extends React.Component {
                 { postid: 2, date: "2010-9-10", content: "introduce new coke" },
                 { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
             ],
-            createPostAppear: false
+            createPostAppear: false,
+            newPostingMsg: ""
         }
     }
 
+    setCreatePostAppear = (newAppear) => {
+        this.setState({createPostAppear: newAppear})
+    }
+    setPostSendingMsg = (msg) => {
+        this.setState({newPostingMsg: msg})
+    }
     render() {
         const setRoute = (newRoute) => {
             let targetRoute = `/`
@@ -170,15 +177,23 @@ class PostList extends React.Component {
                     {postList}
                 </div>
                 <div id="profilenewpost">
-                    <Button variant="primary" onClick = {() => this.setState({createPostAppear: !this.state.createPostAppear})}>
+                    <Button variant="primary" onClick = {() => {
+                        this.setPostSendingMsg("")
+                        this.setState({createPostAppear: !this.state.createPostAppear})}}>
                         {this.state.createPostAppear? "Exit Create Post": "Create Post"}</Button>
                 </div>
 
                 {this.state.createPostAppear? (<div id="createPostContainer">
                     <div style={{height: "500px", width: "500px"}}>
-                        <MakePost/>
+                        <MakePost setPostApp = {this.setCreatePostAppear} setPostSending = {this.setPostSendingMsg}/>
                     </div>
                 </div>):null}
+                <div className="postingMsg">
+                    <h5 className="i green " >
+                        {this.state.newPostingMsg}
+                    </h5>
+                </div>
+
             </div>
         );
     }
