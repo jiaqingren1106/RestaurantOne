@@ -8,9 +8,8 @@ const initalUserState = {
     password: "",
     id: "",
     email: "",
-    following: [],
     images: [],
-    reviews: [],
+    restaurant_id: ""
 }
 
 export const routeState = (state = initalRouteState, action = {}) => {
@@ -30,9 +29,8 @@ export const userState = (state = initalUserState, action = {}) => {
                 password: action.payload.password,
                 id: action.payload.id,
                 email: action.payload.email,
-                following: action.payload.following,
                 images: action.payload.images,
-                reviews: action.payload.reviews
+                restaurant_id: action.payload.restaurant_id
             })
         default:
             return state
