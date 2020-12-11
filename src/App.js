@@ -16,7 +16,7 @@ import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
 
 import Profile from "./pages/Profile";
-import ProfileOwner from "./pages/ProfileOwner";
+import ProfileOwner from "./pages/owner/ProfileOwner";
 
 
 import {Route, withRouter, Switch} from 'react-router-dom'
@@ -66,7 +66,7 @@ const App = ({route, user, history}) => {
    return (
            <div>
                <Switch>
-                   <Route exact path="/" component={Post}/>
+                   <Route exact path="/" component={FirstPage}/>
                    <Route exact path="/ProfilePage" component={ProfileUser}/>
                    <Route exact path="/ProfilePageOwner" component={ProfileOwner}/>
                    <Route exact path="/MenuPage" component={Menu}/>

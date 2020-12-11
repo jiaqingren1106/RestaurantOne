@@ -4,3 +4,12 @@
 #followings{
   
 }
+#userinfo{
+  border-width: 1px;
+  border-color: black;
+  margin: 10px;
+}
+
+.subtitle{
+  margin-right: 23%;
+}
