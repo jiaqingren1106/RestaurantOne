@@ -52,12 +52,13 @@ const createUser = (req, res) => {
     const newUser = new user(req.body);
     let find = false;
     console.log("createUser")
+
     user.find({}, (err, users) => {
         if (err) {
             res.send(err);
         }
         for(let i = 0; i < users.length; i++){
-            if(users[i].name == userName){
+            if(users[i].name === userName){
                 res.send({"condition": "fail"})
                 find = true
             }

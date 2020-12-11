@@ -3,7 +3,7 @@ const { authenticate } = require("../authentication/authMiddleware");
 
 const userRoutes = (app) => {
     app.route('/users')
-        .get(authenticate, UserController.getAllUsers)
+        .get(UserController.getAllUsers)
         .post(UserController.createUser);
 
     app.route('/users/:userId')

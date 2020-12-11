@@ -27,11 +27,20 @@ const UserSchema = new mongoose.Schema({
         }
     ],
 
-    isAdmin:{
-        type: Boolean,
-        default: false,
-        required: true
-    }
+    type:{
+        type: String,
+        required: true,
+        default: "regular"
+    },
+
+    restaurant_id:{  
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Restaurant",
+    },
+
+    isNewRestaurant:{
+        type: Boolean
+    },
 
 });
 
