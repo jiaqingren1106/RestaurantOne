@@ -94,7 +94,7 @@ export const getRestaurantsPost = (Comp, id) => {
 };
 
 
-export const addRestaurantPost = (Comp, restaurantid, reviewid) => {
+export const addRestaurantReview = (Comp, restaurantid, reviewid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}/${reviewid}`
 
     const request = new Request(url,
@@ -111,7 +111,32 @@ export const addRestaurantPost = (Comp, restaurantid, reviewid) => {
             }
         })
         .then(json => {
-            console.log(json)
+            return json
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+export const getRestaurantReviews = (Comp, restaurantid) => {
+    const url = `${API_HOST}/restaurants/${restaurantid}`
+
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            Comp.setState({"reviews": json.reviews})
         })
         .catch(error => {
             console.log(error);

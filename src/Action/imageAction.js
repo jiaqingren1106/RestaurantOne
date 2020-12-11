@@ -76,3 +76,28 @@ export const getImageInNav = (Comp, image_id) => {
             console.log(error);
         });
 };
+
+
+export const getImageForReviewTwo = (Comp, userName, userImage) => {
+    const url = `${API_HOST}/image/${userImage}`
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+        
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get description");
+            }
+        })
+        .then(json => {
+            Comp.setState({userName:userName ,userImage: json.image_url})
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+}
