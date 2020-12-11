@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-
+import MakePost from "../../react-components/MakePost/MakePost";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './Postlist.css'
@@ -41,10 +41,17 @@ class PostList extends React.Component {
                 { postid: 2, date: "2010-9-10", content: "introduce new coke" },
                 { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
             ],
+            createPostAppear: false,
+            newPostingMsg: ""
         }
     }
 
-
+    setCreatePostAppear = (newAppear) => {
+        this.setState({createPostAppear: newAppear})
+    }
+    setPostSendingMsg = (msg) => {
+        this.setState({newPostingMsg: msg})
+    }
     render() {
         const setRoute = (newRoute) => {
             let targetRoute = `/`
@@ -90,7 +97,7 @@ class PostList extends React.Component {
 
         return (
             <div>
-                <SideNav
+                <SideNav className = "navBarProfile"
                 onSelect={(selected) => {
                     // Add your code here
                 }}>
@@ -166,13 +173,27 @@ class PostList extends React.Component {
                     <h1>Restaurant Posts</h1>
                 </div>
 
-                <div id="profilenewpost">
-                    <Button variant="primary">Create new Post</Button>
-                </div>
-
                 <div id="profileContainer">
                     {postList}
                 </div>
+                <div id="profilenewpost">
+                    <Button variant="primary" onClick = {() => {
+                        this.setPostSendingMsg("")
+                        this.setState({createPostAppear: !this.state.createPostAppear})}}>
+                        {this.state.createPostAppear? "Exit Create Post": "Create Post"}</Button>
+                </div>
+
+                {this.state.createPostAppear? (<div id="createPostContainer">
+                    <div style={{height: "500px", width: "500px"}}>
+                        <MakePost setPostApp = {this.setCreatePostAppear} setPostSending = {this.setPostSendingMsg}/>
+                    </div>
+                </div>):null}
+                <div className="postingMsg">
+                    <h5 className="i green " >
+                        {this.state.newPostingMsg}
+                    </h5>
+                </div>
+
             </div>
         );
     }
