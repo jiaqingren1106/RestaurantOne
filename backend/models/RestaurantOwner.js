@@ -15,6 +15,11 @@ const RestaurantOwnerShema = new mongoose.Schema({
     password:{
         type: String,
         required: true
+    },
+
+    restaurant_id:{  
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Restaurant"
     }
 
 });
