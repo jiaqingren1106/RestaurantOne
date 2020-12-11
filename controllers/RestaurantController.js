@@ -25,19 +25,58 @@ const getAllRestaurants = (req, res) => {
 };
 
 const createRestaurant = (req, res) => {
-    if(!req.body.posts){
-        req.body.posts = []
-    }
+    // if(!req.body.posts){
+    //     req.body.posts = []
+    // }
 
+    // if(!req.body.reviews){
+    //     req.body.reviews = []
+    // }
+
+    // if(!req.body.image){
+    //     req.body.image = []
+    // }
+
+    // if(!req.body.rating){
+    //     req.body.rating = "Not Available"
+    // }
+
+    // if(!req.body.opentime){
+    //     req.body.opentime = "Not Available"
+    // }
+
+    // if(!req.body.safe){
+    //     req.body.safe = "Not Available"
+    // }
+
+    // if(!req.body.owner){
+    //     req.body.owner = "Not Available"
+    // } 
+
+    let found = false
     const newRestaurant = new restaurant(req.body);
-
-    newRestaurant.save((err, restaurant) => {
+    
+    restaurant.find({}, (err, restaurants) => {
         if (err) {
             res.send(err);
         }
-        log("createRestaurant: ", restaurant);
+        for(let i = 0; i < restaurants.length; i++){
+            if(restaurants[i].name === newRestaurant.name){
+                found = true
+                console.log(restaurants[i].name)
+                res.send({"condition": "fail"})
+            }
+        }
 
-        res.json(restaurant);
+        if(found === false){
+            newRestaurant.save((err, user) => {
+                if (err) {
+                    res.send(err);
+                }else{
+                res.json({"condition": "success"});
+                }
+            });
+        }
     });
 };
 
