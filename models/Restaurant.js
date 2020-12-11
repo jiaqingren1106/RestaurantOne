@@ -21,25 +21,33 @@ const RestaurantSchema = new mongoose.Schema({
         type: String,
     },
 
-    posts:[
-        {  
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Post"
-        }
-    ], 
+    posts:{
+        type: Array
+    }, 
 
-    reviews:[
-        {  
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Review"
-        }
-    ],
+    reviews:{
+        type: Array
+    },
 
-    certificate:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Image"
-    }
+    image:{
+        type: Array
+    },
 
+    rating:{
+        type: String,
+    },
+
+    safe:{
+        type: String,
+    },
+
+    owner:{
+        type: String,
+    },
+
+    opentime:{
+        type: String,
+    },
 });
 
 
