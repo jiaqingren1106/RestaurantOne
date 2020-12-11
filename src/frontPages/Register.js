@@ -40,7 +40,7 @@ const Register = (props)=> {
         email:"",
         emailc:""
     }
-    })
+)
     const [certificate, setCertificate] = useState(null)
     const [entered_restaurant, setEntered_restaurant] = useState({
         restName: "",
