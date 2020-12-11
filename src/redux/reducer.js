@@ -5,6 +5,7 @@ const initalRouteState = {
 const initalUserState = {
     username: "",
     userType:"",
+    userid: "",
     password: ""
 }
 

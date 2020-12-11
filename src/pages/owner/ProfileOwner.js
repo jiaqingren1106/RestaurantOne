@@ -37,6 +37,7 @@ class ProfileOwner extends React.Component {
         this.state = { id: "" }
     }
 
+
     
 
 
@@ -126,43 +127,41 @@ class ProfileOwner extends React.Component {
                     </SideNav.Nav>
                 </SideNav>
 
-                <form >
-                    <div>
-                        Restaurant Name:
-                        <input id="restaurantName"
-                            type="text"
-                        />
+                <div className="updatProfileContainer">
 
-                    </div>
+                    <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw8 center article-container
+                shadow-5 signInContent signInBox " >
 
-                    <div>
-                        Address:
-                        <input id="restaurantName"
-                            type="text"
-                        />
+                        <main className="pa4 black-80">
+                            <div className="measure center">
+                                <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                                    <legend className="f1 fw6 ph0 mh0 ">User Profile</legend>
+                                    <div className="mt3">
+                                        <label className="db fw6 lh-copy f4 " >Username</label>
+                                        <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
+                                               value={""}
+                                               onChange={(e) => {}}/>
+                                    </div>
+                                    <div className="mv3">
+                                        <label className="db fw6 lh-copy f4 " htmlFor="password">Password</label>
+                                        <input className="b pa2 input-reset ba bg-transparent hover-bg-black  w-100"
+                                               type="password" name="password" id="password"
+                                               onChange={(e) => {}}/>
+                                    </div>
 
-                    </div>
+                                </fieldset>
+                                <div className="">
+                                    <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
+                                            onClick={() => {}}
+                                    > Login </button>
+                                </div>
+                            </div>
+                        </main>
+                    </article>
 
-                    <div>
-                        Open time
-                        <input id="restaurantName"
-                            type="text"
-                        />
-
-                    </div>
-
-                    <div>
-                        description:
-                        <input id="restaurantName"
-                            type="text"
-                        />
-
-                    </div>
-                </form>
-
+                </div>
             </div>
-
-        );
+    );
     }
 }
 
