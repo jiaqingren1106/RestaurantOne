@@ -259,7 +259,7 @@ const Register = (props)=> {
                             <a href="#0" onClick={() => setRoute("SignIn")} className="f6 link dim black db">Sign In</a>
                         </div>
                         <div className="lh-copy mt3 ">
-                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a> 
+                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a>
                         </div>
                     </div>
                 </main>

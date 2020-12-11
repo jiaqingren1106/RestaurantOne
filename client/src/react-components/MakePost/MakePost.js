@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./MakePost.css"
 import {createImage} from "../../Action/imageAction"
-
+import {createPost} from "../../Action/postAction"
 
 const MakePost = (props) => {
     const [postTitle, setPostTitle] = useState("")
@@ -11,6 +11,7 @@ const MakePost = (props) => {
     const [picMsg, setPicMsg] = useState("")
     const [imageId, setImageId] = useState("")
     const [certificate, setCertificate] = useState(null)
+    const [postId, setPostId] = useState("")
 
     const fileSelectedHandler = (e) => {
         const file = e.target.files[0]
@@ -18,6 +19,8 @@ const MakePost = (props) => {
         setPicMsg("upload img successfully")
         setWarning("")
     }
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     const testId = "5fd03079037cb93f99c2fa01"
 
@@ -29,8 +32,16 @@ const MakePost = (props) => {
             props.setPostApp(false)
             props.setPostSending("sending new post...")
             // call the backend sending
-            createImage(certificate, setImageId)
-            
+            createImage(certificate, setPostPic)
+            // console.log(imageId)
+            // createPost(postId, postContent, postPic, imageId, setPostId)
+            // console.log(postId)
+            const yourFunction = async () => {
+                await delay(1000);
+                console.log(postId)
+                // createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
+              };
+            yourFunction()
         }
         else {
             setWarning("has unfilled field!")
@@ -52,6 +63,7 @@ const MakePost = (props) => {
                    <form className="image-form" id = "form2" onChange={(e) => {
                             e.preventDefault();
                             setCertificate(document.getElementById("form2"))
+                            setPostPic(document.getElementById("form2"))
                             }}>
                             <div class="image-form__field" id = "imageI">
                                 <label>Image:</label>

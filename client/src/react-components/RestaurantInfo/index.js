@@ -67,11 +67,6 @@ class RestaurantInfo extends React.Component{
     }
 
     render() {
-
-        // console.log(this.state.userName)
-        // console.log(this.state.userImage)
-        console.log(this.state.reviews)
-
         const reviewLength = (this.state.reviews.length == 0)
 
         if(reviewLength == true){

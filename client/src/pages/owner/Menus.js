@@ -41,23 +41,26 @@ class Menus extends React.Component {
         super(props);
         this.state = {
             MenuItems: [
-                { name: "Bergur", rating: "5", key: "1", image: burger1, price: "10.0$" },
-                { name: "BigMac", rating: "4", key: "2", image: burger2, price: "10.0$" },
-                { name: "Chicken Nugget", rating: "5", key: "3", image: burger3, price: "10.0$" },
+                { name: "Bergur", image: burger1, price: "10.0$" },
+                { name: "BigMac",  image: burger2, price: "10.0$" },
+                { name: "Chicken Nugget", image: burger3, price: "10.0$" },
 
-                { name: "Fries", rating: "5", key: "4", image: burger4, price: "10.0$" },
-                { name: "Chicken Sandvich", rating: "5", key: "5", image: burger5, price: "10.0$" },
-                { name: "Pizza", rating: "5", key: "6", image: burger6, price: "10.0$" },
+                { name: "Fries",  image: burger4, price: "10.0$" },
+                { name: "Chicken Sandvich",  image: burger5, price: "10.0$" },
+                { name: "Pizza",  image: burger6, price: "10.0$" },
 
-                { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
-                { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
-                { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
+                { name: "3 burger",   image: burger7, price: "10.0$" },
+                { name: "1 burger",  image: burger8, price: "10.0$" },
+                { name: "Subway",  image: burger9, price: "10.0$" }
             ],
             createPostAppear: false,
             newPostingMsg: "",
-            postPic: null,
             warning: "",
             picMsg: "",
+
+            postPic: null,
+            name:"",
+            price:""
         }
     }
 
@@ -85,8 +88,20 @@ class Menus extends React.Component {
             this.setState({ postPic: file })
             this.setState({ warning: "upload img successfully" })
             this.setState({ picMsg: "" })
+            console.log(file)
         }
 
+        const createMenu = () => {
+            let menu = {
+                price: this.state.price,
+                name: this.state.name,
+                postPic: this.state.postPic
+            }
+
+            //upload to data base
+            this.setState({postPic:null, price:"", name:""})
+
+        }
 
         const row = 5;
 
@@ -111,7 +126,6 @@ class Menus extends React.Component {
             <div id='MenuInProfile'>
                 {cardgroups.map((index) => {
                     return <MenuGroup
-                        key={0}
                         MenuItems={(this.state.MenuItems).slice(row * index, index * row + row)} />
                 })}
             </div>
@@ -204,7 +218,7 @@ class Menus extends React.Component {
                         id="makeMenuFileUpload" name="avatar"
                         accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
 
-                    <button>
+                    <button onKeyPress={createMenu}>
                         Add
                     </button>
                 </form>

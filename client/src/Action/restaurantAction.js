@@ -4,6 +4,7 @@ import ENV from '../config.js'
 import {getReview} from './reviewAction'
 import {getImage} from './imageAction'
 import {getMultipleDescription} from './postAction'
+import {getFollowerToArray} from './userAction'
 const API_HOST = ENV.api_host
 
 export const getRestaurants = (Comp) => {
@@ -59,6 +60,38 @@ export const getRestaurantsByID = (Comp, id) => {
                         getImage(Comp, json['image'][i])
                     }
                 })    
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+export const getRestaurantsFollowerByID = (Comp, id) => {
+    const url = `${API_HOST}/restaurants/${id}`
+
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            console.log(json.followers)
+            let result = []
+            for (let i=0; i< json.followers.length; i++) {
+                getFollowerToArray(Comp, result, json.followers[i]);
+            }
+            
+            // Comp.setState({follower: result})
 
         })
         .catch(error => {

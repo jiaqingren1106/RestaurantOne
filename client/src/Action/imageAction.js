@@ -22,6 +22,7 @@ export const createImage = (file, setimageId) => {
             }
         })
         .then(json => {
+            console.log(String(json["_id"]))
             setimageId(String(json["_id"]))
         })
         .catch(error => {
