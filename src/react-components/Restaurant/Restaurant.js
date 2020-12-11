@@ -59,7 +59,7 @@ class Restaurant extends React.Component {
               {this.props.description}
           </div>
         </Card.Body>
-        <Card.Footer id={"rating"}>
+        <Card.Footer id="rating">
          Rating: {this.props.rating}
         </Card.Footer>
       </Card>
