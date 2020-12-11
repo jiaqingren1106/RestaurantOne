@@ -47,8 +47,6 @@ const SignIn = (props) => {
         else {
             setRoute("FirstPage")
         }
-
-
     }
     return (
         <div className="signInContainer">

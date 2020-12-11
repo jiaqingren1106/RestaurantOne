@@ -1,4 +1,5 @@
 .signInContainer {
+
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -6,7 +7,7 @@
   background: url("../images/blackbackground.jpg") no-repeat center center
     fixed;
   background-size: cover;
-  position: absolute;
+  position: relative;
 }
 
 .signInBox {
@@ -26,4 +27,11 @@
 
 #fileButton {
   border-color: black;
+  margin-left: 10px;
+}
+.registerInputField {
+  margin-bottom: 10px ;
+}
+#uploadMsg {
+  margin-left: 10px;
 }
