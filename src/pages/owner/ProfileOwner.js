@@ -131,7 +131,6 @@ class ProfileOwner extends React.Component {
                         Restaurant Name:
                         <input id="restaurantName"
                             type="text"
-                        // value="abc"
                         />
 
                     </div>
@@ -140,7 +139,6 @@ class ProfileOwner extends React.Component {
                         Address:
                         <input id="restaurantName"
                             type="text"
-                        // value="abc"
                         />
 
                     </div>
@@ -149,7 +147,6 @@ class ProfileOwner extends React.Component {
                         Open time
                         <input id="restaurantName"
                             type="text"
-                        // value="abc"
                         />
 
                     </div>
@@ -158,7 +155,6 @@ class ProfileOwner extends React.Component {
                         description:
                         <input id="restaurantName"
                             type="text"
-                        // value="abc"
                         />
 
                     </div>

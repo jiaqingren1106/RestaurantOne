@@ -2,6 +2,8 @@ import React from 'react';
 import './Deals.css';
 import { register, setRoute } from "../../redux/actions";
 import { connect } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+
 
 
 import {
@@ -57,7 +59,22 @@ class Deals extends React.Component {
             { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
             { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
         ],
-        searched: []
+        createPostAppear: false,
+        newPostingMsg: "",
+        postPic:null,
+        warning:"",
+        picMsg:"",
+        searched: [],
+
+    }
+
+    
+
+    setCreatePostAppear = (newAppear) => {
+        this.setState({createPostAppear: newAppear})
+    }
+    setPostSendingMsg = (msg) => {
+        this.setState({newPostingMsg: msg})
     }
 
 
@@ -107,6 +124,15 @@ class Deals extends React.Component {
 
             this.props.history.push(targetRoute)
             this.props.setRoute(newRoute)
+        }
+
+        const fileSelectedHandler = (e) => {
+            const file = e.target.files[0]
+
+            this.setState({postPic: file})
+            this.setState({warning: "upload img successfully"})
+            this.setState({picMsg: ""})
+           
         }
 
         return (
@@ -190,9 +216,15 @@ class Deals extends React.Component {
                     Expire Date:
                     <input/>
 
-                    <button>
-                        Add
-                    </button>
+                    <input type="file"
+                           id="makeDealFileUpload" name="avatar"
+                           accept="image/png, image/jpeg" onChange={(e) => {fileSelectedHandler(e)}}/>
+
+                    <Button variant="primary" onClick = {() => {
+                        this.setPostSendingMsg("")
+                        this.setState({createPostAppear: !this.state.createPostAppear})}}>
+                        ADD
+                    </Button>
                 </form>
 
 

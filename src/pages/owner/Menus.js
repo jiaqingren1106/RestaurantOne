@@ -7,6 +7,7 @@ import MenuGroup from '../../react-components/menuGroup/MenuGroup';
 import { register, setRoute } from "../../redux/actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 
 import burger1 from "../../images/Mcdonald-2.png";
@@ -51,9 +52,22 @@ class Menus extends React.Component {
                 { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
                 { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
                 { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
-            ]
+            ],
+            createPostAppear: false,
+            newPostingMsg: "",
+            postPic: null,
+            warning: "",
+            picMsg: "",
         }
     }
+
+    setCreatePostAppear = (newAppear) => {
+        this.setState({ createPostAppear: newAppear })
+    }
+    setPostSendingMsg = (msg) => {
+        this.setState({ newPostingMsg: msg })
+    }
+
 
 
     render() {
@@ -64,6 +78,13 @@ class Menus extends React.Component {
             }
             this.props.setRoute(newRoute)
             this.props.history.push(targetRoute, id)
+        }
+
+        const fileSelectedHandler = (e) => {
+            const file = e.target.files[0]
+            this.setState({ postPic: file })
+            this.setState({ warning: "upload img successfully" })
+            this.setState({ picMsg: "" })
         }
 
 
@@ -174,10 +195,14 @@ class Menus extends React.Component {
 
                 <form id="menuForm">
                     new item:
-                    <input/>
+                    <input />
 
                     Price:
-                    <input/>
+                    <input />
+
+                    <input type="file"
+                        id="makeMenuFileUpload" name="avatar"
+                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
 
                     <button>
                         Add
