@@ -90,7 +90,7 @@ export const getUserForReview = (Comp, user_id) => {
         {
             method:"get"
         })
-        
+    
     fetch(request)
         .then(res => {
             if (res.status === 200) {
@@ -117,7 +117,6 @@ export const createUser =  (userName, userPassword, userEmail, setSubmitMsg) => 
         password: userPassword,
         email:userEmail
     })
-    console.log(UserBody)
 
     const request = new Request(url,
         {
@@ -128,7 +127,9 @@ export const createUser =  (userName, userPassword, userEmail, setSubmitMsg) => 
               },
             body: UserBody
         })
-        
+    
+    console.log(UserBody)
+
     fetch(request)
         .then(res => {
             if (res.status === 200) {
