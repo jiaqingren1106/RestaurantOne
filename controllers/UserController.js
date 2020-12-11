@@ -2,6 +2,7 @@ const user = require('../models/User.js');
 const log = console.log;
 const upload = require("../middleware/upload");
 const { set } = require('mongoose');
+const e = require('express');
 
 const uploadFiles = async (req, res) => {
   try {
@@ -66,8 +67,9 @@ const createUser = (req, res) => {
             newUser.save((err, user) => {
                 if (err) {
                     res.send(err);
+                }else{
+                    res.json({"condition": "success"});
                 }
-                res.json({"condition": "success"});
             });
         }
     });

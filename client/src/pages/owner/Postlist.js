@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { register, setRoute } from "../../redux/actions";
+import {createImage} from '../../Action/imageAction'
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -27,6 +28,8 @@ const mapDispatchToProps = (dispatch) => {
         setUser: (user_obj) => dispatch(register(user_obj))
     }
 }
+
+
 
 class PostList extends React.Component {
 

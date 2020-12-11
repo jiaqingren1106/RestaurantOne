@@ -6,7 +6,6 @@ const API_HOST = ENV.api_host
 export const createImage = (file, setimageId) => {
     const url = `${API_HOST}/image`
 
-    console.log(file)
     const imageData = new FormData(file);
     const request = new Request(url,
         {
@@ -14,7 +13,6 @@ export const createImage = (file, setimageId) => {
             body:imageData
         })
         
-    console.log(request)
     fetch(request)
         .then(res => {
             if (res.status === 200) {
@@ -24,8 +22,8 @@ export const createImage = (file, setimageId) => {
             }
         })
         .then(json => {
-            // console.log(json)
-            setimageId(json["_id"])
+            console.log(String(json["_id"]))
+            setimageId(String(json["_id"]))
         })
         .catch(error => {
             console.log(error);
