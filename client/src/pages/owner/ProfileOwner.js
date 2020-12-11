@@ -34,11 +34,26 @@ class ProfileOwner extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { id: "" }
+        const user = props.user
+        console.log(user)
+        this.state = {
+            userType: user.userType,
+            username: user.username,
+            password: user.password,
+            _id: user.id,
+            email: user.email,
+            restId: user.restaurant_id,
+            openTime: "",
+            restaurantName: "",
+            restaurantDes: ""
+        }
     }
 
 
-    
+    componentDidMount() {
+        //call the backend to
+    }
+
 
 
     render() {
@@ -76,7 +91,7 @@ class ProfileOwner extends React.Component {
 
 
         }
-
+        console.log(this.props.user)
         return (
             <div id="main">
                 <SideNav className="navBarProfile"
@@ -163,22 +178,24 @@ class ProfileOwner extends React.Component {
                                     <div className="mt3">
                                         <label className="db fw6 lh-copy f4 " >Username</label>
                                         <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
-                                               value={""}
-                                               onChange={(e) => {}}/>
+                                               value={this.state.username}
+                                               onChange={(e) => {this.setState({username:e.target.value})}}/>
                                     </div>
                                     <div className="mt3">
                                         <label className="db fw6 lh-copy f4 " >Password</label>
                                         <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
-                                               value={""}
-                                               onChange={(e) => {}}/>
+                                               value={this.state.password}
+                                               onChange={(e) => {this.setState({password: e.target.value})}}/>
                                     </div>
                                     <div className="mv3">
                                         <label className="db fw6 lh-copy f4 " htmlFor="password">Email</label>
                                         <input className="b pa2 input-reset ba bg-transparent hover-bg-black  w-100"
-
-                                               onChange={(e) => {}}/>
+                                               value={this.state.email}
+                                               onChange={(e) => {this.setState({email: e.target.value})}}
+                                        />
                                     </div>
-                                    {displayRestInfo()}
+                                    {this.state.userType === "restaurant"? displayRestInfo(): null}
+
                                 </div>
                                 <div className="">
                                     <button className=" br2 bw2 b ph3 pv2 input-reset ba b--blue  bg-transparent grow pointer f6 dib"
