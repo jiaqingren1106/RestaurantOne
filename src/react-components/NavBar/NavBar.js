@@ -109,12 +109,17 @@ class NavBar extends React.Component {
       </Nav>
     )
     if (user.userType !== ""){
+      let page = "ProfilePage";
+      console.log(user.userType)
+      if (user.userType === "restaurant") {
+        page = "ProfilePageOwner"
+      }
       navRender = (
         <Nav className="ml-auto">
             <Nav.Item><Nav.Link style = {
                 {cursor: "context-menu",
                 }}>Hello, {user.username}</Nav.Link></Nav.Item>
-            <Nav.Item><Nav.Link onClick={() => setRoute("ProfilePage")}>Profile</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={() => setRoute(page)}>Profile</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link onClick={() => this.handleLogOut() }>Log Out</Nav.Link></Nav.Item>
         </Nav>
       )
