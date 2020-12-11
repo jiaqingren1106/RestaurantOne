@@ -213,7 +213,7 @@ class ProfileOwner extends React.Component {
                                     </div>
                                     <div className="mv3">
                                         <label className="db fw6 lh-copy f4 " htmlFor="password">Email</label>
-                                        <input className="b pa2 input-reset ba bg-transparent hover-bg-black  w-100"
+                                        <input className=" pa2 input-reset ba bg-transparent hover-bg-black  w-100"
                                                value={this.state.email}
                                                onChange={(e) => {this.setState({email: e.target.value})}}
                                         />
