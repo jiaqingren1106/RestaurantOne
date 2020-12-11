@@ -24,21 +24,6 @@ app.use(cors());
 const { mongoose } = require("./database/mongoose");
 // const imageRoutes = require('./routes/image');
 
-// === ERROR HANDLER ===
-// catch 400
-app.use((err, req, res, next) => {
-    console.log(err.stack);
-    res.status(400).send(`Error: ${res.originUrl} not found`);
-    next();
-});
-
-// catch 500
-app.use((err, req, res, next) => {
-    console.log(err.stack)
-    res.status(500).send(`Error: ${err}`);
-    next();
-});
-
 // === ROUTES ===
 app.get("/", (req, res) => res.send('Hello World with Restaurant One'));
 
@@ -49,6 +34,21 @@ restaurantOwnerRoutes(app);
 postRoutes(app);
 reviewRoutes(app);
 imageRoutes(app);
+
+// === ERROR HANDLER ===
+// catch 400
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  res.status(400).send(`Error: ${res.originUrl} not found`);
+  next();
+});
+
+// catch 500
+app.use((err, req, res, next) => {
+  console.log(err.stack)
+  res.status(500).send(`Error: ${err}`);
+  next();
+});
 
 // === Server Listening ===
 const port = process.env.PORT || 3000;
