@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -56,7 +57,7 @@ class PostList extends React.Component {
         }
 
         let postList = (
-            <div>
+            <div id="profilePage">
                 {this.state.post.map((post) => {
                     return (
                         <div className={'postBlock'}>
@@ -71,18 +72,28 @@ class PostList extends React.Component {
                                 {"Content:  " + post.content}
                             </p>
 
-
-                        </div>);
+                         </div>);
+                        // <Card>
+                        //     <Card.Header>Post ID: {post.postid}</Card.Header>
+                        //     <Card.Body class={'profilecard'}>
+                        //         <Card.Title >Date: {post.date}</Card.Title>
+                        //         <Card.Text>
+                        //         Content:  {post.content}
+                        //         </Card.Text>
+                        //         <Button variant="primary">Edit</Button>
+                        //         <Button variant="danger">Delete</Button>
+                        //     </Card.Body>
+                        // </Card>
                 })}
             </div>
         );
 
         return (
-            <Container id='Profile'>
-                                <SideNav
-                    onSelect={(selected) => {
-                        // Add your code here
-                    }}>
+            <div>
+                <SideNav
+                onSelect={(selected) => {
+                    // Add your code here
+                }}>
 
                     <SideNav.Toggle />
 
@@ -151,16 +162,18 @@ class PostList extends React.Component {
                     </SideNav.Nav>
                 </SideNav>
 
-
-                <div id="profile">
-                    <Row>
-                        <Col>
-                            {postList}
-                        </Col>
-                    </Row>
-
+                <div id="profiletitle">
+                    <h1>Restaurant Posts</h1>
                 </div>
-            </Container>
+
+                <div id="profilenewpost">
+                    <Button variant="primary">Create new Post</Button>
+                </div>
+
+                <div id="profileContainer">
+                    {postList}
+                </div>
+            </div>
         );
     }
 }
