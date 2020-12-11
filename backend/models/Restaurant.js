@@ -17,6 +17,11 @@ const RestaurantSchema = new mongoose.Schema({
         required: true
     },
 
+    certificate:{
+        type: String,
+        required: true
+    },
+
     posts:[
         {  
             type: mongoose.Schema.Types.ObjectId,

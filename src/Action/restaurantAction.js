@@ -142,3 +142,39 @@ export const getRestaurantReviews = (Comp, restaurantid) => {
             console.log(error);
         });
 };
+
+export const createRestaurant = (restaurantName, restaurantDescription, restaurantAddress, restaurantCertificate, setSubmitMsg) =>{
+
+    const url = `${API_HOST}/restaurants`
+    const UserBody = JSON.stringify({
+        name: restaurantName,
+        description: restaurantDescription,
+        address: restaurantAddress,
+        certificate:restaurantCertificate
+    })
+
+    const request = new Request(url,
+        {
+            method:"post",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+              },
+            body: UserBody
+        })
+    
+    fetch(request)
+    .then(res => {
+        if (res.status === 200) {
+            return res.json()
+        } else {
+            alert("Could not get description");
+        }
+    })
+    .then(json => {
+        setSubmitMsg(json.condition)
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
