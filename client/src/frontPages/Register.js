@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {setRoute, register} from "../redux/actions";
 import { connect } from 'react-redux'
 import {createUser} from '../Action/userAction'
+import {createRestaurant} from '../Action/userAction'
 import "./SignIn.css"
 
 let state = {}
@@ -20,8 +21,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Register = (props)=> {
-
-
 
     const setRoute = (newRoute) => {
         let targetRoute = `/`
@@ -75,8 +74,8 @@ const Register = (props)=> {
                     <div className="uploadBox">
                         <label htmlFor="img">Select certificate image:</label>
                         <input type="file"
-                               id="fileUpload" name="avatar"
-                               accept="image/png, image/jpeg" onChange={fileSelectedHandler}/>
+                                id="fileUpload" name="avatar"
+                                accept="image/png, image/jpeg" onChange={fileSelectedHandler}/>
                         <button id="fileButton" onClick={ function(){
                             document.getElementById("fileUpload").click()} }
                                 className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib black">choose file</button>
@@ -116,7 +115,7 @@ const Register = (props)=> {
         }
         return result
     }
-    const onSubmit = () => {
+    const onSubmit = async () => {
         console.log(entered_user)
         for(const field_ in entered_user){
             if (entered_user[field_] === ""){
@@ -154,11 +153,20 @@ const Register = (props)=> {
         if (result)  {
             setWarning("")
             setSubmitMsg("uploading data...")
-            createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
-            console.log("sss")
+            try{
+                await createUser(
+                    entered_user.username, 
+                    entered_user.password, 
+                    entered_user.email,
+                    entered_restaurant
+                );
+                setSubmitMsg("Success");
+                setRoute("SignIn");
+            }catch(e){
+                setWarning("Something went wrong");
+                alert("Something Went Wrong!");
+            }
         }
-
-
     }
     return (
         <div className="signInContainer">
@@ -170,51 +178,57 @@ const Register = (props)=> {
                     <div className="measure center">
                         <fieldset  className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 mh0 ">Register</legend>
+
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f4" >Username</label>
-                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" onChange={(e) => {entered_user.username = e.target.value}}/>
+                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    onChange={(e) => {
+                                        entered_user.username = e.target.value
+                                    }
+                                }/>
                                 <label className="db fw6 lh-copy f4 ">Confirm Username</label>
-                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"onChange={(e) => {
-                                           entered_user.usernamec =
-                                       e.target.value
-                                       }}/>
+                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    onChange={(e) => {
+                                        entered_user.usernamec = e.target.value
+                                    }
+                                }/>
                             </div>
+
                             <div className="mv3">
-                                <label className="db fw6 lh-copy f4 " >Password</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" onChange={(e) => {
-                                           entered_user.password = e.target.value
-                                }}/>
-                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Password</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" onChange={(e) => {
-                                           entered_user.passwordc = e.target.value
-                                }}/>
-                            </div>
-
-
-                            <div className="mt3">
                                 <label className="db fw6 lh-copy f4 " >Email</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" onChange={(e) => {
-                                           entered_user.email = e.target.value
-                                }}/>
-                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Email</label>
+                                    onChange={(e) => {
+                                        entered_user.email = e.target.value
+                                    }
+                                }/>
+                                <label className="db fw6 lh-copy f4 ">Confirm Email</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" onChange={(e) => {
-                                           entered_user.emailc = e.target.value
-                                }}/>
+                                    onChange={(e) => {
+                                            entered_user.emailc = e.target.value
+                                    }
+                                }/>
                             </div>
 
-
-
-
-
-
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f4 " >Password</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="password"
+                                    onChange={(e) => {
+                                        entered_user.password = e.target.value
+                                    }
+                                }/>
+                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Password</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="password"
+                                    onChange={(e) => {
+                                        entered_user.passwordc = e.target.value
+                                    }
+                                }/>
+                            </div>
 
                             <div className="flex items-center mb2">
                                 <input className="mr2" type="checkbox"
-                                       onChange={(event => {setType(event)})}/>
+                                        onChange={(event => {setType(event)})}/>
                                     <label  className="lh-copy">sign up as restaurant</label>
                             </div>
                             {displayRestaurant()}
@@ -227,7 +241,7 @@ const Register = (props)=> {
                         </fieldset>
                         <div>
                             <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
-                                   onClick={() => onSubmit()}> Create </button>
+                                    onClick={() => onSubmit()}> Create </button>
                         </div>
                         {/* <div className="lh-copy mt3 ">
                             <a href="#0" onClick={() => setRoute("SignIn")} className="f6 link dim black db">Sign In</a>

@@ -22,8 +22,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const Register = (props)=> {
 
-
-
     const setRoute = (newRoute) => {
         let targetRoute = `/`
         if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -117,7 +115,7 @@ const Register = (props)=> {
         }
         return result
     }
-    const onSubmit = () => {
+    const onSubmit = async () => {
         console.log(entered_user)
         for(const field_ in entered_user){
             if (entered_user[field_] === ""){
@@ -155,22 +153,16 @@ const Register = (props)=> {
         if (result)  {
             setWarning("")
             setSubmitMsg("uploading data...")
-
-            if(userType === "regular"){
-                createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
-            } else{
-                createRestaurant(
-                    entered_user.username, 
-                    entered_user.password, 
-                    entered_user.email,
-                    entered_restaurant.restName,
-                    entered_restaurant.restDescription,
-                    entered_restaurant.restAddress,
-                    entered_restaurant.restPostcode,
-                    entered_restaurant.restOpentime,
-                    setSubmitMsg
-                    )
+            const response = await createUser(
+                entered_user.username, 
+                entered_user.password, 
+                entered_user.email,
+                entered_restaurant
+                )
+            if(response.condition){
+                setSubmitMsg(response.condition);
             }
+            
         }
 
 

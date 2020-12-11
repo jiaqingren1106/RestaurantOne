@@ -48,7 +48,17 @@ const getAllUsers = (req, res) => {
 };
 
 const createUser = (req, res) => {
-    const userName = req.body.name
+    // const {
+    //     name: ,
+    //     email: ,
+    //     password: ,
+    //     images:[],
+    //     type:    ,
+    //     restaurant_id: ,
+    //     isNewRestaurant: 
+    // } = req.body;
+
+    const userName = req.body.name;
     const newUser = new user(req.body);
     let find = false;
     console.log("createUser")
@@ -59,6 +69,7 @@ const createUser = (req, res) => {
         }
         for(let i = 0; i < users.length; i++){
             if(users[i].name === userName){
+                console.log("CREATEUSER: FAIL")
                 res.send({"condition": "fail"})
                 find = true
             }
@@ -68,7 +79,8 @@ const createUser = (req, res) => {
                 if (err) {
                     res.send(err);
                 }
-                res.json({"condition": "success"});
+                console.log("CREATEUSER: SUCCESS")
+                res.send(user);
             });
         }
     });

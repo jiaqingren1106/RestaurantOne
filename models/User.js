@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
     },
 
     isNewRestaurant:{
-        type: Boolean
+        type: Boolean,
     },
 
 });

@@ -3,6 +3,7 @@ import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
 import {getUserInLogin} from "../Action/userAction";
+import {login} from "../Action/authAction";
 
 const mapStateToProps = (state) => {
     return {route:
@@ -28,7 +29,7 @@ const SignIn = (props) => {
         props.setRoute(newRoute)
     }
     const [entered_user, setEntered_user] = useState({
-        username: "",
+        email: "",
         password: "",
     })
     const [warning, setWarning] = useState("")
@@ -36,43 +37,74 @@ const SignIn = (props) => {
     const [result, setResult] = useState([])
 
 
-    const handleLogin = () => {
+    // const handleLogin = () => {
 
-        getUserInLogin(setResult, result)
+    //     getUserInLogin(setResult, result)
 
-        console.log(result)
+    //     console.log(result)
 
-        let targetUser = (result).filter((user => user.name === entered_user.username
-            && user.password === entered_user.password))
-        console.log(targetUser)
+    //     let targetUser = (result).filter((user => user.name === entered_user.email
+    //         && user.password === entered_user.password))
+    //     console.log(targetUser)
 
-        if (targetUser.length === 0) {
-            setWarning("no such user or password is incorrect")
-            setEntered_user(entered_user)
-            return
+    //     if (targetUser.length === 0) {
+    //         setWarning("no such email or password is incorrect")
+    //         setEntered_user({
+    //             email: "",
+    //             password: "",
+    //         })
+    //         return
+    //     }
+
+    //     let new_targetUser = {
+    //         email: targetUser[0].name,
+    //         userType: targetUser[0].type,
+    //         password: targetUser[0].password,
+    //         id: targetUser[0]._id,
+    //         email: targetUser[0].email,
+    //         following: targetUser[0].following,
+    //         images: targetUser[0].images,
+    //         reviews: targetUser[0].reviews,
+    //     }
+
+    //     console.log(new_targetUser)
+
+    //     props.setUser(new_targetUser)
+    //     if (targetUser[0].userType === "admin") {
+    //         setRoute("AdminPage")
+    //     }
+    //     else {
+    //         setRoute("FirstPage")
+    //     }
+    // }
+
+    const handleLogin = async () => {
+        try{
+            await login(entered_user.email, entered_user.password);
+
+            console.log("foundUser: ", foundUser)
+            if(!foundUser){
+                setWarning("no such email or password is incorrect")
+                setEntered_user({
+                    email: "",
+                    password: "",
+                })
+                return;
+            }
+
+            props.setUser(JSON.parse(foundUser));
+            if (foundUser.type === "admin") {
+                setRoute("AdminPage")
+            }
+            else {
+                setRoute("FirstPage")
+            }
+        } catch(e){
+
         }
-
-        let new_targetUser = {
-            username: targetUser[0].name,
-            userType: targetUser[0].type,
-            password: targetUser[0].password,
-            id: targetUser[0]._id,
-            email: targetUser[0].email,
-            following: targetUser[0].following,
-            images: targetUser[0].images,
-            reviews: targetUser[0].reviews,
-        }
-
-        console.log(new_targetUser)
-
-        props.setUser(new_targetUser)
-        if (targetUser[0].userType === "admin") {
-            setRoute("AdminPage")
-        }
-        else {
-            setRoute("FirstPage")
-        }
+        
     }
+
     return (
         <div className="signInContainer">
 
@@ -86,7 +118,7 @@ const SignIn = (props) => {
                                 <div className="mt3">
                                     <label className="db fw6 lh-copy f4 " >Username</label>
                                     <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                           onChange={(e) => {entered_user.username = e.target.value}}/>
+                                           onChange={(e) => {entered_user.email = e.target.value}}/>
                                 </div>
                                 <div className="mv3">
                                     <label className="db fw6 lh-copy f4 " htmlFor="password">Password</label>

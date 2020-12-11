@@ -48,6 +48,13 @@ const RestaurantSchema = new mongoose.Schema({
         }
     ],
 
+    followers:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
+
     rating:{
         type: Number
     },
