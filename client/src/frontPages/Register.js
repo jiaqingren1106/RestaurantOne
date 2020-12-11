@@ -168,7 +168,7 @@ const Register = (props)=> {
             setWarning("")
             setSubmitMsg("uploading data...")
             if(userType == "regular"){
-                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
+                createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
             }else{
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
                 createImage(certificate, setImageId)

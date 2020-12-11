@@ -21,10 +21,6 @@ const MakePost = (props) => {
 
     const testId = "5fd03079037cb93f99c2fa01"
 
-    const onSubmit = () => {
-        createImage(certificate, setImageId)
-        
-    }
 
     const handleCreatePost = () => {
         setPicMsg("")
@@ -33,7 +29,8 @@ const MakePost = (props) => {
             props.setPostApp(false)
             props.setPostSending("sending new post...")
             // call the backend sending
-
+            createImage(certificate, setImageId)
+            
         }
         else {
             setWarning("has unfilled field!")
