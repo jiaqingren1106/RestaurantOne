@@ -42,7 +42,6 @@ app.use((err, req, res, next) => {
 // === ROUTES ===
 app.get("/", (req, res) => res.send('Hello World with Restaurant One'));
 
-
 userRoutes(app);
 restaurantRoutes(app);
 restaurantOwnerRoutes(app);
@@ -51,7 +50,7 @@ reviewRoutes(app);
 imageRoutes(app);
 
 // === Server Listening ===
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   log(`server running http://localhost:${port}`);
   log(`press CTRL+C to stop server`);

@@ -9,7 +9,7 @@ const imageRoutes = (app) => {
         .delete(ImageController.deleteImageById);
 
 
-    const { Image } = require("../models/Image");
+    const Image = require("../models/Image");
     const multipart = require('connect-multiparty');
     const multipartMiddleware = multipart();
 
@@ -20,7 +20,6 @@ const imageRoutes = (app) => {
         api_secret: 'saxIaNVXpTfTSXS0spLOuBSOF9I'
     });
     app.post("/image", multipartMiddleware, (req, res) => {
-
         cloudinary.uploader.upload(
             req.files.image.path,
             function (result) {

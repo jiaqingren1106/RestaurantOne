@@ -54,7 +54,10 @@ class BlogElement extends React.Component{
                         {description}
                     </Card.Text>
 
-                    <Link onClick={() => setRoute("Post")}>
+                    <Link onClick={() => setRoute("Post") } to={{ 
+                        pathname: "/Post", 
+                        state: this.props.ids 
+                   }}>
                         <Card.Text className={'readMore'}>
                             read more ....
                         </Card.Text>

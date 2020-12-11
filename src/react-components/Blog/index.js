@@ -6,7 +6,7 @@ import BlogElement from '../BlogElement'
 class blog extends React.Component{
 
     render() {
-        const blogCount = this.props.info.length;
+        const blogCount = this.props.title.length;
         let cardgroups = []
         var i;
         for (i = 0; i < blogCount; i++){
@@ -18,10 +18,11 @@ class blog extends React.Component{
             <CardGroup>
                 {cardgroups.map((index) => {
                     return <BlogElement
-                        image={(this.props.info)[index].image}
-                        title={(this.props.info)[index].title}
-                        descriptions={(this.props.info)[index].descriptions}
-                        date={(this.props.info)[index].date} />
+                        image={(this.props.image)[index]}
+                        title={(this.props.title)[index]}
+                        descriptions={(this.props.description)[index]}
+                        date={(this.props.date)[index]}
+                        ids={(this.props.post_id)[index]} />
                 })}
             </CardGroup>
         );

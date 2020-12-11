@@ -8,6 +8,7 @@
 .blogpic{
     height: 500px;
     width: 800px;
+    padding-bottom: 3vh;
     display: inline-block;
 }
 
@@ -73,6 +74,7 @@
     color: white;
     margin: 0 auto;
     width: 50%;
+    padding-bottom: 3vh;
 }
 
 .PosttextEditorDiv{

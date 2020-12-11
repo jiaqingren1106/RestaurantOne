@@ -81,4 +81,31 @@ const deletePostById = (req, res) => {
     });
 };
 
-module.exports = {getAllPosts, getPostById, createPost, updatePostById, deletePostById}
+
+const addreview = (req, res) => {
+
+    post.findById(req.params.postId, (err, singlePost) => {
+        if (err) {
+            res.send(err);
+        }
+
+        let review_list = singlePost['reviews']
+        review_list.push(req.params.reviewId)
+
+        post.findByIdAndUpdate(
+            req.params.postId,
+            {
+              $set: {
+                reviews: review_list
+              }
+            },
+            { new: true }
+        ).then(p => {
+            res.json(singlePost)
+        })
+    
+    });
+
+}
+
+module.exports = {getAllPosts, getPostById, createPost, updatePostById, deletePostById, addreview}

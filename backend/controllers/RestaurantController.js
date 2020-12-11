@@ -1,5 +1,6 @@
-const restaurant = require('../models/restaurant.js');
+const restaurant = require('../models/Restaurant')
 const log = console.log;
+
 
 const getRestaurantById = (req, res) => {
     restaurant.findById(req.params.restaurantId, (err, restaurant) => {
@@ -8,7 +9,7 @@ const getRestaurantById = (req, res) => {
         }
         log("getRestaurantById: ", restaurant);
 
-        res.json(restaurant.populate("posts"));
+        res.json(restaurant);
     });
 };
 
@@ -69,4 +70,31 @@ const deleteRestaurantById = (req, res) => {
     });
 };
 
-module.exports = {getAllRestaurants, getRestaurantById, createRestaurant, updateRestaurantById, deleteRestaurantById}
+
+const addreview = (req, res) => {
+
+    restaurant.findById(req.params.restaurantId, (err, rest) => {
+        if (err) {
+            res.send(err);
+        }
+        let review_list = rest.reviews 
+        review_list.push(req.params.reviewId)
+
+        restaurant.findByIdAndUpdate(
+            req.params.restaurantId,
+            {
+              $set: {
+                reviews: review_list
+              }
+            },
+            { new: true }
+        ).then(rest => {
+            res.json(rest)
+        })
+    
+    });
+
+}
+
+module.exports = {getAllRestaurants, getRestaurantById, createRestaurant,
+     updateRestaurantById, deleteRestaurantById, addreview}

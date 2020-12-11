@@ -6,6 +6,8 @@ import {BrowserRouter, withRouter, Link, Route} from "react-router-dom";
 import {register, setRoute} from "../redux/actions";
 import {connect} from "react-redux";
 import leftarrow from '../images/leftarrow.png'
+import {getBlogs} from '../Action/blogAction'
+import {getRestaurantsPost} from "../Action/restaurantAction"
 
 const mapStateToProps = (state) => {
     return {
@@ -21,67 +23,30 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class BlogPage extends React.Component{
+    constructor(props){
+        super(props);
 
+        this.state = {
+            id: props.location.state,
+            post_id: [],
+            title:[],
+            date:[],
+            description:[],
+            image: [],
+            info:[]
+        }
 
-    state = {
-        info:[
-            {image: burger, title: "Introduce our new burger", comments: ["Nice !", "Nice !", "Nice !", "Nice !",
-                    "Nice !"], users:["Yuan", "Yuan", "Yuan", "Yuan", "Yuan"], descriptions: "A hamburger (also burger" +
-                    " for short) is a sandwich consisting of one or more cooked patties of ground meat, usually beef," +
-                    " placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame " +
-                    "broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or " +
-                    "chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a \"special sauce\", often a " +
-                    "variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger " +
-                    "topped with cheese is called a cheeseburger", date: 'Nov 1, 2020'},
-            {image: burger, title: "Introduce our new burger", comments: ["Nice !", "Nice !", "Nice !", "Nice !",
-                    "Nice !"], users:["Yuan", "Yuan", "Yuan", "Yuan", "Yuan"], descriptions: "A hamburger (also burger" +
-                    " for short) is a sandwich consisting of one or more cooked patties of ground meat, usually beef," +
-                    " placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame " +
-                    "broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or " +
-                    "chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a \"special sauce\", often a " +
-                    "variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger " +
-                    "topped with cheese is called a cheeseburger", date: 'Nov 1, 2020'},
-            {image: burger, title: "Introduce our new burger", comments: ["Nice !", "Nice !", "Nice !", "Nice !",
-                    "Nice !"], users:["Yuan", "Yuan", "Yuan", "Yuan", "Yuan"], descriptions: "A hamburger (also burger" +
-                    " for short) is a sandwich consisting of one or more cooked patties of ground meat, usually beef," +
-                    " placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame " +
-                    "broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or " +
-                    "chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a \"special sauce\", often a " +
-                    "variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger " +
-                    "topped with cheese is called a cheeseburger", date: 'Nov 1, 2020'},
-            {image: burger, title: "Introduce our new burger", comments: ["Nice !", "Nice !", "Nice !", "Nice !",
-                    "Nice !"], users:["Yuan", "Yuan", "Yuan", "Yuan", "Yuan"], descriptions: "A hamburger (also burger" +
-                    " for short) is a sandwich consisting of one or more cooked patties of ground meat, usually beef," +
-                    " placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame " +
-                    "broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or " +
-                    "chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a \"special sauce\", often a " +
-                    "variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger " +
-                    "topped with cheese is called a cheeseburger", date: 'Nov 1, 2020'},
-            {image: burger, title: "Introduce our new burger", comments: ["Nice !", "Nice !", "Nice !", "Nice !",
-                    "Nice !"], users:["Yuan", "Yuan", "Yuan", "Yuan", "Yuan"], descriptions: "A hamburger (also burger" +
-                    " for short) is a sandwich consisting of one or more cooked patties of ground meat, usually beef," +
-                    " placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame " +
-                    "broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or " +
-                    "chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a \"special sauce\", often a " +
-                    "variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger " +
-                    "topped with cheese is called a cheeseburger", date: 'Nov 1, 2020'}
-        ]
+        getRestaurantsPost(this, props.location.state)
+        console.log(props)
+
     }
+
 
     render() {
 
-        const setRoute = (newRoute) => {
-            let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
-                targetRoute = `${newRoute}`
-            }
-
-            this.props.history.push(targetRoute)
-            this.props.setRoute(newRoute)
-        }
 
         const row = 1
-        const restaurantLen = this.state.info.length;
+        const restaurantLen = this.state.title.length;
         const leftover = restaurantLen % row;
         var cardGroupLen;
         if (leftover === 0) {
@@ -98,22 +63,54 @@ class BlogPage extends React.Component{
         }
 
         var CouponList;
-        CouponList = (
-            <div>
-                {cardgroups.map((index) => {
-                    return <Blog
-                        info={(this.state.info).slice(row*index,index*row+row)}/>
-                })}
-            </div>
-        );
+
+
+        if(this.state.title.length > 0 && this.state.description.length > 0 && this.state.image.length > 0 && this.state.date.length > 0 && this.state.post_id.length > 0){
+            CouponList = (
+                <div>
+                    {cardgroups.map((index) => {
+                        return <Blog
+                            title={(this.state.title).slice(row*index,index*row+row)}
+                            date= {(this.state.date).slice(row*index,index*row+row)}
+                            description= {(this.state.description).slice(row*index,index*row+row)}
+                            image = {(this.state.image).slice(row*index,index*row+row)}
+                            post_id = {(this.state.post_id).slice(row*index,index*row+row)}
+                            />
+                    })}
+                </div>
+            );
+        }else{
+            CouponList = (
+                <div></div>
+            )
+        }
+
+      
+     
+
+        const setRoute = (newRoute, id) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+            this.props.setRoute(newRoute)
+            this.props.history.push(targetRoute, id)
+        }
 
         return (
-                <BrowserRouter>
+                <BrowserRouter >
                     <div className={'BlogPage'}>
                         <div className={'BlogPageUpper'}>
-                            <button className={"restaurantName"} onClick={() => setRoute("RestaurantPage")}>
+                            <Link 
+                            className={"restaurantName"} 
+                            onClick={() => setRoute("RestaurantPage", this.state.id )}
+                            to={{ 
+                                pathname: "/RestaurantPage", 
+                                state: this.state.id 
+                               }}
+                            >
                                 Restaurant
-                            </button>
+                            </Link>
                         </div>
 
                         <p className={'BlogPageTitle'}>

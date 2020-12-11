@@ -5,10 +5,14 @@ const postRoutes = (app) => {
         .get(PostController.getAllPosts)
         .post(PostController.createPost);
 
-    app.route('/Post/:postId')
+    app.route('/post/:postId')
         .get(PostController.getPostById)
         .put(PostController.updatePostById)
         .delete(PostController.deletePostById);
+
+    app.route('/post/:postId/:reviewId')
+        .post(PostController.addreview)
+
 };
 
 module.exports = postRoutes;

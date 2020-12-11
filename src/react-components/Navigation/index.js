@@ -2,7 +2,7 @@ import React from 'react';
 import "./styles.css"
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import {withRouter, Link} from "react-router-dom";
 
 
 const mapStateToProps = (state) => {
@@ -23,15 +23,15 @@ class Navigation extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {Follow:'Follow'};
+        this.state = {Follow:'Follow', id: props.id};
         this.changeFollow = this.changeFollow.bind(this);
     }
 
     changeFollow(){
         if(this.state['Follow'] === 'Follow'){
-            this.setState({Follow: 'Unfollow'})
+            this.setState({Follow: 'Unfollow', id: this.id})
         }else{
-            this.setState({Follow: 'Follow'})
+            this.setState({Follow: 'Follow', id: this.id})
         }
     }
 
@@ -54,19 +54,35 @@ class Navigation extends React.Component {
                     {this.state['Follow']}
                 </button>
 
-                <button className={"navigationButton"} onClick={() => setRoute("BlogPage")}>
+                <Link 
+                className={"navigationButton"} 
+                onClick={() => setRoute("BlogPage")}
+                to={{ 
+                    pathname: "/BlogPage", 
+                    state: this.state.id 
+                   }}
+                >
                     Blog
-                </button>
+                </Link>
 
-                <button className={"navigationButton"} onClick={() => setRoute("MenuPage")}>
+                <Link 
+                className={"navigationButton"} 
+                onClick={() => setRoute("MenuPage")}
+                to={{ 
+                    pathname: "/MenuPage", 
+                    state: this.state.id 
+                   }}
+                >
                     Menu
-                </button>
+                </Link>
 
 
             </div>
         )
     }
 }
+
+
 
 
 
