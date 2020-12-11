@@ -16,6 +16,7 @@
 #restaurantTitle{
     height: 30px;
     font-size: x-large;
+    color: #130506;
 }
 
 #cardBody{
@@ -35,7 +36,13 @@
     overflow: auto;
     height: 50px;
     font-size: medium;
+    color: #130506;
+
 }
 #restaurantDescri::-webkit-scrollbar{
     width: 0;
+}
+
+#rating{
+    color: #130506;
 }

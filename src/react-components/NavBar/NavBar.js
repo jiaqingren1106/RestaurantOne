@@ -121,8 +121,8 @@ class NavBar extends React.Component {
     }
 
     return (
-      <Styles>
-        <Navbar expand="lg" fixed="top">
+      <Styles >
+        <Navbar id="topNav" expand="lg" fixed="top">
             <div>
                 <Navbar.Brand  className='point_cursor' onClick={this.onCoupon}>Deals</Navbar.Brand>
                 <Navbar.Brand  className='point_cursor' onClick={this.onDashBoard}>Dashboard</Navbar.Brand>
