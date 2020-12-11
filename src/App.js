@@ -13,6 +13,11 @@ import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
+import Menus from "./pages/owner/Menus";
+import Deals from "./pages/owner/Deals"
+
+import History from "./pages/user/History";
+import Following from "./pages/user/Following"
 
 import Profile from "./pages/Profile";
 import ProfileOwner from "./pages/owner/ProfileOwner";
@@ -21,7 +26,7 @@ import Postlist from "./pages/owner/Postlist"
 
 
 import {Route, withRouter, Switch} from 'react-router-dom'
-import ProfileUser from './pages/ProfileUser';
+import ProfileUser from './pages/user/ProfileUser';
 
 const getTargetPage = (route) => {
     // switch (route) {
@@ -70,6 +75,12 @@ const App = ({route, user, history}) => {
                    <Route exact path="/Followers" component={Followers}/>
                    <Route exact path="/" component={StartUp}/>
                    <Route exact path="/Postlist" component={Postlist}/>
+                   <Route exact path="/Menus" component={Menus}/>
+                   <Route exact path="/Deals" component={Deals}/>
+
+                   <Route exact path="/History" component={History}/>
+                   <Route exact path="/Following" component={Following}/>
+
 
                    <Route exact path="/ProfilePage" component={ProfileUser}/>
                    <Route exact path="/ProfilePageOwner" component={ProfileOwner}/>

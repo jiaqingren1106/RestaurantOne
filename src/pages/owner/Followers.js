@@ -106,7 +106,7 @@ class Followers extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="posts">
+                        <NavItem eventKey="posts" onClick={() => setRoute("Postlist")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -126,7 +126,7 @@ class Followers extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="menus">
+                        <NavItem eventKey="menus" onClick={() => setRoute("Menus")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -136,7 +136,7 @@ class Followers extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="deal">
+                        <NavItem eventKey="deal" onClick={() => setRoute("Deals")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>

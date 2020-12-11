@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { register, setRoute } from "../../redux/actions";
+import NavBar from '../../react-components/NavBar/NavBar'
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,7 +11,13 @@ import Col from 'react-bootstrap/Col'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import './Postlist.css'
+
+// import './ProfileUser.css';
+
+
+
+
+const mql = window.matchMedia(`(min-width: 800px)`);
 
 
 const mapStateToProps = (state) => {
@@ -27,21 +34,13 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class PostList extends React.Component {
+class ProfileUser extends React.Component {
 
     constructor(props) {
-        super(props)
-        // const username = this.props.user.username
-        // const password = this.props.user.password
-        this.state = {
-            post: [
-                { postid: 0, date: "2010-9-10", content: "introduce new burger" },
-                { postid: 1, date: "2010-9-10", content: "introduce new fries" },
-                { postid: 2, date: "2010-9-10", content: "introduce new coke" },
-                { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
-            ],
-        }
+        super(props);
+        this.state = {id:""}
     }
+
 
 
     render() {
@@ -55,31 +54,10 @@ class PostList extends React.Component {
             this.props.setRoute(newRoute)
         }
 
-        let postList = (
-            <div>
-                {this.state.post.map((post) => {
-                    return (
-                        <div className={'postBlock'}>
-                            <p id="history">
-                                {"Date: " + post.date}
-                            </p>
-                            <p id="history">
-                                {"Post ID: " + post.postid}
-                            </p>
-
-                            <p id="history">
-                                {"Content:  " + post.content}
-                            </p>
-
-
-                        </div>);
-                })}
-            </div>
-        );
 
         return (
-            <Container id='Profile'>
-                                <SideNav
+            <div id="main">
+                <SideNav
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -98,7 +76,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageOwner")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -108,7 +86,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="posts" onClick={() => setRoute("Postlist")}>
+                        <NavItem eventKey="posts" onClick={() => setRoute("History")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -118,7 +96,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="followers" onClick={() => setRoute("Followers")}>
+                        <NavItem eventKey="followers" onClick={() => setRoute("Following")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -127,42 +105,39 @@ class PostList extends React.Component {
                                 followers
                             </NavText>
                         </NavItem>
-
-                        <NavItem eventKey="menus" onClick={() => setRoute("Menus")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                menus
-                            </NavText>
-                        </NavItem>
-
-                        <NavItem eventKey="deal" onClick={() => setRoute("Deals")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                deal
-                            </NavText>
-                        </NavItem>
-
                     </SideNav.Nav>
                 </SideNav>
 
+                <form >
+                    <div>
+                        User Name:
+                        <input id="userName"
+                                type="text"
+                        />
 
-                <div id="profile">
-                    <Row>
-                        <Col>
-                            {postList}
-                        </Col>
-                    </Row>
+                    </div>
 
-                </div>
-            </Container>
+                    <div>
+                        Email:
+                        <input id="userName"
+                                type="text"
+                        />
+
+                    </div>
+
+                    <div>
+                        Password:
+                        <input id="userName"
+                                type="text"
+                        />
+
+                    </div>
+                </form>
+
+            </div>
+
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUser);

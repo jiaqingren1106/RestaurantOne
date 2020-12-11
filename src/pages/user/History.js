@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import './Postlist.css'
+// import './Postlist.css'
 
 
 const mapStateToProps = (state) => {
@@ -34,11 +34,11 @@ class PostList extends React.Component {
         // const username = this.props.user.username
         // const password = this.props.user.password
         this.state = {
-            post: [
-                { postid: 0, date: "2010-9-10", content: "introduce new burger" },
-                { postid: 1, date: "2010-9-10", content: "introduce new fries" },
-                { postid: 2, date: "2010-9-10", content: "introduce new coke" },
-                { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
+            history: [
+                { postid: 0, date: "2010-9-10", comment: "really good, 10/10 would come again" },
+                { postid: 1, date: "2010-9-10", comment: "really good, 10/10 would come again" },
+                { postid: 2, date: "2010-9-10", comment: "really good, 10/10 would come again" },
+                { postid: 4, date: "2010-9-10", comment: "really good, 10/10 would come again" }
             ],
         }
     }
@@ -47,7 +47,7 @@ class PostList extends React.Component {
     render() {
         const setRoute = (newRoute) => {
             let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
+            if (!(newRoute === "StartUp" || newRoute === "")) {
                 targetRoute = `${newRoute}`
             }
 
@@ -55,20 +55,20 @@ class PostList extends React.Component {
             this.props.setRoute(newRoute)
         }
 
-        let postList = (
+        let historyList = (
             <div>
-                {this.state.post.map((post) => {
+                {this.state.history.map((review) => {
                     return (
-                        <div className={'postBlock'}>
+                        <div className={'reviewBlock'}>
                             <p id="history">
-                                {"Date: " + post.date}
+                                {"Date: " + review.date}
                             </p>
                             <p id="history">
-                                {"Post ID: " + post.postid}
+                                {"Post ID: " + review.postid}
                             </p>
 
                             <p id="history">
-                                {"Content:  " + post.content}
+                                {"Comments:  " + review.comment}
                             </p>
 
 
@@ -79,7 +79,7 @@ class PostList extends React.Component {
 
         return (
             <Container id='Profile'>
-                                <SideNav
+                <SideNav
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -98,7 +98,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageOwner")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -108,7 +108,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="posts" onClick={() => setRoute("Postlist")}>
+                        <NavItem eventKey="posts" onClick={() => setRoute("History")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -118,7 +118,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="followers" onClick={() => setRoute("Followers")}>
+                        <NavItem eventKey="followers" onClick={() => setRoute("Following")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -127,27 +127,6 @@ class PostList extends React.Component {
                                 followers
                             </NavText>
                         </NavItem>
-
-                        <NavItem eventKey="menus" onClick={() => setRoute("Menus")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                menus
-                            </NavText>
-                        </NavItem>
-
-                        <NavItem eventKey="deal" onClick={() => setRoute("Deals")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                deal
-                            </NavText>
-                        </NavItem>
-
                     </SideNav.Nav>
                 </SideNav>
 
@@ -155,7 +134,7 @@ class PostList extends React.Component {
                 <div id="profile">
                     <Row>
                         <Col>
-                            {postList}
+                            {historyList}
                         </Col>
                     </Row>
 

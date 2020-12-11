@@ -10,8 +10,6 @@ import Col from 'react-bootstrap/Col'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import './Postlist.css'
-
 
 const mapStateToProps = (state) => {
     return {
@@ -27,24 +25,35 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class PostList extends React.Component {
+class Following extends React.Component {
 
     constructor(props) {
         super(props)
-        // const username = this.props.user.username
-        // const password = this.props.user.password
+        const username = this.props.user.username
+        const password = this.props.user.password
         this.state = {
-            post: [
-                { postid: 0, date: "2010-9-10", content: "introduce new burger" },
-                { postid: 1, date: "2010-9-10", content: "introduce new fries" },
-                { postid: 2, date: "2010-9-10", content: "introduce new coke" },
-                { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
+
+            following: [
+                { name: "BergurKing", rating: "5", key: "1" },
+                { name: "McDonalds", rating: "4", key: "2" },
+                { name: "AW", rating: "5", key: "3" },
+
+                { name: "Subway", rating: "5", key: "4" },
+                { name: "Popeye", rating: "5", key: "5" },
+                { name: "PizzaHut", rating: "5", key: "6" },
+
+                { name: "TimHortons", rating: "5", key: "7" },
+                { name: "StarBucks", rating: "5", key: "8" },
+                { name: "TacoBell", rating: "5", key: "9" }
             ],
+
         }
     }
-
-
+ 
     render() {
+        // const user = this.props.user;
+        // const showPassword = ("*").repeat(user.password.length);
+
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -55,31 +64,28 @@ class PostList extends React.Component {
             this.props.setRoute(newRoute)
         }
 
-        let postList = (
+
+    
+        let followingList = (
             <div>
-                {this.state.post.map((post) => {
+                {this.state.following.map((following) => {
                     return (
-                        <div className={'postBlock'}>
-                            <p id="history">
-                                {"Date: " + post.date}
+                        <div className={'reviewBlock'}>
+                            <p id="followings">
+                                {"Name: " + following.name}
                             </p>
-                            <p id="history">
-                                {"Post ID: " + post.postid}
+                            <p id="followings">
+                                {"Rating: " + following.rating}
                             </p>
-
-                            <p id="history">
-                                {"Content:  " + post.content}
-                            </p>
-
-
                         </div>);
                 })}
             </div>
         );
 
+
         return (
             <Container id='Profile'>
-                                <SideNav
+                <SideNav
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -98,7 +104,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageOwner")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -108,7 +114,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="posts" onClick={() => setRoute("Postlist")}>
+                        <NavItem eventKey="posts" onClick={() => setRoute("History")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -118,7 +124,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="followers" onClick={() => setRoute("Followers")}>
+                        <NavItem eventKey="followers" onClick={() => setRoute("Following")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -127,27 +133,6 @@ class PostList extends React.Component {
                                 followers
                             </NavText>
                         </NavItem>
-
-                        <NavItem eventKey="menus" onClick={() => setRoute("Menus")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                menus
-                            </NavText>
-                        </NavItem>
-
-                        <NavItem eventKey="deal" onClick={() => setRoute("Deals")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                deal
-                            </NavText>
-                        </NavItem>
-
                     </SideNav.Nav>
                 </SideNav>
 
@@ -155,7 +140,7 @@ class PostList extends React.Component {
                 <div id="profile">
                     <Row>
                         <Col>
-                            {postList}
+                            {followingList}
                         </Col>
                     </Row>
 
@@ -165,4 +150,4 @@ class PostList extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, mapDispatchToProps)(Following);
