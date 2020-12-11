@@ -1,0 +1,24 @@
+#main {
+    text-align: center;
+}
+
+.updatProfileContainer {
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+
+
+#restaurantName{
+    display: inline-block;
+    border-color: black;
+    border-width: 1px;
+    width: 200px;
+    height: 40px;
+}
+

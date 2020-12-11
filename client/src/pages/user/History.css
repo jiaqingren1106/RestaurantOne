@@ -1,0 +1,9 @@
+#historyList{
+    margin-left: 70px;
+}
+
+.historyBlock{
+    border-width: 1px;
+    border-color: black;
+    width: 50%;
+}

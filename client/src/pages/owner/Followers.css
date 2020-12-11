@@ -1,0 +1,10 @@
+.followerBlock{
+    border-color: black;
+    border-width: 1px;
+    margin-left: 70px;
+    width: 50%;
+}
+
+#followerlist{
+    margin-left: 70px;
+}

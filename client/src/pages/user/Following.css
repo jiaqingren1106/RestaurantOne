@@ -1,0 +1,8 @@
+.followingBlock{
+    border-width: 1px;
+    border-color: black;
+    width: 50%;
+}
+#followingLsit{
+    margin-left: 70px;
+}

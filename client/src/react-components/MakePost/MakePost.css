@@ -1,0 +1,23 @@
+#makePostFileButton {
+    border-color: black;
+}
+
+#makePostFileUpload {
+    display: none; /* do not display the actual file upload button */
+}
+.makePost {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.postInput {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.createPostBut {
+    width: fit-content;
+}
