@@ -1,14 +1,15 @@
 const RestaurantOwnerController = require("../controllers/RestaurantOwnerController");
+const { authenticate } = require("../authentication/authMiddleware");
 
 const restaurantOwnerRoutes = (app) => {
     app.route('/restaurantOwners')
-        .get(RestaurantOwnerController.getAllRestaurantOwners)
+        .get(authenticate, RestaurantOwnerController.getAllRestaurantOwners)
         .post(RestaurantOwnerController.createRestaurantOwner);
 
     app.route('/restaurantOwners/:restaurantOwnerId')
-        .get(RestaurantOwnerController.getRestaurantOwnerById)
-        .put(RestaurantOwnerController.updateRestaurantOwnerById)
-        .delete(RestaurantOwnerController.deleteRestaurantOwnerById);
+        .get(authenticate, RestaurantOwnerController.getRestaurantOwnerById)
+        .put(authenticate, RestaurantOwnerController.updateRestaurantOwnerById)
+        .delete(authenticate, RestaurantOwnerController.deleteRestaurantOwnerById);
 };
 
 module.exports = restaurantOwnerRoutes;

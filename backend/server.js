@@ -1,32 +1,128 @@
-// "use strict";
-const cors = require("cors");
+"use strict";
+
+/* Server environment setup */
+// To run in development mode, run normally: node server.js
+// To run in development with the test user logged in the backend, run: TEST_USER_ON=true node server.js
+// To run in production mode, run in terminal: NODE_ENV=production node server.js
+const env = process.env.NODE_ENV // read the environment variable (will be 'production' in production mode)
+
+// const USE_TEST_USER = env !== 'production' && process.env.TEST_USER_ON // option to turn on the test user.
+// const TEST_USER_ID = '5fb8b011b864666580b4efe3' // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
+// const TEST_USER_EMAIL = 'test@user.com'
+//////////////////////////////////////
+// === Initializing ===
 const express = require("express");
 const app = express();
+const log = console.log;
+const bodyParser = require('body-parser')
+const bcrypt = require('bcryptjs')
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+const cors = require("cors");
+if (env !== 'production') { app.use(cors()) };
+
+//=== MONGODB ===
+const { mongoose } = require("./database/mongoose");
+mongoose.set('useFindAndModify', false);
+
+const { ObjectID } = require("mongodb");
+const User = require("./models/User");
+const RestaurantOwner = require("./models/RestaurantOwner");
+
+//=== EXPRESS SESSION ===
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session) // to store session information on the database in production
+
+/*** Session handling **************************************/
+// Create a session and session cookie
+app.use(
+  session({
+      secret: process.env.SESSION_SECRET || "our hardcoded secret", // make a SESSION_SECRET environment variable when deploying (for example, on heroku)
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+          expires: 60000,
+          httpOnly: true
+      },
+      // store the sessions on the database in production
+      store: env === 'production' ? new MongoStore({ mongooseConnection: mongoose.connection }) : null
+  })
+);
+
+// === ROUTES ===
+// Default Route
+app.get("/", (req, res) => res.send('Hello World with Restaurant One'));
+
+// Authentication
+app.post("/login", async (req, res) => {
+  log("login")
+  const email = req.body.email;
+  const password = req.body.password;
+  log(email)
+  log(password)
+
+  let chosenUser;
+  let chosenRestaurantOwner;
+
+  // log(email, password);
+  // Use the static method on the User model to find a user
+  // by their email and password
+  try{
+    chosenUser = await User.findOne({ email: email });
+    chosenRestaurantOwner = await RestaurantOwner.findOne({ email: email });
+    log("chosenUser: ", chosenUser);
+    log("chosenRestaurantOwner: ", chosenRestaurantOwner);
+    
+    if(chosenUser){
+      bcrypt.compare(password, chosenUser.password, (err, result) => {
+				if (result) {
+					req.session.user = chosenUser._id;
+          req.session.email = chosenUser.email; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
+          res.send({ currentUser: chosenUser.email, isAdmin: chosenUser.isAdmin, session: req.session });
+				} else {
+					res.status(400).json({error: "User not found"});
+				}
+			})
+    } else if(chosenRestaurantOwner){
+      bcrypt.compare(password, chosenRestaurantOwner.password, (err, result) => {
+				if (result) {
+					req.session.user = chosenRestaurantOwner._id;
+          req.session.email = chosenRestaurantOwner.email; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
+          res.send({ currentUser: chosenRestaurantOwner.email, isNewRestaurant: chosenRestaurantOwner.isNewRestaurant});
+				} else {
+					res.status(400).json({error: "Restaurant Owner not found"});
+				}
+			})
+    } else{
+      res.status(400).json({error: "User not found"});
+    }
+  }catch(e){
+    res.status(400).send(e)
+  }
+});
+
+app.get("/logout", (req, res) => {
+  // Remove the session
+  req.session.destroy(error => {
+      if (error) {
+          res.status(500).send(error);
+      } else {
+          res.send()
+      }
+  });
+});
+
+
+// All other Route
 const userRoutes = require('./routes/user');
 const restaurantRoutes = require('./routes/restaurant');
 const restaurantOwnerRoutes = require('./routes/restaurantOwner');
 const postRoutes = require('./routes/post');
 const reviewRoutes = require('./routes/review');
 const imageRoutes = require('./routes/image');
-
-const bodyParser = require('body-parser')
-
-// === Initializing variables ===
-const log = console.log;
-
-// === app.use() ===
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(cors());
-
-//=== MONGODB ===
-const { mongoose } = require("./database/mongoose");
-// const imageRoutes = require('./routes/image');
-
-// === ROUTES ===
-app.get("/", (req, res) => res.send('Hello World with Restaurant One'));
-
 
 userRoutes(app);
 restaurantRoutes(app);
