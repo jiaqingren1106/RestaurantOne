@@ -1,17 +1,31 @@
 import React, {useState} from "react";
 import "./MakePost.css"
+import {createImage} from "../../Action/imageAction"
+
+
 const MakePost = (props) => {
     const [postTitle, setPostTitle] = useState("")
     const [postContent, setPostContent] = useState("")
     const [postPic, setPostPic] = useState(null)
     const [warning, setWarning] = useState("")
     const [picMsg, setPicMsg] = useState("")
+    const [imageId, setImageId] = useState("")
+    const [certificate, setCertificate] = useState(null)
+
     const fileSelectedHandler = (e) => {
         const file = e.target.files[0]
         setPostPic(file)
         setPicMsg("upload img successfully")
         setWarning("")
     }
+
+    const testId = "5fd03079037cb93f99c2fa01"
+
+    const onSubmit = () => {
+        createImage(certificate, setImageId)
+        
+    }
+
     const handleCreatePost = () => {
         setPicMsg("")
         setWarning("")
@@ -36,11 +50,20 @@ const MakePost = (props) => {
                     <textarea id="postText" name="Post Text"
                               className="db border-box hover-black ba b--black-20 pa2 br2 mb2  h-100"
                               onChange={(e) => {setPostContent(e.target.value)}}/>
-                    <input type="file"
-                           id="makePostFileUpload" name="avatar"
-                           accept="image/png, image/jpeg" onChange={(e) => {fileSelectedHandler(e)}}/>
-                    <button id="makePostFileButton" onClick={() => {document.getElementById("makePostFileUpload").click()} }
-                            className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib black">choose post picture</button>
+                   
+
+                   <form className="image-form" id = "form2" onChange={(e) => {
+                            e.preventDefault();
+                            setCertificate(document.getElementById("form2"))
+                            }}>
+                            <div class="image-form__field" id = "imageI">
+                                <label>Image:</label>
+                                <input name="image" type="file" />
+                            </div>
+                    </form>
+
+
+
                 <p className="i green" >
                     {picMsg}
                 </p>

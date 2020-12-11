@@ -63,7 +63,6 @@ const createRestaurant = (req, res) => {
         for(let i = 0; i < restaurants.length; i++){
             if(restaurants[i].name === newRestaurant.name){
                 found = true
-                console.log(restaurants[i].name)
                 res.send({"condition": "fail"})
             }
         }
