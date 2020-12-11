@@ -68,9 +68,10 @@ const App = ({route, user, history}) => {
    return (
            <div>
                <Switch>
-                    <Route exact path="/Followers" component={Followers}/>
+                   <Route exact path="/Followers" component={Followers}/>
                    <Route exact path="/" component={StartUp}/>
                    <Route exact path="/Postlist" component={Postlist}/>
+
                    <Route exact path="/ProfilePage" component={ProfileUser}/>
                    <Route exact path="/ProfilePageOwner" component={ProfileOwner}/>
                    <Route exact path="/MenuPage" component={Menu}/>
