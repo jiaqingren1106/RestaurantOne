@@ -17,6 +17,8 @@ import Menu from './react-components/menu/Menu';
 
 import Profile from "./pages/Profile";
 import ProfileOwner from "./pages/owner/ProfileOwner";
+import Followers from "./pages/owner/Followers";
+import Postlist from "./pages/owner/Postlist"
 
 
 import {Route, withRouter, Switch} from 'react-router-dom'
@@ -66,7 +68,9 @@ const App = ({route, user, history}) => {
    return (
            <div>
                <Switch>
+                    <Route exact path="/Followers" component={Followers}/>
                    <Route exact path="/" component={FirstPage}/>
+                   <Route exact path="/Postlist" component={Postlist}/>
                    <Route exact path="/ProfilePage" component={ProfileUser}/>
                    <Route exact path="/ProfilePageOwner" component={ProfileOwner}/>
                    <Route exact path="/MenuPage" component={Menu}/>
