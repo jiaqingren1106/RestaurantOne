@@ -10,8 +10,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+
 import './ProfileOwner.css';
 
 
@@ -44,6 +44,17 @@ class ProfileOwner extends React.Component {
 
 
     render() {
+        const setRoute = (newRoute) => {
+            let targetRoute = `/`
+            if (!(newRoute=== "StartUp" || newRoute === "")){
+                targetRoute = `${newRoute}`
+            }
+
+            this.props.history.push(targetRoute)
+            this.props.setRoute(newRoute)
+        }
+
+
         return (
             <div id="main">
                 <SideNav
@@ -55,7 +66,7 @@ class ProfileOwner extends React.Component {
 
                     <SideNav.Nav defaultSelected="home">
 
-                        <NavItem eventKey="Home">
+                        <NavItem eventKey="Home" onClick={() => setRoute("FirstPage")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -65,17 +76,27 @@ class ProfileOwner extends React.Component {
                             </NavText>
                         </NavItem>
 
+                        <NavItem eventKey="Profile">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                            </NavIcon>
+
+                            <NavText>
+                                Profile
+                            </NavText>
+                        </NavItem>
+
                         <NavItem eventKey="posts">
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
 
-                            <NavText >
+                            <NavText onClick={() => setRoute("Postlist")} >
                                 posts
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="followers">
+                        <NavItem eventKey="followers" onClick={() => setRoute("Followers")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -144,9 +165,6 @@ class ProfileOwner extends React.Component {
                         />
 
                     </div>
-
-
-
                 </form>
 
             </div>
