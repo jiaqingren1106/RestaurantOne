@@ -20,13 +20,18 @@ class RestaurantGroups extends React.Component {
     for (i = 0; i < restaurantcount; i++) {
         cardgroups.push(i);
     }
+    
 
     var RestaurantList;
     RestaurantList = (
       <CardGroup>
         {cardgroups.map((index) => {
+          let rest_image = ""
+          if ((this.props.restaurants)[index].image.length != 0) {
+            rest_image = (this.props.restaurants)[index].image[0]
+          }
           return <Restaurant
-          image={(this.props.restaurants)[index].image[0]} 
+          image={rest_image} 
           description={(this.props.restaurants)[index].description} 
           name={(this.props.restaurants)[index].name} 
           rating={(this.props.restaurants)[index].rating}
