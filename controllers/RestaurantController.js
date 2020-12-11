@@ -25,33 +25,33 @@ const getAllRestaurants = (req, res) => {
 };
 
 const createRestaurant = (req, res) => {
-    // if(!req.body.posts){
-    //     req.body.posts = []
-    // }
+    if(!req.body.posts){
+        req.body.posts = []
+    }
 
-    // if(!req.body.reviews){
-    //     req.body.reviews = []
-    // }
+    if(!req.body.reviews){
+        req.body.reviews = []
+    }
 
-    // if(!req.body.image){
-    //     req.body.image = []
-    // }
+    if(!req.body.image){
+        req.body.image = []
+    }
 
-    // if(!req.body.rating){
-    //     req.body.rating = "Not Available"
-    // }
+    if(!req.body.rating){
+        req.body.rating = "Not Available"
+    }
 
-    // if(!req.body.opentime){
-    //     req.body.opentime = "Not Available"
-    // }
+    if(!req.body.opentime){
+        req.body.opentime = "Not Available"
+    }
 
-    // if(!req.body.safe){
-    //     req.body.safe = "Not Available"
-    // }
+    if(!req.body.safe){
+        req.body.safe = "Not Available"
+    }
 
-    // if(!req.body.owner){
-    //     req.body.owner = "Not Available"
-    // } 
+    if(!req.body.owner){
+        req.body.owner = "Not Available"
+    } 
 
     let found = false
     const newRestaurant = new restaurant(req.body);
