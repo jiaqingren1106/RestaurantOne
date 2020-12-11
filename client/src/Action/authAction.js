@@ -2,7 +2,7 @@ import ENV from '../config.js'
 const API_HOST = ENV.api_host
 
 // A function to send a POST request with the user to be logged in
-export const login = async (email, password) => {
+export const login = async (email, password, setUser) => {
     // Create our request constructor with all the parameters we need
     const request = new Request(`${API_HOST}/login`, {
         method: "post",
@@ -19,8 +19,15 @@ export const login = async (email, password) => {
     // Send the request with fetch()
     await fetch(request)
         .then(res => {
+            console.log("response: ", res);
             if (res.status === 200) {
                 return res.json();
+            }
+        }).then( json =>{
+            if (json.currentUser !== undefined) {
+                console.log("json: ", json)
+                setUser(json.currentUser);
+                // app.setState({ currentUser: json.currentUser });
             }
         })
         .catch(error => {

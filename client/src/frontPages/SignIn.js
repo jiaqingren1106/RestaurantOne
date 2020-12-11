@@ -36,40 +36,12 @@ const SignIn = (props) => {
     const [loginLoadingMsg, setLoginLoadingMsg] = useState("")
     const [result, setResult] = useState([])
 
-    // const checkLoginInfo = () => {
-    // if(result.length > 0){
-    //     let targetUser = (result).filter((user => user.name === entered_user.username
-    //         && user.password === entered_user.password))
-    //     if (targetUser.length === 0) {
-    //         setLoginLoadingMsg("")
-    //         setWarning("no such user or password is incorrect")
-    //         setEntered_user(entered_user)
-    //         return
-    //     }
-    //     let new_targetUser = {
-    //         username: targetUser[0].name,
-    //         userType: targetUser[0].type,
-    //         password: targetUser[0].password,
-    //         id: targetUser[0]._id,
-    //         email: targetUser[0].email,
-    //         images: targetUser[0].images,
-    //         restaurant_id: targetUser[0].restaurant_id
-    //     }
-
-    //     console.log(new_targetUser)
-
-    //     props.setUser(new_targetUser)
-    //     if (targetUser[0].userType === "admin") {
-    //         setRoute("AdminPage")
-    //     }
-    //     else {
-    //         setRoute("FirstPage")
     const handleLogin = async () => {
         try{
-            await login(entered_user.email, entered_user.password);
+            await login(entered_user.email, entered_user.password, props.setUser);
 
-            console.log("foundUser: ", foundUser)
-            if(!foundUser){
+            console.log("foundUser: ", props.user)
+            if(!props.user){
                 setWarning("no such email or password is incorrect")
                 setEntered_user({
                     email: "",
@@ -78,8 +50,7 @@ const SignIn = (props) => {
                 return;
             }
 
-            props.setUser(JSON.parse(foundUser));
-            if (foundUser.type === "admin") {
+            if (props.user.type === "admin") {
                 setRoute("AdminPage")
             }
             else {
@@ -91,14 +62,6 @@ const SignIn = (props) => {
         
     }
 
-    // }
-    // useEffect(checkLoginInfo, [result])
-    // const handleLogin = () => {
-    //     setResult([])
-    //     getUserInLogin(setResult, result)
-
-
-    // }
     return (
         <div className="signInContainer">
 
