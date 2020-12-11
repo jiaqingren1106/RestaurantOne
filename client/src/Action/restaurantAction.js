@@ -143,15 +143,24 @@ export const getRestaurantReviews = (Comp, restaurantid) => {
         });
 };
 
-export const createRestaurant = (restaurantName, restaurantDescription, restaurantAddress, restaurantCertificate, setSubmitMsg) =>{
 
+export const createRestaurant = async (
+    name, 
+    address, 
+    description, 
+    postcode, 
+    opentime, 
+    ) => 
+    {
     const url = `${API_HOST}/restaurants`
-    const UserBody = JSON.stringify({
-        name: restaurantName,
-        description: restaurantDescription,
-        address: restaurantAddress,
-        certificate:restaurantCertificate
+    const RestaurantBody = JSON.stringify({
+        name: name,
+        address: address,
+        description: description,
+        postcode: postcode,
+        opentime: opentime
     })
+    console.log(RestaurantBody)
 
     const request = new Request(url,
         {
@@ -160,21 +169,18 @@ export const createRestaurant = (restaurantName, restaurantDescription, restaura
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
               },
-            body: UserBody
+            body: RestaurantBody
         })
-    
-    fetch(request)
-    .then(res => {
-        if (res.status === 200) {
-            return res.json()
-        } else {
-            alert("Could not get description");
-        }
-    })
-    .then(json => {
-        setSubmitMsg(json.condition)
-    })
-    .catch(error => {
-        console.log(error);
-    });
-}
+        
+    await fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get description");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};

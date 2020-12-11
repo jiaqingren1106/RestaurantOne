@@ -18,28 +18,40 @@ const RestaurantSchema = new mongoose.Schema({
     },
 
     certificate:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Image"
     },
 
-    posts:{
-        type: Array
-    }, 
-
-    reviews:{
-        type: Array
+    owner_id:{  
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
 
-    image:{
-        type: Array
-    },
+    images:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Image"
+        }
+    ],
+
+    followers:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
 
     rating:{
-        type: String,
+        type: Number
     },
 
-    safe:{
-        type: String,
+    opentime:{
+        type: String
     },
+
+    isSafe:{
+        type:Boolean
+    }
 
     owner:{
         type: String,
