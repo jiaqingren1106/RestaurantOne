@@ -31,6 +31,11 @@ const RestaurantSchema = new mongoose.Schema({
         }
     ],
 
+    certificate:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Image"
+    }
+
 });
 
 
