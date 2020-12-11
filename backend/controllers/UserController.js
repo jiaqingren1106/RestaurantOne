@@ -1,6 +1,7 @@
 const user = require('../models/user.js');
 const log = console.log;
-const upload = require("../middleware/upload")
+const upload = require("../middleware/upload");
+const { set } = require('mongoose');
 
 const uploadFiles = async (req, res) => {
   try {
@@ -47,14 +48,28 @@ const getAllUsers = (req, res) => {
 };
 
 const createUser = (req, res) => {
+    const userName = req.body.name
     const newUser = new user(req.body);
-    console.log(user)
-    newUser.save((err, user) => {
+    let find = false;
+    console.log("createUser")
+    user.find({}, (err, users) => {
         if (err) {
             res.send(err);
         }
-        log("createUser: ", user);
-        res.json(user);
+        for(let i = 0; i < users.length; i++){
+            if(users[i].name == userName){
+                res.send({"condition": "fail"})
+                find = true
+            }
+        }
+        if(find === false){
+            newUser.save((err, user) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.json({"condition": "success"});
+            });
+        }
     });
 };
 

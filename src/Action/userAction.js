@@ -56,3 +56,38 @@ export const getUserForReview = (Comp, user_id) => {
             console.log(error);
         });
 };
+
+export const createUser =  (userName, userPassword, userEmail, setSubmitMsg) => {
+    const url = `${API_HOST}/users`
+    const UserBody = JSON.stringify({
+        name: userName,
+        password: userPassword,
+        email:userEmail
+    })
+    console.log(UserBody)
+
+    const request = new Request(url,
+        {
+            method:"post",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+              },
+            body: UserBody
+        })
+        
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get description");
+            }
+        })
+        .then(json => {
+            setSubmitMsg(json.condition)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
