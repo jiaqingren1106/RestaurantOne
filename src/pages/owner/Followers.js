@@ -8,6 +8,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import "./Followers.css"
+
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
@@ -47,6 +49,8 @@ class Followers extends React.Component {
     render() {
         // const user = this.props.user;
         // const showPassword = ("*").repeat(user.password.length);
+        console.log(this.props)
+
 
         const setRoute = (newRoute) => {
             let targetRoute = `/`
@@ -61,10 +65,11 @@ class Followers extends React.Component {
 
     
         let followerList = (
-            <div>
+            <div id="followerlist">
+                <h1>Followers:</h1>
                 {this.state.follower.map((follower) => {
                     return (
-                        <div className={'reviewBlock'}>
+                        <div className={'followerBlock'}>
                             <p id="followers">
                                 {"Name: " + follower.name}
                             </p>

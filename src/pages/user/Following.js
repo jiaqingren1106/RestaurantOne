@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
+import "./Following.css"
+
 const mapStateToProps = (state) => {
     return {
         route: state.routeState.route,
@@ -67,10 +69,10 @@ class Following extends React.Component {
 
     
         let followingList = (
-            <div>
+            <div id="followingLsit">
                 {this.state.following.map((following) => {
                     return (
-                        <div className={'reviewBlock'}>
+                        <div className={'followingBlock'}>
                             <p id="followings">
                                 {"Name: " + following.name}
                             </p>
@@ -104,7 +106,7 @@ class Following extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePage")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -120,7 +122,7 @@ class Following extends React.Component {
                             </NavIcon>
 
                             <NavText onClick={() => setRoute("Postlist")} >
-                                posts
+                                History
                             </NavText>
                         </NavItem>
 
@@ -130,7 +132,7 @@ class Following extends React.Component {
                             </NavIcon>
 
                             <NavText>
-                                followers
+                                Followings
                             </NavText>
                         </NavItem>
                     </SideNav.Nav>

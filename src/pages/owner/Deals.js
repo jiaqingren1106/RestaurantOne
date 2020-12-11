@@ -187,6 +187,9 @@ class Deals extends React.Component {
                     New coupon code:
                     <input/>
 
+                    Expire Date:
+                    <input/>
+
                     <button>
                         Add
                     </button>

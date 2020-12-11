@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { register, setRoute } from "../../redux/actions";
-import NavBar from '../../react-components/NavBar/NavBar'
-
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import './ProfileOwner.css';
+
+import { createUser } from '../../Action/userAction'
+import "../../frontPages/SignIn.css"
 
 
 
@@ -38,15 +34,16 @@ class ProfileOwner extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {id:""}
+        this.state = { id: "" }
     }
 
+    
 
 
     render() {
         const setRoute = (newRoute) => {
             let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
+            if (!(newRoute === "StartUp" || newRoute === "")) {
                 targetRoute = `${newRoute}`
             }
 
@@ -133,8 +130,8 @@ class ProfileOwner extends React.Component {
                     <div>
                         Restaurant Name:
                         <input id="restaurantName"
-                                type="text"
-                            // value="abc"
+                            type="text"
+                        // value="abc"
                         />
 
                     </div>
@@ -142,8 +139,8 @@ class ProfileOwner extends React.Component {
                     <div>
                         Address:
                         <input id="restaurantName"
-                                type="text"
-                            // value="abc"
+                            type="text"
+                        // value="abc"
                         />
 
                     </div>
@@ -151,8 +148,8 @@ class ProfileOwner extends React.Component {
                     <div>
                         Open time
                         <input id="restaurantName"
-                                type="text"
-                            // value="abc"
+                            type="text"
+                        // value="abc"
                         />
 
                     </div>
@@ -160,8 +157,8 @@ class ProfileOwner extends React.Component {
                     <div>
                         description:
                         <input id="restaurantName"
-                                type="text"
-                            // value="abc"
+                            type="text"
+                        // value="abc"
                         />
 
                     </div>
@@ -174,3 +171,10 @@ class ProfileOwner extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileOwner);
+
+
+
+
+
+
+

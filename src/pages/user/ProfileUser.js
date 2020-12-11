@@ -76,7 +76,7 @@ class ProfileUser extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePage")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>

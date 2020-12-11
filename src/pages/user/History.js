@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col'
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-// import './Postlist.css'
+import './History.css'
 
 
 const mapStateToProps = (state) => {
@@ -56,10 +56,10 @@ class PostList extends React.Component {
         }
 
         let historyList = (
-            <div>
+            <div id="historyList">
                 {this.state.history.map((review) => {
                     return (
-                        <div className={'reviewBlock'}>
+                        <div className="historyBlock">
                             <p id="history">
                                 {"Date: " + review.date}
                             </p>
@@ -98,7 +98,7 @@ class PostList extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePage")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -114,7 +114,7 @@ class PostList extends React.Component {
                             </NavIcon>
 
                             <NavText onClick={() => setRoute("Postlist")} >
-                                posts
+                                History
                             </NavText>
                         </NavItem>
 
@@ -124,7 +124,7 @@ class PostList extends React.Component {
                             </NavIcon>
 
                             <NavText>
-                                followers
+                                Followings
                             </NavText>
                         </NavItem>
                     </SideNav.Nav>
