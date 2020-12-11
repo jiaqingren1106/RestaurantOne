@@ -1,4 +1,4 @@
-const user = require('../models/user.js');
+const user = require('../models/User.js');
 const log = console.log;
 const upload = require("../middleware/upload");
 const { set } = require('mongoose');

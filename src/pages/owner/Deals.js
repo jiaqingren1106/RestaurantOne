@@ -1,17 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import './Deals.css';
 import { register, setRoute } from "../../redux/actions";
+import { connect } from 'react-redux';
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import MakePost from "../../react-components/MakePost/MakePost";
+
+import {
+    BURGERKING, MCDONALDS,
+    AWDES, SUBWAY, POPEYES, PIZZAHUT, TIMHORTONS,
+    STARBUCKS,
+    TACOBELL
+} from "../../data/discription_constants";
+
+import CouponGroup from '../../react-components/CouponGroup/CouponGroup';
+import AW from "../../images/AW.png";
+import BurgerKing from "../../images/burgerking.jpg";
+import Mcdonald from "../../images/Mcdonald.png";
+import PizzaHut from "../../images/pizzahut.jpg";
+import Popeye from "../../images/popeye.jpg";
+import StarBucks from "../../images/starbucks.jpg";
+import TimHortons from "../../images/timhortons.jpg";
+import TacoBell from "../../images/tacobell.jpg";
+import Subway from "../../images/subway.jpg";
+
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import './Postlist.css'
 
 
 const mapStateToProps = (state) => {
@@ -28,24 +40,65 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class PostList extends React.Component {
 
-    constructor(props) {
-        super(props)
-        // const username = this.props.user.username
-        // const password = this.props.user.password
-        this.state = {
-            post: [
-                { postid: 0, date: "2010-9-10", content: "introduce new burger" },
-                { postid: 1, date: "2010-9-10", content: "introduce new fries" },
-                { postid: 2, date: "2010-9-10", content: "introduce new coke" },
-                { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
-            ],
-            createPostAppear: false
-        }
+class Deals extends React.Component {
+    state = {
+        onSearch: false,
+        restaurants: [
+            { name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING },
+            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
+            { name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
+
+            { name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
+            { name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
+            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
+
+            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
+            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
+            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
+        ],
+        searched: []
     }
 
+
     render() {
+        const column = 4;
+
+        let restaurants
+        if (this.state.onSearch) {
+            restaurants = this.state.searched
+        } else {
+            restaurants = this.state.restaurants
+        }
+
+
+        const restaurantLen = restaurants.length;
+        const leftover = restaurantLen % column;
+        var cardGroupLen;
+        if (leftover === 0) {
+            cardGroupLen = restaurantLen / column;
+        } else {
+            cardGroupLen = restaurantLen / column + 1;
+        }
+
+
+        let cardgroups = [];
+        var i;
+        for (i = 0; i < cardGroupLen; i++) {
+            cardgroups.push(i);
+        }
+
+        var CouponList;
+        CouponList = (
+            <div id="dealsInProfile">
+                {cardgroups.map((index) => {
+                    return <CouponGroup
+                        restaurants={(restaurants).slice(column * index, index * column + column)} />
+
+                })}
+            </div>
+        );
+
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -56,44 +109,12 @@ class PostList extends React.Component {
             this.props.setRoute(newRoute)
         }
 
-        let postList = (
-            <div id="profilePage">
-                {this.state.post.map((post) => {
-                    return (
-                        <div className={'postBlock'}>
-                            <p id="history">
-                                {"Date: " + post.date}
-                            </p>
-                            <p id="history">
-                                {"Post ID: " + post.postid}
-                            </p>
-
-                            <p id="history">
-                                {"Content:  " + post.content}
-                            </p>
-
-                         </div>);
-                        // <Card>
-                        //     <Card.Header>Post ID: {post.postid}</Card.Header>
-                        //     <Card.Body class={'profilecard'}>
-                        //         <Card.Title >Date: {post.date}</Card.Title>
-                        //         <Card.Text>
-                        //         Content:  {post.content}
-                        //         </Card.Text>
-                        //         <Button variant="primary">Edit</Button>
-                        //         <Button variant="danger">Delete</Button>
-                        //     </Card.Body>
-                        // </Card>
-                })}
-            </div>
-        );
-
         return (
-            <div>
-                <SideNav className = "navBarProfile"
-                onSelect={(selected) => {
-                    // Add your code here
-                }}>
+            <section className='SecondPage'>
+                <SideNav
+                    onSelect={(selected) => {
+                        // Add your code here
+                    }}>
 
                     <SideNav.Toggle />
 
@@ -162,26 +183,20 @@ class PostList extends React.Component {
                     </SideNav.Nav>
                 </SideNav>
 
-                <div id="profiletitle">
-                    <h1>Restaurant Posts</h1>
-                </div>
+                <form id="dealForm">
+                    New coupon code:
+                    <input/>
 
-                <div id="profileContainer">
-                    {postList}
-                </div>
-                <div id="profilenewpost">
-                    <Button variant="primary" onClick = {() => this.setState({createPostAppear: !this.state.createPostAppear})}>
-                        {this.state.createPostAppear? "Exit Create Post": "Create Post"}</Button>
-                </div>
+                    <button>
+                        Add
+                    </button>
+                </form>
 
-                {this.state.createPostAppear? (<div id="createPostContainer">
-                    <div style={{height: "500px", width: "500px"}}>
-                        <MakePost/>
-                    </div>
-                </div>):null}
-            </div>
+
+                {CouponList}
+            </section>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, mapDispatchToProps)(Deals);

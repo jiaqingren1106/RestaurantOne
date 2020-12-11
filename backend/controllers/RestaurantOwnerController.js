@@ -1,4 +1,4 @@
-const restaurantOwner = require('../models/restaurantOwner.js');
+const restaurantOwner = require('../models/RestaurantOwner.js');
 const log = console.log;
 
 const getRestaurantOwnerById = (req, res) => {

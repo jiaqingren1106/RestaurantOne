@@ -1,0 +1,14 @@
+#main {
+    text-align: center;
+}
+
+
+
+#userName{
+    display: inline-block;
+    border-color: black;
+    border-width: 1px;
+    width: 200px;
+    height: 40px;
+}
+

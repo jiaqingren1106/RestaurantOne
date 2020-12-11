@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
-import './ProfileOwner.css';
+// import './ProfileUser.css';
 
 
 
@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class ProfileOwner extends React.Component {
+class ProfileUser extends React.Component {
 
     constructor(props) {
         super(props);
@@ -76,7 +76,7 @@ class ProfileOwner extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageOwner")}>
+                        <NavItem eventKey="Profile" onClick={() => setRoute("ProfilePageUser")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -86,7 +86,7 @@ class ProfileOwner extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="posts" onClick={() => setRoute("Postlist")}>
+                        <NavItem eventKey="posts" onClick={() => setRoute("History")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -96,7 +96,7 @@ class ProfileOwner extends React.Component {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="followers" onClick={() => setRoute("Followers")}>
+                        <NavItem eventKey="followers" onClick={() => setRoute("Following")}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -105,63 +105,30 @@ class ProfileOwner extends React.Component {
                                 followers
                             </NavText>
                         </NavItem>
-
-                        <NavItem eventKey="menus" onClick={() => setRoute("Menus")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                menus
-                            </NavText>
-                        </NavItem>
-
-                        <NavItem eventKey="deal" onClick={() => setRoute("Deals")}>
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-
-                            <NavText>
-                                deal
-                            </NavText>
-                        </NavItem>
-
                     </SideNav.Nav>
                 </SideNav>
 
                 <form >
                     <div>
-                        Restaurant Name:
-                        <input id="restaurantName"
+                        User Name:
+                        <input id="userName"
                                 type="text"
-                            // value="abc"
                         />
 
                     </div>
 
                     <div>
-                        Address:
-                        <input id="restaurantName"
+                        Email:
+                        <input id="userName"
                                 type="text"
-                            // value="abc"
                         />
 
                     </div>
 
                     <div>
-                        Open time
-                        <input id="restaurantName"
+                        Password:
+                        <input id="userName"
                                 type="text"
-                            // value="abc"
-                        />
-
-                    </div>
-
-                    <div>
-                        description:
-                        <input id="restaurantName"
-                                type="text"
-                            // value="abc"
                         />
 
                     </div>
@@ -173,4 +140,4 @@ class ProfileOwner extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileOwner);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUser);
