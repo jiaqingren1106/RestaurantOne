@@ -7,7 +7,8 @@ const url2 = 'mongodb://localhost:27017/Phase2'
 mongoose
   .connect(url, {
     useNewUrlParser: true,
-     useCreateIndex: true
+    useCreateIndex: true,
+    useUnifiedTopology: true
   })
   .then((con) => {
     console.log('DB connection successful');
