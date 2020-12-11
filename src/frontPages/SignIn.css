@@ -8,6 +8,7 @@
     fixed;
   background-size: cover;
   position: relative;
+  min-height: 100vh;
 }
 
 .signInBox {
