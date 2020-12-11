@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
@@ -32,26 +32,19 @@ const SignIn = (props) => {
         password: "",
     })
     const [warning, setWarning] = useState("")
-
+    const [loginLoadingMsg, setLoginLoadingMsg] = useState("")
     const [result, setResult] = useState([])
 
-
-    const handleLogin = () => {
-
-        getUserInLogin(setResult, result)
-
-        console.log(result)
-
+    const checkLoginInfo = () => {
+    if(result.length > 0){
         let targetUser = (result).filter((user => user.name === entered_user.username
             && user.password === entered_user.password))
-        console.log(targetUser)
-
         if (targetUser.length === 0) {
+            setLoginLoadingMsg("")
             setWarning("no such user or password is incorrect")
             setEntered_user(entered_user)
             return
         }
-
         let new_targetUser = {
             username: targetUser[0].name,
             userType: targetUser[0].type,
@@ -71,6 +64,15 @@ const SignIn = (props) => {
         else {
             setRoute("FirstPage")
         }
+    }
+
+    }
+    useEffect(checkLoginInfo, [result])
+    const handleLogin = () => {
+        setResult([])
+        getUserInLogin(setResult, result)
+
+
     }
     return (
         <div className="signInContainer">
@@ -95,6 +97,9 @@ const SignIn = (props) => {
                                 </div>
                                 <p className="i red">
                                     {warning}
+                                </p>
+                                <p className="i dark-blue">
+                                    {loginLoadingMsg}
                                 </p>
                             </fieldset>
                             <div className="">

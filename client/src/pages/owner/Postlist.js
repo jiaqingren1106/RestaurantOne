@@ -56,6 +56,7 @@ class PostList extends React.Component {
         this.setState({newPostingMsg: msg})
     }
     render() {
+        const {user} =this.props.user
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
