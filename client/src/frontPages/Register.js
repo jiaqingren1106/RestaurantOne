@@ -170,6 +170,7 @@ const Register = (props)=> {
             if(userType == "regular"){
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
             }else{
+                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
                 createImage(certificate, setImageId)
                 const yourFunction = async () => {
                     await delay(500);
