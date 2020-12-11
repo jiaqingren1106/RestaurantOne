@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import FirstPage from "./pages/FirstPage";
 import SecondPage from "./pages/SecondPage";
 import Register from "./frontPages/Register";
-import RegisterOwner from "./frontPages/RegisterOwner";
 import SignIn from "./frontPages/SignIn";
 import AdminPage from "./Admin/AdminPage";
 import {routeState, userState} from "./redux/reducer";
@@ -81,7 +80,7 @@ const App = ({route, user, history}) => {
                    <Route exact path="/RestaurantPage" component={RestaurantPage}/>
                    <Route exact path="/SecondPage" component={SecondPage}/>
                    <Route exact path="/FirstPage" component={FirstPage}/>
-                   <Route exact path="/Register" component={RegisterOwner}/>
+                   <Route exact path="/Register" component={Register}/>
                    <Route exact path="/SignIn" component={SignIn}/>
                </Switch>
            </div>
