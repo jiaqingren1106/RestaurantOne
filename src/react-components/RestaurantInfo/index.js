@@ -9,7 +9,9 @@ import MapContainer from '../MapContainer/MapContainer'
 import userPic from '../../images/userPhoto.jpg'
 import {register, setRoute} from "../../redux/actions";
 import {addReview} from "../../Action/reviewAction"
+import {getRestaurantReviews} from "../../Action/restaurantAction"
 
+let comp;
 
 const mapStateToProps = (state) => {
     return {
@@ -29,13 +31,15 @@ class RestaurantInfo extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {value: '', reviews: []};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmit2 = this.handleSubmit2.bind(this);
 
-        this.reviews = this.props.info['reviews'];
+        this.state.userId = this.props.info.userId
+        this.state.reviews = this.props.info['reviews'];
         this.reviewpic = this.props.info['reviewpic'];
+        this.update = false;
     }
 
 
@@ -44,10 +48,12 @@ class RestaurantInfo extends React.Component{
             alert("have to login to make comment")
         }
         else{
-            // this.users.push(this.props.user.username)
-            // this.setState({value: this.state.value});
-            console.log(this.state.value)
             addReview(this, this.state.value, this.props.info.userId, this.props.info.restaurantId)
+            // getRestaurantReviews(this, this.props.info.restaurantId)
+            if(this.state.userName != undefined){
+                const value = this.state.value
+                this.state.reviews.push([this.state.userName, this.state.userImage, value])
+            }
         }
 
     }
@@ -62,15 +68,17 @@ class RestaurantInfo extends React.Component{
 
     render() {
 
-        let comp;
-        const reviewLength = (this.reviews.length == 0)
+        // console.log(this.state.userName)
+        // console.log(this.state.userImage)
+        console.log(this.state.reviews)
 
+        const reviewLength = (this.state.reviews.length == 0)
 
         if(reviewLength == true){
             comp = <div> </div>
         }else{
             let review_list = []
-            for(let i = 0; i < this.reviews.length; i ++){
+            for(let i = 0; i < this.state.reviews.length; i ++){
                 review_list.push(i)
             }
 
@@ -80,15 +88,15 @@ class RestaurantInfo extends React.Component{
                         <div className={'reviewBlock2'}>
 
                             <div className={'userInfo'}>
-                                <img src={this.reviews[index][1]} alt = {''} className={"userPic"} />
+                                <img src={this.state.reviews[index][1]} alt = {''} className={"userPic"} />
 
                                 <p className={'userName1'}>
-                                    {this.reviews[index][0]}
+                                    {this.state.reviews[index][0]}
                                 </p>
                             </div>
                         </div>
                         <p className={'reviewConcent'}>
-                            {"Comments:  " + this.reviews[index][2]}
+                            {"Comments:  " + this.state.reviews[index][2]}
                         </p>
 
                        <hr
@@ -113,7 +121,7 @@ class RestaurantInfo extends React.Component{
         //                 </div>
 
         //                 <p className={'reviewConcent'}>
-        //                     {"Comments:  " + this.reviews[index]}
+        //                     {"Comments:  " + this.state.reviews[index]}
         //                 </p>
 
         //                 <img src={user1} alt={""} className={"reviewpic"} />
@@ -130,7 +138,7 @@ class RestaurantInfo extends React.Component{
 
 
 
-        const length = this.reviews.length
+        const length = this.state.reviews.length
 
         let i;
         let list = []

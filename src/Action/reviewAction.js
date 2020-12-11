@@ -1,8 +1,9 @@
 
 import ENV from '../config.js'
 import {getUser} from './userAction'
-import {addRestaurantPost} from './restaurantAction'
+import {addRestaurantReview} from './restaurantAction'
 import {addPostReview} from './postAction'
+import {getUserForReview} from './userAction'
 const API_HOST = ENV.api_host
 
 export const getReview = (Comp, review_id, index) => {
@@ -54,12 +55,14 @@ export const addReview = (Comp, review, userid, restaurantid) => {
             }
         })
         .then(json => {
-            addRestaurantPost(Comp, restaurantid, json['_id'])
+            addRestaurantReview(Comp, restaurantid, json['_id'])
+            getUserForReview(Comp, Comp.state.userId)
         })
         .catch(error => {
             console.log(error);
         });
 }
+
 
 export const addReviewFromPost = (Comp, review, userid, postid) => {
     const url = `${API_HOST}/reviews`
