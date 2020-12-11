@@ -54,7 +54,7 @@ app.use(
 
 // === ROUTES ===
 // Default Route
-app.get("/", (req, res) => res.send('Hello World with Restaurant One'));
+// app.get("/", (req, res) => res.send('Hello World with Restaurant One'));
 
 // Authentication
 app.post("/login", async (req, res) => {
