@@ -58,9 +58,8 @@ const SignIn = (props) => {
             password: targetUser[0].password,
             id: targetUser[0]._id,
             email: targetUser[0].email,
-            following: targetUser[0].following,
             images: targetUser[0].images,
-            reviews: targetUser[0].reviews,
+            restaurant_id: targetUser[0].restaurant_id
         }
 
         console.log(new_targetUser)
