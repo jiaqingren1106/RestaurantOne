@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
-import loginData from "../data/LoginData";
+import {getUserInLogin} from "../Action/userAction";
 
 const mapStateToProps = (state) => {
     return {route:
@@ -32,15 +32,40 @@ const SignIn = (props) => {
         password: "",
     })
     const [warning, setWarning] = useState("")
+
+    const [result, setResult] = useState([])
+
+
     const handleLogin = () => {
-        let targetUser = loginData.filter((user => user.username === entered_user.username
+
+        getUserInLogin(setResult, result)
+
+        console.log(result)
+
+        let targetUser = (result).filter((user => user.name === entered_user.username
             && user.password === entered_user.password))
+        console.log(targetUser)
+
         if (targetUser.length === 0) {
             setWarning("no such user or password is incorrect")
             setEntered_user(entered_user)
             return
         }
-        props.setUser(targetUser[0])
+
+        let new_targetUser = {
+            username: targetUser[0].name,
+            userType: targetUser[0].type,
+            password: targetUser[0].password,
+            id: targetUser[0]._id,
+            email: targetUser[0].email,
+            following: targetUser[0].following,
+            images: targetUser[0].images,
+            reviews: targetUser[0].reviews,
+        }
+
+        console.log(new_targetUser)
+
+        props.setUser(new_targetUser)
         if (targetUser[0].userType === "admin") {
             setRoute("AdminPage")
         }

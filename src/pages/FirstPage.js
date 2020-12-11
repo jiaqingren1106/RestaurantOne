@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { register, setRoute } from "../redux/actions";
+import { connect } from 'react-redux';
+
+
 import './FirstPage.css';
 import {BURGERKING, MCDONALDS,
     AWDES, SUBWAY, POPEYES,PIZZAHUT, TIMHORTONS,
@@ -18,11 +22,28 @@ import StarBucks from "../images/starbucks.jpg";
 import TimHortons from "../images/timhortons.jpg";
 import TacoBell from "../images/tacobell.jpg";
 import Subway from "../images/subway.jpg";
+
 import NavBar from '../react-components/NavBar/NavBar';
 
+
+
+const mapStateToProps = (state) => {
+    return {
+        route: state.routeState.route,
+        user: state.userState
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route) => dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
+
 class FirstPage extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state ={
             onSearch: false,
             restaurants: [
@@ -41,6 +62,7 @@ class FirstPage extends React.Component {
             searched: []
         };
         getRestaurants(this);
+        console.log(props)
     }
 
     useMeWhenYouDoSearch = (props) => {
@@ -116,4 +138,4 @@ class FirstPage extends React.Component {
     }
 }
 
-export default FirstPage;
+export default connect(mapStateToProps, mapDispatchToProps)(FirstPage);

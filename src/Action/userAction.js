@@ -30,6 +30,31 @@ export const getUser = (Comp, user_id, review_content) => {
         });
 };
 
+export const getUserInLogin = (setResult, result) => {
+    const url = `${API_HOST}/users`
+    const request = new Request(url,
+        {
+            method:"get"
+        })
+        
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get description");
+            }
+        })
+        .then(json => {
+            setResult(json)
+            
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
 
 export const getUserForReview = (Comp, user_id) => {
     const url = `${API_HOST}/users/${user_id}`
