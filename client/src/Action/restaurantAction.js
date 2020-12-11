@@ -4,7 +4,6 @@ import ENV from '../config.js'
 import {getReview} from './reviewAction'
 import {getImage} from './imageAction'
 import {getMultipleDescription} from './postAction'
-import {getFollowerToArray} from './userAction'
 const API_HOST = ENV.api_host
 
 export const getRestaurants = (Comp) => {
@@ -60,38 +59,6 @@ export const getRestaurantsByID = (Comp, id) => {
                         getImage(Comp, json['image'][i])
                     }
                 })    
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-};
-
-
-export const getRestaurantsFollowerByID = (Comp, id) => {
-    const url = `${API_HOST}/restaurants/${id}`
-
-    const request = new Request(url,
-        {
-            method:"get"
-        })
-
-    fetch(request)
-        .then(res => {
-            if (res.status === 200) {
-                return res.json()
-            } else {
-                alert("Could not get restaurants");
-            }
-        })
-        .then(json => {
-            console.log(json.followers)
-            let result = []
-            for (let i=0; i< json.followers.length; i++) {
-                getFollowerToArray(Comp, result, json.followers[i]);
-            }
-            
-            // Comp.setState({follower: result})
 
         })
         .catch(error => {
@@ -176,24 +143,15 @@ export const getRestaurantReviews = (Comp, restaurantid) => {
         });
 };
 
+export const createRestaurant = (restaurantName, restaurantDescription, restaurantAddress, restaurantCertificate, setSubmitMsg) =>{
 
-export const createRestaurant = async (
-    name, 
-    address, 
-    description, 
-    postcode, 
-    opentime, 
-    ) => 
-    {
     const url = `${API_HOST}/restaurants`
-    const RestaurantBody = JSON.stringify({
-        name: name,
-        address: address,
-        description: description,
-        postcode: postcode,
-        opentime: opentime
+    const UserBody = JSON.stringify({
+        name: restaurantName,
+        description: restaurantDescription,
+        address: restaurantAddress,
+        certificate:restaurantCertificate
     })
-    console.log(RestaurantBody)
 
     const request = new Request(url,
         {
@@ -202,18 +160,21 @@ export const createRestaurant = async (
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
               },
-            body: RestaurantBody
+            body: UserBody
         })
-        
-    await fetch(request)
-        .then(res => {
-            if (res.status === 200) {
-                return res.json()
-            } else {
-                alert("Could not get description");
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        });
-};
+    
+    fetch(request)
+    .then(res => {
+        if (res.status === 200) {
+            return res.json()
+        } else {
+            alert("Could not get description");
+        }
+    })
+    .then(json => {
+        setSubmitMsg(json.condition)
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}

@@ -49,28 +49,16 @@ const getAllUsers = (req, res) => {
 };
 
 const createUser = (req, res) => {
-    // const {
-    //     name: ,
-    //     email: ,
-    //     password: ,
-    //     images:[],
-    //     type:    ,
-    //     restaurant_id: ,
-    //     isNewRestaurant: 
-    // } = req.body;
-
-    const userName = req.body.name;
+    const userName = req.body.name
     const newUser = new user(req.body);
     let find = false;
     console.log("createUser")
-
     user.find({}, (err, users) => {
         if (err) {
             res.send(err);
         }
         for(let i = 0; i < users.length; i++){
-            if(users[i].name === userName){
-                console.log("CREATEUSER: FAIL")
+            if(users[i].name == userName){
                 res.send({"condition": "fail"})
                 find = true
             }
@@ -82,8 +70,6 @@ const createUser = (req, res) => {
                 }else{
                     res.json({"condition": "success"});
                 }
-                console.log("CREATEUSER: SUCCESS")
-                res.send(user);
             });
         }
     });

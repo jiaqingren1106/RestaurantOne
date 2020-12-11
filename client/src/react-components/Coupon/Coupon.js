@@ -17,13 +17,13 @@ class Coupon extends React.Component {
 
         <Card.Footer className="couponFooter">
           <small className="text-muted">
-              Code: {this.props.code}
+              Code: mdsahfjksggfk
           </small>
         </Card.Footer>
 
       <Card.Footer className="couponFooter">
           <small className="text-muted">
-              Expired date: {this.props.expire}
+              Expired date: Dec 31, 2020
           </small>
       </Card.Footer>
 

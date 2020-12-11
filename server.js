@@ -28,7 +28,9 @@ if (env !== 'production') { app.use(cors()) };
 const { mongoose } = require("./database/mongoose");
 mongoose.set('useFindAndModify', false);
 
+const { ObjectID } = require("mongodb");
 const User = require("./models/User");
+const RestaurantOwner = require("./models/RestaurantOwner");
 
 //=== EXPRESS SESSION ===
 const session = require("express-session");
@@ -62,12 +64,17 @@ app.post("/login", async (req, res) => {
   log(email)
   log(password)
 
+  let chosenUser;
+  let chosenRestaurantOwner;
+
   // log(email, password);
   // Use the static method on the User model to find a user
   // by their email and password
   try{
-    const chosenUser = await User.findOne({ email: email });
+    chosenUser = await User.findOne({ email: email });
+    chosenRestaurantOwner = await RestaurantOwner.findOne({ email: email });
     log("chosenUser: ", chosenUser);
+    log("chosenRestaurantOwner: ", chosenRestaurantOwner);
     
     if(chosenUser){
       bcrypt.compare(password, chosenUser.password, (err, result) => {
@@ -77,6 +84,16 @@ app.post("/login", async (req, res) => {
           res.send({ currentUser: chosenUser.email, isAdmin: chosenUser.isAdmin, session: req.session });
 				} else {
 					res.status(400).json({error: "User not found"});
+				}
+			})
+    } else if(chosenRestaurantOwner){
+      bcrypt.compare(password, chosenRestaurantOwner.password, (err, result) => {
+				if (result) {
+					req.session.user = chosenRestaurantOwner._id;
+          req.session.email = chosenRestaurantOwner.email; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
+          res.send({ currentUser: chosenRestaurantOwner.email, isNewRestaurant: chosenRestaurantOwner.isNewRestaurant});
+				} else {
+					res.status(400).json({error: "Restaurant Owner not found"});
 				}
 			})
     } else{
@@ -102,12 +119,14 @@ app.get("/logout", (req, res) => {
 // All other Route
 const userRoutes = require('./routes/user');
 const restaurantRoutes = require('./routes/restaurant');
+const restaurantOwnerRoutes = require('./routes/restaurantOwner');
 const postRoutes = require('./routes/post');
 const reviewRoutes = require('./routes/review');
 const imageRoutes = require('./routes/image');
 
 userRoutes(app);
 restaurantRoutes(app);
+restaurantOwnerRoutes(app);
 postRoutes(app);
 reviewRoutes(app);
 imageRoutes(app);

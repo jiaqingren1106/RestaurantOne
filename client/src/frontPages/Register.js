@@ -26,6 +26,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const Register = (props)=> {
 
+
+
     const setRoute = (newRoute) => {
         let targetRoute = `/`
         if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -127,7 +129,7 @@ const Register = (props)=> {
         }
         return result
     }
-    const onSubmit = async () => {
+    const onSubmit = () => {
         console.log(entered_user)
         for(const field_ in entered_user){
             if (entered_user[field_] === ""){
@@ -165,20 +167,24 @@ const Register = (props)=> {
         if (result)  {
             setWarning("")
             setSubmitMsg("uploading data...")
-            try{
-                await createUser(
-                    entered_user.username, 
-                    entered_user.password, 
-                    entered_user.email,
-                    entered_restaurant
-                );
-                setSubmitMsg("Success");
-                setRoute("SignIn");
-            }catch(e){
-                setWarning("Something went wrong");
-                alert("Something Went Wrong!");
+            if(userType == "regular"){
+                createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
+            }else{
+                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
+                createImage(certificate, setImageId)
+                const yourFunction = async () => {
+                    await delay(500);
+                    console.log(imageId)
+                    createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
+                  };
+                yourFunction()
+                // if(imageId != ""){
+                //     createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
+                // }
             }
         }
+
+
     }
     return (
         <div className="signInContainer">
@@ -190,57 +196,51 @@ const Register = (props)=> {
                     <div className="measure center">
                         <fieldset  className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 mh0 ">Register</legend>
-
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f4" >Username</label>
-                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                    onChange={(e) => {
-                                        entered_user.username = e.target.value
-                                    }
-                                }/>
+                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" onChange={(e) => {entered_user.username = e.target.value}}/>
                                 <label className="db fw6 lh-copy f4 ">Confirm Username</label>
-                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    onChange={(e) => {
-                                        entered_user.usernamec = e.target.value
-                                    }
-                                }/>
+                                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"onChange={(e) => {
+                                           entered_user.usernamec =
+                                       e.target.value
+                                       }}/>
                             </div>
-
                             <div className="mv3">
-                                <label className="db fw6 lh-copy f4 " >Email</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    onChange={(e) => {
-                                        entered_user.email = e.target.value
-                                    }
-                                }/>
-                                <label className="db fw6 lh-copy f4 ">Confirm Email</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    onChange={(e) => {
-                                            entered_user.emailc = e.target.value
-                                    }
-                                }/>
-                            </div>
-
-                            <div className="mt3">
                                 <label className="db fw6 lh-copy f4 " >Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="password"
-                                    onChange={(e) => {
-                                        entered_user.password = e.target.value
-                                    }
-                                }/>
+                                       type="password" onChange={(e) => {
+                                           entered_user.password = e.target.value
+                                }}/>
                                 <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="password"
-                                    onChange={(e) => {
-                                        entered_user.passwordc = e.target.value
-                                    }
-                                }/>
+                                       type="password" onChange={(e) => {
+                                           entered_user.passwordc = e.target.value
+                                }}/>
                             </div>
+
+
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f4 " >Email</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                       type="password" onChange={(e) => {
+                                           entered_user.email = e.target.value
+                                }}/>
+                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Email</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                       type="password" onChange={(e) => {
+                                           entered_user.emailc = e.target.value
+                                }}/>
+                            </div>
+
+
+
+
+
+
 
                             <div className="flex items-center mb2">
                                 <input className="mr2" type="checkbox"
-                                        onChange={(event => {setType(event)})}/>
+                                       onChange={(event => {setType(event)})}/>
                                     <label  className="lh-copy">sign up as restaurant</label>
                             </div>
                             {displayRestaurant()}
@@ -253,7 +253,7 @@ const Register = (props)=> {
                         </fieldset>
                         <div>
                             <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
-                                    onClick={() => onSubmit()}> Create </button>
+                                   onClick={() => onSubmit()}> Create </button>
                         </div>
                         <div className="lh-copy mt3 ">
                             <a href="#0" onClick={() => setRoute("SignIn")} className="f6 link dim black db">Sign In</a>
