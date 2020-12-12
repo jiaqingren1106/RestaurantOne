@@ -25,7 +25,7 @@ export const login = async (email, password) => {
                 return res.json();
             }
         }).then( json =>{
-            if (json.currentUser !== undefined) {
+            if (json && json.currentUser !== undefined) {
                 return json.currentUser
             }
         })
