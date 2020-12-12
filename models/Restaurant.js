@@ -37,17 +37,9 @@ const RestaurantSchema = new mongoose.Schema({
         type: String,
     },
 
-    safe:{
-        type: String,
-    },
-
-    owner:{
-        type: String,
-    },
-
-    opentime:{
-        type: String,
-    },
+    isSafe:{
+        type:Boolean
+    }
 });
 
 

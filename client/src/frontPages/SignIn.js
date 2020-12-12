@@ -35,45 +35,52 @@ const SignIn = (props) => {
     const [loginLoadingMsg, setLoginLoadingMsg] = useState("")
     const [result, setResult] = useState([])
 
-    const checkLoginInfo = () => {
-    if(result.length > 0){
-        let targetUser = (result).filter((user => user.name === entered_user.username
-            && user.password === entered_user.password))
-        if (targetUser.length === 0) {
-            setLoginLoadingMsg("")
-            setWarning("no such user or password is incorrect")
-            setEntered_user(entered_user)
-            return
-        }
-        let new_targetUser = {
-            username: targetUser[0].name,
-            userType: targetUser[0].type,
-            password: targetUser[0].password,
-            id: targetUser[0]._id,
-            email: targetUser[0].email,
-            images: targetUser[0].images,
-            restaurant_id: targetUser[0].restaurant_id
-        }
+    const handleLogin = async () => {
+        try{
+            let foundUser = await login(entered_user.email, entered_user.password);
 
-        console.log(new_targetUser)
+            if(!foundUser){
+                setWarning("no such email or password is incorrect")
+                setEntered_user({
+                    email: "",
+                    password: "",
+                })
+                return;
+            }
 
-        props.setUser(new_targetUser)
-        if (targetUser[0].userType === "admin") {
-            setRoute("AdminPage")
-        }
-        else {
-            setRoute("FirstPage")
+            // console.log("email:", foundUser.email)
+            // console.log("id:", foundUser._id)
+            // console.log("images:", foundUser.images)
+            // console.log("password:", foundUser.password)
+            // console.log("userType:", foundUser.type)
+            // console.log("username:", foundUser.name)
+            // console.log("restaurant_id:", foundUser.restaurant_id)
+
+            props.setUser({
+                email: foundUser.email,
+                id: foundUser._id,
+                images: foundUser.images,
+                password: foundUser.password,
+                userType: foundUser.type,
+                username: foundUser.name,
+                restaurant_id:foundUser.restaurant_id
+            });
+            // console.log("USER:", props.user)
+
+
+            if (props.user.userType === "admin") {
+                setRoute("AdminPage")
+            }
+            else if (props.user.userType === "restaurant" || props.user.userType === "regular"){
+                setRoute("FirstPage")
+            } else {
+                alert("something went wrong!")
+            }
+        } catch(e){
+            console.log(e);
         }
     }
 
-    }
-    useEffect(checkLoginInfo, [result])
-    const handleLogin = () => {
-        setResult([])
-        getUserInLogin(setResult, result)
-
-
-    }
     return (
         <div className="signInContainer">
 

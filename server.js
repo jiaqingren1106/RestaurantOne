@@ -61,8 +61,8 @@ app.post("/login", async (req, res) => {
   log("login")
   const email = req.body.email;
   const password = req.body.password;
-  log(email)
-  log(password)
+  log("email: ", email)
+  log("password: ", password)
 
   let chosenUser;
   let chosenRestaurantOwner;
@@ -81,9 +81,10 @@ app.post("/login", async (req, res) => {
 				if (result) {
 					req.session.user = chosenUser._id;
           req.session.email = chosenUser.email; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
-          res.send({ currentUser: chosenUser.email, isAdmin: chosenUser.isAdmin, session: req.session });
+          res.user = chosenUser;
+          res.send({ currentUser: chosenUser });
 				} else {
-					res.status(400).json({error: "User not found"});
+          res.status(400).json({error: "User not found"});
 				}
 			})
     } else if(chosenRestaurantOwner){
