@@ -124,7 +124,7 @@ class Menus extends React.Component {
         return (
             <section className='Menu'>
 
-                <SideNav className = " o-70"
+                <SideNav
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -195,6 +195,7 @@ class Menus extends React.Component {
 
                     </SideNav.Nav>
                 </SideNav>
+<<<<<<< HEAD
                 <h1 className="f3 f2-m f1-l fw2 near-white mv3 center-l">
                     This is the title
                 </h1>
@@ -217,6 +218,26 @@ class Menus extends React.Component {
                         {this.state.warning}
                     </p>
                 </div>
+=======
+
+                <form id="menuForm">
+                    new item:
+                    <input />
+
+                    Price:
+                    <input />
+
+                    <input type="file"
+                        id="makeMenuFileUpload" name="avatar"
+                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
+
+                    <button>
+                        Add
+                    </button>
+                </form>
+
+                {MenuItemList}
+>>>>>>> parent of 76d5fee... add menu style
             </section>
         );
     }
