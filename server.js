@@ -124,6 +124,8 @@ const restaurantOwnerRoutes = require('./routes/restaurantOwner');
 const postRoutes = require('./routes/post');
 const reviewRoutes = require('./routes/review');
 const imageRoutes = require('./routes/image');
+const menuRoutes = require('./routes/menu')
+const couponRoutes = require('./routes/coupon')
 
 userRoutes(app);
 restaurantRoutes(app);
@@ -131,7 +133,8 @@ restaurantOwnerRoutes(app);
 postRoutes(app);
 reviewRoutes(app);
 imageRoutes(app);
-
+menuRoutes(app)
+couponRoutes(app)
 // === ERROR HANDLER ===
 // catch 400
 app.use((err, req, res, next) => {
