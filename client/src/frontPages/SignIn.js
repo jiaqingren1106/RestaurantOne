@@ -3,6 +3,7 @@ import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
 import {getUserInLogin} from "../Action/userAction";
+// import {login} from "../Action/"
 
 const mapStateToProps = (state) => {
     return {route:
@@ -37,8 +38,8 @@ const SignIn = (props) => {
 
     const handleLogin = async () => {
         try{
-            let foundUser = await login(entered_user.email, entered_user.password);
-
+            // let foundUser = await login(entered_user.email, entered_user.password);
+            let foundUser = ""
             if(!foundUser){
                 setWarning("no such email or password is incorrect")
                 setEntered_user({
