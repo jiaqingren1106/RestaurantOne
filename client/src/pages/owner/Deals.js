@@ -45,51 +45,39 @@ const mapDispatchToProps = (dispatch) => {
 
 class Deals extends React.Component {
     state = {
-        onSearch: false,
-        restaurants: [
-            { name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING },
-            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
-            { name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
+        coupon: [
+            { image: BurgerKing, code: "2341535245642453", expire: "2020" },
+            { image: Mcdonald, code: "dfdfsggfgb", expire: "2020" },
+            { image: AW, code: "dfasfsdsd", expire: "qy53  rGER" },
+            { image: Subway, code: "KTYRHTEGRW", expire: "2020" },
+            { image: Popeye, code: "42IOFH33F", expire: "2020" },
+            { image: PizzaHut, code: "REGGQWR", expire: "2020" },
 
-            { name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
-            { name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
-            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
-
-            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
-            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
-            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
+            { image: TimHortons, code: "34TQGTQ43", expire: "2020" },
+            { image: StarBucks, code: "EQRGERQER", expire: "2020" },
+            { image: TacoBell, code: "QERGERGQ", expire: "2020" }
         ],
-        createPostAppear: false,
-        newPostingMsg: "",
-        postPic:null,
-        warning:"",
-        picMsg:"",
-        searched: [],
-
     }
 
-    
+
 
     setCreatePostAppear = (newAppear) => {
-        this.setState({createPostAppear: newAppear})
+        this.setState({ createPostAppear: newAppear })
     }
     setPostSendingMsg = (msg) => {
-        this.setState({newPostingMsg: msg})
+        this.setState({ newPostingMsg: msg })
     }
 
 
     render() {
         const column = 4;
 
-        let restaurants
-        if (this.state.onSearch) {
-            restaurants = this.state.searched
-        } else {
-            restaurants = this.state.restaurants
-        }
+
+        let coupon = this.state.coupon
 
 
-        const restaurantLen = restaurants.length;
+
+        const restaurantLen = coupon.length;
         const leftover = restaurantLen % column;
         var cardGroupLen;
         if (leftover === 0) {
@@ -110,7 +98,7 @@ class Deals extends React.Component {
             <div id="dealsInProfile">
                 {cardgroups.map((index) => {
                     return <CouponGroup
-                        restaurants={(restaurants).slice(column * index, index * column + column)} />
+                        restaurants={(coupon).slice(column * index, index * column + column)} />
 
                 })}
             </div>
@@ -118,7 +106,7 @@ class Deals extends React.Component {
 
         const setRoute = (newRoute) => {
             let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
+            if (!(newRoute === "StartUp" || newRoute === "")) {
                 targetRoute = `${newRoute}`
             }
 
@@ -129,10 +117,10 @@ class Deals extends React.Component {
         const fileSelectedHandler = (e) => {
             const file = e.target.files[0]
 
-            this.setState({postPic: file})
-            this.setState({warning: "upload img successfully"})
-            this.setState({picMsg: ""})
-           
+            this.setState({ postPic: file })
+            this.setState({ warning: "upload img successfully" })
+            this.setState({ picMsg: "" })
+
         }
 
         return (
@@ -211,18 +199,19 @@ class Deals extends React.Component {
 
                 <form id="dealForm">
                     New coupon code:
-                    <input/>
+                    <input />
 
                     Expire Date:
-                    <input/>
+                    <input />
 
                     <input type="file"
-                           id="makeDealFileUpload" name="avatar"
-                           accept="image/png, image/jpeg" onChange={(e) => {fileSelectedHandler(e)}}/>
+                        id="makeDealFileUpload" name="avatar"
+                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
 
-                    <Button variant="primary" onClick = {() => {
+                    <Button variant="primary" onClick={() => {
                         this.setPostSendingMsg("")
-                        this.setState({createPostAppear: !this.state.createPostAppear})}}>
+                        this.setState({ createPostAppear: !this.state.createPostAppear })
+                    }}>
                         ADD
                     </Button>
                 </form>
