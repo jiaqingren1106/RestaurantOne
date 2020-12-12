@@ -56,6 +56,8 @@
             restaurant_id: targetUser[0].restaurant_id
         }
 
+        console.log(new_targetUser)
+
         props.setUser(new_targetUser)
         if (targetUser[0].userType === "admin") {
             setRoute("AdminPage")
