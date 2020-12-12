@@ -12,6 +12,18 @@ const restaurantRoutes = (app) => {
 
     app.route('/restaurants/:restaurantId/:reviewId')
         .post(RestaurantController.addreview)
+<<<<<<< Updated upstream
+=======
+
+    app.route('/restaurants/:restaurantId/:postid/:postid1')
+        .post(RestaurantController.addpost)
+
+    app.route('/restaurants/:restaurantId/:menuid/:menuid1/menuid2')
+        .post(RestaurantController.addmenu)
+
+    app.route('/restaurants/:restaurantId/:couponid/couponid1/couponid2/couponid3')
+        .post(RestaurantController.addcoupon)
+>>>>>>> Stashed changes
 };
 
 module.exports = restaurantRoutes;

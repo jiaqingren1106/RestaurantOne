@@ -161,6 +161,80 @@ export const getRestaurantsPost = (Comp, id) => {
 
 export const addRestaurantReview = (Comp, restaurantid, reviewid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}/${reviewid}`
+    const request = new Request(url,
+        {
+            method:"post"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            return json
+        })
+        .catch(error => {
+            console.log(error);
+        });   
+}
+
+
+export const addRestaurantMenu = (restaurantid, menuid) => {
+    const url = `${API_HOST}/restaurants/${restaurantid}/${menuid}/${menuid}/${menuid}`
+
+    const request = new Request(url,
+        {
+            method:"post"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            return json
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+export const addRestaurantCoupon = (restaurantid, couponid) => {
+    const url = `${API_HOST}/restaurants/${restaurantid}/${couponid}/${couponid}/${couponid}/${couponid}`
+
+    const request = new Request(url,
+        {
+            method:"post"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            return json
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+export const addRestaurantPost = (restaurantid, postid) => {
+    const url = `${API_HOST}/restaurants/${restaurantid}/${postid}/${postid}`
 
     const request = new Request(url,
         {
