@@ -35,47 +35,6 @@
 //     const [loginLoadingMsg, setLoginLoadingMsg] = useState("")
 //     const [result, setResult] = useState([])
 
-<<<<<<< Updated upstream
-    const checkLoginInfo = () => {
-    if(result.length > 0){
-        let targetUser = (result).filter((user => user.name === entered_user.username
-            && user.password === entered_user.password))
-        if (targetUser.length === 0) {
-            setLoginLoadingMsg("")
-            setWarning("no such user or password is incorrect")
-            setEntered_user(entered_user)
-            return
-        }
-        let new_targetUser = {
-            username: targetUser[0].name,
-            userType: targetUser[0].type,
-            password: targetUser[0].password,
-            id: targetUser[0]._id,
-            email: targetUser[0].email,
-            images: targetUser[0].images,
-            restaurant_id: targetUser[0].restaurant_id
-        }
-
-        props.setUser(new_targetUser)
-        if (targetUser[0].userType === "admin") {
-            setRoute("AdminPage")
-        }
-        else {
-            setRoute("FirstPage")
-        }
-    }
-
-    }
-    useEffect(checkLoginInfo, [result])
-    const handleLogin = () => {
-        setResult([])
-        getUserInLogin(setResult, result)
-
-
-    }
-    return (
-        <div className="signInContainer">
-=======
 //     const handleLogin = async () => {
 //         try{
 //             let foundUser = await login(entered_user.email, entered_user.password);
@@ -124,7 +83,6 @@
 
 //     return (
 //         <div className="signInContainer">
->>>>>>> Stashed changes
 
 //                 <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw8 center article-container
 //                 shadow-5 signInContent signInBox " >
