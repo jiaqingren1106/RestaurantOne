@@ -3,6 +3,7 @@ import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
 import {getUserInLogin} from "../Action/userAction";
+import {login} from "../Action/authAction";
 
 const mapStateToProps = (state) => {
     return {route:
@@ -33,9 +34,24 @@ const SignIn = (props) => {
     })
     const [warning, setWarning] = useState("")
     const [loginLoadingMsg, setLoginLoadingMsg] = useState("")
-    const [result, setResult] = useState([])
 
+
+    const changeRoute = () => {
+        if (props.user.username === "") {
+            return
+        }
+        if (props.user.userType === "admin") {
+            setRoute("AdminPage")
+        }
+        else if (props.user.userType === "restaurant" || props.user.userType === "regular"){
+            setRoute("FirstPage")
+        } else {
+            alert("something went wrong!")
+        }
+    }
+    useEffect(changeRoute, [props.user])
     const handleLogin = async () => {
+
         try{
             let foundUser = await login(entered_user.email, entered_user.password);
 
@@ -68,14 +84,6 @@ const SignIn = (props) => {
             // console.log("USER:", props.user)
 
 
-            if (props.user.userType === "admin") {
-                setRoute("AdminPage")
-            }
-            else if (props.user.userType === "restaurant" || props.user.userType === "regular"){
-                setRoute("FirstPage")
-            } else {
-                alert("something went wrong!")
-            }
         } catch(e){
             console.log(e);
         }

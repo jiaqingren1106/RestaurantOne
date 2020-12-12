@@ -56,7 +56,7 @@ const Register = (props)=> {
     const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
-    const [imageId, setimageId] = useState("")
+    const [imageId, setImageId] = useState("")
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -174,7 +174,7 @@ const Register = (props)=> {
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
 
             }else{
-                createImage(certificate, setimageId);
+                createImage(certificate, setImageId);
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
                 createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
             }
