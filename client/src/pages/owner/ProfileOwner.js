@@ -82,7 +82,9 @@ class ProfileOwner extends React.Component {
         }
         else {
             this.setState({warning: "update successfully"})
-            setAndUpdateRest(this, this.state.restId)
+            if (this.state.userType === "restaurant") {
+                setAndUpdateRest(this, this.state.restId)
+            }
             setAndUpdateUser(this, this.state._id)
         }
 
