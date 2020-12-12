@@ -38,10 +38,9 @@ const SignIn = (props) => {
 
     const handleLogin = async () => {
         try{
-            await login(entered_user.email, entered_user.password, props.setUser);
+            let foundUser = await login(entered_user.email, entered_user.password);
 
-            console.log("foundUser: ", props.user)
-            if(!props.user){
+            if(!foundUser){
                 setWarning("no such email or password is incorrect")
                 setEntered_user({
                     email: "",
@@ -50,11 +49,33 @@ const SignIn = (props) => {
                 return;
             }
 
-            if (props.user.type === "admin") {
+            console.log("email:", foundUser.email)
+            console.log("id:", foundUser._id)
+            console.log("images:", foundUser.images)
+            console.log("password:", foundUser.password)
+            console.log("userType:", foundUser.type)
+            console.log("username:", foundUser.name)
+            console.log("restaurant_id:", foundUser.restaurant_id)
+
+            props.setUser({
+                email: foundUser.email,
+                id: foundUser._id,
+                images: foundUser.images,
+                password: foundUser.password,
+                userType: foundUser.type,
+                username: foundUser.name,
+                restaurant_id:foundUser.restaurant_id
+            });
+            console.log("USER:", props.user)
+
+
+            if (props.user.userType === "admin") {
                 setRoute("AdminPage")
             }
-            else {
+            else if (props.user.userType === "restaurant" || props.user.userType === "regular"){
                 setRoute("FirstPage")
+            } else {
+                alert("something went wrong!")
             }
         } catch(e){
             console.log(e);

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { register, setRoute } from "../../redux/actions";
 import './NavBar.css'
 import {withRouter} from "react-router-dom";
+import {logout} from "../../Action/authAction"
 
 
 const Styles = styled.div`
@@ -65,22 +66,38 @@ class NavBar extends React.Component {
     
   }
   setRoute = (newRoute) => {
-        let targetRoute = `/`
-        if (!(newRoute=== "StartUp" || newRoute === "")){
-            targetRoute = `${newRoute}`
-        }
-
-        this.props.history.push(targetRoute)
-        this.props.setRoute(newRoute)
+    let targetRoute = `/`
+    if (!(newRoute=== "StartUp" || newRoute === "")){
+        targetRoute = `${newRoute}`
     }
-    handleLogOut = () => {
+
+    this.props.history.push(targetRoute)
+    this.props.setRoute(newRoute)
+  }
+
+  handleLogOut = () => {
+    try{
+      const response = logout()
+      console.log("logout:", response);
+      if(response){
         this.props.setUser( {
-            username: "",
-            userType:"",
-            password: ""
+          email: "",
+          id: "",
+          images: "",
+          password: "",
+          userType: "",
+          username: "",
+          restaurant_id: ""
         })
         this.setRoute("StartUp")
-    }
+        return;
+      }
+      alert("something went wrong")
+    } catch(e){
+      console.log(e)
+    } 
+  }
+
   render() {
     const user = this.props.user
       const setRoute = (newRoute) => {

@@ -2,7 +2,7 @@ import ENV from '../config.js'
 const API_HOST = ENV.api_host
 
 // A function to send a POST request with the user to be logged in
-export const login = async (email, password, setUser) => {
+export const login = async (email, password) => {
     // Create our request constructor with all the parameters we need
     const request = new Request(`${API_HOST}/login`, {
         method: "post",
@@ -17,7 +17,8 @@ export const login = async (email, password, setUser) => {
     });
 
     // Send the request with fetch()
-    await fetch(request)
+    try{
+        const foundUser = await fetch(request)
         .then(res => {
             console.log("response: ", res);
             if (res.status === 200) {
@@ -25,28 +26,31 @@ export const login = async (email, password, setUser) => {
             }
         }).then( json =>{
             if (json.currentUser !== undefined) {
-                console.log("json: ", json)
-                setUser(json.currentUser);
-                // app.setState({ currentUser: json.currentUser });
+                return json.currentUser
             }
         })
-        .catch(error => {
-            console.log(error);
-        });
+
+        return foundUser;
+    } catch(e){
+        console.log(e)
+    }
 };
 
 // A function to send a GET request to logout the current user
-export const logout = (app) => {
+export const logout = async (app) => {
     const url = `${API_HOST}/logout`;
 
-    fetch(url)
+    try{
+        const foundUser = await fetch(url)
         .then(res => {
-            app.setState({
-                currentUser: null,
-                message: { type: "", body: "" }
-            });
+            if (res.status === 200) {
+                return res.json();
+            }
         })
-        .catch(error => {
-            console.log(error);
-        });
+
+        return foundUser;
+    } catch(e){
+        console.log(e)
+    }
+    
 };
