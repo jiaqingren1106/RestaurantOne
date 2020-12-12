@@ -3,9 +3,8 @@ import ENV from '../config.js'
 const API_HOST = ENV.api_host
 
 
-export const createImage = (file, setimageId) => {
+export const createImage = (file, setImageId) => {
     const url = `${API_HOST}/image`
-
     const imageData = new FormData(file);
     const request = new Request(url,
         {
@@ -22,8 +21,8 @@ export const createImage = (file, setimageId) => {
             }
         })
         .then(json => {
-            console.log(String(json["_id"]))
-            setimageId(String(json["_id"]))
+            const id = json['_id']
+            setImageId(String(id))
         })
         .catch(error => {
             console.log(error);

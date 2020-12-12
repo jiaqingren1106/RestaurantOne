@@ -6,8 +6,6 @@ import { getElementError } from "@testing-library/react";
 import {createImage} from '../Action/imageAction'
 import {createRestaurant} from "../Action/restaurantAction"
 import "./SignIn.css"
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
 
 let state = {}
 
@@ -60,6 +58,8 @@ const Register = (props)=> {
     const [submitMsg, setSubmitMsg] = useState("")
     const [imageId, setImageId] = useState("")
 
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
     const setType = (e) => {
         if (e.target.checked === true) {
             setUserType("restaurant")
@@ -84,7 +84,11 @@ const Register = (props)=> {
 
                         <form className="image-form" id = "form1" onChange={(e) => {
                             e.preventDefault();
+
                             setCertificate(document.getElementById("form1"))
+
+                            createImage(document.getElementById("form1"), setImageId)
+
                             // createImage(certificate, setimageId)
                             }}>
                             <div class="image-form__field" id = "imageI">
@@ -115,7 +119,6 @@ const Register = (props)=> {
         let result = true
         for (const field_ in entered_restaurant) {
             if (entered_restaurant[field_] === "") {
-                console.log(field_)
                 result = false
             }
         }
@@ -171,16 +174,9 @@ const Register = (props)=> {
                 createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
             }else{
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
-                createImage(certificate, setImageId)
-                const yourFunction = async () => {
-                    await delay(500);
-                    console.log(imageId)
-                    createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-                  };
-                yourFunction()
-                // if(imageId != ""){
-                //     createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-                // }
+            
+                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
+
             }
         }
 

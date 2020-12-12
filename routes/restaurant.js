@@ -12,6 +12,9 @@ const restaurantRoutes = (app) => {
 
     app.route('/restaurants/:restaurantId/:reviewId')
         .post(RestaurantController.addreview)
+
+    app.route('/restaurants/:restaurantId/:postid/:postid1')
+        .post(RestaurantController.addpost)
 };
 
 module.exports = restaurantRoutes;

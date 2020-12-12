@@ -67,6 +67,7 @@ const createRestaurant = (req, res) => {
         for(let i = 0; i < restaurants.length; i++){
             if(restaurants[i].name === newRestaurant.name){
                 found = true
+                console.log(restaurants[i].name)
                 res.send({"condition": "fail"})
             }
         }
@@ -138,5 +139,30 @@ const addreview = (req, res) => {
 
 }
 
+const addpost = (req, res) => {
+
+    restaurant.findById(req.params.restaurantId, (err, rest) => {
+        if (err) {
+            res.send(err);
+        }
+        let review_list = rest.posts
+        review_list.push(req.params.postid)
+
+        restaurant.findByIdAndUpdate(
+            req.params.restaurantId,
+            {
+              $set: {
+                posts: review_list
+              }
+            },
+            { new: true }
+        ).then(rest => {
+            res.json(rest)
+        })
+    
+    });
+
+}
+
 module.exports = {getAllRestaurants, getRestaurantById, createRestaurant,
-     updateRestaurantById, deleteRestaurantById, addreview}
+     updateRestaurantById, deleteRestaurantById, addreview, addpost}

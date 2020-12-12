@@ -2,6 +2,24 @@ import React, {useState} from "react";
 import "./MakePost.css"
 import {createImage} from "../../Action/imageAction"
 import {createPost} from "../../Action/postAction"
+import { connect } from 'react-redux';
+import { register, setRoute } from "../../redux/actions";
+
+
+const mapStateToProps = (state) => {
+    return {
+        route: state.routeState.route,
+        user: state.userState
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route) => dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
+
 
 const MakePost = (props) => {
     const [postTitle, setPostTitle] = useState("")
@@ -9,7 +27,7 @@ const MakePost = (props) => {
     const [postPic, setPostPic] = useState(null)
     const [warning, setWarning] = useState("")
     const [picMsg, setPicMsg] = useState("")
-    const [imageId, setImageId] = useState("")
+    const [imageId1, setImageId1] = useState("")
     const [certificate, setCertificate] = useState(null)
     const [postId, setPostId] = useState("")
 
@@ -20,33 +38,27 @@ const MakePost = (props) => {
         setWarning("")
     }
 
-    const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    const testId = "5fd03079037cb93f99c2fa01"
+    const testId = props.user.restaurant_id
 
 
     const handleCreatePost = () => {
         setPicMsg("")
         setWarning("")
         if (postTitle !== "" && postContent !== "" && postPic !== null) {
-            props.setPostApp(false)
-            props.setPostSending("sending new post...")
+            // props.setPostApp(false)
+            // props.setPostSending("sending new post...")
             // call the backend sending
-            createImage(certificate, setPostPic)
-            // console.log(imageId)
-            // createPost(postId, postContent, postPic, imageId, setPostId)
-            // console.log(postId)
-            const yourFunction = async () => {
-                await delay(1000);
-                console.log(postId)
-                // createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-              };
-            yourFunction()
+            createPost(postTitle, postContent, imageId1, setPostId ,testId)
+            props.setPostSending("Success")
         }
         else {
             setWarning("has unfilled field!")
         }
     }
+
+    
+
     return (
         <div className="makePost">
             <div className="pa3 black-80 pl4 postInput" >
@@ -62,6 +74,7 @@ const MakePost = (props) => {
 
                    <form className="image-form" id = "form2" onChange={(e) => {
                             e.preventDefault();
+                            createImage(document.getElementById("form2"), setImageId1)
                             setCertificate(document.getElementById("form2"))
                             setPostPic(document.getElementById("form2"))
                             }}>
@@ -84,4 +97,5 @@ const MakePost = (props) => {
         </div>
         )
 }
-export default MakePost
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(MakePost);

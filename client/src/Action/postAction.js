@@ -1,6 +1,8 @@
 import ENV from '../config.js'
 import {getImage} from "./imageAction"
 import {getReview} from "./reviewAction"
+import {addRestaurantPost} from "./restaurantAction"
+
 const API_HOST = ENV.api_host
 
 
@@ -42,17 +44,16 @@ export const getDescription = (Comp) => {
 };
 
 
-export const createPost = (title, description, image_id, setPostId) => {
+export const createPost = (title, description, imageId, setPostId, restaurantId) => {
     const url = `${API_HOST}/post`
-
     const Body = JSON.stringify({
         title: title,
         description: description,
-        image:[image_id],
+        image:imageId,
         date: "",
-        reviews: []
+        reviews: ""
     })
-
+    
     const request = new Request(url,
         {
             method:"post",
@@ -72,7 +73,7 @@ export const createPost = (title, description, image_id, setPostId) => {
             }
         })
         .then(json => {
-            setPostId(json['_id'])
+            addRestaurantPost(restaurantId, json['_id'])
         })
         .catch(error => {
             console.log(error);

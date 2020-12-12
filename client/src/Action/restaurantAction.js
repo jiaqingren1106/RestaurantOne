@@ -118,6 +118,29 @@ export const addRestaurantReview = (Comp, restaurantid, reviewid) => {
         });
 };
 
+export const addRestaurantPost = (restaurantid, postid) => {
+    const url = `${API_HOST}/restaurants/${restaurantid}/${postid}/${postid}`
+
+    const request = new Request(url,
+        {
+            method:"post"
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            return json
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
 
 export const getRestaurantReviews = (Comp, restaurantid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}`
