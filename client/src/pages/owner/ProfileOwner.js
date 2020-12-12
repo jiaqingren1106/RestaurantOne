@@ -7,10 +7,8 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import './ProfileOwner.css';
 
-import { createUser, setAndUpdateUser } from '../../Action/userAction'
+import { createUser } from '../../Action/userAction'
 import "../../frontPages/SignIn.css"
-import {getRestAttributeByID, setAndUpdateRest, updateRestInfo} from "../../Action/restaurantAction"
-
 
 
 
@@ -49,15 +47,11 @@ class ProfileOwner extends React.Component {
             restaurantDes: "",
             warning: ""
         }
-
-        getRestAttributeByID(this, user.restaurant_id);
-        
     }
 
 
     componentDidMount() {
         //call the backend to
-        
     }
 
 
@@ -82,22 +76,6 @@ class ProfileOwner extends React.Component {
         }
         else {
             this.setState({warning: "update successfully"})
-            if (this.state.userType === "restaurant") {
-                setAndUpdateRest(this, this.state.restId)
-            }
-
-            let new_targetUser = {
-                username: this.state.username,
-                userType: this.state.userType,
-                password: this.state.password,
-                id: this.state._id,
-                email: this.state.email,
-                images: this.props.user.images,
-                restaurant_id: this.props.user.restaurant_id
-            }
-    
-            this.props.setUser(new_targetUser)
-            setAndUpdateUser(this, this.state._id)
         }
 
     }
@@ -134,14 +112,10 @@ class ProfileOwner extends React.Component {
                               onChange={(e) => {this.setState({openTime: e.target.value})}}/>
                 </div>
             </div>)
-        }
 
-        const uploadChange = () => {
 
         }
-
-
-        // console.log(this.props.user)
+        console.log(this.props.user)
         return (
             <div id="main">
                 <SideNav className="navBarProfile"

@@ -215,3 +215,4 @@ const addcoupon = (req, res) => {
 
 module.exports = {getAllRestaurants, getRestaurantById, createRestaurant,
      updateRestaurantById, deleteRestaurantById, addreview, addpost, addmenu, addcoupon}
+

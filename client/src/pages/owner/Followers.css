@@ -3,15 +3,8 @@
     border-width: 1px;
     margin-left: 70px;
     width: 50%;
-    border-radius: 5%;
-    color: brown;
-    border-color: chocolate;
 }
 
 #followerlist{
     margin-left: 70px;
-}
-
-#followers{
-    margin-right: 30%;
 }

@@ -40,38 +40,35 @@ class Menus extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            MenuItems: [ // get from the backend
-                { name: "Bergur", image: burger1, price: "10.0$" },
-                { name: "BigMac",  image: burger2, price: "10.0$" },
-                { name: "Chicken Nugget",  image: burger3, price: "10.0$" },
+            MenuItems: [
+                { name: "Bergur", rating: "5", key: "1", image: burger1, price: "10.0$" },
+                { name: "BigMac", rating: "4", key: "2", image: burger2, price: "10.0$" },
+                { name: "Chicken Nugget", rating: "5", key: "3", image: burger3, price: "10.0$" },
 
-                { name: "Fries",  image: burger4, price: "10.0$" },
-                { name: "Chicken Sandvich",  image: burger5, price: "10.0$" },
+                { name: "Fries", rating: "5", key: "4", image: burger4, price: "10.0$" },
+                { name: "Chicken Sandvich", rating: "5", key: "5", image: burger5, price: "10.0$" },
                 { name: "Pizza", rating: "5", key: "6", image: burger6, price: "10.0$" },
 
-                { name: "3 burger",  image: burger7, price: "10.0$" },
-                { name: "1 burger",  image: burger8, price: "10.0$" },
-                { name: "Subway", image: burger9, price: "10.0$" }
+                { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
+                { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
+                { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
             ],
-           newItem: {
-                name: "",
-               image: null,
-               price: ""},
+            createPostAppear: false,
+            newPostingMsg: "",
+            postPic: null,
             warning: "",
+            picMsg: "",
         }
     }
-    componentDidMount() {
-        // call to get Menu Items:
 
+    setCreatePostAppear = (newAppear) => {
+        this.setState({ createPostAppear: newAppear })
     }
-    handleUploadMenu =  () => {
-        if (this.state.newItem.name === "" || this.state.newItem.image == null || this.state.newItem.price === ""){
-            this.setState({warning: "have unfilled field"})
-        }
-        else{
-            // call backend
-        }
+    setPostSendingMsg = (msg) => {
+        this.setState({ newPostingMsg: msg })
     }
+
+
 
     render() {
         const setRoute = (newRoute, id) => {
@@ -203,20 +200,18 @@ class Menus extends React.Component {
                 <div id="menuForm" className="o-80">
                     <div className="flex justify-around">
                         new item:
-                        <input  onChange={(e) => {this.setState({newItem: {...this.state.newItem, ...{name: e.target.value}}})}}/>
+                        <input  />
                     </div>
                     <div className="flex justify-around">
                         Price:
-                        <input  onChange={(e) => {this.setState({newItem: {...this.state.newItem, ...{price: e.target.value}}})}}/>
+                        <input  />
                     </div>
                     <input type="file"
                            id="makeMenuFileUpload" name="avatar"
-                           accept="image/png, image/jpeg" onChange={(e) => {  }} />
+                           accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
 
-                    <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-light-purple" href="#0" onClick={this.handleUploadMenu}> add Menu</a>
-                    <p className=" i red">
-                        {this.state.warning}
-                    </p>
+                    <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-light-purple" href="#0"> add Menu</a>
+
                 </div>
 
                 <form id="menuForm">
