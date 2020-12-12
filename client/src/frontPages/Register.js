@@ -172,9 +172,18 @@ const Register = (props)=> {
                 createUser(entered_user.name, entered_user.password, entered_user.email, "", setSubmitMsg)
 
             }else{
-                createImage(certificate, setImageId);
-                const newRestaurant = await createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId)
-                createUser(entered_user.name, entered_user.password, entered_user.email, newRestaurant._id,setSubmitMsg)
+
+
+                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
+                createImage(certificate, setImageId)
+                const yourFunction = async () => {
+                    await delay(500);
+                    console.log(imageId)
+                    createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
+                  };
+                yourFunction()
+                // if(imageId != ""){
+
             }
         }
 

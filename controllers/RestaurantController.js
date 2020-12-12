@@ -160,5 +160,56 @@ const addpost = (req, res) => {
 
 }
 
+
+const addmenu = (req, res) => {
+
+    restaurant.findById(req.params.restaurantId, (err, rest) => {
+        if (err) {
+            res.send(err);
+        }
+        let review_list = rest.menus
+        review_list.push(req.params.menuid)
+
+        restaurant.findByIdAndUpdate(
+            req.params.restaurantId,
+            {
+              $set: {
+                menus: review_list
+              }
+            },
+            { new: true }
+        ).then(rest => {
+            res.json(rest)
+        })
+    
+    });
+}
+
+const addcoupon = (req, res) => {
+
+    restaurant.findById(req.params.restaurantId, (err, rest) => {
+        if (err) {
+            res.send(err);
+        }
+        let review_list = rest.coupons
+        review_list.push(req.params.couponid)
+
+        restaurant.findByIdAndUpdate(
+            req.params.restaurantId,
+            {
+              $set: {
+                coupons: review_list
+              }
+            },
+            { new: true }
+        ).then(rest => {
+            res.json(rest)
+        })
+    
+    });
+}
+
+
 module.exports = {getAllRestaurants, getRestaurantById, createRestaurant,
-     updateRestaurantById, deleteRestaurantById, addreview, addpost}
+     updateRestaurantById, deleteRestaurantById, addreview, addpost, addmenu, addcoupon}
+

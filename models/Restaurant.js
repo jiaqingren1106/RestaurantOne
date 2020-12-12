@@ -21,6 +21,14 @@ const RestaurantSchema = new mongoose.Schema({
         type: String,
     },
 
+    coupons: {
+        type: Array
+    },
+
+    menus: {
+        type: Array
+    },
+
     posts:{
         type: Array
     }, 

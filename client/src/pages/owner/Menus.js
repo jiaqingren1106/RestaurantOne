@@ -193,6 +193,63 @@ class Menus extends React.Component {
                     </SideNav.Nav>
                 </SideNav>
 
+                <h1 className="f3 f2-m f1-l fw2 near-white mv3 center-l">
+                    This is the title
+                </h1>
+                {MenuItemList}
+                <div id="menuForm" className="o-80">
+                    <div className="flex justify-around">
+                        new item:
+                        <input  />
+                    </div>
+                    <div className="flex justify-around">
+                        Price:
+                        <input  />
+                    </div>
+                    <input type="file"
+                           id="makeMenuFileUpload" name="avatar"
+                           accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
+
+                    <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-light-purple" href="#0"> add Menu</a>
+
+                </div>
+
+                <form id="menuForm">
+                    new item:
+                    <input />
+
+                    Price:
+                    <input />
+
+                    <input type="file"
+                        id="makeMenuFileUpload" name="avatar"
+                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
+
+                    <button>
+                        Add
+                    </button>
+                </form>
+
+                {MenuItemList}
+
+                <form id="menuForm">
+                    new item:
+                    <input />
+
+                    Price:
+                    <input />
+
+                    <input type="file"
+                        id="makeMenuFileUpload" name="avatar"
+                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
+
+                    <button>
+                        Add
+                    </button>
+                </form>
+
+                {MenuItemList}
+
                 <form id="menuForm">
                     new item:
                     <input />

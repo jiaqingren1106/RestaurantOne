@@ -35,7 +35,6 @@ class ProfileOwner extends React.Component {
     constructor(props) {
         super(props);
         const user = props.user
-        console.log(user)
         this.state = {
             userType: user.userType,
             username: user.username,
@@ -45,7 +44,8 @@ class ProfileOwner extends React.Component {
             restId: user.restaurant_id,
             openTime: "",
             restaurantName: "",
-            restaurantDes: ""
+            restaurantDes: "",
+            warning: ""
         }
     }
 
@@ -55,6 +55,30 @@ class ProfileOwner extends React.Component {
     }
 
 
+    handleUpDate = () => {
+        let restaurant_fields = ["restId","openTime", "restaurantName",  "restaurantDes"]
+        let user_fields = ["userType", "username", "password", "_id", "email"]
+        let result = true;
+        if (this.state.userType === "restaurant") {
+            for (const restaurant_field in restaurant_fields) {
+                if (this.state[restaurant_fields[parseInt(restaurant_field)]] === "") {
+                    result = false
+                }
+            }
+        }
+        for (const user_field in user_fields) {
+            if (this.state[user_fields[parseInt(user_field)] ]=== "") {
+                result = false
+            }
+        }
+        if (!result) {
+            this.setState({warning: "has unfilled input"})
+        }
+        else {
+            this.setState({warning: "update successfully"})
+        }
+
+    }
 
     render() {
         const setRoute = (newRoute) => {
@@ -72,20 +96,20 @@ class ProfileOwner extends React.Component {
                 <div className="mt3">
                     <label className="db fw6 lh-copy f4 " >Restaurant Name</label>
                     <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
-
-                           onChange={(e) => {}}/>
+                            value={this.state.restaurantName}
+                           onChange={(e) => {this.setState({restaurantName: e.target.value})}}/>
                 </div>
                 <div className="mt3">
                     <label className="db fw6 lh-copy f4 " >Restaurant Description</label>
                     <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-100 h5"
-
-                           onChange={(e) => {}}/>
+                              value={this.state.restaurantDes}
+                           onChange={(e) => {this.setState({restaurantDes: e.target.value})}}/>
                 </div>
                 <div className="mt3 flex flex-row justify-between">
                     <label className="db fw6 lh-copy f4 " >Open Time:</label>
                     <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-60 "
-
-                              onChange={(e) => {}}/>
+                              value={this.state.openTime}
+                              onChange={(e) => {this.setState({openTime: e.target.value})}}/>
                 </div>
             </div>)
 
@@ -168,7 +192,7 @@ class ProfileOwner extends React.Component {
 
                 <div className="updatProfileContainer">
 
-                    <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw8 center article-container
+                    <div className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw8 center article-container
                 shadow-5 signInContent signInBox " >
 
                         <main className="pa4 black-80">
@@ -189,7 +213,7 @@ class ProfileOwner extends React.Component {
                                     </div>
                                     <div className="mv3">
                                         <label className="db fw6 lh-copy f4 " htmlFor="password">Email</label>
-                                        <input className="b pa2 input-reset ba bg-transparent hover-bg-black  w-100"
+                                        <input className=" pa2 input-reset ba bg-transparent hover-bg-black  w-100"
                                                value={this.state.email}
                                                onChange={(e) => {this.setState({email: e.target.value})}}
                                         />
@@ -199,12 +223,15 @@ class ProfileOwner extends React.Component {
                                 </div>
                                 <div className="">
                                     <button className=" br2 bw2 b ph3 pv2 input-reset ba b--blue  bg-transparent grow pointer f6 dib"
-                                            onClick={() => {}}
+                                            onClick={this.handleUpDate}
                                     > Update </button>
                                 </div>
+                                <p className={this.state.warning.includes("input")? "i dark-red" : "i dark-green"}>
+                                    {this.state.warning}
+                                </p>
                             </div>
                         </main>
-                    </article>
+                    </div>
                 </div>
             </div>
     );
