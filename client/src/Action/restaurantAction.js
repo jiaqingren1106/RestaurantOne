@@ -166,7 +166,12 @@ export const getRestaurantReviews = (Comp, restaurantid) => {
         });
 };
 
-export const createRestaurant = (restaurantName, restaurantDescription, restaurantAddress, restaurantCertificate, setSubmitMsg) =>{
+export const createRestaurant = async (
+    restaurantName, 
+    restaurantDescription, 
+    restaurantAddress, 
+    restaurantCertificate, 
+    ) =>{
 
     const url = `${API_HOST}/restaurants`
     const UserBody = JSON.stringify({
@@ -185,19 +190,16 @@ export const createRestaurant = (restaurantName, restaurantDescription, restaura
               },
             body: UserBody
         })
+    try{
+        const newRestaurant = await fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            }
+        })
+        return newRestaurant;
+    } catch(e){
+        console.log(e);
+    }
     
-    fetch(request)
-    .then(res => {
-        if (res.status === 200) {
-            return res.json()
-        } else {
-            alert("Could not get description");
-        }
-    })
-    .then(json => {
-        setSubmitMsg(json.condition)
-    })
-    .catch(error => {
-        console.log(error);
-    });
 }

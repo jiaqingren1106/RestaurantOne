@@ -82,12 +82,18 @@ export const getUserForReview = (Comp, user_id) => {
         });
 };
 
-export const createUser =  (userName, userPassword, userEmail, setSubmitMsg) => {
+export const createUser =  (
+    userName, 
+    userPassword, 
+    userEmail,
+    restaurant_id,
+    setSubmitMsg) => {
     const url = `${API_HOST}/users`
     const UserBody = JSON.stringify({
         name: userName,
         password: userPassword,
-        email:userEmail
+        email:userEmail,
+        restaurant_id: restaurant_id
     })
     console.log(UserBody)
 

@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
-import {getUserInLogin} from "../Action/userAction";
+// import {getUserInLogin} from "../Action/userAction";
+import {login} from "../Action/authAction";
 
 const mapStateToProps = (state) => {
     return {route:
@@ -28,7 +29,7 @@ const SignIn = (props) => {
         props.setRoute(newRoute)
     }
     const [entered_user, setEntered_user] = useState({
-        username: "",
+        email: "",
         password: "",
     })
     const [warning, setWarning] = useState("")
@@ -92,9 +93,9 @@ const SignIn = (props) => {
                             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                                 <legend className="f1 fw6 ph0 mh0 ">Sign In</legend>
                                 <div className="mt3">
-                                    <label className="db fw6 lh-copy f4 " >Username</label>
+                                    <label className="db fw6 lh-copy f4 " >Email</label>
                                     <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                           onChange={(e) => {entered_user.username = e.target.value}}/>
+                                           onChange={(e) => {entered_user.email = e.target.value}}/>
                                 </div>
                                 <div className="mv3">
                                     <label className="db fw6 lh-copy f4 " htmlFor="password">Password</label>

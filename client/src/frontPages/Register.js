@@ -24,8 +24,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const Register = (props)=> {
 
-
-
     const setRoute = (newRoute) => {
         let targetRoute = `/`
         if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -42,8 +40,8 @@ const Register = (props)=> {
         passwordc:"",
         email:"",
         emailc:""
-    }
-)
+        }
+    )
     const [certificate, setCertificate] = useState(null)
     const [entered_restaurant, setEntered_restaurant] = useState({
         restName: "",
@@ -56,7 +54,7 @@ const Register = (props)=> {
     const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
-    const [imageId, setimageId] = useState("")
+    const [imageId, setImageId] = useState("")
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -132,7 +130,7 @@ const Register = (props)=> {
         }
         return result
     }
-    const onSubmit = () => {
+    const onSubmit = async () => {
         console.log(entered_user)
         for(const field_ in entered_user){
             if (entered_user[field_] === ""){
@@ -171,12 +169,12 @@ const Register = (props)=> {
             setWarning("")
             setSubmitMsg("uploading data...")
             if(userType == "regular"){
-                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
+                createUser(entered_user.name, entered_user.password, entered_user.email, "", setSubmitMsg)
 
             }else{
-                createImage(certificate, setimageId);
-                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
-                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
+                createImage(certificate, setImageId);
+                const newRestaurant = await createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId)
+                createUser(entered_user.name, entered_user.password, entered_user.email, newRestaurant._id,setSubmitMsg)
             }
         }
 
@@ -201,6 +199,20 @@ const Register = (props)=> {
                                        e.target.value
                                        }}/>
                             </div>
+                            
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f4 " >Email</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                        onChange={(e) => {
+                                           entered_user.email = e.target.value
+                                }}/>
+                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Email</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    onChange={(e) => {
+                                    entered_user.emailc = e.target.value
+                                }}/>
+                            </div>
+
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f4 " >Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
@@ -213,26 +225,6 @@ const Register = (props)=> {
                                            entered_user.passwordc = e.target.value
                                 }}/>
                             </div>
-
-
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f4 " >Email</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" onChange={(e) => {
-                                           entered_user.email = e.target.value
-                                }}/>
-                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Email</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                       type="password" onChange={(e) => {
-                                           entered_user.emailc = e.target.value
-                                }}/>
-                            </div>
-
-
-
-
-
-
 
                             <div className="flex items-center mb2">
                                 <input className="mr2" type="checkbox"
