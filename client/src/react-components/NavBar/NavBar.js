@@ -109,7 +109,7 @@ class NavBar extends React.Component {
       </Nav>
     )
     if (user.userType !== ""){
-      let page = "ProfilePage";
+      let page = "ProfilePageOwner";
       console.log(user.userType)
       if (user.userType === "restaurant") {
         page = "ProfilePageOwner"

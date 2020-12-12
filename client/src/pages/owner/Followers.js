@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import {getRestaurantsFollowerByID} from "../../Action/restaurantAction"
 
 import "./Followers.css"
 
@@ -36,20 +37,20 @@ class Followers extends React.Component {
         this.state = {
 
             follower: [
-                { name: "alan", key: "1" },
-                { name: "yuan", key: "2" },
-                { name: "yinke", key: "3" },
-                { name: "patric", key: "4" },
+                { name: "alan", email:""},
+                { name: "yuan", email:""},
+                { name: "yinke", email:""},
+                { name: "patric", email:""},
               
             ]
 
         }
+        let restaurant_id = (props.user.restaurant_id);
+        getRestaurantsFollowerByID(this, restaurant_id)
     }
  
     render() {
-        // const user = this.props.user;
-        // const showPassword = ("*").repeat(user.password.length);
-        console.log(this.props)
+     
 
 
         const setRoute = (newRoute) => {
@@ -70,9 +71,13 @@ class Followers extends React.Component {
                 {this.state.follower.map((follower) => {
                     return (
                         <div className={'followerBlock'}>
-                            <p id="followers">
+                            <span id="followers">
                                 {"Name: " + follower.name}
-                            </p>
+                            </span>
+                            
+                            <span id="email">
+                                {"email: " + follower.email}
+                            </span>
                         </div>);
                 })}
             </div>
