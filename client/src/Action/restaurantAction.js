@@ -1,4 +1,3 @@
-
 import { components } from 'react-select';
 import ENV from '../config.js'
 import {getReview} from './reviewAction'
@@ -179,9 +178,8 @@ export const addRestaurantReview = (Comp, restaurantid, reviewid) => {
         })
         .catch(error => {
             console.log(error);
-        });   
+        });
 }
-
 
 export const addRestaurantMenu = (restaurantid, menuid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}/${menuid}/${menuid}/${menuid}`
@@ -383,4 +381,3 @@ export const setAndUpdateRest = (Comp, restaurantid) => {
             console.log(error);
         });
 };
-

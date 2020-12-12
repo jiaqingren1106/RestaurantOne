@@ -2,7 +2,12 @@ import React, {useEffect, useState} from 'react';
 import './SignIn.css'
 import { connect } from 'react-redux'
 import {register, setRoute} from "../redux/actions";
+<<<<<<< HEAD
 import {login} from "../Action/authAction";
+=======
+import {getUserInLogin} from "../Action/userAction";
+// import {login} from "../Action/"
+>>>>>>> 4faba034eca225cfb457bd4bfa303beaa7ae19f7
 
 const mapStateToProps = (state) => {
     return {route:
@@ -37,8 +42,13 @@ const SignIn = (props) => {
 
     const handleLogin = async () => {
         try{
+<<<<<<< HEAD
             let foundUser = await login(entered_user.email, entered_user.password);
 
+=======
+            // let foundUser = await login(entered_user.email, entered_user.password);
+            let foundUser = ""
+>>>>>>> 4faba034eca225cfb457bd4bfa303beaa7ae19f7
             if(!foundUser){
                 setWarning("no such email or password is incorrect")
                 setEntered_user({
