@@ -59,11 +59,6 @@ const Register = (props)=> {
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
     const [imageId, setImageId] = useState("")
-<<<<<<< Updated upstream
-=======
-
-    const delay = ms => new Promise(res => setTimeout(res, ms));
->>>>>>> Stashed changes
 
     const setType = (e) => {
         if (e.target.checked === true) {
@@ -175,10 +170,7 @@ const Register = (props)=> {
             if(userType == "regular"){
                 createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
             }else{
-<<<<<<< Updated upstream
-=======
                 createImage(certificate, setImageId);
->>>>>>> Stashed changes
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
                 createImage(certificate, setImageId)
                 const yourFunction = async () => {
