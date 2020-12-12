@@ -41,45 +41,6 @@ export const getDescription = (Comp) => {
         });
 };
 
-
-export const createPost = (title, description, image_id, setPostId) => {
-    const url = `${API_HOST}/post`
-
-    const Body = JSON.stringify({
-        title: title,
-        description: description,
-        image:[image_id],
-        date: "",
-        reviews: []
-    })
-
-    const request = new Request(url,
-        {
-            method:"post",
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-              },
-            body: Body
-        })
-
-    fetch(request)
-        .then(res => {
-            if (res.status === 200) {
-                return res.json()
-            } else {
-                alert("Could not get restaurants");
-            }
-        })
-        .then(json => {
-            setPostId(json['_id'])
-        })
-        .catch(error => {
-            console.log(error);
-    });
-
-}
-
 export const getMultipleDescription = (Comp, post_id) => {
     const url = `${API_HOST}/post/${post_id}`
     console.log(url)

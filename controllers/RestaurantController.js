@@ -53,10 +53,6 @@ const createRestaurant = (req, res) => {
         req.body.owner = "Not Available"
     } 
 
-    if(!req.body.followers){
-        req.body.followers = []
-    }
-
     let found = false
     const newRestaurant = new restaurant(req.body);
     
@@ -67,6 +63,7 @@ const createRestaurant = (req, res) => {
         for(let i = 0; i < restaurants.length; i++){
             if(restaurants[i].name === newRestaurant.name){
                 found = true
+                console.log(restaurants[i].name)
                 res.send({"condition": "fail"})
             }
         }

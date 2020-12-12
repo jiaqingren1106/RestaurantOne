@@ -6,8 +6,6 @@ import { getElementError } from "@testing-library/react";
 import {createImage} from '../Action/imageAction'
 import {createRestaurant} from "../Action/restaurantAction"
 import "./SignIn.css"
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
 
 let state = {}
 
@@ -58,7 +56,7 @@ const Register = (props)=> {
     const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
-    const [imageId, setImageId] = useState("")
+    const [imageId, setimageId] = useState("")
 
     const setType = (e) => {
         if (e.target.checked === true) {
@@ -168,19 +166,10 @@ const Register = (props)=> {
             setWarning("")
             setSubmitMsg("uploading data...")
             if(userType == "regular"){
-                createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
-            }else{
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
-                createImage(certificate, setImageId)
-                const yourFunction = async () => {
-                    await delay(500);
-                    console.log(imageId)
-                    createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-                  };
-                yourFunction()
-                // if(imageId != ""){
-                //     createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-                // }
+            }else{
+                createImage(certificate, setimageId);
+                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
             }
         }
 
