@@ -117,3 +117,69 @@ export const createUser =  (userName, userPassword, userEmail, setSubmitMsg) => 
             console.log(error);
         });
 };
+
+
+
+export const updateUserInfo = (data, userid) => {
+    const url = `${API_HOST}/users/${userid}`
+    const UserBody = JSON.stringify({name:data.name, email:data.email, password:data.password, isAdmin:false})
+    console.log(UserBody)
+
+
+    console.log(UserBody)
+
+    const request = new Request(url,
+        {
+            method:"put",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+              },
+            body: UserBody
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            return json
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+export const setAndUpdateUser = (Comp, userid) => {
+    const url = `${API_HOST}/users/${userid}`
+
+    const request = new Request(url,
+        {
+            method:"get",
+        })
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } else {
+                alert("Could not get restaurants");
+            }
+        })
+        .then(json => {
+            json.name = Comp.state.username;
+            json.password = Comp.state.password;
+            json.email = Comp.state.email;
+
+            updateUserInfo(json, userid);
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
