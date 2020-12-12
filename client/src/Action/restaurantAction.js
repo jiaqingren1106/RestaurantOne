@@ -93,11 +93,9 @@ export const getRestaurantsPost = (Comp, id) => {
         });
 };
 
-<<<<<<< Updated upstream
 
 export const addRestaurantReview = (Comp, restaurantid, reviewid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}/${reviewid}`
-=======
 export const addRestaurantMenu = (restaurantid, menuid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}/${menuid}/${menuid}/${menuid}`
 
@@ -150,7 +148,6 @@ export const addRestaurantCoupon = (restaurantid, couponid) => {
 
 export const addRestaurantPost = (restaurantid, postid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}/${postid}/${postid}`
->>>>>>> Stashed changes
 
     const request = new Request(url,
         {
