@@ -248,7 +248,7 @@ export const createRestaurant = (restaurantName, restaurantDescription, restaura
 
 export const updateRestInfo = (data, restaurantid) => {
     const url = `${API_HOST}/restaurants/${restaurantid}`
-    const UserBody = JSON.stringify({name:data.name, address:data.address, description:data.description})
+    const UserBody = JSON.stringify({name:data.name, address:data.address, description:data.description, opentime: data.opentime})
     console.log(url)
 
 
@@ -300,7 +300,7 @@ export const setAndUpdateRest = (Comp, restaurantid) => {
         .then(json => {
             json.name = Comp.state.restaurantName;
             json.description = Comp.state.restaurantDes;
-            json.openTime = Comp.state.openTime;
+            json.opentime = Comp.state.openTime;
 
             updateRestInfo(json, restaurantid);
 

@@ -85,6 +85,18 @@ class ProfileOwner extends React.Component {
             if (this.state.userType === "restaurant") {
                 setAndUpdateRest(this, this.state.restId)
             }
+
+            let new_targetUser = {
+                username: this.state.username,
+                userType: this.state.userType,
+                password: this.state.password,
+                id: this.state._id,
+                email: this.state.email,
+                images: this.props.user.images,
+                restaurant_id: this.props.user.restaurant_id
+            }
+    
+            this.props.setUser(new_targetUser)
             setAndUpdateUser(this, this.state._id)
         }
 
