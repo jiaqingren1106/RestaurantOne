@@ -56,7 +56,7 @@ const Register = (props)=> {
     const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
-    const [imageId, setImageId] = useState("")
+    const [imageId, setimageId] = useState("")
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -171,12 +171,12 @@ const Register = (props)=> {
             setWarning("")
             setSubmitMsg("uploading data...")
             if(userType == "regular"){
-                createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg)
-            }else{
                 createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
-            
-                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
 
+            }else{
+                createImage(certificate, setimageId);
+                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
+                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
             }
         }
 
@@ -255,7 +255,7 @@ const Register = (props)=> {
                             <a href="#0" onClick={() => setRoute("SignIn")} className="f6 link dim black db">Sign In</a>
                         </div>
                         <div className="lh-copy mt3 ">
-                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a> 
+                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a>
                         </div>
                     </div>
                 </main>

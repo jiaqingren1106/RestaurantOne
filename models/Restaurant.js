@@ -48,10 +48,6 @@ const RestaurantSchema = new mongoose.Schema({
     opentime:{
         type: String,
     },
-
-    followers: {
-        type: Array,
-    }
 });
 
 

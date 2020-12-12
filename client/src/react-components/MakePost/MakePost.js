@@ -42,6 +42,7 @@ const MakePost = (props) => {
     const testId = props.user.restaurant_id
 
 
+
     const handleCreatePost = () => {
         setPicMsg("")
         setWarning("")
@@ -51,6 +52,7 @@ const MakePost = (props) => {
             // call the backend sending
             createPost(postTitle, postContent, imageId1, setPostId ,testId)
             props.setPostSending("Success")
+
         }
         else {
             setWarning("has unfilled field!")
@@ -70,6 +72,7 @@ const MakePost = (props) => {
                     <textarea id="postText" name="Post Text"
                               className="db border-box hover-black ba b--black-20 pa2 br2 mb2  h-100"
                               onChange={(e) => {setPostContent(e.target.value)}}/>
+
                    
 
                    <form className="image-form" id = "form2" onChange={(e) => {
@@ -86,6 +89,11 @@ const MakePost = (props) => {
 
 
 
+                    <input type="file"
+                           id="makePostFileUpload" name="avatar"
+                           accept="image/png, image/jpeg" onChange={(e) => {fileSelectedHandler(e)}}/>
+                    <button id="makePostFileButton" onClick={() => {document.getElementById("makePostFileUpload").click()} }
+                            className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib black">choose post picture</button>
                 <p className="i green" >
                     {picMsg}
                 </p>

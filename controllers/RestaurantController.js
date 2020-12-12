@@ -53,10 +53,6 @@ const createRestaurant = (req, res) => {
         req.body.owner = "Not Available"
     } 
 
-    if(!req.body.followers){
-        req.body.followers = []
-    }
-
     let found = false
     const newRestaurant = new restaurant(req.body);
     

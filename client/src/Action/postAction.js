@@ -81,6 +81,7 @@ export const createPost = (title, description, imageId, setPostId, restaurantId)
 
 }
 
+
 export const getMultipleDescription = (Comp, post_id) => {
     const url = `${API_HOST}/post/${post_id}`
     console.log(url)

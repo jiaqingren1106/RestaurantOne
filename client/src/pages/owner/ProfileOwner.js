@@ -34,11 +34,26 @@ class ProfileOwner extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { id: "" }
+        const user = props.user
+        console.log(user)
+        this.state = {
+            userType: user.userType,
+            username: user.username,
+            password: user.password,
+            _id: user.id,
+            email: user.email,
+            restId: user.restaurant_id,
+            openTime: "",
+            restaurantName: "",
+            restaurantDes: ""
+        }
     }
 
 
-    
+    componentDidMount() {
+        //call the backend to
+    }
+
 
 
     render() {
@@ -52,10 +67,34 @@ class ProfileOwner extends React.Component {
             this.props.setRoute(newRoute)
         }
 
+        const displayRestInfo = () => {
+            return (<div >
+                <div className="mt3">
+                    <label className="db fw6 lh-copy f4 " >Restaurant Name</label>
+                    <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
 
+                           onChange={(e) => {}}/>
+                </div>
+                <div className="mt3">
+                    <label className="db fw6 lh-copy f4 " >Restaurant Description</label>
+                    <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-100 h5"
+
+                           onChange={(e) => {}}/>
+                </div>
+                <div className="mt3 flex flex-row justify-between">
+                    <label className="db fw6 lh-copy f4 " >Open Time:</label>
+                    <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-60 "
+
+                              onChange={(e) => {}}/>
+                </div>
+            </div>)
+
+
+        }
+        console.log(this.props.user)
         return (
             <div id="main">
-                <SideNav
+                <SideNav className="navBarProfile"
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -134,31 +173,38 @@ class ProfileOwner extends React.Component {
 
                         <main className="pa4 black-80">
                             <div className="measure center">
-                                <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                                <div  className="ba b--transparent ph0 mh0">
                                     <legend className="f1 fw6 ph0 mh0 ">User Profile</legend>
                                     <div className="mt3">
                                         <label className="db fw6 lh-copy f4 " >Username</label>
                                         <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
-                                               value={""}
-                                               onChange={(e) => {}}/>
+                                               value={this.state.username}
+                                               onChange={(e) => {this.setState({username:e.target.value})}}/>
+                                    </div>
+                                    <div className="mt3">
+                                        <label className="db fw6 lh-copy f4 " >Password</label>
+                                        <input className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
+                                               value={this.state.password}
+                                               onChange={(e) => {this.setState({password: e.target.value})}}/>
                                     </div>
                                     <div className="mv3">
-                                        <label className="db fw6 lh-copy f4 " htmlFor="password">Password</label>
+                                        <label className="db fw6 lh-copy f4 " htmlFor="password">Email</label>
                                         <input className="b pa2 input-reset ba bg-transparent hover-bg-black  w-100"
-                                               type="password" name="password" id="password"
-                                               onChange={(e) => {}}/>
+                                               value={this.state.email}
+                                               onChange={(e) => {this.setState({email: e.target.value})}}
+                                        />
                                     </div>
+                                    {this.state.userType === "restaurant"? displayRestInfo(): null}
 
-                                </fieldset>
+                                </div>
                                 <div className="">
-                                    <button className=" br2 bw2 b ph3 pv2 input-reset ba b--black  bg-transparent grow pointer f6 dib"
+                                    <button className=" br2 bw2 b ph3 pv2 input-reset ba b--blue  bg-transparent grow pointer f6 dib"
                                             onClick={() => {}}
-                                    > Login </button>
+                                    > Update </button>
                                 </div>
                             </div>
                         </main>
                     </article>
-
                 </div>
             </div>
     );
