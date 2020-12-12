@@ -49,13 +49,13 @@ const SignIn = (props) => {
                 return;
             }
 
-            console.log("email:", foundUser.email)
-            console.log("id:", foundUser._id)
-            console.log("images:", foundUser.images)
-            console.log("password:", foundUser.password)
-            console.log("userType:", foundUser.type)
-            console.log("username:", foundUser.name)
-            console.log("restaurant_id:", foundUser.restaurant_id)
+            // console.log("email:", foundUser.email)
+            // console.log("id:", foundUser._id)
+            // console.log("images:", foundUser.images)
+            // console.log("password:", foundUser.password)
+            // console.log("userType:", foundUser.type)
+            // console.log("username:", foundUser.name)
+            // console.log("restaurant_id:", foundUser.restaurant_id)
 
             props.setUser({
                 email: foundUser.email,
@@ -66,7 +66,7 @@ const SignIn = (props) => {
                 username: foundUser.name,
                 restaurant_id:foundUser.restaurant_id
             });
-            console.log("USER:", props.user)
+            // console.log("USER:", props.user)
 
 
             if (props.user.userType === "admin") {
