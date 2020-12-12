@@ -138,10 +138,6 @@ const addreview = (req, res) => {
 
 }
 
-<<<<<<< Updated upstream
-module.exports = {getAllRestaurants, getRestaurantById, createRestaurant,
-     updateRestaurantById, deleteRestaurantById, addreview}
-=======
 const addpost = (req, res) => {
 
     restaurant.findById(req.params.restaurantId, (err, rest) => {
@@ -219,4 +215,3 @@ const addcoupon = (req, res) => {
 
 module.exports = {getAllRestaurants, getRestaurantById, createRestaurant,
      updateRestaurantById, deleteRestaurantById, addreview, addpost, addmenu, addcoupon}
->>>>>>> Stashed changes
