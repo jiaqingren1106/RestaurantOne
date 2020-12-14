@@ -164,20 +164,20 @@ class Post extends React.Component{
                             </div>);
                     })} */}
 
-                    {/* <div className = {"PosttextEditorDiv"}>
-                        <textarea className={"PosttextEditor"}
+                    <div className = {"PosttextEditorDiv"}>
+                        {/* <textarea className={"PosttextEditor"}
                                 ref={c => (this.textarea = c)}
                                 placeholder="Type your comments here!"
                                 rows={10}
                                 cols={100}
                                 defaultValue=""
                                 onChange={this.handleChange}
-                        />
+                        /> */}
                     </div>
 
-                    <button onClick={this.handleSubmit} className={"PostsubmitButton"}>
+                    {/* <button onClick={this.handleSubmit} className={"PostsubmitButton"}>
                         submit
-                    </button> */}
+                    </button>  */}
 
                 </div>
             </div>
