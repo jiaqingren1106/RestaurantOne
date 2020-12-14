@@ -40,10 +40,12 @@ const updateReviewById = (req, res) => {
         (err, review) => {
             if (err) {
                 res.send(err);
+            }else{
+                log("updateReviewById: ", review);
+                res.json(review);
             }
 
-            log("updateReviewById: ", review);
-            res.json(review);
+
         });
 };
 

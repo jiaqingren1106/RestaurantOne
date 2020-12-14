@@ -100,6 +100,7 @@ class BlogPage extends React.Component{
             this.props.setRoute(newRoute)
             this.props.history.push(targetRoute, id)
         }
+        console.log(this.state.id)
 
         return (
                 <BrowserRouter >
@@ -110,7 +111,7 @@ class BlogPage extends React.Component{
                             onClick={() => setRoute("RestaurantPage", this.state.id )}
                             to={{ 
                                 pathname: "/RestaurantPage", 
-                                state: this.state.id 
+                                state: this.props.user.restaurant_id
                                }}
                             >
                                 Restaurant

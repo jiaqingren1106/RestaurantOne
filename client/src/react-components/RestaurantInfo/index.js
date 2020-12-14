@@ -10,6 +10,7 @@ import userPic from '../../images/userPhoto.jpg'
 import { register, setRoute } from "../../redux/actions";
 import { addReview } from "../../Action/reviewAction"
 import { getRestaurantReviews } from "../../Action/restaurantAction"
+import { urlencoded } from 'body-parser';
 
 let comp;
 
@@ -44,8 +45,8 @@ class RestaurantInfo extends React.Component {
 
 
     handleSubmit(event) {
-
         addReview(this, this.state.value, this.props.user.id, this.props.info.restaurantId)
+        // window.location.reload(false);
         // getRestaurantReviews(this, this.props.info.restaurantId)
         if (this.state.userName != undefined) {
             const value = this.state.value
@@ -63,11 +64,6 @@ class RestaurantInfo extends React.Component {
     }
 
     render() {
-
-        // console.log(this.state.userName)
-        // console.log(this.state.userImage)
-        console.log(this.state.reviews)
-
         const reviewLength = (this.state.reviews.length == 0)
 
         if (reviewLength == true) {
@@ -84,7 +80,7 @@ class RestaurantInfo extends React.Component {
                         <div className={'reviewBlock2'}>
 
                             <div className={'userInfo'}>
-                                <img src={this.state.reviews[index][1]} alt={'https://res.cloudinary.com/ddmruegqh/image/upload/v1607896942/jmdv0vhsyttwndfx4umg.jpg'} className={"userPic"} />
+                                <img src={new URL('https://res.cloudinary.com/ddmruegqh/image/upload/v1607896942/jmdv0vhsyttwndfx4umg.jpg')} alt={''} className={"userPic"} />
 
                                 <p className={'userName1'}>
                                     {this.state.reviews[index][0]}
