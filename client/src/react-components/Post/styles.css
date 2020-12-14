@@ -90,5 +90,16 @@
 }
 
 .postPage{
+    margin: 0 0 0 0;
+    background-image: url("../../images/blackbackground.jpg");
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+.test{
     background-image: url("../../images/blackbackground.jpg");
 }

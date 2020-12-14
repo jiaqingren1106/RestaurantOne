@@ -12,7 +12,8 @@ export const getDescription = (Comp) => {
         {
             method: "get"
         })
-
+    
+    console.log(url)
     fetch(request)
         .then(res => {
             if (res.status === 200) {
@@ -31,8 +32,6 @@ export const getDescription = (Comp) => {
                     getReview(Comp, json['reviews'][i])
                 }
             })
-
-
 
         })
         .catch(error => {

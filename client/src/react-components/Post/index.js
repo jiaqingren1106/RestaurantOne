@@ -46,6 +46,7 @@ class Post extends React.Component{
             // this.users.push(this.props.user.username)
             // this.setState({value: this.state.value});
             addReviewFromPost(this, this.state.value, this.props.user.id, this.state.id)
+            // window.location.reload(false);
         }
     }
 
@@ -73,38 +74,45 @@ class Post extends React.Component{
         let comp;
         const reviewLength = (this.state['reviews'].length == 0)
 
+        comp = <div className = "test"></div>
 
         if(reviewLength == true){
-            comp = <div> </div>
+            comp = <div className = "test"></div>
         }else{
-            let review_list = []
-            for(let i = 0; i < this.state['reviews'].length; i ++){
-                review_list.push(i)
-            }
+            comp = <div className = "test"></div>
 
-            comp = review_list.map((index) => {
-                return (
-                    <div className={'commentsBlock'}>
-                        <div className={'userInfo1'}>
-                            <img src={this.state['reviews'][index][1]} alt = {''} className={"userPicture1"} />
+            // let review_list = []
+            // for(let i = 0; i < this.state['reviews'].length; i ++){
+            //     review_list.push(i)
+            // }
 
-                            <p className={'userName'}>
-                                {this.state['reviews'][index][0]}
-                            </p>
-                        </div>
-                        <p className={'reviewContent'}>
-                            {"Comments:  " + this.state['reviews'][index][2]}
-                        </p>
+            // comp = review_list.map((index) => {
+            //     return (
+            //         <div className={'commentsBlock'}>
+            //             <div className={'userInfo1'}>
+            //                 <img src={this.state['reviews'][index][1]} alt = {''} className={"userPicture1"} />
 
-                    </div>);
-            })
+            //                 <p className={'userName'}>
+            //                     {this.state['reviews'][index][0]}
+            //                 </p>
+            //             </div>
+            //             <p className={'reviewContent'}>
+            //                 {"Comments:  " + this.state['reviews'][index][2]}
+            //             </p>
+
+            //         </div>);
+            // })
         }
 
 
         return(
 
             <div className={"postPage"}>
-                <button className={"restaurantName"} onClick={() => setRoute("RestaurantPage")}>
+                <button className={"restaurantName"} onClick={() => setRoute("BlogPage")} 
+                to={{ 
+                        pathname: "/BlogPage", 
+                        state: this.props.user.restaurant_id
+                        }}>
                     Blog
                 </button>
 
@@ -133,11 +141,12 @@ class Post extends React.Component{
                         </p>
                     </div>
 
-                    <p className={"commentsTitle"}>
+                    {/* <p className={"commentsTitle"}>
                         Comments
                     </p>
 
-                    {comp}
+                    {comp} */}
+                    {/* {comp} */}
                     {/* {this.state['reviews'].map((index) => {
                         return (
                             <div className={'commentsBlock'}>
@@ -155,7 +164,7 @@ class Post extends React.Component{
                             </div>);
                     })} */}
 
-                    <div className = {"PosttextEditorDiv"}>
+                    {/* <div className = {"PosttextEditorDiv"}>
                         <textarea className={"PosttextEditor"}
                                 ref={c => (this.textarea = c)}
                                 placeholder="Type your comments here!"
@@ -168,7 +177,7 @@ class Post extends React.Component{
 
                     <button onClick={this.handleSubmit} className={"PostsubmitButton"}>
                         submit
-                    </button>
+                    </button> */}
 
                 </div>
             </div>
