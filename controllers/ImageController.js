@@ -82,10 +82,11 @@ const getImageById = (req, res) => {
     Image.findById(imageId, (err, image) => {
         if (err) {
             res.send(err);
+        }else{
+            res.json(image);
         }
         log("getImageById: ", image);
 
-        res.json(image);
     })
 }
 module.exports = {getAllImages, deleteImageById, getImageById, createImage}

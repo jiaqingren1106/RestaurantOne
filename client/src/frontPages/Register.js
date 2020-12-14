@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {setRoute, register} from "../redux/actions";
 import { connect } from 'react-redux'
 import {createUser} from '../Action/userAction'
@@ -6,9 +6,12 @@ import { getElementError } from "@testing-library/react";
 import {createImage} from '../Action/imageAction'
 import {createRestaurant} from "../Action/restaurantAction"
 import "./SignIn.css"
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 
 let state = {}
 
+let submitStatus = false
 const mapStateToProps = (state) => {
     return {
         route: state.routeState.route
@@ -23,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Register = (props)=> {
+
 
     const setRoute = (newRoute) => {
         let targetRoute = `/`
@@ -40,23 +44,25 @@ const Register = (props)=> {
         passwordc:"",
         email:"",
         emailc:""
-        }
-    )
+    }
+)
     const [certificate, setCertificate] = useState(null)
+    const [certificate1, setCertificate1] = useState(null)
+
+    const [uploadimage, setUploadImage] = useState(null)
     const [entered_restaurant, setEntered_restaurant] = useState({
         restName: "",
         restDescription: "",
         restAddress: "",
-        restPostcode: "",
         restOpentime: ""
     })
     const [warning, setWarning] = useState("")
-    const [uploadMsg, setuploadMsg] = useState("")
     const [userType, setUserType] = useState("regular") // regular restaurant
     const [submitMsg, setSubmitMsg] = useState("")
+    const [restaurantMsg, setRestaurantMsg] = useState("")
+    const [userMsg, setUserMsg] = useState("")
+    const [restaurantid, setRestaurantid] = useState("")
     const [imageId, setImageId] = useState("")
-
-    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     const setType = (e) => {
         if (e.target.checked === true) {
@@ -67,10 +73,7 @@ const Register = (props)=> {
         }
     }
 
-    // const fileSelectedHandler = (e) => {
-    //     setCertificate(file)
-    //     setuploadMsg("upload img successfully")
-    // }
+
 
     const displayRestaurant = () => {
         if (userType === "regular") {}
@@ -78,15 +81,12 @@ const Register = (props)=> {
             return (
                 <div>
                     <div className="uploadBox">
-                        <label htmlFor="img">Select certificate image:</label>
+                        <label htmlFor="img">Select Certificate image:</label>
 
                         <form className="image-form" id = "form1" onChange={(e) => {
                             e.preventDefault();
-
-                            setCertificate(document.getElementById("form1"))
-
                             createImage(document.getElementById("form1"), setImageId)
-
+                            setCertificate(document.getElementById("form1"))
                             // createImage(certificate, setimageId)
                             }}>
                             <div class="image-form__field" id = "imageI">
@@ -95,9 +95,21 @@ const Register = (props)=> {
                             </div>
                         </form>
 
-                        <p className="i dark-blue" id="uploadMsg">
-                            {uploadMsg}
-                        </p>
+
+                        <label htmlFor="img">Select restaurant image:</label>
+                        <form className="image-form" id = "form5" onChange={(e) => {
+                            e.preventDefault();
+                            createImage(document.getElementById("form5"), setUploadImage)
+                            setCertificate1(document.getElementById("form5"))
+                            }}>
+                            <div class="image-form__field" id = "imageI">
+                                <label>Image:</label>
+                                <input name="image" type="file" />
+                            </div>
+                        </form>
+
+
+                        
                     </div>
                     <label className="db fw6 lh-copy f4" >Restaurant Name</label>
                     <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 registerInputField" onChange={(e) => {entered_restaurant.restName = e.target.value}}/>
@@ -105,18 +117,20 @@ const Register = (props)=> {
                     <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 registerInputField" onChange={(e) => {entered_restaurant.restDescription = e.target.value}}/>
                     <label className="db fw6 lh-copy f4" >Restaurant Address</label>
                     <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 registerInputField" onChange={(e) => {entered_restaurant.restAddress = e.target.value}}/>
-                    <label className="db fw6 lh-copy f4" >Restaurant Postal Code</label>
-                    <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 registerInputField" onChange={(e) => {entered_restaurant.restPostcode = e.target.value}}/>
                     <label className="db fw6 lh-copy f4" >Restaurant Open Time</label>
-                    <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 registerInputField" onChange={(e) => {entered_restaurant.restOpentime = e.target.value}}/>
+                    <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 registerInputField" onChange={(e) => {
+                        entered_restaurant.restOpentime = e.target.value         
+                        }}/>
                 </div>
                 )
         }
     }
     const restaurantOnSubmit = () => {
+        console.log(restaurantid)
         let result = true
         for (const field_ in entered_restaurant) {
             if (entered_restaurant[field_] === "") {
+                console.log(field_)
                 result = false
             }
         }
@@ -130,10 +144,28 @@ const Register = (props)=> {
         }
         return result
     }
-    const onSubmit = async () => {
-        console.log(entered_user)
+
+    useEffect(() => {createUser(entered_user.username, entered_user.password, entered_user.email, setUserMsg, userType, restaurantid)}, [restaurantid]) 
+    useEffect(() => {       
+
+                            if(submitStatus == true){
+                                if(userMsg != "success"){
+                                    setSubmitMsg("User sign up fails")
+                                    setUserMsg("")
+                                }else if(restaurantMsg != "success" && userType === "restaurant"){
+                                    setSubmitMsg("Restaurant sign up fails")
+                                    setRestaurantMsg("")
+                                }else{
+                                    setSubmitMsg("Success sign up")
+                            }
+    }},
+    [userMsg])
+
+
+    const onSubmit = () => {
+        submitStatus = true
         for(const field_ in entered_user){
-            if (entered_user[field_] === ""){
+            if (entered_user[field_] === "" ){
                 setWarning("have unfilled field")
                 setSubmitMsg("")
                 setEntered_restaurant(entered_restaurant)
@@ -165,29 +197,30 @@ const Register = (props)=> {
         if (userType === "restaurant") {
             result = restaurantOnSubmit()
         }
+
+
         if (result)  {
             setWarning("")
             setSubmitMsg("uploading data...")
-            if(userType == "regular"){
-                createUser(entered_user.name, entered_user.password, entered_user.email, "", setSubmitMsg)
-
+            if(userType === "regular"){
+                console.log(entered_user)
+                createUser(entered_user.username, entered_user.password, entered_user.email, setUserMsg, userType, "")
             }else{
-
-
-                createUser(entered_user.name, entered_user.password, entered_user.email, setSubmitMsg)
-                createImage(certificate, setImageId)
-                const yourFunction = async () => {
-                    await delay(500);
-                    console.log(imageId)
-                    createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, imageId, setSubmitMsg)
-                  };
-                yourFunction()
-                // if(imageId != ""){
-
+                console.log(uploadimage)
+                createRestaurant(entered_restaurant.restName, entered_restaurant.restDescription, entered_restaurant.restAddress, entered_restaurant.restOpentime,imageId, setRestaurantMsg, setRestaurantid, uploadimage)
+                // createUser(entered_user.username, entered_user.password, entered_user.email, setSubmitMsg, userType, restaurantid)
             }
         }
+        // console.log(restaurantMsg)
+        // console.log(userMsg)
 
+        if(restaurantMsg == "fail"){
+            setSubmitMsg("Restaurant sign up fails")
+        }
 
+        if(userMsg == "fail"){
+            setSubmitMsg("User sign up fails")
+        }
     }
     return (
         <div className="signInContainer">
@@ -208,20 +241,6 @@ const Register = (props)=> {
                                        e.target.value
                                        }}/>
                             </div>
-                            
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f4 " >Email</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                        onChange={(e) => {
-                                           entered_user.email = e.target.value
-                                }}/>
-                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Email</label>
-                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    onChange={(e) => {
-                                    entered_user.emailc = e.target.value
-                                }}/>
-                            </div>
-
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f4 " >Password</label>
                                 <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
@@ -234,6 +253,21 @@ const Register = (props)=> {
                                            entered_user.passwordc = e.target.value
                                 }}/>
                             </div>
+
+
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f4 " >Email</label>
+                                <input className=" pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                        onChange={(e) => {
+                                           entered_user.email = e.target.value
+                                }}/>
+                                <label className="db fw6 lh-copy f4 " htmlFor="password">Confirm Email</label>
+                                <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                       type="password" onChange={(e) => {
+                                           entered_user.emailc = e.target.value
+                                }}/>
+                            </div>
+
 
                             <div className="flex items-center mb2">
                                 <input className="mr2" type="checkbox"
@@ -256,7 +290,7 @@ const Register = (props)=> {
                             <a href="#0" onClick={() => setRoute("SignIn")} className="f6 link dim black db">Sign In</a>
                         </div>
                         <div className="lh-copy mt3 ">
-                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a>
+                            <a href="#0" onClick={() => setRoute("StartUp")} className="f6 link dim black db">Back To Start</a> 
                         </div>
                     </div>
                 </main>

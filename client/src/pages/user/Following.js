@@ -12,6 +12,8 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import "./Following.css"
+import {getAllFollowingArray} from "../../Action/restaurantAction"
+
 
 const mapStateToProps = (state) => {
     return {
@@ -35,30 +37,21 @@ class Following extends React.Component {
         const password = this.props.user.password
         this.state = {
 
-            following: [
-                { name: "BergurKing", rating: "5", key: "1" },
-                { name: "McDonalds", rating: "4", key: "2" },
-                { name: "AW", rating: "5", key: "3" },
-
-                { name: "Subway", rating: "5", key: "4" },
-                { name: "Popeye", rating: "5", key: "5" },
-                { name: "PizzaHut", rating: "5", key: "6" },
-
-                { name: "TimHortons", rating: "5", key: "7" },
-                { name: "StarBucks", rating: "5", key: "8" },
-                { name: "TacoBell", rating: "5", key: "9" }
+            follows: [
             ],
 
         }
+
+        getAllFollowingArray(props.user.follows, this)
     }
- 
+
     render() {
         // const user = this.props.user;
         // const showPassword = ("*").repeat(user.password.length);
 
         const setRoute = (newRoute) => {
             let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
+            if (!(newRoute === "StartUp" || newRoute === "")) {
                 targetRoute = `${newRoute}`
             }
 
@@ -67,18 +60,19 @@ class Following extends React.Component {
         }
 
 
-    
+
         let followingList = (
             <div id="followingLsit">
-                {this.state.following.map((following) => {
+                {this.state.follows.map((follows) => {
                     return (
                         <div className={'followingBlock'}>
                             <p id="followings">
-                                {"Name: " + following.name}
+                                {"Name: " + follows.name}
+                                {/* <button id="unfollow">
+                                    unfollow
+                                </button> */}
                             </p>
-                            <p id="followings">
-                                {"Rating: " + following.rating}
-                            </p>
+
                         </div>);
                 })}
             </div>

@@ -13,7 +13,6 @@ class blog extends React.Component{
             cardgroups.push(i)
         }
         var BlogList;
-
         BlogList = (
             <CardGroup>
                 {cardgroups.map((index) => {

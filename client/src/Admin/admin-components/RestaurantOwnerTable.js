@@ -3,67 +3,74 @@ import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './Table.css';
+import { getUserInAdmin } from "../../Action/userAction";
+import {deleteUser} from "../../Action/userAction"
+import {deleteRestaurant} from "../../Action/restaurantAction"
+
 
 class RestaurantOwnerTable extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         header : ["id", "Restaurant Name", "address", "email", "Ban/Unban", "Delete"],
-         restaurantOwner : [
-             {id: 1, name: "KFC", address:"Toronto", email: "kfc@gmail.com", isBan: false},
-             {id: 2, name: "KFC", address:"Toronto", email: "kfc@gmail.com", isBan: false},
-             {id: 3, name: "KFC", address:"Toronto", email: "kfc@gmail.com", isBan: false},
-             {id: 4, name: "KFC", address:"Toronto", email: "kfc@gmail.com", isBan: false},
+         header: ["id", "Restaurant Name", "email", "Delete"],
+         users: [
+            { _id: 1, name: "KFC",  email: "kfc@gmail.com"},
+            { _id: 2, name: "KFC", email: "kfc@gmail.com"},
+            { _id: 3, name: "KFC",  email: "kfc@gmail.com"},
+            { _id: 4, name: "KFC", email: "kfc@gmail.com"},
          ]
-     }
+      }
+      getUserInAdmin(this);
    }
 
-   toggleButton(id){
-      let updatingRestaurantOwner = this.state.restaurantOwner;
-      for (let i = 0; i < this.state.restaurantOwner.length; i++){
-         if(updatingRestaurantOwner[i]["id"] === id){
-            updatingRestaurantOwner[i]["isBan"] = !updatingRestaurantOwner[i]["isBan"]
+   // toggleButton(id) {
+   //    let updatingRestaurantOwner = this.state.users;
+   //    for (let i = 0; i < this.state.users.length; i++) {
+   //       if (updatingRestaurantOwner[i]["id"] === id) {
+   //          updatingRestaurantOwner[i]["isBan"] = !updatingRestaurantOwner[i]["isBan"]
+   //       }
+   //    }
+   //    this.setState({ users: updatingRestaurantOwner })
+   // }
+
+   // isBanButtonRender(isBan, id) {
+   //    if (isBan) {
+   //       return <Button variant="secondary" block onClick={() => this.toggleButton(id)}>Unban</Button>
+   //    } else {
+   //       return <Button variant="dark" block onClick={() => this.toggleButton(id)}>Ban</Button>
+   //    }
+   // }
+
+   deleteRestaurantOwner(id, restaurant_id) {
+      let updatingrestaurantOwner = this.state.users;
+      for (let i = 0; i < this.state.users.length; i++) {
+         if (updatingrestaurantOwner[i]["_id"] === id) {
+            updatingrestaurantOwner.splice(i, 1);
          }
       }
-      this.setState({restaurantOwner: updatingRestaurantOwner})
+      deleteUser(id);
+      deleteRestaurant(restaurant_id);
+
+      this.setState({ users: updatingrestaurantOwner })
    }
 
-   isBanButtonRender(isBan, id){
-      if(isBan){
-         return <Button variant="secondary" block onClick={() => this.toggleButton(id)}>Unban</Button>
-      } else{
-         return <Button variant="dark" block onClick={() => this.toggleButton(id)}>Ban</Button>
-      }
-   }
+   renderTableData() {
+      return this.state.users.map((owner) => {
+         if (owner.type === "restaurant") {
+            const { _id, name, email, restaurant_id} = owner //destructuring
 
-   deleteRestaurantOwner(id){
-      let updatingrestaurantOwner = this.state.restaurantOwner;
-      for (let i = 0; i < this.state.restaurantOwner.length; i++){
-          if(updatingrestaurantOwner[i]["id"] === id){
-              updatingrestaurantOwner.splice(i, 1);
-          }
-      }
-      this.setState({users: updatingrestaurantOwner})
- }
+            return (
+               <tr key={_id}>
+                  <td>{_id}</td>
+                  <td>{name}</td>
+                  <td>{email}</td>
+                  <td>
+                     <Button variant="danger" block onClick={() => this.deleteRestaurantOwner(_id, restaurant_id)}>Delete</Button>
+                  </td>
+               </tr>
+            )
+         }
 
-    renderTableData() {
-      return this.state.restaurantOwner.map((owner) => {
-         const { id, name, address, email, isBan} = owner //destructuring
-
-         return (
-            <tr key={id}>
-               <td>{id}</td>
-               <td>{name}</td>
-               <td>{address}</td>
-               <td>{email}</td>
-               <td>
-                  {this.isBanButtonRender(isBan, id)}
-               </td>
-               <td>
-                  <Button variant="danger" block onClick={()=>this.deleteRestaurantOwner(id)}>Delete</Button>
-               </td>
-            </tr>
-         )
       })
    }
 
@@ -74,16 +81,16 @@ class RestaurantOwnerTable extends React.Component {
       })
    }
 
-   emptyNotification(){
-      if(this.state.restaurantOwner.length === 0){
-         return(
+   emptyNotification() {
+      if (this.state.users.length === 0) {
+         return (
             <Alert variant={'secondary'}>
                There are no Restaurant Owner in Restaurant Reviewer
             </Alert>
          )
       }
    }
-  
+
    render() {
       return (
          <div class="table">

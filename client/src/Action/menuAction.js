@@ -1,11 +1,11 @@
-import { getImageForMenu, getImageForCoupon } from "./imageAction";
+import { getImageForMenu } from "./imageAction";
 import ENV from '../config.js'
-import {addRestaurantCoupon, addRestaurantMenu} from './restaurantAction'
+import {addRestaurantMenu} from './restaurantAction'
 
 const API_HOST = ENV.api_host
 
-export const getCouponItem = (Comp, couponid) => {
-    const url = `${API_HOST}/coupon/${couponid}`
+export const getMenuItem = (Comp, menuid) => {
+    const url = `${API_HOST}/menu/${menuid}`
     const request = new Request(url,
         {
             method:"get"
@@ -24,17 +24,17 @@ export const getCouponItem = (Comp, couponid) => {
             const image = json['image']
             const price = json['price']
 
-            getImageForCoupon(Comp, image, name, price, couponid)
+            getImageForMenu(Comp, image, name, price, menuid)
         })
         .catch(error => {
             console.log(error);
         });
 }
 
-export const addCoupon = (Comp, couponName, couponImage, couponPrice) => {
+export const addMenu = (Comp, name, image, price) => {
     
-    const url = `${API_HOST}/coupon`
-    const UserBody = JSON.stringify({name:couponName, image:couponImage, price:couponPrice})
+    const url = `${API_HOST}/menu`
+    const UserBody = JSON.stringify({name:name, image:image, price:price})
 
     const request = new Request(url,
         {
@@ -46,8 +46,8 @@ export const addCoupon = (Comp, couponName, couponImage, couponPrice) => {
             body: UserBody
         }
     )
-    console.log(UserBody)
 
+    console.log(UserBody)
     fetch(request)
         .then(res => {
             if (res.status === 200) {
@@ -58,36 +58,10 @@ export const addCoupon = (Comp, couponName, couponImage, couponPrice) => {
         })
         .then(json => {
             console.log(Comp.state)
-            addRestaurantCoupon(Comp.state['restaurantId'], json['_id'])
+           addRestaurantMenu(Comp.state['restaurantId'], json['_id'])
         })
         .catch(error => {
             console.log(error);
         });
+
 }
-
-
-export const getAllCoupon = (Comp) => {
-    const url = `${API_HOST}/coupon`
-
-    const request = new Request(url,
-        {
-            method: "get"
-        })
-
-    fetch(request)
-        .then(res => {
-            if (res.status === 200) {
-                return res.json()
-            } else {
-                alert("Could not get restaurants");
-            }
-        })
-        .then(json => {
-            for (let i = 0; i < json.length; i++) {
-                getCouponItem(Comp, json[i]._id)
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        });
-} 

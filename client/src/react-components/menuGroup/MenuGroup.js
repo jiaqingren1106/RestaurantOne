@@ -27,7 +27,12 @@ class MenuGroup extends React.Component {
           image={(this.props.MenuItems)[index].image} 
           price={(this.props.MenuItems)[index].price} 
           name={(this.props.MenuItems)[index].name} 
-          rating={(this.props.MenuItems)[index].rating}/>
+          menuid={(this.props.MenuItems)[index].menuid}
+          restid={this.props.restid}
+          upper={this.props.upper}
+          state={this.props.state}
+          display={this.props.display}
+          />
         })}
       </CardGroup>
     );

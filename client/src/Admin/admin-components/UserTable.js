@@ -3,76 +3,55 @@ import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './Table.css';
+import { getUserInAdmin, deleteUser } from "../../Action/userAction";
+
 
 class UserTable extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         header : ["id", "name", "email", "status", "Ban/Unban", "Delete"],
-         users : [
-             {id: 1, name: "Alan", email:"alan@gmail.com", status:"BAN", isBan: true},
-             {id: 2, name: "Alan", email:"alan@gmail.com", status:"BAN", isBan: true},
-             {id: 3, name: "Alan", email:"alan@gmail.com", status:"BAN", isBan: true},
-             {id: 4, name: "Alan", email:"alan@gmail.com", status:"BAN", isBan: true},
-             {id: 5, name: "Alan", email:"alan@gmail.com", status:"BAN", isBan: true},
+         header: ["id", "name", "email", "Delete"],
+         users: [
+            { _id: 1, name: "Alan", email: "alan@gmail.com", type: "" },
+            { _id: 2, name: "Alan", email: "alan@gmail.com", type: "" },
+            { _id: 3, name: "Alan", email: "alan@gmail.com", type: "" },
+            { _id: 4, name: "Alan", email: "alan@gmail.com", type: "" },
+            { _id: 5, name: "Alan", email: "alan@gmail.com", type: "" },
          ]
-     }
+      }
+      getUserInAdmin(this);
    }
 
-   toggleButton(id){
+   
+   deleteUser(id) {
       let updatingUsers = this.state.users;
-      for (let i = 0; i < this.state.users.length; i++){
-         if(updatingUsers[i]["id"] === id){
-            updatingUsers[i]["isBan"] = !updatingUsers[i]["isBan"]
-            if(updatingUsers[i]["isBan"]){
-                updatingUsers[i]["status"] = "BAN"
-            } else{
-                updatingUsers[i]["status"] = "UNBAN"
-            }
-            
-            break
+      for (let i = 0; i < this.state.users.length; i++) {
+         if (updatingUsers[i]["_id"] === id) {
+            updatingUsers.splice(i, 1);
          }
       }
-      this.setState({users: updatingUsers})
+      deleteUser(id)
+      this.setState({ users: updatingUsers })
    }
 
-   isBanButtonRender(isBan, id){
-      if(isBan){
-         return <Button variant="secondary" block onClick={() => this.toggleButton(id)}>Unban</Button>
-      } else{
-         return <Button variant="dark" block onClick={() => this.toggleButton(id)}>Ban</Button>
-      }
-   }
-   
-   deleteUser(id){
-        let updatingUsers = this.state.users;
-        for (let i = 0; i < this.state.users.length; i++){
-            if(updatingUsers[i]["id"] === id){
-                updatingUsers.splice(i, 1);
-            }
-        }
-        this.setState({users: updatingUsers})
-   }
-
-    renderTableData() {
-        return this.state.users.map((user) => {
-            const { id, name, email, status , isBan} = user //destructuring
-    
+   renderTableData() {
+      return this.state.users.map((user) => {
+         if (user.type != "restaurant") {
+            const { _id, name, email, type } = user //destructuring
             return (
-                <tr key={id}>
-                    <td>{id}</td>
-                    <td>{name}</td>
-                    <td>{email}</td>
-                    <td>{status}</td>
-                    <td>
-                        {this.isBanButtonRender(isBan, id)}
-                    </td>
-                    <td>
-                        <Button variant="danger" block onClick={()=>this.deleteUser(id)}>Delete</Button>
-                    </td>
-                </tr>
+               <tr key={_id}>
+                  <td>{_id}</td>
+                  <td>{name}</td>
+                  <td>{email}</td>
+                  <td>
+                     <Button variant="danger" block onClick={() => this.deleteUser(_id)}>Delete</Button>
+                  </td>
+               </tr>
             )
-            })
+         }
+
+
+      })
    }
 
    renderTableHeader() {
@@ -82,17 +61,20 @@ class UserTable extends React.Component {
       })
    }
 
-   emptyNotification(){
-       if(this.state.users.length === 0){
-        return(
+   emptyNotification() {
+      if (this.state.users.length === 0) {
+         return (
             <Alert variant={'secondary'}>
-                There are no users in Restaurant Reviewer
+               There are no users in Restaurant Reviewer
             </Alert>
-        )
-       }
+         )
+      }
    }
-  
+
+
+
    render() {
+      console.log(this.state.users);
       return (
          <div class="table">
             <h1 class='title'>User Table</h1>

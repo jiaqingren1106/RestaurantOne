@@ -1,7 +1,7 @@
 #MenuItemPic{
     width: 100%;
-    height: 60%;
     flex-grow: 1;
+
 }
 
 #MenuItem1{
@@ -10,6 +10,7 @@
     overflow: hidden;
     box-shadow: 2px 2px 30px 2px #130506;
     max-width: 35%;
+    display: block;
 }
 
 

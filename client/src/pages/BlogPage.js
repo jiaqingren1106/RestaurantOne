@@ -11,7 +11,8 @@ import {getRestaurantsPost} from "../Action/restaurantAction"
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.route,
+        user: state.userState
     }
 }
 
@@ -36,13 +37,13 @@ class BlogPage extends React.Component{
             info:[]
         }
 
-        getRestaurantsPost(this, props.location.state)
-        console.log(props)
+        getRestaurantsPost(this, this.props.user.restaurant_id)
 
     }
 
 
     render() {
+        console.log(this.props.user)
 
 
         const row = 1
@@ -66,9 +67,12 @@ class BlogPage extends React.Component{
 
 
         if(this.state.title.length > 0 && this.state.description.length > 0 && this.state.image.length > 0 && this.state.date.length > 0 && this.state.post_id.length > 0){
+            console.log(this.state.image)
+
             CouponList = (
                 <div>
                     {cardgroups.map((index) => {
+                        console.log(this.state)
                         return <Blog
                             title={(this.state.title).slice(row*index,index*row+row)}
                             date= {(this.state.date).slice(row*index,index*row+row)}

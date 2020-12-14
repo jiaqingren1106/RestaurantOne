@@ -4,7 +4,6 @@ import './CouponGroup.css';
 
 import CardGroup from 'react-bootstrap/CardGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
 
 
 
@@ -12,7 +11,7 @@ import { Container } from 'react-bootstrap';
 class CouponGroup extends React.Component {
 
   render() {
-    const restaurantcount = this.props.restaurants.length;
+    const restaurantcount = (this.props).coupons.length;
 
     let cardgroups = [];
     var i;
@@ -25,10 +24,15 @@ class CouponGroup extends React.Component {
       <CardGroup id="Coupon">
         {cardgroups.map((index) => {
           return <Coupon
-          image={(this.props.restaurants)[index].image} 
-          description={(this.props.restaurants)[index].description} 
-          name={(this.props.restaurants)[index].name} 
-          rating={(this.props.restaurants)[index].rating}/>
+          image={(this.props.coupons)[index].image} 
+          price={(this.props.coupons)[index].price} 
+          name={(this.props.coupons)[index].name} 
+          couponid={(this.props.coupons)[index].couponid}
+          restid={this.props.restid}
+          upper={this.props.upper}
+          state={this.props.state}
+          display={this.props.display}
+          />
         })}
       </CardGroup>
     );

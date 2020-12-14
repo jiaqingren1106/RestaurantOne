@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { register, setRoute } from "../../redux/actions";
-
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -12,6 +9,8 @@ import "./Followers.css"
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import {getRestaurantsFollowerByID} from "../../Action/restaurantAction"
+
 
 const mapStateToProps = (state) => {
     return {
@@ -35,23 +34,15 @@ class Followers extends React.Component {
         const password = this.props.user.password
         this.state = {
 
-            follower: [
-                { name: "alan", key: "1" },
-                { name: "yuan", key: "2" },
-                { name: "yinke", key: "3" },
-                { name: "patric", key: "4" },
-              
+            followers: [
             ]
 
         }
+        let restaurant_id = (props.user.restaurant_id);
+        getRestaurantsFollowerByID(this, restaurant_id)
     }
  
     render() {
-        // const user = this.props.user;
-        // const showPassword = ("*").repeat(user.password.length);
-        console.log(this.props)
-
-
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -67,12 +58,16 @@ class Followers extends React.Component {
         let followerList = (
             <div id="followerlist">
                 <h1>Followers:</h1>
-                {this.state.follower.map((follower) => {
+                {this.state.followers.map((followers) => {
                     return (
                         <div className={'followerBlock'}>
-                            <p id="followers">
-                                {"Name: " + follower.name}
-                            </p>
+                            <span id="followers">
+                                {"Name: " + followers.name}
+                            </span>
+                            
+                            <span id="email">
+                                {"email: " + followers.email}
+                            </span>
                         </div>);
                 })}
             </div>
@@ -81,7 +76,10 @@ class Followers extends React.Component {
 
 
         return (
-            <Container id='Profile'>
+            <Container
+                id='Profile'
+                // className='Menu'
+            >
                 <SideNav
                     onSelect={(selected) => {
                         // Add your code here

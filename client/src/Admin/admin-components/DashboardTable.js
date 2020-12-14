@@ -4,46 +4,57 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './Table.css';
 
+import { getRestRequest, handleRequest } from "../../Action/restaurantAction";
+import { getImage } from '../../Action/imageAction';
+
 class DashboardTable extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         header : ["id", "Restaurant Name", "email", "address", "Accept", "Delete"],
-         restRequest : [
-             {id: 1, name: "KFC", email:"KFC@gmail.com", address: "Toronto"},
-             {id: 2, name: "A&W", email:"A&W@gmail.com", address: "Alan"},
-             {id: 3, name: "Naan&Kabob", email:"Naan&Kabob@gmail.com", address: "Ren"},
-             {id: 4, name: "Chatime", email:"Chatime@gmail.com", address: "Place"},
-         ]
-     }
+         header: ["id", "Restaurant Name", "address", "certificate", "Accept", "Delete"],
+         restaurants: [
+            { _id: 1, name: "KFC", address: "Toronto", certificate:"" },
+            { _id: 2, name: "A&W", address: "Alan", certificate:""  },
+            { _id: 3, name: "Naan&Kabob", address: "Ren", certificate:""  },
+            { _id: 4, name: "Chatime", address: "Place", certificate:""  },
+         ],
+         image: []
+      }
+      getRestRequest(this)
+      
+
    }
 
-   deleteRestRequest(id){
-      let updatingRestRequest = this.state.restRequest;
-      for (let i = 0; i < this.state.restRequest.length; i++){
-          if(updatingRestRequest[i]["id"] === id){
-              updatingRestRequest.splice(i, 1);
-              break;
-          }
+   handleRestRequest(id, approve) {
+      let updatingRestRequest = this.state.restaurants;
+      let target;
+      for (let i = 0; i < this.state.restaurants.length; i++) {
+         if (updatingRestRequest[i]["_id"] === id) {
+            target = updatingRestRequest[i]
+            updatingRestRequest.splice(i, 1);
+            break;
+         }
       }
-      this.setState({restRequest: updatingRestRequest})
- }
+      handleRequest(approve, id, target);
 
-    renderTableData() {
-      return this.state.restRequest.map((restaurant) => {
-         const {id, name, email, address} = restaurant //destructuring
+      this.setState({ restaurants: updatingRestRequest })
+   }
 
+   renderTableData() {
+      return this.state.restaurants.map((restaurant, index) => {
+         const { _id, name, address,  certificate} = restaurant //destructuring
+         
          return (
-            <tr key={id}>
-               <td>{id}</td>
+            <tr key={_id}>
+               <td>{_id}</td>
                <td>{name}</td>
-               <td>{email}</td>
                <td>{address}</td>
+               <td><img src={this.state.image[index]}/></td>
                <td>
-                    <Button variant="success" block onClick={()=>this.deleteRestRequest(id)}>Accept</Button>
+                  <Button variant="success" block onClick={() => this.handleRestRequest(_id, true)}>Accept</Button>
                </td>
                <td>
-                  <Button variant="danger" block onClick={()=>this.deleteRestRequest(id)}>Decline</Button>
+                  <Button variant="danger" block onClick={() => this.handleRestRequest(_id, false)}>Decline</Button>
                </td>
             </tr>
          )
@@ -57,31 +68,31 @@ class DashboardTable extends React.Component {
       })
    }
 
-   emptyNotification(){
-      if(this.state.restRequest.length === 0){
-         return(
+   emptyNotification() {
+      if (this.state.restaurants.length === 0) {
+         return (
             <Alert variant={'secondary'}>
                There are no Restaurant Registration Request in Restaurant Reviewer
             </Alert>
          )
       }
    }
-  
+
    render() {
       return (
-        <div class="table">
+         <div class="table">
             <h1 class='title'>Dashboard</h1>
             <h3 class='subtitle'>Restaurant Registration Request</h3>
             <Table striped bordered hover id='RestRequest' size='sm'>
-                <thead>
-                    <tr>{this.renderTableHeader()}</tr>
-                </thead>
-                <tbody>
-                    {this.renderTableData()}
-                </tbody>
+               <thead>
+                  <tr>{this.renderTableHeader()}</tr>
+               </thead>
+               <tbody>
+                  {this.renderTableData()}
+               </tbody>
             </Table>
             {this.emptyNotification()}
-        </div>
+         </div>
       )
    }
 }

@@ -13,6 +13,18 @@ const getCouponbyId = (req, res) => {
     });
 };
 
+const getAllCoupon = (req, res) => {
+	coupon.find()
+		.then(
+			coupon => {
+				res.json(coupon)
+			},
+			error => {
+				res.status(500).send('Internal server error' + error)
+			}
+		)
+}
+
 const createCoupon = (req, res) => {
     const newCoupon = new coupon(req.body);
     newCoupon.save((err, post) => {
@@ -24,4 +36,4 @@ const createCoupon = (req, res) => {
 };
 
 
-module.exports = {getCouponbyId, createCoupon}
+module.exports = {getCouponbyId, createCoupon, getAllCoupon}

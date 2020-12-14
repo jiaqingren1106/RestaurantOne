@@ -1,73 +1,60 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
+// import '../../pages/owner/Menus.css';
 import './Menu.css';
 
 import MenuGroup from '../menuGroup/MenuGroup';
-import NavBar from '../../react-components/NavBar/NavBar';
-import {register, setRoute} from "../../redux/actions";
-import {connect} from "react-redux";
-import {withRouter, Link} from "react-router-dom";
-
-
-import burger1 from "../../images/Mcdonald-2.png";
-import burger2 from "../../images/Mcdonald-3.png";
-import burger3 from "../../images/Mcdonald-4.png";
-import burger4 from "../../images/Mcdonald-5.png";
-import burger5 from "../../images/popeye.jpg";
-import burger6 from "../../images/pizzahut.jpg";
-import burger7 from "../../images/burger.jpg";
-import burger8 from "../../images/user-review-1.jpg";
-import burger9 from "../../images/subway.jpg";
+import { register, setRoute } from "../../redux/actions";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+import { getRestaurantMenu } from "../../Action/restaurantAction"
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.route,
+        user: state.userState
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setRoute: (new_route)=> dispatch(setRoute(new_route)),
+        setRoute: (new_route) => dispatch(setRoute(new_route)),
         setUser: (user_obj) => dispatch(register(user_obj))
     }
 }
 
 class Menu extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            MenuItems: [
-                { name: "Bergur", rating: "5", key: "1", image: burger1, price: "10.0$" },
-                { name: "BigMac", rating: "4", key: "2", image: burger2, price: "10.0$" },
-                { name: "Chicken Nugget", rating: "5", key: "3", image: burger3, price: "10.0$" },
-    
-                { name: "Fries", rating: "5", key: "4", image: burger4, price: "10.0$" },
-                { name: "Chicken Sandvich", rating: "5", key: "5", image: burger5, price: "10.0$" },
-                { name: "Pizza", rating: "5", key: "6", image: burger6, price: "10.0$" },
-    
-                { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
-                { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
-                { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
-            ]
+            MenuItems: [],
+            newItem: {
+                name: "",
+                image: null,
+                price: ""
+            },
+            warning: "",
+            restaurantId: this.props.user.restaurant_id
         }
+
+        getRestaurantMenu(this, this.props.user.restaurant_id)
+
+
     }
 
-    useMeWhenOnClick = (pageNumber) => {
-        this.setState({ 
-            page: pageNumber
-        })
-    }
 
 
     render() {
+        console.log(this.state)
+
         const setRoute = (newRoute, id) => {
             let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
+            if (!(newRoute === "StartUp" || newRoute === "")) {
                 targetRoute = `${newRoute}`
             }
             this.props.setRoute(newRoute)
             this.props.history.push(targetRoute, id)
         }
-
 
 
         const row = 5;
@@ -88,32 +75,41 @@ class Menu extends React.Component {
             cardgroups.push(i);
         }
 
+        const updateState = (newMenuItems) => {
+            this.setState({ MenuItems: newMenuItems })
+        }
+
         var MenuItemList;
         MenuItemList = (
-            <div className={'menu'}>
+            <div id='MenuInProfile'>
                 {cardgroups.map((index) => {
                     return <MenuGroup
-                        key={0}
-                        MenuItems={(this.state.MenuItems).slice(row * index, index * row + row)} />
+                        MenuItems={(this.state.MenuItems).slice(row * index, index * row + row)} restid={this.state.restaurantId} upper={updateState} state={this.state} display={false} />
                 })}
             </div>
         );
 
-       
+
+
 
         return (
             <section className='Menu'>
-                <Link 
-                id="back" 
-                onClick={() => setRoute("RestaurantPage", this.props.location.state)}
-                to={{ 
-                    pathname: "/RestaurantPage", 
-                    state: this.props.location.state
-                   }}
+                <h1 className="f3 f2-m f1-l fw2 near-white mv3 center-l">
+                    Menu
+                </h1>
+                <Link
+                    id="back"
+                    onClick={() => setRoute("RestaurantPage", this.props.location.state)}
+                    to={{
+                        pathname: "/RestaurantPage",
+                        state: this.props.location.state
+                    }}
                 >
                     back
                 </Link>
+
                 {MenuItemList}
+
             </section>
         );
     }

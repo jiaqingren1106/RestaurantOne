@@ -10,9 +10,6 @@ const UserSchema = new mongoose.Schema({
     email:{
         type: String,
 		required: true,
-		minlength: 1,
-		trim: true,
-        unique: true,
     },
 
     password:{
@@ -27,30 +24,28 @@ const UserSchema = new mongoose.Schema({
         }
     ],
 
+    type:{
+        type: String
+    },
+
     isAdmin:{
         type: Boolean,
         default: false,
-        required: true
+    },
+
+    restaurant_id:{
+        type: String
+    },
+
+    reviews:{
+        type: Array
+    },
+
+    follows: {
+        type: Array
     }
 
 });
-
-UserSchema.pre('save', function(next) {
-	const user = this; // binds this to User document instance
-
-	// checks to ensure we don't hash password more than once
-	if (user.isModified('password')) {
-		// generate salt and hash the password
-		bcrypt.genSalt(10, (err, salt) => {
-			bcrypt.hash(user.password, salt, (err, hash) => {
-				user.password = hash
-				next()
-			})
-		})
-	} else {
-		next()
-	}
-})
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

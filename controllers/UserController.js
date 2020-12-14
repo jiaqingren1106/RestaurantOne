@@ -31,9 +31,9 @@ const getUserById = (req, res) => {
     user.findById(req.params.userId, (err, user) => {
         if (err) {
             res.send(err);
+        }else{
+            res.json(user)
         }
-        log("getUserById: ", user);
-        res.json(user.populate("reviews"));
     });
 };
 
@@ -51,7 +51,9 @@ const createUser = (req, res) => {
     const userName = req.body.name
     const newUser = new user(req.body);
     let find = false;
-    console.log("createUser")
+    // console.log("createUser")
+
+    console.log(req.body)
     user.find({}, (err, users) => {
         if (err) {
             res.send(err);
@@ -66,8 +68,10 @@ const createUser = (req, res) => {
             newUser.save((err, user) => {
                 if (err) {
                     res.send(err);
+                }else{
+                    console.log("success")
+                    res.json({"condition": "success", "id": user['_id']});
                 }
-                res.json({"condition": "success"});
             });
         }
     });
@@ -100,5 +104,99 @@ const deleteUserById = (req, res) => {
     });
 };
 
+const addReviewtoUser = (req, res) => {
 
-module.exports = {getAllUsers, getUserById, createUser, updateUserById, deleteUserById, uploadFiles}
+    const userid = req.params.userId
+    const reviewid = req.params.reviewId
+
+    user.findById(userid, (err, singleUser) => {
+        if (err) {
+            res.send(err);
+        }
+
+        let review_list = singleUser['reviews']
+        review_list.push(reviewid)
+
+        user.findByIdAndUpdate(
+            userid,
+            {
+              $set: {
+                reviews: review_list
+              }
+            },
+            { new: true }
+        ).then(singleUser => {
+            res.json(singleUser)
+        })
+    
+    });
+
+}
+
+
+const addFollowtoUser = (req, res) => {
+
+    const userid = req.params.userId
+    const followid = req.params.followId
+
+    user.findById(userid, (err, singleUser) => {
+        if (err) {
+            res.send(err);
+        }
+
+        let review_list = singleUser['follows']
+        review_list.push(followid)
+
+        user.findByIdAndUpdate(
+            userid,
+            {
+              $set: {
+                follows: review_list
+              }
+            },
+            { new: true }
+        ).then(singleUser => {
+            res.json(singleUser)
+        })
+    
+    });
+
+}
+
+
+const deleteFollowtoUser = (req, res) => {
+
+    const userid = req.params.userId
+    const followid = req.params.followId
+
+    user.findById(userid, (err, singleUser) => {
+        if (err) {
+            res.send(err);
+        }
+
+        let review_list = []
+
+        for(let i = 0; i < singleUser['follows'].length; i++){
+            if(singleUser['follows'][i] != followid){
+                review_list.push(singleUser['follows'][i])
+            }
+        }
+    
+        user.findByIdAndUpdate(
+            userid,
+            {
+              $set: {
+                follows: review_list
+              }
+            },
+            { new: true }
+        ).then(singleUser => {
+            res.json(singleUser)
+        })
+    
+    });
+
+}
+
+module.exports = {getAllUsers, getUserById, createUser, updateUserById, deleteUserById, uploadFiles,
+     addReviewtoUser, addFollowtoUser, deleteFollowtoUser}

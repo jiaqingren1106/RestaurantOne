@@ -25,9 +25,11 @@ const mapDispatchToProps = (dispatch) => {
 
 class BlogElement extends React.Component{
     render(){
+
         const maxlength = 300;
         let description = this.props.descriptions.slice(1, maxlength)
         description = description.concat("......")
+
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -36,11 +38,12 @@ class BlogElement extends React.Component{
 
             this.props.history.push(targetRoute)
             this.props.setRoute(newRoute)
+            window.location.reload(false);
         }
 
         return(
             <Card className={"Card"}>
-                <Card.Img className={"CardImage"} variant={"top"} src={burgers} />
+                <Card.Img className={"CardImage"} variant={"top"} src={this.props.image} />
                 <Card.Body>
                     <Card.Text className={"Title"}>
                         {this.props.title}
@@ -54,6 +57,7 @@ class BlogElement extends React.Component{
                         {description}
                     </Card.Text>
 
+
                     <Link onClick={() => setRoute("Post") } to={{ 
                         pathname: "/Post", 
                         state: this.props.ids 
@@ -62,6 +66,8 @@ class BlogElement extends React.Component{
                             read more ....
                         </Card.Text>
                     </Link>
+
+
 
                 </Card.Body>
             </Card>

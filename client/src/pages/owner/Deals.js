@@ -3,30 +3,13 @@ import './Deals.css';
 import { register, setRoute } from "../../redux/actions";
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+import { getRestaurantCoupon } from '../../Action/restaurantAction'
+import { createImageForCoupon } from "../../Action/imageAction"
 
-
-
-import {
-    BURGERKING, MCDONALDS,
-    AWDES, SUBWAY, POPEYES, PIZZAHUT, TIMHORTONS,
-    STARBUCKS,
-    TACOBELL
-} from "../../data/discription_constants";
 
 import CouponGroup from '../../react-components/CouponGroup/CouponGroup';
-import AW from "../../images/AW.png";
-import BurgerKing from "../../images/burgerking.jpg";
-import Mcdonald from "../../images/Mcdonald.png";
-import PizzaHut from "../../images/pizzahut.jpg";
-import Popeye from "../../images/popeye.jpg";
-import StarBucks from "../../images/starbucks.jpg";
-import TimHortons from "../../images/timhortons.jpg";
-import TacoBell from "../../images/tacobell.jpg";
-import Subway from "../../images/subway.jpg";
-
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
 
 const mapStateToProps = (state) => {
     return {
@@ -42,60 +25,66 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-
 class Deals extends React.Component {
-    state = {
-        onSearch: false,
-        restaurants: [
-            { name: "BurgerKing", rating: "5", key: "1", image: BurgerKing, description: BURGERKING },
-            { name: "McDonalds", rating: "4", key: "2", image: Mcdonald, description: MCDONALDS },
-            { name: "AW", rating: "5", key: "3", image: AW, description: AWDES },
 
-            { name: "Subway", rating: "5", key: "4", image: Subway, description: SUBWAY },
-            { name: "Popeyes", rating: "5", key: "5", image: Popeye, description: POPEYES },
-            { name: "PizzaHut", rating: "5", key: "6", image: PizzaHut, description: PIZZAHUT },
 
-            { name: "TimHortons", rating: "5", key: "7", image: TimHortons, description: TIMHORTONS },
-            { name: "StarBucks", rating: "5", key: "8", image: StarBucks, description: STARBUCKS },
-            { name: "TacoBell", rating: "5", key: "9", image: TacoBell, description: TACOBELL }
-        ],
-        createPostAppear: false,
-        newPostingMsg: "",
-        postPic:null,
-        warning:"",
-        picMsg:"",
-        searched: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+            couponItems: [],
+            newCoupon: {
+                name: "",
+                image: null,
+                price: ""
+            },
+
+            warning: "",
+            restaurantId: this.props.user.restaurant_id
+        }
+
+        getRestaurantCoupon(this, this.props.user.restaurant_id)
 
     }
 
-    
 
     setCreatePostAppear = (newAppear) => {
-        this.setState({createPostAppear: newAppear})
+        this.setState({ createPostAppear: newAppear })
     }
     setPostSendingMsg = (msg) => {
-        this.setState({newPostingMsg: msg})
+        this.setState({ newPostingMsg: msg })
+    }
+    handleUploadMenu = () => {
+        if (this.state.newCoupon.name === "" || this.state.newCoupon.image == null || this.state.newCoupon.price === "") {
+            this.setState({ warning: "have unfilled field" })
+        }
+        else {
+            // call backend
+            this.setState({ warning: "" })
+        }
     }
 
-
     render() {
-        const column = 4;
+        console.log(this.state)
 
-        let restaurants
-        if (this.state.onSearch) {
-            restaurants = this.state.searched
-        } else {
-            restaurants = this.state.restaurants
+        const setRoute = (newRoute, id) => {
+            let targetRoute = `/`
+            if (!(newRoute === "StartUp" || newRoute === "")) {
+                targetRoute = `${newRoute}`
+            }
+            this.props.setRoute(newRoute)
+            this.props.history.push(targetRoute, id)
         }
 
 
-        const restaurantLen = restaurants.length;
-        const leftover = restaurantLen % column;
+        const row = 4;
+
+        const couponLen = this.state.couponItems.length;
+        const leftover = couponLen % row;
         var cardGroupLen;
         if (leftover === 0) {
-            cardGroupLen = restaurantLen / column;
+            cardGroupLen = couponLen / row;
         } else {
-            cardGroupLen = restaurantLen / column + 1;
+            cardGroupLen = couponLen / row + 1;
         }
 
 
@@ -105,39 +94,33 @@ class Deals extends React.Component {
             cardgroups.push(i);
         }
 
+        const updateState = (newCouponItems) => {
+            this.setState({couponItems:newCouponItems})
+        }
+
         var CouponList;
         CouponList = (
             <div id="dealsInProfile">
                 {cardgroups.map((index) => {
                     return <CouponGroup
-                        restaurants={(restaurants).slice(column * index, index * column + column)} />
-
+                        coupons={(this.state.couponItems).slice(row * index, index * row + row)} restid={this.state.restaurantId} upper={updateState} state={this.state} display={true}/>
                 })}
             </div>
         );
 
-        const setRoute = (newRoute) => {
-            let targetRoute = `/`
-            if (!(newRoute=== "StartUp" || newRoute === "")){
-                targetRoute = `${newRoute}`
-            }
-
-            this.props.history.push(targetRoute)
-            this.props.setRoute(newRoute)
-        }
-
+        
         const fileSelectedHandler = (e) => {
             const file = e.target.files[0]
 
-            this.setState({postPic: file})
-            this.setState({warning: "upload img successfully"})
-            this.setState({picMsg: ""})
-           
+            this.setState({ postPic: file })
+            this.setState({ warning: "upload img successfully" })
+            this.setState({ picMsg: "" })
+
         }
 
         return (
-            <section className='SecondPage'>
-                <SideNav
+            <section className='Menu'>
+                <SideNav className=" o-70"
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -208,27 +191,49 @@ class Deals extends React.Component {
 
                     </SideNav.Nav>
                 </SideNav>
-
-                <form id="dealForm">
-                    New coupon code:
-                    <input/>
-
-                    Expire Date:
-                    <input/>
-
-                    <input type="file"
-                           id="makeDealFileUpload" name="avatar"
-                           accept="image/png, image/jpeg" onChange={(e) => {fileSelectedHandler(e)}}/>
-
-                    <Button variant="primary" onClick = {() => {
-                        this.setPostSendingMsg("")
-                        this.setState({createPostAppear: !this.state.createPostAppear})}}>
-                        ADD
-                    </Button>
-                </form>
+                <h1 className="f3 f2-m f1-l fw2 near-white mv3 center-l">
+                    Coupon
+                </h1>
 
 
                 {CouponList}
+                <div id="couponForm" className="o-90">
+                    <div className="flex justify-around black">
+                        new Coupon:
+                        <input onChange={(e) => { this.setState({ newCoupon: { ...this.state.newCoupon, ...{ name: e.target.value } } }) }} />
+                    </div>
+                    <div className="flex justify-around black">
+                        Expire Date:
+                        <input onChange={(e) => { this.setState({ newCoupon: { ...this.state.newCoupon, ...{ price: e.target.value } } }) }} />
+                    </div>
+
+
+                    <form className="image-form" id="form4" onSubmit={(e) => {
+                        e.preventDefault();
+                        createImageForCoupon(document.getElementById("form4"), this)
+
+                        window.location.reload(false);
+                    }
+
+                    }>
+
+                        <div class="image-form__field">
+                            <label>Image:</label>
+                            <input name="image" type="file" />
+                        </div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className="image-form__submit-button"
+                        >
+                            Upload
+                    </Button>
+                    </form>
+
+
+
+                </div>
             </section>
         );
     }

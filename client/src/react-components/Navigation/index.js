@@ -3,11 +3,13 @@ import "./styles.css"
 import {register, setRoute} from "../../redux/actions";
 import {connect} from "react-redux";
 import {withRouter, Link} from "react-router-dom";
-
+import {deleteFollowtoUser, addFollowtoUser} from "../../Action/userAction"
+import {addFollowtoRestaurant, deleteFollowtoRestaurant} from "../../Action/restaurantAction"
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.route,
+        user: state.userState
     }
 }
 
@@ -29,14 +31,23 @@ class Navigation extends React.Component {
 
     changeFollow(){
         if(this.state['Follow'] === 'Follow'){
-            this.setState({Follow: 'Unfollow', id: this.id})
+            console.log(this.id)
+            this.setState({Follow: 'Unfollow'})
+            // addFollowtoUser(this.props.user.id, this.state.id)
+            // addFollowtoRestaurant(this.state.id, this.props.user.id)
         }else{
-            this.setState({Follow: 'Follow', id: this.id})
+            this.setState({Follow: 'Follow'})
+            // deleteFollowtoUser(this.props.user.id, this.state.id)
+            // deleteFollowtoRestaurant(this.state.id, this.props.user.id)
         }
     }
 
 
     render() {
+
+        // console.log(this.props.user.id)
+        // console.log(this.props.user.restaurant_id)
+
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute=== "StartUp" || newRoute === "")){
@@ -70,7 +81,7 @@ class Navigation extends React.Component {
                 onClick={() => setRoute("MenuPage")}
                 to={{ 
                     pathname: "/MenuPage", 
-                    state: this.state.id 
+                    state: this.state.id
                    }}
                 >
                     Menu

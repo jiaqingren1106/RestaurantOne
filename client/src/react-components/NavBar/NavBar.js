@@ -90,8 +90,10 @@ class NavBar extends React.Component {
           restaurant_id: ""
         })
         this.setRoute("StartUp")
+          localStorage.removeItem('userData')
         return;
       }
+
       alert("something went wrong")
     } catch(e){
       console.log(e)
@@ -126,7 +128,7 @@ class NavBar extends React.Component {
       </Nav>
     )
     if (user.userType !== ""){
-      let page = "ProfilePageOwner";
+      let page = "ProfilePage";
       console.log(user.userType)
       if (user.userType === "restaurant") {
         page = "ProfilePageOwner"

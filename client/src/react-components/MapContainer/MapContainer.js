@@ -1,19 +1,41 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
+import {getRestAttributeByID, getLocationAttributeByID} from "../../Action/restaurantAction";
+import {register, setRoute} from "../../redux/actions";
+import { connect } from 'react-redux';
+import {googleApiKey} from "../../data/constants";
+
 
 const mapStyles = {
     position: 'relative',
     width: '100%',
     height: '100%'
 };
+const mapStateToProps = (state) => {
+    return {
+        route: state.routeState.route,
+        user: state.userState
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route) => dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
 
 export class MapContainer extends Component {
 
-    state = {
-    lat: 43.6686687,
-    lng: -79.3976189,
-        apiKey: 'AIzaSyALh3Jxz38yeMi-GmZ8ID5xMvhDnmaC244'
-    };
+    constructor(props) {
+        super();
+        this.state = {
+            lat: 43.6686687,
+            lng: -79.3976189,
+            apiKey: googleApiKey
+        };
+        getLocationAttributeByID(this, props.user.restaurant_id)
+    }
 
 
     render() {
@@ -68,4 +90,4 @@ export class MapContainer extends Component {
 //         );
 //     }
 }
-export default MapContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);

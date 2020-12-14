@@ -6,10 +6,9 @@ const getMenubyId = (req, res) => {
     menu.findById(req.params.menuId, (err, post) => {
         if (err) {
             res.send(err);
+        }else{
+            res.json(post);
         }
-        log("getPostById: ", post);
-
-        res.json(post);
     });
 };
 

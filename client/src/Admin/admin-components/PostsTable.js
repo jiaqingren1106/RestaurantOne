@@ -3,65 +3,51 @@ import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './Table.css';
+import {getAllPost, deletePostAdmin} from "../../Action/postAction";
+
 
 class PostsTable extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         header : ["id", "restaurant_id", "title", "content", "Ban/Unban", "Delete"],
+         header : ["id", "restaurant_id", "title", "content", "Delete"],
          posts : [
-             {id: 1, rest_id: 1, title:"Discount 10%", content: "Get your Discounts!", isBan: true},
-             {id: 2, rest_id: 2, title:"Discount 20%", content: "Get your Discounts!", isBan: false},
-             {id: 3, rest_id: 3, title:"Discount 30%", content: "Get your Discounts!", isBan: true},
-             {id: 4, rest_id: 4, title:"Discount 40%", content: "Get your Discounts!", isBan: false},
+             {_id: 1, rest_id: 1, title:"Discount 10%", description: "Get your Discounts!"},
+             {_id: 2, rest_id: 2, title:"Discount 20%", description: "Get your Discounts!"},
+             {_id: 3, rest_id: 3, title:"Discount 30%", description: "Get your Discounts!"},
+             {_id: 4, rest_id: 4, title:"Discount 40%", description: "Get your Discounts!"},
          ]
      }
+     getAllPost(this)
    }
-
-   toggleButton(id){
-      let updatingPosts = this.state.posts;
-      for (let i = 0; i < this.state.posts.length; i++){
-         if(updatingPosts[i]["id"] === id){
-            updatingPosts[i]["isBan"] = !updatingPosts[i]["isBan"]
-            // alert("isBan of " + id +"becomes "+ updatingPosts[i]["isBan"])
-         }
-      }
-      this.setState({posts: updatingPosts})
-   }
-
-   isBanButtonRender(isBan, id){
-      if(isBan){
-         return <Button variant="secondary" block onClick={() => this.toggleButton(id)}>Unban</Button>
-      } else{
-         return <Button variant="dark" block onClick={() => this.toggleButton(id)}>Ban</Button>
-      }
-   }
+  
 
    deletePosts(id){
       let updatingPosts = this.state.posts;
       for (let i = 0; i < this.state.posts.length; i++){
-          if(updatingPosts[i]["id"] === id){
+          if(updatingPosts[i]["_id"] === id){
               updatingPosts.splice(i, 1);
           }
       }
+
+      deletePostAdmin(id)
+
       this.setState({users: updatingPosts})
  }
 
     renderTableData() {
       return this.state.posts.map((post) => {
-         const { id, rest_id, title, content , isBan} = post //destructuring
+         const { _id, rest_id, title, description} = post //destructuring
 
          return (
-            <tr key={id}>
-               <td>{id}</td>
+            <tr key={_id}>
+               <td>{_id}</td>
                <td>{rest_id}</td>
                <td>{title}</td>
-               <td>{content}</td>
+               <td>{description}</td>
+               
                <td>
-                  {this.isBanButtonRender(isBan, id)}
-               </td>
-               <td>
-                  <Button variant="danger" block onClick={()=>this.deletePosts(id)}>Delete</Button>
+                  <Button variant="danger" block onClick={()=>this.deletePosts(_id)}>Delete</Button>
                </td>
             </tr>
          )

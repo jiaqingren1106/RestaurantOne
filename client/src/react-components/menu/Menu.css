@@ -5,7 +5,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 100px;
     padding-left: 3%;
     padding-right: 3%;
 
@@ -14,7 +13,7 @@
 .Menu {
     content: "";
     opacity: 0.8;
-    background: url("../../images/front_background.jpg") no-repeat center center fixed;
+    background: url("../../images/blackbackground_2.jpg") no-repeat center center fixed;
     background-size: cover;
     /* filter: blur(3px); */
     position: relative;

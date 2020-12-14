@@ -13,7 +13,7 @@ const logger = createLogger()
 
 
 const rootReducer = combineReducers({routeState, userState})
-const store = createStore(rootReducer, applyMiddleware(logger))
+const store = createStore(rootReducer)
 
 
 

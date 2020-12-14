@@ -3,16 +3,9 @@ import WebsiteName from "../react-components/WebsiteName";
 import Slider from "../react-components/Slider";
 import RestaurantInfo from "../react-components/RestaurantInfo";
 import "./RestaurantPage.css"
-import Mcdonald1 from '../images/Mcdonald-1.png'
-import Mcdonald2 from '../images/Mcdonald-2.png'
-import Mcdonald3 from '../images/Mcdonald-3.png'
-import Mcdonald4 from '../images/Mcdonald-4.png'
-import Mcdonald5 from '../images/Mcdonald-5.png'
 import rightArrow from '../images/rightarrow.png'
 import leftArrow from '../images/leftarrow.png'
 import Navigation from "../react-components/Navigation";
-import user1 from '../images/user-review-1.jpg'
-import leftarrow from "../images/leftarrow.png";
 import { withRouter } from "react-router-dom";
 import { register, setRoute } from "../redux/actions";
 import { connect } from "react-redux";
@@ -49,7 +42,6 @@ class RestaurantPage extends React.Component {
                 posts: []
         }
         
-        console.log(props)
         if (props.location.state) {
             getRestaurantsByID(this, props.location.state)
         }

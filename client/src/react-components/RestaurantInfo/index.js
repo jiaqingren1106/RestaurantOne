@@ -7,9 +7,9 @@ import user2 from '../../images/user-review-2.jpg'
 import user3 from '../../images/user-review-3.jpg'
 import MapContainer from '../MapContainer/MapContainer'
 import userPic from '../../images/userPhoto.jpg'
-import {register, setRoute} from "../../redux/actions";
-import {addReview} from "../../Action/reviewAction"
-import {getRestaurantReviews} from "../../Action/restaurantAction"
+import { register, setRoute } from "../../redux/actions";
+import { addReview } from "../../Action/reviewAction"
+import { getRestaurantReviews } from "../../Action/restaurantAction"
 
 let comp;
 
@@ -27,11 +27,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class RestaurantInfo extends React.Component{
+class RestaurantInfo extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: '', reviews: []};
+        this.state = { value: '', reviews: [] };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmit2 = this.handleSubmit2.bind(this);
@@ -44,22 +44,18 @@ class RestaurantInfo extends React.Component{
 
 
     handleSubmit(event) {
-        if (this.props.usersid === "") {
-            alert("have to login to make comment")
-        }
-        else{
-            addReview(this, this.state.value, this.props.info.userId, this.props.info.restaurantId)
-            // getRestaurantReviews(this, this.props.info.restaurantId)
-            if(this.state.userName != undefined){
-                const value = this.state.value
-                this.state.reviews.push([this.state.userName, this.state.userImage, value])
-            }
+
+        addReview(this, this.state.value, this.props.user.id, this.props.info.restaurantId)
+        // getRestaurantReviews(this, this.props.info.restaurantId)
+        if (this.state.userName != undefined) {
+            const value = this.state.value
+            this.state.reviews.push([this.props.user.username, this.state.userImage, value])
         }
 
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({ value: event.target.value });
     }
 
     handleSubmit2(event) {
@@ -74,11 +70,11 @@ class RestaurantInfo extends React.Component{
 
         const reviewLength = (this.state.reviews.length == 0)
 
-        if(reviewLength == true){
+        if (reviewLength == true) {
             comp = <div> </div>
-        }else{
+        } else {
             let review_list = []
-            for(let i = 0; i < this.state.reviews.length; i ++){
+            for (let i = 0; i < this.state.reviews.length; i++) {
                 review_list.push(i)
             }
 
@@ -88,7 +84,7 @@ class RestaurantInfo extends React.Component{
                         <div className={'reviewBlock2'}>
 
                             <div className={'userInfo'}>
-                                <img src={this.state.reviews[index][1]} alt = {''} className={"userPic"} />
+                                <img src={this.state.reviews[index][1]} alt={'https://res.cloudinary.com/ddmruegqh/image/upload/v1607896942/jmdv0vhsyttwndfx4umg.jpg'} className={"userPic"} />
 
                                 <p className={'userName1'}>
                                     {this.state.reviews[index][0]}
@@ -99,50 +95,21 @@ class RestaurantInfo extends React.Component{
                             {"Comments:  " + this.state.reviews[index][2]}
                         </p>
 
-                       <hr
-                        style={{
-                            margin: '1em auto',
-                        }} />
+                        <hr
+                            style={{
+                                margin: '1em auto',
+                            }} />
 
                     </div>);
             })
         }
 
 
-        // {list.map((index) => {
-        //     return (
-        //         <div className={'reviewBlock'}>
-        //             <div className={'reviewBlock2'}>
-        //                 <div className={'userInfo'}>
-        //                     <img src={userPic} alt={''} className={'userPic'} />
-        //                     <p className={'userName1'} >
-        //                         {this.users[index]}
-        //                     </p>
-        //                 </div>
-
-        //                 <p className={'reviewConcent'}>
-        //                     {"Comments:  " + this.state.reviews[index]}
-        //                 </p>
-
-        //                 <img src={user1} alt={""} className={"reviewpic"} />
-        //             </div>
-        //             <>
-        //             <hr
-        //                 style={{
-        //                     margin: '1em auto',
-        //                 }} />
-        //             </>
-        //         </div>);
-        // })}
-
-
-
-
         const length = this.state.reviews.length
 
         let i;
         let list = []
-        for(i = 0;i < length; i++){
+        for (i = 0; i < length; i++) {
             list.push(i);
         }
 
@@ -172,14 +139,14 @@ class RestaurantInfo extends React.Component{
                                 Covid Update
                             </p>
 
-                            <img className={"checkPic"} src={checkPic} alt={"None"}/>
+                            <img className={"checkPic"} src={checkPic} alt={"None"} />
 
                             <p className={"condition"}>
                                 {this.props.info.safe}
                             </p>
                         </div>
-                        <div  className={"googleMap"}>
-                            <MapContainer/>
+                        <div className={"googleMap"}>
+                            <MapContainer />
                         </div>
                     </div>
 
@@ -189,30 +156,9 @@ class RestaurantInfo extends React.Component{
                     </p>
 
                     {comp}
-                    </div>
+                </div>
 
-                    <div className={"rate"}>
-                        <form onSubmit={this.handleSubmit2}>
-                            <label>
-                                <p className = {"selectRate"}>
-                                Select your rate:
-                                </p>
-                                <select value={this.state.value} onChange={this.handleChange}>
-                                    <option value="1">1</option>
-
-                                    <option value="2">2</option>
-
-                                    <option value="3">3</option>
-
-                                    <option value="4">4</option>
-
-                                    <option value="5">5</option>
-                                </select>
-                            </label>
-                        </form>
-                    </div>
-
-                    <div>
+                <div>
                     <textarea className={"textEditor"}
                         ref={c => (this.textarea = c)}
                         placeholder="Type your comments here!"
@@ -221,10 +167,10 @@ class RestaurantInfo extends React.Component{
                         defaultValue=""
                         onChange={this.handleChange}
                     />
-                    </div>
+                </div>
 
-                    <button onClick={this.handleSubmit} className={"submitButton"}>
-                        submit
+                <button onClick={this.handleSubmit} className={"submitButton"}>
+                    submit
                     </button>
 
             </div>

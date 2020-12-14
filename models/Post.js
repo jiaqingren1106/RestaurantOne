@@ -24,6 +24,7 @@ const PostSchema = new mongoose.Schema({
     reviews: {
         type: Array
     }
+
 });
 
 

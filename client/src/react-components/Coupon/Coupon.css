@@ -12,7 +12,7 @@
     border-radius: 5%;
     overflow: hidden;
     box-shadow: 2px 2px 30px 2px #130506;
-    max-width: 25% ;
+    max-width: 23% ;
 
 }
 
@@ -26,5 +26,14 @@
     margin: 0;
 }
 
+.delete-icon{
+    transform: scale(1.5);
+    background-color: white;
+    border-radius: 40%;
+    ;
+}
+.delete-icon:hover{
+    cursor: pointer;
+}
 #coupon{
 }

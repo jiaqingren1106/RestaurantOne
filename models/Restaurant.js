@@ -17,6 +17,10 @@ const RestaurantSchema = new mongoose.Schema({
         required: true
     },
 
+    opentime:{
+        type:String
+    },
+
     certificate:{
         type: String,
     },
@@ -25,7 +29,7 @@ const RestaurantSchema = new mongoose.Schema({
         type: Array
     },
 
-    menus: {
+    menu: {
         type: Array
     },
 
@@ -46,7 +50,23 @@ const RestaurantSchema = new mongoose.Schema({
     },
 
     safe:{
-        type:Boolean
+        type:String
+    },
+
+    approval:{
+        type: String
+    },
+
+    follows:{
+        type: Array
+    },
+
+    longitude: {
+        type: String
+    },
+
+    latitude: {
+        type: String
     }
 });
 

@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { register, setRoute } from "../../redux/actions";
 
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
+
+import Button from 'react-bootstrap/Button';
 import MakePost from "../../react-components/MakePost/MakePost";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -36,10 +37,7 @@ class PostList extends React.Component {
         // const password = this.props.user.password
         this.state = {
             post: [
-                { postid: 0, date: "2010-9-10", content: "introduce new burger" },
-                { postid: 1, date: "2010-9-10", content: "introduce new fries" },
-                { postid: 2, date: "2010-9-10", content: "introduce new coke" },
-                { postid: 4, date: "2010-9-10", content: "introduce new coffee" }
+
             ],
             createPostAppear: false,
             newPostingMsg: ""
@@ -97,7 +95,7 @@ class PostList extends React.Component {
         );
 
         return (
-            <div>
+            <div className='Menu'>
                 <SideNav className = "navBarProfile"
                 onSelect={(selected) => {
                     // Add your code here

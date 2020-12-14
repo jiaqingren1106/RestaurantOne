@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { register, setRoute } from "../../redux/actions";
+import {createImageForProfile} from "../../Action/imageAction"
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import './ProfileOwner.css';
 
-import { createUser } from '../../Action/userAction'
+import { createUser, setAndUpdateUser } from '../../Action/userAction'
 import "../../frontPages/SignIn.css"
-
-
-
+import {getRestAttributeByID, setAndUpdateRest, updateRestInfo} from "../../Action/restaurantAction"
+import {createImage} from "../../Action/imageAction";
+import {addRestImage} from "../../Action/restaurantAction"
 
 const mql = window.matchMedia(`(min-width: 800px)`);
 
@@ -45,17 +46,27 @@ class ProfileOwner extends React.Component {
             openTime: "",
             restaurantName: "",
             restaurantDes: "",
-            warning: ""
+            address: "",
+            warning: "",
+            restaurantMsg: null,
+            newImage: ""
         }
+
+        getRestAttributeByID(this, user.restaurant_id);
     }
 
 
-    componentDidMount() {
-        //call the backend to
-    }
 
 
     handleUpDate = () => {
+
+        console.log(this.state.newImage)
+
+        if(this.state.newImage != ""){
+            addRestImage(this.state.newImage, this.props.user.restaurant_id)
+        }
+
+
         let restaurant_fields = ["restId","openTime", "restaurantName",  "restaurantDes"]
         let user_fields = ["userType", "username", "password", "_id", "email"]
         let result = true;
@@ -76,11 +87,28 @@ class ProfileOwner extends React.Component {
         }
         else {
             this.setState({warning: "update successfully"})
+            if (this.state.userType === "restaurant") {
+                setAndUpdateRest(this, this.state.restId)
+            }
+            let new_targetUser = {
+                username: this.state.username,
+                userType: this.state.userType,
+                password: this.state.password,
+                id: this.state._id,
+                email: this.state.email,
+                images: this.props.user.images,
+                restaurant_id: this.props.user.restaurant_id
+            }
+    
+            this.props.setUser(new_targetUser)
+            localStorage.setItem('userData', JSON.stringify(new_targetUser))
+            setAndUpdateUser(this, this.state._id)
         }
 
     }
 
     render() {
+        console.log(this.state.newImage)
         const setRoute = (newRoute) => {
             let targetRoute = `/`
             if (!(newRoute === "StartUp" || newRoute === "")) {
@@ -99,11 +127,38 @@ class ProfileOwner extends React.Component {
                             value={this.state.restaurantName}
                            onChange={(e) => {this.setState({restaurantName: e.target.value})}}/>
                 </div>
+                <div className="uploadBox justify-between ma2 items-center">
+                    <label htmlFor="img">Select Restaurant image:</label>
+
+
+                    <form className="image-form" id="form5" onChange={(e) => {
+                        e.preventDefault();
+                        createImageForProfile(document.getElementById("form5"), this)
+                    }
+
+                    }>
+
+                        <div class="image-form__field">
+                            <label>Image:</label>
+                            <input name="image" type="file" />
+                        </div>
+                    </form>
+
+
+
+
+                </div>
                 <div className="mt3">
                     <label className="db fw6 lh-copy f4 " >Restaurant Description</label>
                     <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-100 h5"
                               value={this.state.restaurantDes}
                            onChange={(e) => {this.setState({restaurantDes: e.target.value})}}/>
+                </div>
+                <div className="mt3">
+                    <label className="db fw6 lh-copy f4 " >Restaurant Address</label>
+                    <textarea className="pa2 input-reset ba bg-transparent hover-bg-black  w-100 "
+                              value={this.state.address}
+                              onChange={(e) => {this.setState({address: e.target.value})}}/>
                 </div>
                 <div className="mt3 flex flex-row justify-between">
                     <label className="db fw6 lh-copy f4 " >Open Time:</label>
@@ -115,9 +170,8 @@ class ProfileOwner extends React.Component {
 
 
         }
-        console.log(this.props.user)
         return (
-            <div id="main">
+            <div id="main" className='Menu'>
                 <SideNav className="navBarProfile"
                     onSelect={(selected) => {
                         // Add your code here

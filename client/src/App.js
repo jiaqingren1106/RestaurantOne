@@ -8,25 +8,23 @@ import SecondPage from "./pages/SecondPage";
 import Register from "./frontPages/Register";
 import SignIn from "./frontPages/SignIn";
 import AdminPage from "./Admin/AdminPage";
-import {routeState, userState} from "./redux/reducer";
 import RestaurantPage from "./pages/RestaurantPage";
 import BlogPage from "./pages/BlogPage";
 import Post from "./react-components/Post";
 import Menu from './react-components/menu/Menu';
 import Menus from "./pages/owner/Menus";
 import Deals from "./pages/owner/Deals"
-
+import {googleApiKey} from "./data/constants";
 import History from "./pages/user/History";
 import Following from "./pages/user/Following"
 
-import Profile from "./pages/Profile";
 import ProfileOwner from "./pages/owner/ProfileOwner";
 import Followers from "./pages/owner/Followers";
 import Postlist from "./pages/owner/Postlist"
-
-
+import Geocode from "react-geocode";
 import {Route, withRouter, Switch} from 'react-router-dom'
 import ProfileUser from './pages/user/ProfileUser';
+import {register, setRoute} from "./redux/actions";
 
 const getTargetPage = (route) => {
     // switch (route) {
@@ -65,10 +63,18 @@ const mapStateToProps = (state) => {
 
 
 }
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route) => dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
 
-const App = ({route, user, history}) => {
-
+const App = (props) => {
+    useEffect( () => {
+        Geocode.setApiKey("AIzaSyALh3Jxz38yeMi-GmZ8ID5xMvhDnmaC244");
+        Geocode.setLanguage("en");
+    }, [])
    return (
            <div>
                <Switch>

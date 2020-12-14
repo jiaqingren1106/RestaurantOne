@@ -23,6 +23,7 @@
 
 
 const UserController = require("../controllers/UserController");
+const User = require("../models/User");
 
 const userRoutes = (app) => {
     app.route('/users')
@@ -40,6 +41,12 @@ const userRoutes = (app) => {
         // .post(UserController.uploadFiles)
         // app.post('/image')
 
+    app.route('/users/:userId/:reviewId/:reviewId1')
+        .post(UserController.addReviewtoUser)
+   
+    app.route('/users/:userId/:followId/:followId1/:followId2')
+        .post(UserController.addFollowtoUser)
+        .delete(UserController.deleteFollowtoUser)
 };
 
 module.exports = userRoutes;

@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './History.css'
-
+import {getAllReviewArray} from "../../Action/reviewAction"
 
 const mapStateToProps = (state) => {
     return {
@@ -35,12 +35,10 @@ class PostList extends React.Component {
         // const password = this.props.user.password
         this.state = {
             history: [
-                { postid: 0, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 1, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 2, date: "2010-9-10", comment: "really good, 10/10 would come again" },
-                { postid: 4, date: "2010-9-10", comment: "really good, 10/10 would come again" }
+
             ],
         }
+        getAllReviewArray(props.user.reviews, this)
     }
 
 
@@ -61,10 +59,7 @@ class PostList extends React.Component {
                     return (
                         <div className="historyBlock">
                             <p id="history">
-                                {"Date: " + review.date}
-                            </p>
-                            <p id="history">
-                                {"Post ID: " + review.postid}
+                                {"Post ID: " + review.id}
                             </p>
 
                             <p id="history">

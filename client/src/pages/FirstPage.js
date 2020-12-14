@@ -1,28 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { register, setRoute } from "../redux/actions";
 import { connect } from 'react-redux';
-
-
 import './FirstPage.css';
-import {BURGERKING, MCDONALDS,
-    AWDES, SUBWAY, POPEYES,PIZZAHUT, TIMHORTONS,
-STARBUCKS,
-TACOBELL} from "../data/discription_constants";
 import RestaurantGroups from '../react-components/RestaurantGroups/RestaurantGroups';
-
 import {getRestaurants} from "../Action/restaurantAction"
-
-
-import AW from "../images/AW.png";
-import BurgerKing from "../images/burgerking.jpg";
-import Mcdonald from "../images/Mcdonald.png";
-import PizzaHut from "../images/pizzahut.jpg";
-import Popeye from "../images/popeye.jpg";
-import StarBucks from "../images/starbucks.jpg";
-import TimHortons from "../images/timhortons.jpg";
-import TacoBell from "../images/tacobell.jpg";
-import Subway from "../images/subway.jpg";
-
 import NavBar from '../react-components/NavBar/NavBar';
 
 

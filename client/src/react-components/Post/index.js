@@ -7,7 +7,6 @@ import userPic from '../../images/userPhoto.jpg'
 import {withRouter} from "react-router-dom";
 import {getDescription} from "../../Action/postAction"
 import { waitFor } from '@testing-library/react';
-import { components } from 'react-select';
 import {addReviewFromPost} from '../../Action/reviewAction'
 
 const mapStateToProps = (state) => {
@@ -32,12 +31,11 @@ class Post extends React.Component{
         super(props);
         this.reviews = ['Hebetude joyeuses' +
         ' assister nul ton prochain les commence massacre. Tout ni elle pris il au ma vaut sent hein. Ils pleine net enleve tenter maison centre blancs. Ils voeux que aimer bas linge des verre. Instrument maintenant en miserables au defilaient he. Se torture enlever en dessein. Peur moi age sang deja fort etat fin. Ronfle car car mon ces pareil reunir humain metres peuple. Corbeille sacrifice convertir des ses militaire ans.'];
-        this.users = ['ShuaiYuan'];
-        this.state = {value: '', id: "5fcefe28b06a85d4258bdd3b", postImage: [],description:"", title: "", date: "", image:[], reviews:[], userid: "5fcfbd01794cb32eb4a928ec"};
+        this.users = [this.props.user.username]
+        this.state = {value: '', id: this.props.location.state, postImage: [],description:"", title: "", date: "", image:[], reviews:[], userid: "5fcfbd01794cb32eb4a928ec"};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         getDescription(this)
-        console.log(this.props)
     }
     
     handleSubmit(event) {
@@ -47,7 +45,7 @@ class Post extends React.Component{
             // this.reviews.push(this.state.value)
             // this.users.push(this.props.user.username)
             // this.setState({value: this.state.value});
-            addReviewFromPost(this, this.state.value, this.state.userid, this.state.id)
+            addReviewFromPost(this, this.state.value, this.props.user.id, this.state.id)
         }
     }
 

@@ -3,6 +3,22 @@ import React from 'react';
 import { Navigation } from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import './AdminSidebar.css'
+import { connect } from 'react-redux'
+import {register, setRoute} from "../redux/actions";
+
+const mapStateToProps = (state) => {
+    return {route:
+        state.routeState.route,
+        user: state.userState}
+
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRoute: (new_route)=> dispatch(setRoute(new_route)),
+        setUser: (user_obj) => dispatch(register(user_obj))
+    }
+}
+
 
 class AdminSidebar extends React.Component {
     render() {
@@ -32,6 +48,10 @@ class AdminSidebar extends React.Component {
                         title: 'Reviews',
                         itemId: 4
                     },
+                    // {
+                    //     title: 'LogOut',
+                    //     itemId: 5
+                    // },
                 ]}
             />
         );
@@ -39,4 +59,4 @@ class AdminSidebar extends React.Component {
 
 }
 
-export default AdminSidebar;
+export default connect(mapStateToProps,mapDispatchToProps)(AdminSidebar)

@@ -1,31 +1,19 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import './Menus.css';
-
 import MenuGroup from '../../react-components/menuGroup/MenuGroup';
-
-
 import { register, setRoute } from "../../redux/actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-
-
-import burger1 from "../../images/Mcdonald-2.png";
-import burger2 from "../../images/Mcdonald-3.png";
-import burger3 from "../../images/Mcdonald-4.png";
-import burger4 from "../../images/Mcdonald-5.png";
-import burger5 from "../../images/popeye.jpg";
-import burger6 from "../../images/pizzahut.jpg";
-import burger7 from "../../images/burger.jpg";
-import burger8 from "../../images/user-review-1.jpg";
-import burger9 from "../../images/subway.jpg";
-
+import { getRestaurantMenu } from "../../Action/restaurantAction"
+import { createImage, createImageForMenu } from '../../Action/imageAction'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 const mapStateToProps = (state) => {
     return {
-        route: state.route
+        route: state.route,
+        user: state.userState
     }
 }
 
@@ -40,37 +28,34 @@ class Menus extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            MenuItems: [
-                { name: "Bergur", rating: "5", key: "1", image: burger1, price: "10.0$" },
-                { name: "BigMac", rating: "4", key: "2", image: burger2, price: "10.0$" },
-                { name: "Chicken Nugget", rating: "5", key: "3", image: burger3, price: "10.0$" },
-
-                { name: "Fries", rating: "5", key: "4", image: burger4, price: "10.0$" },
-                { name: "Chicken Sandvich", rating: "5", key: "5", image: burger5, price: "10.0$" },
-                { name: "Pizza", rating: "5", key: "6", image: burger6, price: "10.0$" },
-
-                { name: "3 burger", rating: "5", key: "7", image: burger7, price: "10.0$" },
-                { name: "1 burger", rating: "5", key: "8", image: burger8, price: "10.0$" },
-                { name: "Subway", rating: "5", key: "9", image: burger9, price: "10.0$" }
-            ],
-            createPostAppear: false,
-            newPostingMsg: "",
-            postPic: null,
+            MenuItems: [],
+            newItem: {
+                name: "",
+                image: null,
+                price: ""
+            },
             warning: "",
-            picMsg: "",
+            restaurantId: this.props.user.restaurant_id
+        }
+
+        getRestaurantMenu(this, this.props.user.restaurant_id)
+
+
+    }
+
+
+    handleUploadMenu = () => {
+        if (this.state.newItem.name === "" || this.state.newItem.image == null || this.state.newItem.price === "") {
+            this.setState({ warning: "have unfilled field" })
+        }
+        else {
+            // call backend
+            this.setState({ warning: "" })
         }
     }
-
-    setCreatePostAppear = (newAppear) => {
-        this.setState({ createPostAppear: newAppear })
-    }
-    setPostSendingMsg = (msg) => {
-        this.setState({ newPostingMsg: msg })
-    }
-
-
-
     render() {
+        console.log(this.state)
+
         const setRoute = (newRoute, id) => {
             let targetRoute = `/`
             if (!(newRoute === "StartUp" || newRoute === "")) {
@@ -78,13 +63,6 @@ class Menus extends React.Component {
             }
             this.props.setRoute(newRoute)
             this.props.history.push(targetRoute, id)
-        }
-
-        const fileSelectedHandler = (e) => {
-            const file = e.target.files[0]
-            this.setState({ postPic: file })
-            this.setState({ warning: "upload img successfully" })
-            this.setState({ picMsg: "" })
         }
 
 
@@ -106,22 +84,27 @@ class Menus extends React.Component {
             cardgroups.push(i);
         }
 
+        const updateState = (newMenuItems) => {
+            this.setState({MenuItems:newMenuItems})
+        }
+
         var MenuItemList;
         MenuItemList = (
             <div id='MenuInProfile'>
                 {cardgroups.map((index) => {
                     return <MenuGroup
-                        key={0}
-                        MenuItems={(this.state.MenuItems).slice(row * index, index * row + row)} />
+                        MenuItems={(this.state.MenuItems).slice(row * index, index * row + row)} restid={this.state.restaurantId} upper={updateState} state={this.state} display={true}/>
                 })}
             </div>
         );
+
+        
 
 
         return (
             <section className='Menu'>
 
-                <SideNav
+                <SideNav className=" o-70"
                     onSelect={(selected) => {
                         // Add your code here
                     }}>
@@ -192,81 +175,44 @@ class Menus extends React.Component {
 
                     </SideNav.Nav>
                 </SideNav>
-
                 <h1 className="f3 f2-m f1-l fw2 near-white mv3 center-l">
-                    This is the title
+                    Menu
                 </h1>
                 {MenuItemList}
-                <div id="menuForm" className="o-80">
-                    <div className="flex justify-around">
+                <div id="menuForm" className="o-90">
+                    <div className="flex justify-around black">
                         new item:
-                        <input  />
+                        <input onChange={(e) => { this.setState({ newItem: { ...this.state.newItem, ...{ name: e.target.value } } }) }} />
                     </div>
-                    <div className="flex justify-around">
+                    <div className="flex justify-around black">
                         Price:
-                        <input  />
+                        <input onChange={(e) => { this.setState({ newItem: { ...this.state.newItem, ...{ price: e.target.value } } }) }} />
                     </div>
-                    <input type="file"
-                           id="makeMenuFileUpload" name="avatar"
-                           accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
 
-                    <a className="f6 grow no-underline br-pill ph3 pv2 mb2 dib white bg-light-purple" href="#0"> add Menu</a>
 
+                    <form className="image-form" id="form3" onSubmit={(e) => {
+                        e.preventDefault();
+                        createImageForMenu(document.getElementById("form3"), this)
+                        window.location.reload(false);
+
+                    }
+
+                    }>
+
+                        <div class="image-form__field">
+                            <label>Image:</label>
+                            <input name="image" type="file" />
+                        </div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className="image-form__submit-button"
+                        >
+                            Upload
+                    </Button>
+                    </form>
                 </div>
-
-                <form id="menuForm">
-                    new item:
-                    <input />
-
-                    Price:
-                    <input />
-
-                    <input type="file"
-                        id="makeMenuFileUpload" name="avatar"
-                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
-
-                    <button>
-                        Add
-                    </button>
-                </form>
-
-                {MenuItemList}
-
-                <form id="menuForm">
-                    new item:
-                    <input />
-
-                    Price:
-                    <input />
-
-                    <input type="file"
-                        id="makeMenuFileUpload" name="avatar"
-                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
-
-                    <button>
-                        Add
-                    </button>
-                </form>
-
-                {MenuItemList}
-
-                <form id="menuForm">
-                    new item:
-                    <input />
-
-                    Price:
-                    <input />
-
-                    <input type="file"
-                        id="makeMenuFileUpload" name="avatar"
-                        accept="image/png, image/jpeg" onChange={(e) => { fileSelectedHandler(e) }} />
-
-                    <button>
-                        Add
-                    </button>
-                </form>
-
-                {MenuItemList}
             </section>
         );
     }
